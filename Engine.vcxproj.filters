@@ -49,6 +49,9 @@
     <Filter Include="ヘッダー ファイル\Math">
       <UniqueIdentifier>{ad2ac244-8695-48f7-ab33-c5bfaa5076ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="シェーダーファイル">
+      <UniqueIdentifier>{a76cdae9-805d-416f-8044-31b92158d542}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -66,6 +69,9 @@
     <ClCompile Include="lib\engine\Input\Input.cpp">
       <Filter>ソース ファイル\Input</Filter>
     </ClCompile>
+    <ClCompile Include="lib\engine\Input\Keyboard.cpp">
+      <Filter>ソース ファイル\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engine\Math\DirectX12Math.h">
@@ -80,5 +86,21 @@
     <ClInclude Include="lib\engine\Base\WinApp.h">
       <Filter>ヘッダー ファイル\Base</Filter>
     </ClInclude>
+    <ClInclude Include="lib\engine\Input\Keyboard.h">
+      <Filter>ヘッダー ファイル\Input</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shaders\Sprite.hlsli">
+      <Filter>シェーダーファイル</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\shaders\SpritePS.hlsl">
+      <Filter>シェーダーファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\SpriteVS.hlsl">
+      <Filter>シェーダーファイル</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

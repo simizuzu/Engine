@@ -14,10 +14,6 @@ struct WINDOWSIZE
 
 class WinApp
 {
-	void CreateGameWindow(
-		const wchar_t* title = TitleName.data(),
-		UINT windowStyle = WS_OVERLAPPEDWINDOW,
-		int32_t Width = window_width,
-		int32_t Height = window_height);
+	
 };
 

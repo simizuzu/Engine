@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Audio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -119,7 +119,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Audio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -129,19 +129,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DirectX12Math.cpp" />
-    <ClCompile Include="DirectXCommon.cpp" />
-    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="lib\engine\Base\DirectXCommon.cpp" />
+    <ClCompile Include="lib\engine\Base\WinApp.cpp" />
+    <ClCompile Include="lib\engine\Input\Input.cpp" />
+    <ClCompile Include="lib\engine\Math\DirectX12Math.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="SpriteCommon.cpp" />
-    <ClCompile Include="WinApp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DirectX12Math.h" />
-    <ClInclude Include="DirectXCommon.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="SpriteCommon.h" />
-    <ClInclude Include="WinApp.h" />
+    <ClInclude Include="lib\engine\Base\DirectXCommon.h" />
+    <ClInclude Include="lib\engine\Base\WinApp.h" />
+    <ClInclude Include="lib\engine\Input\Input.h" />
+    <ClInclude Include="lib\engine\Math\DirectX12Math.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

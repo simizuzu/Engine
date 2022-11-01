@@ -54,37 +54,31 @@
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="DirectX12Math.cpp">
+    <ClCompile Include="lib\engine\Base\WinApp.cpp">
+      <Filter>ソース ファイル\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\Math\DirectX12Math.cpp">
       <Filter>ソース ファイル\Math</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXCommon.cpp">
+    <ClCompile Include="lib\engine\Base\DirectXCommon.cpp">
       <Filter>ソース ファイル\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
+    <ClCompile Include="lib\engine\Input\Input.cpp">
       <Filter>ソース ファイル\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="WinApp.cpp">
-      <Filter>ソース ファイル\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteCommon.cpp">
-      <Filter>ソース ファイル\2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DirectX12Math.h">
+    <ClInclude Include="lib\engine\Math\DirectX12Math.h">
       <Filter>ヘッダー ファイル\Math</Filter>
     </ClInclude>
-    <ClInclude Include="DirectXCommon.h">
+    <ClInclude Include="lib\engine\Base\DirectXCommon.h">
       <Filter>ヘッダー ファイル\Base</Filter>
     </ClInclude>
-    <ClInclude Include="WinApp.h">
-      <Filter>ヘッダー ファイル\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
+    <ClInclude Include="lib\engine\Input\Input.h">
       <Filter>ヘッダー ファイル\Input</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteCommon.h">
-      <Filter>ヘッダー ファイル\2D</Filter>
+    <ClInclude Include="lib\engine\Base\WinApp.h">
+      <Filter>ヘッダー ファイル\Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

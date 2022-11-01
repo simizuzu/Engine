@@ -19,11 +19,40 @@ public:
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
 public:
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	/// <param name="directInput">:DirectInputオブジェクト</param>
 	void Initialize(IDirectInput8* directInput);
+
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
+
+	/// <summary>
+	/// キーを押した状態の処理
+	/// </summary>
+	/// <param name="keyNum">:キーナンバー</param>
+	/// <returns>キーナンバー</returns>
 	bool PushKey(BYTE keyNum);
+	/// <summary>
+	/// キーを離した状態の処理
+	/// </summary>
+	/// <param name="keyNum">:キーナンバー</param>
+	/// <returns>キーナンバー</returns>
 	bool ReleaseKey(BYTE keyNum);
+	/// <summary>
+	/// キーを押した瞬間の処理
+	/// </summary>
+	/// <param name="keyNum">:キーナンバー</param>
+	/// <returns>キーナンバー</returns>
 	bool TriggerPushKey(BYTE keyNum);
+	/// <summary>
+	/// キーを離した瞬間の処理
+	/// </summary>
+	/// <param name="keyNum">:キーナンバー</param>
+	/// <returns>キーナンバー</returns>
 	bool TriggerReleaseKey(BYTE keyNum);
 
 private:

@@ -9,11 +9,14 @@ void Input::Initialize()
 	result = DirectInput8Create(winApp->GetHinstance(), DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&directInput, nullptr);
 	assert(SUCCEEDED(result));
 
+	// キーボード初期化
 	keyboard_ = new Keyboard();
 	keyboard_->Initialize(directInput.Get());
 }
 
-void Input::Update() {
+void Input::Update() 
+{
+	// キーボード処理
 	keyboard_->Update();
 }
 

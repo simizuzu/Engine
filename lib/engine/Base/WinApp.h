@@ -15,9 +15,7 @@ public: // 定数
 	// ウィンドウ縦幅
 	static const int window_width = 1280;
 
-public:
-	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
-
+public: // メンバ関数
 	/// <summary>
 	/// 初期化
 	/// </summary>
@@ -36,7 +34,7 @@ public:
 	// シングルトン
 	static WinApp* GetInstance();
 
-public:
+public: // ゲッター
 	HWND GetHwnd() const { return hwnd; }
 	HINSTANCE GetHinstance() const { return w.hInstance; }
 

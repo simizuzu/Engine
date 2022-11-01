@@ -9,7 +9,7 @@ using namespace DirectX;
 
 class Input
 {
-public:
+private:
 	// テンプレート
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 

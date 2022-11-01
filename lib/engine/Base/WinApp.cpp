@@ -60,6 +60,7 @@ bool WinApp::ProccessMessage()
 		DispatchMessage(&msg);
 	}
 
+	//×ボタンで終了メッセージが来たらゲームループを抜ける
 	if (msg.message == WM_QUIT)
 	{
 		return true;

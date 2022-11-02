@@ -16,9 +16,8 @@ private:
 	// テンプレート
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
-	// DirectX12デバイス
+	HRESULT result;
 	ComPtr<ID3D12Device> device;
-	// DXGIファクトリ
 	ComPtr<IDXGIFactory7> dxgiFactory;
 	ComPtr<IDXGISwapChain4> swapChain;
 	ComPtr<ID3D12CommandAllocator> commandAllocator;
@@ -35,15 +34,29 @@ private:
 	std::vector<ComPtr<ID3D12Resource>> backBuffers;
 	// 深度テストの設定
 	ID3D12Resource* depthBuff = nullptr;
-	ID3D12DescriptorHeap* dsvHeap = nullptr;
+	ComPtr<ID3D12DescriptorHeap> dsvHeap;
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle;
 	// フェンスの生成
 	ComPtr<ID3D12Fence> fence;
 	UINT64 fenceVal = 0;
-public:
+	// リソースバリア
+	D3D12_RESOURCE_BARRIER barrierDesc{};
+	// 画面を塗りつぶす色
+	FLOAT clearColor[4] = { 0.1f,0.25f,0.5f,0.0f };
+public: // メンバ関数
 	/// <summary>
 	/// 初期化
 	/// </summary>
 	void Initialize(WinApp* winApp);
+
+	/// <summary>
+	/// 描画前処理
+	/// </summary>
+	void PreDraw();
+	/// <summary>
+	/// 描画後処理
+	/// </summary>
+	void PostDraw();
 
 	// ゲッター
 	ID3D12Device* GetDevice();
@@ -55,6 +68,7 @@ public:
 	ID3D12DescriptorHeap* GetRtvHeap();
 	ID3D12Fence* GetFence();
 
+	void SetBackScreenColor(float red, float green, float blue, float alpha);
 private: // 各初期化
 	/// <summary>
 	/// デバイスの初期化
@@ -80,6 +94,10 @@ private: // 各初期化
 	/// フェンスの初期化
 	/// </summary>
 	void InitializeFence();
+	/// <summary>
+	/// コマンドのフラッシュ
+	/// </summary>
+	void ExecuteCommand();
 
 private: // エラーメッセージの抑制
 	/// <summary>

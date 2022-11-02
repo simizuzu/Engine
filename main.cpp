@@ -30,10 +30,25 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 			// ゲームループを抜ける
 			break;
 		}
+
+		// 入力の更新
+		input_->Update();
+
+		// DirectX枚フレーム処理 ここから
+		dxCommon_->PreDraw();
+
+		// ゲームシーン描画 ここから
+		// ゲームシーン描画 ここまで
+
+		//描画コマンド ここから
+
+		//描画コマンド ここまで
+		dxCommon_->PostDraw();
+		// DirectX枚フレーム処理 ここまで
 	}
 #pragma endregion
 
-	// WindowsAPIの終了処理
+	// ウィンドウクラスを登録解除
 	winApp_->Finalize();
 
 	// 解放処理

@@ -2,14 +2,14 @@
 
 void DirectXCommon::Initialize(WinApp* winApp)
 {
-	// NULL検出
-	assert(winApp);
-	// メンバ変数に記録
-	this->winApp = winApp;
 #ifdef _DEBUG
 	EnableDebugLayer();
 	//BreakOnSeverity();
 #endif
+	// NULL検出
+	assert(winApp);
+	// メンバ変数に記録
+	this->winApp = winApp;
 
 	// デバイスの生成
 	InitializeDevice();
@@ -120,6 +120,7 @@ void DirectXCommon::InitializeCommand()
 void DirectXCommon::InitializeSwapChain()
 {
 	HRESULT result;
+	WinApp* winApp = WinApp::GetInstance();
 	ComPtr<IDXGISwapChain1> swapChain1;
 
 	// スワップチェーンの設定
@@ -133,17 +134,17 @@ void DirectXCommon::InitializeSwapChain()
 	swapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 	// スワップチェーン生成
 	result = dxgiFactory->CreateSwapChainForHwnd(
-		commandQueue.Get(),
+		commandQueue.Get(), 
 		winApp->GetHwnd(),
-		&swapChainDesc,
-		nullptr,
-		nullptr,
+		&swapChainDesc, 
+		nullptr, 
+		nullptr, 
 		&swapChain1);
 
-	// 生成したIDXGISwapChain1のオブジェクトをIDXGISwapChain4に変換する
-	swapChain1.As(&swapChain1);
-
 	assert(SUCCEEDED(result));
+
+	// 生成したIDXGISwapChain1のオブジェクトをIDXGISwapChain4に変換する
+	swapChain1.As(&swapChain);
 }
 
 void DirectXCommon::InitializeRTV()

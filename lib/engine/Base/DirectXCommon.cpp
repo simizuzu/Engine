@@ -1,19 +1,9 @@
 #include "DirectXCommon.h"
 
-void DirectXCommon::Initialize(WinApp* winApp)
+void DirectXCommon::Initialize()
 {
-	// NULL検出
-	assert(winApp);
-	// メンバ変数に記録
-	this->winApp = winApp;
-
-#ifdef _DEBUG
-	EnableDebugLayer();
-#endif
-
 	// デバイスの生成
 	InitializeDevice();
-	BreakOnSeverity();
 	// コマンド関連の初期化
 	InitializeCommand();
 	// スワップチェーンの初期化
@@ -27,21 +17,18 @@ void DirectXCommon::Initialize(WinApp* winApp)
 #pragma region 各初期化
 void DirectXCommon::InitializeDevice()
 {
-	// 対応レベルの配列
-	D3D_FEATURE_LEVEL levels[] =
-	{
-		D3D_FEATURE_LEVEL_12_1,
-		D3D_FEATURE_LEVEL_12_0,
-		D3D_FEATURE_LEVEL_11_1,
-		D3D_FEATURE_LEVEL_11_0,
-	};
+	HRESULT result;
+
+#ifdef _DEBUG
+	EnableDebugLayer();
+#endif
 
 	// DXGIファクトリーの生成
 	result = CreateDXGIFactory(IID_PPV_ARGS(&dxgiFactory));
 	assert(SUCCEEDED(result));
 
 	// アダプターの列挙用
-	std::vector <ComPtr<IDXGIAdapter4>>adapters;
+	std::vector<ComPtr<IDXGIAdapter4>> adapters;
 	// ここに特定の名前を持つアダプターオブジェクトが入る
 	ComPtr<IDXGIAdapter4> tmpAdapter;
 
@@ -49,42 +36,57 @@ void DirectXCommon::InitializeDevice()
 	for (UINT i = 0;
 		dxgiFactory->EnumAdapterByGpuPreference(i,
 			DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE,
-			IID_PPV_ARGS(&tmpAdapter)) != DXGI_ERROR_NOT_FOUND;
-		i++) {
-		//動的配列に追加する
+			IID_PPV_ARGS(&tmpAdapter)) != DXGI_ERROR_NOT_FOUND; i++)
+	{
+		// 動的配列に追加する
 		adapters.push_back(tmpAdapter);
 	}
 
 	// 妥当なアダプタを選別する
-	for (size_t i = 0; i < adapters.size(); i++) {
+	for (size_t i = 0; i < adapters.size(); i++)
+	{
 		DXGI_ADAPTER_DESC3 adapterDesc;
 		// アダプターの情報を取得する
 		adapters[i]->GetDesc3(&adapterDesc);
 
 		// ソフトウェアデバイスを回避
-		if (!(adapterDesc.Flags & DXGI_ADAPTER_FLAG3_SOFTWARE)) {
+		if (!(adapterDesc.Flags & DXGI_ADAPTER_FLAG3_SOFTWARE))
+		{
 			// デバイスを採用してループを抜ける
 			tmpAdapter = adapters[i];
 			break;
 		}
 	}
 
-	// Direct3Dデバイスの初期化
-	D3D_FEATURE_LEVEL featureLevel;
+	// 対応レベルの配列
+	D3D_FEATURE_LEVEL levels[] = {
+		D3D_FEATURE_LEVEL_12_1,
+		D3D_FEATURE_LEVEL_12_0,
+		D3D_FEATURE_LEVEL_11_1,
+		D3D_FEATURE_LEVEL_11_0,
+	};
 
-	for (size_t i = 0; i < _countof(levels); i++) {
+	D3D_FEATURE_LEVEL featureLevel;
+	for (size_t i = 0; i < _countof(levels); i++)
+	{
 		// 採用したアダプターでデバイスを生成
 		result = D3D12CreateDevice(tmpAdapter.Get(), levels[i], IID_PPV_ARGS(&device));
-		if (result == S_OK) {
+		if (result == S_OK)
+		{
 			// デバイスを生成できた時点でループを抜ける
 			featureLevel = levels[i];
 			break;
 		}
 	}
+
+	assert(SUCCEEDED(result));
+
+	BreakOnSeverity();
 }
 
 void DirectXCommon::InitializeCommand()
 {
+	HRESULT result;
 	// コマンドアロケータの生成
 	result = device->CreateCommandAllocator(
 		D3D12_COMMAND_LIST_TYPE_DIRECT,
@@ -107,6 +109,7 @@ void DirectXCommon::InitializeCommand()
 
 void DirectXCommon::InitializeSwapChain()
 {
+	HRESULT result;
 	ComPtr<IDXGISwapChain1> swapChain1;
 
 	// スワップチェーンの設定
@@ -164,6 +167,7 @@ void DirectXCommon::InitializeRTV()
 
 void DirectXCommon::InitializeFence()
 {
+	HRESULT result;
 	result = device->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 }
 #pragma endregion
@@ -188,19 +192,67 @@ void DirectXCommon::PreDraw()
 	// 画面の色を変更
 	commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
 }
+
 void DirectXCommon::PostDraw()
 {
+	HRESULT result;
+	// バックバッファの番号を取得（2つなので0番か1番）
+	UINT bbIndex = swapChain->GetCurrentBackBufferIndex();
+
+	// リソースバリアで書き込み可能に変更
+	D3D12_RESOURCE_BARRIER barrierDesc{};
+	barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;//描画状態から
+	barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;//表示状態へ
+	commandList->ResourceBarrier(1, &barrierDesc);
+
+	//命令のクローズ
+	result = commandList->Close();
+	assert(SUCCEEDED(result));
+	//コマンドリストの実行
+	ID3D12CommandList* commandListts[] = { commandList.Get()};
+	commandQueue->ExecuteCommandLists(1, commandListts);
+
+	//フリップ
+	result = swapChain->Present(1, 0);
+	assert(SUCCEEDED(result));
+
+	//コマンド実行完了を待つ
+	commandQueue->Signal(fence.Get(), ++fenceVal);
+	if (fence->GetCompletedValue() != fenceVal)
+	{
+		HANDLE event = CreateEvent(nullptr, false, false, nullptr);
+		fence->SetEventOnCompletion(fenceVal, event);
+		if (event != 0)
+		{
+			WaitForSingleObject(event, INFINITE);
+			CloseHandle(event);
+		}
+	}
+
+	//キューをクリア
+	result = commandAllocator->Reset();
+	assert(SUCCEEDED(result));
+	//コマンドリストを貯める準備
+	if (commandList != 0)
+	{
+		result = commandList->Reset(commandAllocator.Get(), nullptr);
+		assert(SUCCEEDED(result));
+	}
+	else
+	{
+		assert(SUCCEEDED(0));
+	}
 }
 
 #pragma region エラーメッセージの抑制
 void DirectXCommon::EnableDebugLayer()
 {
 	//デバックレイヤーをオンに
-	ComPtr<ID3D12Debug1> debugController;
+	ComPtr<ID3D12Debug> debugController;
 
 	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
 		debugController->EnableDebugLayer();
-		debugController->SetEnableGPUBasedValidation(TRUE);
+		//debugController->SetEnableGPUBasedValidation(TRUE);
 	}
 }
 

@@ -4,19 +4,18 @@
 #include <wrl.h>
 #include <cassert>
 #include <vector>
+#include <string>
 
 #include "WinApp.h"
 
 #pragma comment(lib,"d3d12.lib")
 #pragma comment(lib,"dxgi.lib")
 
+using Microsoft::WRL::ComPtr;
+
 class DirectXCommon
 {
 private:
-	// テンプレート
-	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
-
-	HRESULT result;
 	// DirectX12デバイス
 	ComPtr<ID3D12Device> device;
 	// DXGIファクトリ
@@ -34,9 +33,6 @@ private:
 	D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc{};
 	// バックバッファ
 	std::vector<ComPtr<ID3D12Resource>> backBuffers;
-	// 深度テストの設定
-	ID3D12Resource* depthBuff = nullptr;
-	ID3D12DescriptorHeap* dsvHeap = nullptr;
 	// フェンスの生成
 	ComPtr<ID3D12Fence> fence;
 	UINT64 fenceVal = 0;
@@ -46,7 +42,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(WinApp* winApp);
+	void Initialize();
 
 	/// <summary>
 	/// 描画前処理

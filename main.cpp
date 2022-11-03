@@ -14,7 +14,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 	// DirectX‰Šú‰»
 	DirectXCommon* dxCommon_ = nullptr;
 	dxCommon_ = new DirectXCommon();
-	dxCommon_->Initialize(winApp_);
+	dxCommon_->Initialize();
 
 	// Input‰Šú‰»
 	Input* input_ = nullptr;

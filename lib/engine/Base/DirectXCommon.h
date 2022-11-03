@@ -1,57 +1,77 @@
 #pragma once
+#include <Windows.h>
 #include <d3d12.h>
-#include <dxgi1_6.h>
-#include <wrl.h>
-#include <cassert>
 #include <vector>
-#include <string>
+#include <dxgi1_6.h>
 
 #include "WinApp.h"
-
-#pragma comment(lib,"d3d12.lib")
-#pragma comment(lib,"dxgi.lib")
-
-using Microsoft::WRL::ComPtr;
 
 class DirectXCommon
 {
 private:
-	// DirectX12デバイス
-	ComPtr<ID3D12Device> device;
-	// DXGIファクトリ
-	ComPtr<IDXGIFactory7> dxgiFactory;
-	ComPtr<IDXGISwapChain4> swapChain;
-	ComPtr<ID3D12CommandAllocator> commandAllocator;
-	ComPtr<ID3D12GraphicsCommandList> commandList;
-	ComPtr<ID3D12CommandQueue> commandQueue;
-	ComPtr<ID3D12DescriptorHeap> rtvHeap;
+	// DirectX 初期化処理
+	HRESULT result;
+	ID3D12Device* device = nullptr;
+	IDXGIFactory7* dxgiFactory = nullptr;
+	IDXGISwapChain4* swapChain = nullptr;
+	ID3D12CommandAllocator* cmdAllocator = nullptr;
+	ID3D12GraphicsCommandList* commandList = nullptr;
+	ID3D12CommandQueue* commandQueue = nullptr;
+	ID3D12DescriptorHeap* rtvHeap = nullptr;
 
+
+	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{}; // 外に出さなきゃエラー起きる
 	// スワップチェーンの設定
-	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle;
+
 	// デスクリプタヒープの設定
 	D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc{};
+
 	// バックバッファ
-	std::vector<ComPtr<ID3D12Resource>> backBuffers;
+	std::vector<ID3D12Resource*> backBuffers;
+
 	// フェンスの生成
-	ComPtr<ID3D12Fence> fence;
+	ID3D12Fence* fence = nullptr;
 	UINT64 fenceVal = 0;
 
-	FLOAT clearColor[4] = { 0.1f,0.25f,0.5f,0.0f };
-public:
-	/// <summary>
-	/// 初期化
-	/// </summary>
-	void Initialize();
+	//バリアーデスク
+	D3D12_RESOURCE_BARRIER barrierDesc{};
 
-	/// <summary>
-	/// 描画前処理
-	/// </summary>
+	FLOAT clearColor[4] = { 0.1f,0.25f, 0.5f,0.0f }; // 黄緑色
+
+
+	//DXGIまわり初期化
+	void InitializeDXGI();
+
+	//最終的なレンダーターゲットの生成
+	void CreatRtv();
+
+	//スワップチェインの生成
+	void CreateSwapChain();
+
+	//コマンドまわり初期化
+	void InitializeCommand();
+
+	//フェンス生成
+	void CreateFence();
+
+	//デバッグレイヤーを有効にする
+	void EnableDebugLayer();
+
+
+public:
+	static DirectXCommon* GetInstance();
+
+	// DirectX毎フレーム処理ここから
+	void Initialize();
 	void PreDraw();
-	/// <summary>
-	/// 描画後処理
-	/// </summary>
 	void PostDraw();
+	void ExecuteCommand();
+	// DirectX毎フレーム処理ここまで
+
+	// セッター
+	//背景色変更(RGBA)
+	void SetBackScreenColor(float red, float green, float blue, float alpha);
 
 	// ゲッター
 	ID3D12Device* GetDevice();
@@ -62,40 +82,5 @@ public:
 	ID3D12CommandQueue* GetCommandQueue();
 	ID3D12DescriptorHeap* GetRtvHeap();
 	ID3D12Fence* GetFence();
-
-private: // 各初期化
-	/// <summary>
-	/// デバイスの初期化
-	/// </summary>
-	void InitializeDevice();
-	/// <summary>
-	/// コマンド関連の初期化
-	/// </summary>
-	void InitializeCommand();
-	/// <summary>
-	/// スワップチェーンの初期化
-	/// </summary>
-	void InitializeSwapChain();
-	/// <summary>
-	/// レンダーターゲットビューの初期化
-	/// </summary>
-	void InitializeRTV();
-	/// <summary>
-	/// フェンスの初期化
-	/// </summary>
-	void InitializeFence();
-
-private: // エラーメッセージの抑制
-	/// <summary>
-	/// デバッグレイヤーを有効にする
-	/// </summary>
-	void EnableDebugLayer();
-	/// <summary>
-	/// デバックレイヤー時に止める処理(Windows10版)
-	/// </summary>
-	void BreakOnSeverity();
-
-private:
-	WinApp* winApp = WinApp::GetInstance();
+	UINT64 GetFenceVal();
 };
-

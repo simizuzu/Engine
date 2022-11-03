@@ -1,64 +1,24 @@
 #include "DirectXCommon.h"
+#include <cassert>
+#include <string>
 
-void DirectXCommon::Initialize()
-{
-	// デバイスの生成
-	InitializeDevice();
-	// コマンド関連の初期化
-	InitializeCommand();
-	// スワップチェーンの初期化
-	InitializeSwapChain();
-	// レンダーターゲットビューの初期化
-	InitializeRTV();
-	// フェンスの初期化
-	InitializeFence();
-}
+#pragma comment(lib, "d3d12.lib")
+#pragma comment(lib, "dxgi.lib")
 
-#pragma region 各初期化
-void DirectXCommon::InitializeDevice()
-{
-	HRESULT result;
-
+void DirectXCommon::Initialize() {
 #ifdef _DEBUG
 	EnableDebugLayer();
 #endif
 
-	// DXGIファクトリーの生成
-	result = CreateDXGIFactory(IID_PPV_ARGS(&dxgiFactory));
-	assert(SUCCEEDED(result));
+	InitializeDXGI();
+	InitializeCommand();
+	CreateSwapChain();
+	CreatRtv();
+	CreateFence();
+}
 
-	// アダプターの列挙用
-	std::vector<ComPtr<IDXGIAdapter4>> adapters;
-	// ここに特定の名前を持つアダプターオブジェクトが入る
-	ComPtr<IDXGIAdapter4> tmpAdapter;
-
-	// パフォーマンスが高いものから順に、すべてのアダプターを列挙する
-	for (UINT i = 0;
-		dxgiFactory->EnumAdapterByGpuPreference(i,
-			DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE,
-			IID_PPV_ARGS(&tmpAdapter)) != DXGI_ERROR_NOT_FOUND; i++)
-	{
-		// 動的配列に追加する
-		adapters.push_back(tmpAdapter);
-	}
-
-	// 妥当なアダプタを選別する
-	for (size_t i = 0; i < adapters.size(); i++)
-	{
-		DXGI_ADAPTER_DESC3 adapterDesc;
-		// アダプターの情報を取得する
-		adapters[i]->GetDesc3(&adapterDesc);
-
-		// ソフトウェアデバイスを回避
-		if (!(adapterDesc.Flags & DXGI_ADAPTER_FLAG3_SOFTWARE))
-		{
-			// デバイスを採用してループを抜ける
-			tmpAdapter = adapters[i];
-			break;
-		}
-	}
-
-	// 対応レベルの配列
+void DirectXCommon::InitializeDXGI() {
+	//対応レベルの配列
 	D3D_FEATURE_LEVEL levels[] = {
 		D3D_FEATURE_LEVEL_12_1,
 		D3D_FEATURE_LEVEL_12_0,
@@ -66,89 +26,90 @@ void DirectXCommon::InitializeDevice()
 		D3D_FEATURE_LEVEL_11_0,
 	};
 
+	//DXGIファクトリーの生成
+	result = CreateDXGIFactory(IID_PPV_ARGS(&dxgiFactory));
+	assert(SUCCEEDED(result));
+
+	//アダプターの列挙用
+	std::vector < IDXGIAdapter4*>adapters;
+	//ここに特定の名前を持つアダプターオブジェクトが入る
+	IDXGIAdapter4* tmpAdapter = nullptr;
+
+	//パフォーマンスが高いものから順に、すべてのアダプターを列挙する
+	for (UINT i = 0;
+		dxgiFactory->EnumAdapterByGpuPreference(i,
+			DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE,
+			IID_PPV_ARGS(&tmpAdapter)) != DXGI_ERROR_NOT_FOUND;
+		i++) {
+		//動的配列に追加する
+		adapters.push_back(tmpAdapter);
+	}
+
+	// 妥当なアダプタを選別する
+	for (size_t i = 0; i < adapters.size(); i++) {
+		DXGI_ADAPTER_DESC3 adapterDesc;
+		// アダプターの情報を取得する
+		adapters[i]->GetDesc3(&adapterDesc);
+
+		// ソフトウェアデバイスを回避
+		if (!(adapterDesc.Flags & DXGI_ADAPTER_FLAG3_SOFTWARE)) {
+			// デバイスを採用してループを抜ける
+			tmpAdapter = adapters[i];
+			break;
+		}
+	}
+
+	//Direct3Dデバイスの初期化
 	D3D_FEATURE_LEVEL featureLevel;
-	for (size_t i = 0; i < _countof(levels); i++)
-	{
+
+	for (size_t i = 0; i < _countof(levels); i++) {
 		// 採用したアダプターでデバイスを生成
-		result = D3D12CreateDevice(tmpAdapter.Get(), levels[i], IID_PPV_ARGS(&device));
-		if (result == S_OK)
-		{
+		result = D3D12CreateDevice(tmpAdapter, levels[i], IID_PPV_ARGS(&device));
+		if (result == S_OK) {
 			// デバイスを生成できた時点でループを抜ける
 			featureLevel = levels[i];
 			break;
 		}
 	}
 
-	assert(SUCCEEDED(result));
-
-	BreakOnSeverity();
+#ifdef _DEBUG
+	Microsoft::WRL::ComPtr<ID3D12InfoQueue> infoQueue;
+	if (SUCCEEDED(device->QueryInterface(IID_PPV_ARGS(&infoQueue)))) {
+		// 抑制するエラー
+		D3D12_MESSAGE_ID denyIds[] = {
+			/*
+			 * Windows11でのDXGIデバッグレイヤーとDX12デバッグレイヤーの相互作用バグによるエラーメッセージ
+			 * https://stackoverflow.com/questions/69805245/directx-12-application-is-crashing-in-windows-11
+			 */
+			D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE };
+		// 抑制する表示レベル
+		D3D12_MESSAGE_SEVERITY severities[] = { D3D12_MESSAGE_SEVERITY_INFO };
+		D3D12_INFO_QUEUE_FILTER filter{};
+		filter.DenyList.NumIDs = _countof(denyIds);
+		filter.DenyList.pIDList = denyIds;
+		filter.DenyList.NumSeverities = _countof(severities);
+		filter.DenyList.pSeverityList = severities;
+		// 指定したエラーの表示を抑制する
+		infoQueue->PushStorageFilter(&filter);
+		// エラー時にブレークを発生させる
+		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);
+	}
+#endif
 }
 
-void DirectXCommon::InitializeCommand()
-{
-	HRESULT result;
-	// コマンドアロケータの生成
-	result = device->CreateCommandAllocator(
-		D3D12_COMMAND_LIST_TYPE_DIRECT,
-		IID_PPV_ARGS(&commandAllocator));
-	assert(SUCCEEDED(result));
-
-	// コマンドリストを生成
-	result = device->CreateCommandList(0,
-		D3D12_COMMAND_LIST_TYPE_DIRECT,
-		commandAllocator.Get(), nullptr,
-		IID_PPV_ARGS(&commandList));
-	assert(SUCCEEDED(result));
-
-	// コマンドキューの設定
-	D3D12_COMMAND_QUEUE_DESC commandQueueDesc{}; //構造体の中身を0でクリアしている
-	// コマンドキューを生成
-	result = device->CreateCommandQueue(&commandQueueDesc, IID_PPV_ARGS(&commandQueue));
-	assert(SUCCEEDED(result));
-}
-
-void DirectXCommon::InitializeSwapChain()
-{
-	HRESULT result;
-	ComPtr<IDXGISwapChain1> swapChain1;
-
-	// スワップチェーンの設定
-	swapChainDesc.Width = 1280;
-	swapChainDesc.Height = 720;
-	swapChainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	swapChainDesc.SampleDesc.Count = 1;
-	swapChainDesc.BufferUsage = DXGI_USAGE_BACK_BUFFER;
-	swapChainDesc.BufferCount = 2;
-	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
-	swapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
-	// スワップチェーン生成
-	result = dxgiFactory->CreateSwapChainForHwnd(
-		commandQueue.Get(), 
-		winApp->GetHwnd(),
-		&swapChainDesc, 
-		nullptr, 
-		nullptr, 
-		&swapChain1);
-
-	assert(SUCCEEDED(result));
-
-	// 生成したIDXGISwapChain1のオブジェクトをIDXGISwapChain4に変換する
-	swapChain1.As(&swapChain);
-}
-
-void DirectXCommon::InitializeRTV()
-{
+void DirectXCommon::CreatRtv() {
 	//デスクリプタヒープの設定
 	rtvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV; //レンダーターゲットビュー
 	rtvHeapDesc.NumDescriptors = swapChainDesc.BufferCount;
+
 	//デスクリプタヒープの生成
 	device->CreateDescriptorHeap(&rtvHeapDesc, IID_PPV_ARGS(&rtvHeap));
+
 	//バックバッファ
 	backBuffers.resize(swapChainDesc.BufferCount);
 
 	//スワップチェーンの全てのバッファについて処理する
-	for (size_t i = 0; i < backBuffers.size(); i++)
-	{
+	for (size_t i = 0; i < backBuffers.size(); i++) {
 		//スワップチェーンからバッファを取得
 		swapChain->GetBuffer((UINT)i, IID_PPV_ARGS(&backBuffers[i]));
 		//デスクリプタヒ－プのハンドルを取得
@@ -161,55 +122,103 @@ void DirectXCommon::InitializeRTV()
 		rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 		rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
 		//レンダーターゲットビューの生成
-		device->CreateRenderTargetView(backBuffers[i].Get(), &rtvDesc, rtvHandle);
+		device->CreateRenderTargetView(backBuffers[i], &rtvDesc, rtvHandle);
 	}
 }
 
-void DirectXCommon::InitializeFence()
-{
-	HRESULT result;
+void DirectXCommon::CreateSwapChain() {
+	//スワップチェーンの設定
+	swapChainDesc.Width = 1280;
+	swapChainDesc.Height = 720;
+	swapChainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	swapChainDesc.SampleDesc.Count = 1;
+	swapChainDesc.BufferUsage = DXGI_USAGE_BACK_BUFFER;
+	swapChainDesc.BufferCount = 2;
+	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
+	swapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
+	//生成
+	result = dxgiFactory->CreateSwapChainForHwnd(commandQueue, WinApp::GetInstance()->GetHwnd(), &swapChainDesc, nullptr, nullptr, (IDXGISwapChain1**)&swapChain);
+
+}
+
+DirectXCommon* DirectXCommon::GetInstance() {
+	static DirectXCommon DirectXCore_;
+	return &DirectXCore_;
+}
+
+void DirectXCommon::InitializeCommand() {
+
+	//コマンドアロケータの生成
+	result = device->CreateCommandAllocator(
+		D3D12_COMMAND_LIST_TYPE_DIRECT,
+		IID_PPV_ARGS(&cmdAllocator));
+	assert(SUCCEEDED(result));
+
+	//コマンドリストを生成
+	result = device->CreateCommandList(0,
+		D3D12_COMMAND_LIST_TYPE_DIRECT,
+		cmdAllocator, nullptr,
+		IID_PPV_ARGS(&commandList));
+	assert(SUCCEEDED(result));
+
+	//コマンドキューの設定
+	D3D12_COMMAND_QUEUE_DESC commandQueueDesc{}; //構造体の中身を0でクリアしている
+	//コマンドキューを生成
+	result = device->CreateCommandQueue(&commandQueueDesc, IID_PPV_ARGS(&commandQueue));
+	assert(SUCCEEDED(result));
+}
+
+
+void DirectXCommon::CreateFence() {
 	result = device->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 }
-#pragma endregion
 
-void DirectXCommon::PreDraw()
-{
-	// バックバッファの番号を取得（2つなので0番か1番）
+void DirectXCommon::EnableDebugLayer() {
+	//デバックレイヤーをオンに
+	ID3D12Debug* debugController;
+
+	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
+		debugController->EnableDebugLayer();
+	}
+}
+
+void DirectXCommon::PreDraw() {
+
+	//1バックバッファ番号を取得
 	UINT bbIndex = swapChain->GetCurrentBackBufferIndex();
+	//書き込み可能に変更
 
-	// リソースバリアで書き込み可能に変更
-	D3D12_RESOURCE_BARRIER barrierDesc{};
-	barrierDesc.Transition.pResource = backBuffers[bbIndex].Get();//バックバッファを指定
+	barrierDesc.Transition.pResource = backBuffers[bbIndex];//バックバッファを指定
 	barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;//表示状態から
 	barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;//描画状態へ
 	commandList->ResourceBarrier(1, &barrierDesc);
 
-	// レンダーターゲットビューのハンドルを取得
-	rtvHeap->GetCPUDescriptorHandleForHeapStart();
-	rtvHandle.ptr += bbIndex * device->GetDescriptorHandleIncrementSize(rtvHeapDesc.Type);
+	//2描画先変更
+	rtvHandle = rtvHeap->GetCPUDescriptorHandleForHeapStart();
+	rtvHandle.ptr += (static_cast<unsigned long long>(bbIndex)) * device->GetDescriptorHandleIncrementSize(rtvHeapDesc.Type);
 	commandList->OMSetRenderTargets(1, &rtvHandle, false, nullptr);
 
-	// 画面の色を変更
+	//3画面クリア
 	commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
 }
 
-void DirectXCommon::PostDraw()
-{
-	HRESULT result;
-	// バックバッファの番号を取得（2つなので0番か1番）
-	UINT bbIndex = swapChain->GetCurrentBackBufferIndex();
+void DirectXCommon::PostDraw() {
 
-	// リソースバリアで書き込み可能に変更
-	D3D12_RESOURCE_BARRIER barrierDesc{};
+	//5.元に戻す
 	barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;//描画状態から
 	barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;//表示状態へ
 	commandList->ResourceBarrier(1, &barrierDesc);
+
+	ExecuteCommand();
+}
+
+void DirectXCommon::ExecuteCommand() {
 
 	//命令のクローズ
 	result = commandList->Close();
 	assert(SUCCEEDED(result));
 	//コマンドリストの実行
-	ID3D12CommandList* commandListts[] = { commandList.Get()};
+	ID3D12CommandList* commandListts[] = { commandList };
 	commandQueue->ExecuteCommandLists(1, commandListts);
 
 	//フリップ
@@ -217,7 +226,7 @@ void DirectXCommon::PostDraw()
 	assert(SUCCEEDED(result));
 
 	//コマンド実行完了を待つ
-	commandQueue->Signal(fence.Get(), ++fenceVal);
+	commandQueue->Signal(fence, ++fenceVal);
 	if (fence->GetCompletedValue() != fenceVal)
 	{
 		HANDLE event = CreateEvent(nullptr, false, false, nullptr);
@@ -230,12 +239,12 @@ void DirectXCommon::PostDraw()
 	}
 
 	//キューをクリア
-	result = commandAllocator->Reset();
+	result = cmdAllocator->Reset();
 	assert(SUCCEEDED(result));
 	//コマンドリストを貯める準備
 	if (commandList != 0)
 	{
-		result = commandList->Reset(commandAllocator.Get(), nullptr);
+		result = commandList->Reset(cmdAllocator, nullptr);
 		assert(SUCCEEDED(result));
 	}
 	else
@@ -244,86 +253,47 @@ void DirectXCommon::PostDraw()
 	}
 }
 
-#pragma region エラーメッセージの抑制
-void DirectXCommon::EnableDebugLayer()
+void DirectXCommon::SetBackScreenColor(float red, float green, float blue, float alpha)
 {
-	//デバックレイヤーをオンに
-	ComPtr<ID3D12Debug> debugController;
-
-	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
-		debugController->EnableDebugLayer();
-		//debugController->SetEnableGPUBasedValidation(TRUE);
-	}
+	clearColor[0] = red;
+	clearColor[1] = green;
+	clearColor[2] = blue;
+	clearColor[3] = alpha;
 }
-
-void DirectXCommon::BreakOnSeverity()
-{
-	ComPtr<ID3D12InfoQueue> infoQueue;
-	if (SUCCEEDED(device->QueryInterface(IID_PPV_ARGS(&infoQueue))))
-	{
-		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);	// 不正時(エラーより上)に止まる
-		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);		// エラー時に止まる
-		infoQueue->Release();
-	}
-
-	// 抑制するエラー
-	D3D12_MESSAGE_ID denyIds[] = {
-		/*
-		 * Windows11でのDXGIデバックレイヤーとD12デバックレイヤーの相互作用バグによるエラーメッセージ
-		 * https://stackoverflow.com/questions/69805245/directx-12-application-is-crashing-in-windows-11
-		 */
-		D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE
-	};
-	// 抑制する表示レベル
-	D3D12_MESSAGE_SEVERITY severiries[] = { D3D12_MESSAGE_SEVERITY_INFO };
-	D3D12_INFO_QUEUE_FILTER filter{};
-	filter.DenyList.NumIDs = _countof(denyIds);
-	filter.DenyList.pIDList = denyIds;
-	filter.DenyList.NumSeverities = _countof(severiries);
-	filter.DenyList.pSeverityList = severiries;
-	// 指定したエラーの表示を抑制する
-	infoQueue->PushStorageFilter(&filter);
-}
-#pragma endregion
-
 #pragma region ゲッター
-ID3D12Device* DirectXCommon::GetDevice()
-{
-	return device.Get();
+ID3D12Device* DirectXCommon::GetDevice() {
+	return device;
 }
 
-IDXGIFactory7* DirectXCommon::GetDxgiFactory()
-{
-	return dxgiFactory.Get();
+IDXGIFactory7* DirectXCommon::GetDxgiFactory() {
+	return dxgiFactory;
 }
 
-IDXGISwapChain4* DirectXCommon::GetSwapChain()
-{
-	return swapChain.Get();
+IDXGISwapChain4* DirectXCommon::GetSwapChain() {
+	return swapChain;
 }
 
-ID3D12CommandAllocator* DirectXCommon::GetCmdAllocator()
-{
-	return commandAllocator.Get();
+ID3D12CommandAllocator* DirectXCommon::GetCmdAllocator() {
+	return cmdAllocator;
 }
 
-ID3D12GraphicsCommandList* DirectXCommon::GetCommandList()
-{
-	return commandList.Get();
+ID3D12GraphicsCommandList* DirectXCommon::GetCommandList() {
+	return commandList;
 }
 
-ID3D12CommandQueue* DirectXCommon::GetCommandQueue()
-{
-	return commandQueue.Get();
+ID3D12CommandQueue* DirectXCommon::GetCommandQueue() {
+	return commandQueue;
 }
 
-ID3D12DescriptorHeap* DirectXCommon::GetRtvHeap()
-{
-	return rtvHeap.Get();
+ID3D12DescriptorHeap* DirectXCommon::GetRtvHeap() {
+	return rtvHeap;
 }
 
-ID3D12Fence* DirectXCommon::GetFence()
-{
-	return fence.Get();
+ID3D12Fence* DirectXCommon::GetFence() {
+	return fence;
+}
+
+UINT64 DirectXCommon::GetFenceVal() {
+	return fenceVal;
 }
 #pragma endregion

@@ -16,6 +16,7 @@ private:
 	// テンプレート
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
+	HRESULT result;
 	// DirectX12デバイス
 	ComPtr<ID3D12Device> device;
 	// DXGIファクトリ
@@ -39,11 +40,22 @@ private:
 	// フェンスの生成
 	ComPtr<ID3D12Fence> fence;
 	UINT64 fenceVal = 0;
+
+	FLOAT clearColor[4] = { 0.1f,0.25f,0.5f,0.0f };
 public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
 	void Initialize(WinApp* winApp);
+
+	/// <summary>
+	/// 描画前処理
+	/// </summary>
+	void PreDraw();
+	/// <summary>
+	/// 描画後処理
+	/// </summary>
+	void PostDraw();
 
 	// ゲッター
 	ID3D12Device* GetDevice();
@@ -73,10 +85,6 @@ private: // 各初期化
 	/// </summary>
 	void InitializeRTV();
 	/// <summary>
-	/// 深度バッファの初期化
-	/// </summary>
-	void InitializeDepthBuffer();
-	/// <summary>
 	/// フェンスの初期化
 	/// </summary>
 	void InitializeFence();
@@ -92,6 +100,6 @@ private: // エラーメッセージの抑制
 	void BreakOnSeverity();
 
 private:
-	WinApp* winApp = nullptr;
+	WinApp* winApp = WinApp::GetInstance();
 };
 

@@ -30,6 +30,12 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 			// ƒQ[ƒ€ƒ‹[ƒv‚ð”²‚¯‚é
 			break;
 		}
+
+		dxCommon_->PreDraw();
+
+
+
+		dxCommon_->PostDraw();
 	}
 #pragma endregion
 

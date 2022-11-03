@@ -2,25 +2,24 @@
 
 void DirectXCommon::Initialize(WinApp* winApp)
 {
-#ifdef _DEBUG
-	EnableDebugLayer();
-	//BreakOnSeverity();
-#endif
 	// NULL検出
 	assert(winApp);
 	// メンバ変数に記録
 	this->winApp = winApp;
 
+#ifdef _DEBUG
+	EnableDebugLayer();
+#endif
+
 	// デバイスの生成
 	InitializeDevice();
+	BreakOnSeverity();
 	// コマンド関連の初期化
 	InitializeCommand();
 	// スワップチェーンの初期化
 	InitializeSwapChain();
 	// レンダーターゲットビューの初期化
 	InitializeRTV();
-	// 深度バッファの初期化
-	InitializeDepthBuffer();
 	// フェンスの初期化
 	InitializeFence();
 }
@@ -36,15 +35,6 @@ void DirectXCommon::InitializeDevice()
 		D3D_FEATURE_LEVEL_11_1,
 		D3D_FEATURE_LEVEL_11_0,
 	};
-
-	HRESULT result;
-
-	// デバックレイヤーをオンに
-	ComPtr<ID3D12Debug> debugController;
-
-	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
-		debugController->EnableDebugLayer();
-	}
 
 	// DXGIファクトリーの生成
 	result = CreateDXGIFactory(IID_PPV_ARGS(&dxgiFactory));
@@ -95,8 +85,6 @@ void DirectXCommon::InitializeDevice()
 
 void DirectXCommon::InitializeCommand()
 {
-	HRESULT result;
-
 	// コマンドアロケータの生成
 	result = device->CreateCommandAllocator(
 		D3D12_COMMAND_LIST_TYPE_DIRECT,
@@ -119,8 +107,6 @@ void DirectXCommon::InitializeCommand()
 
 void DirectXCommon::InitializeSwapChain()
 {
-	HRESULT result;
-	WinApp* winApp = WinApp::GetInstance();
 	ComPtr<IDXGISwapChain1> swapChain1;
 
 	// スワップチェーンの設定
@@ -176,68 +162,41 @@ void DirectXCommon::InitializeRTV()
 	}
 }
 
-void DirectXCommon::InitializeDepthBuffer()
-{
-	HRESULT result;
-	this->winApp = winApp;
-
-	// 深度バッファリソース設定
-	D3D12_RESOURCE_DESC depthResourceDesc{};
-	depthResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-	depthResourceDesc.Width = winApp->window_width;   //レンダーターゲットに合わせる
-	depthResourceDesc.Height = winApp->window_height; //レンダーターゲットに合わせる
-	depthResourceDesc.DepthOrArraySize = 1;
-	depthResourceDesc.Format = DXGI_FORMAT_D32_FLOAT; // 深度フォーマット
-	depthResourceDesc.SampleDesc.Count = 1;
-	depthResourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL; // デプスステンシル
-	// 深度地用ヒーププロパティ
-	D3D12_HEAP_PROPERTIES depthHeapProp{};
-	depthHeapProp.Type = D3D12_HEAP_TYPE_DEFAULT;
-	// 深度地のクリア設定
-	D3D12_CLEAR_VALUE depthClearValue{};
-	depthClearValue.DepthStencil.Depth = 1.0f; // 深度地1.0f（最大値）でクリア
-	depthClearValue.Format = DXGI_FORMAT_D32_FLOAT; // 深度地フォーマット
-
-	// 深度バッファ生成
-	result = device->CreateCommittedResource(
-		&depthHeapProp,
-		D3D12_HEAP_FLAG_NONE,
-		&depthResourceDesc,
-		D3D12_RESOURCE_STATE_DEPTH_WRITE, // 深度地書き込みに使用
-		&depthClearValue,
-		IID_PPV_ARGS(&depthBuff));
-	assert(SUCCEEDED(result));
-
-	// 深度ビュー(DSV)用デスクリプタヒープ作成
-	D3D12_DESCRIPTOR_HEAP_DESC dsvHeapDesc{};
-	dsvHeapDesc.NumDescriptors = 1; // 深度ビューは1つ
-	dsvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_DSV; // デプスステンシルビュー
-	result = device->CreateDescriptorHeap(&dsvHeapDesc, IID_PPV_ARGS(&dsvHeap));
-	assert(SUCCEEDED(result));
-
-	// 深度ビュー(DSV)作成
-	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc = {};
-	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT; // 深度地フォーマット
-	dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
-	device->CreateDepthStencilView(
-		depthBuff,
-		&dsvDesc,
-		dsvHeap->GetCPUDescriptorHandleForHeapStart());
-	assert(SUCCEEDED(result));
-}
-
 void DirectXCommon::InitializeFence()
 {
-	HRESULT result;
 	result = device->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 }
 #pragma endregion
+
+void DirectXCommon::PreDraw()
+{
+	// バックバッファの番号を取得（2つなので0番か1番）
+	UINT bbIndex = swapChain->GetCurrentBackBufferIndex();
+
+	// リソースバリアで書き込み可能に変更
+	D3D12_RESOURCE_BARRIER barrierDesc{};
+	barrierDesc.Transition.pResource = backBuffers[bbIndex].Get();//バックバッファを指定
+	barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;//表示状態から
+	barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;//描画状態へ
+	commandList->ResourceBarrier(1, &barrierDesc);
+
+	// レンダーターゲットビューのハンドルを取得
+	rtvHeap->GetCPUDescriptorHandleForHeapStart();
+	rtvHandle.ptr += bbIndex * device->GetDescriptorHandleIncrementSize(rtvHeapDesc.Type);
+	commandList->OMSetRenderTargets(1, &rtvHandle, false, nullptr);
+
+	// 画面の色を変更
+	commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+}
+void DirectXCommon::PostDraw()
+{
+}
 
 #pragma region エラーメッセージの抑制
 void DirectXCommon::EnableDebugLayer()
 {
 	//デバックレイヤーをオンに
-	ID3D12Debug1* debugController;
+	ComPtr<ID3D12Debug1> debugController;
 
 	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
 		debugController->EnableDebugLayer();
@@ -245,34 +204,34 @@ void DirectXCommon::EnableDebugLayer()
 	}
 }
 
-//void DirectXCommon::BreakOnSeverity()
-//{
-//	ID3D12InfoQueue* infoQueue;
-//	if (SUCCEEDED(device->QueryInterface(IID_PPV_ARGS(&infoQueue))))
-//	{
-//		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);	// 不正時(エラーより上)に止まる
-//		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);		// エラー時に止まる
-//		infoQueue->Release();
-//	}
-//
-//	// 抑制するエラー
-//	D3D12_MESSAGE_ID denyIds[] = {
-//		/*
-//		 * Windows11でのDXGIデバックレイヤーとD12デバックレイヤーの相互作用バグによるエラーメッセージ
-//		 * https://stackoverflow.com/questions/69805245/directx-12-application-is-crashing-in-windows-11
-//		 */
-//		D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE
-//	};
-//	// 抑制する表示レベル
-//	D3D12_MESSAGE_SEVERITY severiries[] = { D3D12_MESSAGE_SEVERITY_INFO };
-//	D3D12_INFO_QUEUE_FILTER filter{};
-//	filter.DenyList.NumIDs = _countof(denyIds);
-//	filter.DenyList.pIDList = denyIds;
-//	filter.DenyList.NumSeverities = _countof(severiries);
-//	filter.DenyList.pSeverityList = severiries;
-//	// 指定したエラーの表示を抑制する
-//	infoQueue->PushStorageFilter(&filter);
-//}
+void DirectXCommon::BreakOnSeverity()
+{
+	ComPtr<ID3D12InfoQueue> infoQueue;
+	if (SUCCEEDED(device->QueryInterface(IID_PPV_ARGS(&infoQueue))))
+	{
+		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);	// 不正時(エラーより上)に止まる
+		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);		// エラー時に止まる
+		infoQueue->Release();
+	}
+
+	// 抑制するエラー
+	D3D12_MESSAGE_ID denyIds[] = {
+		/*
+		 * Windows11でのDXGIデバックレイヤーとD12デバックレイヤーの相互作用バグによるエラーメッセージ
+		 * https://stackoverflow.com/questions/69805245/directx-12-application-is-crashing-in-windows-11
+		 */
+		D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE
+	};
+	// 抑制する表示レベル
+	D3D12_MESSAGE_SEVERITY severiries[] = { D3D12_MESSAGE_SEVERITY_INFO };
+	D3D12_INFO_QUEUE_FILTER filter{};
+	filter.DenyList.NumIDs = _countof(denyIds);
+	filter.DenyList.pIDList = denyIds;
+	filter.DenyList.NumSeverities = _countof(severiries);
+	filter.DenyList.pSeverityList = severiries;
+	// 指定したエラーの表示を抑制する
+	infoQueue->PushStorageFilter(&filter);
+}
 #pragma endregion
 
 #pragma region ゲッター

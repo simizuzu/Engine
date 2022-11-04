@@ -11,53 +11,41 @@ class DirectXCommon
 private:
 	// DirectX 初期化処理
 	HRESULT result;
-	ID3D12Device* device = nullptr;
-	IDXGIFactory7* dxgiFactory = nullptr;
-	IDXGISwapChain4* swapChain = nullptr;
-	ID3D12CommandAllocator* cmdAllocator = nullptr;
-	ID3D12GraphicsCommandList* commandList = nullptr;
-	ID3D12CommandQueue* commandQueue = nullptr;
-	ID3D12DescriptorHeap* rtvHeap = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12Device> device;
+	Microsoft::WRL::ComPtr<IDXGIFactory7> dxgiFactory;
+	Microsoft::WRL::ComPtr<IDXGISwapChain4> swapChain;
+	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> cmdAllocator;
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList;
+	Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue;
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> rtvHeap;
+	Microsoft::WRL::ComPtr<ID3D12Fence> fence;
+	std::vector< Microsoft::WRL::ComPtr<ID3D12Resource>> backBuffers;
 
-
-	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{}; // 外に出さなきゃエラー起きる
 	// スワップチェーンの設定
-	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle;
-
+	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{}; // 外に出さなきゃエラー起きる
 	// デスクリプタヒープの設定
 	D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc{};
-
-	// バックバッファ
-	std::vector<ID3D12Resource*> backBuffers;
-
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle;
 	// フェンスの生成
-	ID3D12Fence* fence = nullptr;
 	UINT64 fenceVal = 0;
-
 	//バリアーデスク
 	D3D12_RESOURCE_BARRIER barrierDesc{};
-
+	// 背景色
 	FLOAT clearColor[4] = { 0.1f,0.25f, 0.5f,0.0f }; // 黄緑色
-
 
 	//DXGIまわり初期化
 	void InitializeDXGI();
-
 	//最終的なレンダーターゲットの生成
 	void CreatRtv();
-
 	//スワップチェインの生成
 	void CreateSwapChain();
-
 	//コマンドまわり初期化
 	void InitializeCommand();
-
 	//フェンス生成
 	void CreateFence();
-
 	//デバッグレイヤーを有効にする
 	void EnableDebugLayer();
-
+	void BreakOnSeverity();
 
 public:
 	static DirectXCommon* GetInstance();

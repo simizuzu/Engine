@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);$(ProjectDir)lib\engine\2D\Sprite;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -120,7 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);$(ProjectDir)lib\engine\2D\Sprite;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -131,21 +131,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="FPS.cpp" />
+    <ClCompile Include="lib\engine\2D\Sprite\Sprite.cpp" />
+    <ClCompile Include="lib\engine\2D\Sprite\SpriteCommon.cpp" />
     <ClCompile Include="lib\engine\Base\DirectXCommon.cpp" />
+    <ClCompile Include="lib\engine\Base\FPS.cpp" />
     <ClCompile Include="lib\engine\Base\WinApp.cpp" />
     <ClCompile Include="lib\engine\Input\Input.cpp" />
     <ClCompile Include="lib\engine\Input\Keyboard.cpp" />
     <ClCompile Include="lib\engine\Math\DirectX12Math.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FPS.h" />
+    <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
+    <ClInclude Include="lib\engine\2D\Sprite\SpriteCommon.h" />
     <ClInclude Include="lib\engine\Base\DirectXCommon.h" />
+    <ClInclude Include="lib\engine\Base\FPS.h" />
     <ClInclude Include="lib\engine\Base\WinApp.h" />
     <ClInclude Include="lib\engine\Input\Input.h" />
     <ClInclude Include="lib\engine\Input\Keyboard.h" />
     <ClInclude Include="lib\engine\Math\DirectX12Math.h" />
+    <ClInclude Include="TextureManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\Sprite.hlsli" />

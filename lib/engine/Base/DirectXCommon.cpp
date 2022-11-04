@@ -285,7 +285,11 @@ void DirectXCommon::BreakOnSeverity()
 		// 指定したエラーの表示を抑制する
 		infoQueue->PushStorageFilter(&filter);
 		// エラー時にブレークを発生させる
+		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
 		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);
+
+		// オンにするとコマンドアロケータで止まってしまう...
+		//infoQueue->Release();
 	}
 }
 #pragma endregion

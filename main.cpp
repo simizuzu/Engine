@@ -3,6 +3,7 @@
 #include "Input.h"
 #include "WinApp.h"
 #include "DirectXCommon.h"
+#include "FPS.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
@@ -21,6 +22,11 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 	input_ = new Input();
 	input_->Initialize();
 
+	// FPS固定初期化
+	FPS* fps_ = nullptr;
+	fps_ = new FPS();
+	fps_->InitializeFixFps();
+
 #pragma region ゲームループ
 	// ゲームループ
 	while (true){
@@ -32,7 +38,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 		}
 
 		dxCommon_->PreDraw();
-
+		fps_->UpdateFixFPS();
 
 
 		dxCommon_->PostDraw();

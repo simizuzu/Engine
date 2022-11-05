@@ -6,34 +6,41 @@
 #include "FPS.h"
 #include "SpriteCommon.h"
 #include "Sprite.h"
+#include "TextureManager.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 #pragma region 基盤システムの初期化
 	// WindowsAPI初期化
 	WinApp* winApp_ = nullptr;
-	winApp_ = new WinApp;
+	winApp_ = new WinApp();
 	winApp_->GetInstance()->Initialize();
 
 	// DirectX初期化
 	DirectXCommon* dxCommon_ = nullptr;
-	dxCommon_ = new DirectXCommon;
+	dxCommon_ = new DirectXCommon();
 	dxCommon_->Initialize();
+
+	// テクスチャマネージャ初期化
+	TextureManager* textureManager_ = nullptr;
+	textureManager_ = new TextureManager();
+	textureManager_->Initialize(dxCommon_);
 
 	// FPS固定初期化
 	FPS* fps_ = nullptr;
-	fps_ = new FPS;
+	fps_ = new FPS();
 	fps_->InitializeFixFps();
 
 	// Input初期化
 	Input* input_ = nullptr;
-	input_ = new Input;
+	input_ = new Input();
 	input_->Initialize();
 
 	// スプライト共通部の初期化
 	SpriteCommon* spriteCommon_ = nullptr;
-	spriteCommon_ = new SpriteCommon;
+	spriteCommon_ = new SpriteCommon();
 	spriteCommon_->Initialize(dxCommon_);
+
 #pragma endregion
 
 #pragma region 最初のシーンの初期化
@@ -71,17 +78,21 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 #pragma endregion
 
 #pragma region 基盤システムの終了
-	// 入力解放
-	delete input_;
 	// スプライト解放
 	delete sprite_;
 	delete spriteCommon_;
+	// 入力解放
+	delete input_;
+	// テクスチャ解放
+	delete textureManager_;
 	// DirectX解放
 	delete dxCommon_;
 	// WindowsAPIの終了処理
 	winApp_->Finalize();
-	// 解放処理
+	// WinApp解放
 	delete winApp_;
+	// FPS解放
+	delete fps_;
 #pragma endregion
 
 	return 0;

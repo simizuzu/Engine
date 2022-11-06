@@ -45,7 +45,6 @@ public: // メンバ関数
 	/// <summary>
 	/// テクスチャ読み込み
 	/// </summary>
-	/// <param name="texNumber">テクスチャ番号</param>
 	/// <param name="filename">テクスチャファイル名</param>
 	void LoadTexture(const std::string& fileName);
 
@@ -54,6 +53,14 @@ public: // メンバ関数
 	/// </summary>
 	/// <param name="commandList">コマンドリスト</param>
 	void SetGrapihcsSrvHeaps(ID3D12GraphicsCommandList* commandList);
+
+	/// <summary>
+	/// シェーダーリソースビューをセット
+	/// </summary>
+	/// <param name="commandList">コマンドリスト</param>
+	/// <param name="rootPrameterIndex">ルートパラメータ</param>
+	/// <param name="texNumber">テクスチャ番号</param>
+	void SetShaderResourceView(ID3D12GraphicsCommandList* commandList, UINT rootPrameterIndex, UINT texNumber);
 
 	// インスタンス
 	static TextureManager* GetInstance();

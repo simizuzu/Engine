@@ -141,6 +141,21 @@ void TextureManager::SetGrapihcsSrvHeaps(ID3D12GraphicsCommandList* commandList)
 	commandList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
 }
 
+void TextureManager::SetShaderResourceView(ID3D12GraphicsCommandList* commandList, UINT rootPrameterIndex, UINT texNumber)
+{
+	TextureData tmp{};
+
+	UINT incrementSize = directXCommon_->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+
+	//SRVヒープの先頭ハンドルを取得
+	D3D12_CPU_DESCRIPTOR_HANDLE srvHandle = srvHeap->GetCPUDescriptorHandleForHeapStart();
+	tmp.srvGpuHandle = srvHeap->GetGPUDescriptorHandleForHeapStart();
+
+	// ハンドルのポインタずらし
+	srvHandle.ptr += static_cast<UINT64> (texCount) * incrementSize;
+	tmp.srvGpuHandle.ptr += static_cast<UINT64> (texCount) * incrementSize;
+}
+
 TextureManager* TextureManager::GetInstance()
 {
 	static TextureManager instance;

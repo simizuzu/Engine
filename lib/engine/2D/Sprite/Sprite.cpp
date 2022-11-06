@@ -1,6 +1,6 @@
 #include "Sprite.h"
 
-void Sprite::Initialize(SpriteCommon* spriteCommon)
+void Sprite::Initialize(TextureManager* textureManager)
 {
-	spriteCommon_ = spriteCommon;
+	textureManager_ = textureManager;
 }

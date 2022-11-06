@@ -138,7 +138,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="lib\engine\2D\Sprite\Sprite.cpp" />
-    <ClCompile Include="lib\engine\2D\Sprite\SpriteCommon.cpp" />
     <ClCompile Include="lib\engine\Base\DirectXCommon.cpp" />
     <ClCompile Include="lib\engine\Base\FPS.cpp" />
     <ClCompile Include="lib\engine\Base\WinApp.cpp" />
@@ -150,7 +149,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
-    <ClInclude Include="lib\engine\2D\Sprite\SpriteCommon.h" />
     <ClInclude Include="lib\engine\Base\DirectXCommon.h" />
     <ClInclude Include="lib\engine\Base\FPS.h" />
     <ClInclude Include="lib\engine\Base\WinApp.h" />

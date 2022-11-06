@@ -84,9 +84,6 @@
     <ClCompile Include="lib\engine\2D\Sprite\Sprite.cpp">
       <Filter>ソース ファイル\2D\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="lib\engine\2D\Sprite\SpriteCommon.cpp">
-      <Filter>ソース ファイル\2D\Sprite</Filter>
-    </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>ソース ファイル\Base</Filter>
     </ClCompile>
@@ -111,9 +108,6 @@
       <Filter>ヘッダー ファイル\Base</Filter>
     </ClInclude>
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h">
-      <Filter>ヘッダー ファイル\2D\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\engine\2D\Sprite\SpriteCommon.h">
       <Filter>ヘッダー ファイル\2D\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="lib\engine\Base\FPS.h">

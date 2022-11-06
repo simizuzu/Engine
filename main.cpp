@@ -4,7 +4,6 @@
 #include "WinApp.h"
 #include "DirectXCommon.h"
 #include "FPS.h"
-#include "SpriteCommon.h"
 #include "Sprite.h"
 #include "TextureManager.h"
 
@@ -37,16 +36,16 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 	input_->Initialize();
 
 	// スプライト共通部の初期化
-	SpriteCommon* spriteCommon_ = nullptr;
-	spriteCommon_ = new SpriteCommon();
-	spriteCommon_->Initialize(dxCommon_);
+	TextureManager* textureManager_ = nullptr;
+	textureManager_ = new TextureManager();
+	textureManager_->Initialize(dxCommon_);
 
 #pragma endregion
 
 #pragma region 最初のシーンの初期化
 	// スプライトの初期化
 	Sprite* sprite_ = new Sprite();
-	sprite_->Initialize(spriteCommon_);
+	sprite_->Initialize(textureManager_);
 #pragma endregion
 
 #pragma region ゲームループ
@@ -80,11 +79,10 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 #pragma region 基盤システムの終了
 	// スプライト解放
 	delete sprite_;
-	delete spriteCommon_;
-	// 入力解放
-	delete input_;
 	// テクスチャ解放
 	delete textureManager_;
+	// 入力解放
+	delete input_;
 	// DirectX解放
 	delete dxCommon_;
 	// WindowsAPIの終了処理

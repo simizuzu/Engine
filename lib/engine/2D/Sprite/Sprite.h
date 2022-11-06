@@ -1,11 +1,12 @@
 #pragma once
-#include "SpriteCommon.h"
+#include <DirectXMath.h>
+#include "TextureManager.h"
 
 class Sprite
 {
 public:
-	void Initialize(SpriteCommon* spriteCommon);
+	void Initialize(TextureManager* textureManager);
 
 private:
-	SpriteCommon* spriteCommon_ = nullptr;
+	TextureManager* textureManager_ = nullptr;
 };

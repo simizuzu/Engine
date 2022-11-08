@@ -45,8 +45,8 @@ private: // ƒƒ“ƒo•Ï”
 	WNDCLASSEX w{};
 
 private:
-	WinApp() = default;
-	~WinApp() = default;
+	WinApp();
+	~WinApp();
 	WinApp& operator=(const WinApp&) = delete;
 	WinApp(const WinApp&) = delete;
 };

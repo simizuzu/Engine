@@ -33,7 +33,7 @@ public: // エイリアステンプレート
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
 public: // 定数
-	static const size_t MaxSRVCount = 1024; // テクスチャの最大枚数
+	static const size_t MaxSRVCount = 2056; // テクスチャの最大枚数
 
 public: // メンバ関数
 	/// <summary>
@@ -46,7 +46,7 @@ public: // メンバ関数
 	/// テクスチャ読み込み
 	/// </summary>
 	/// <param name="filename">テクスチャファイル名</param>
-	void LoadTexture(const std::string& fileName);
+	uint32_t LoadTexture(const std::string& fileName);
 
 	/// <summary>
 	/// デスクリプタヒープをセット（グラフィックスコマンド）
@@ -62,6 +62,19 @@ public: // メンバ関数
 	/// <param name="texNumber">テクスチャ番号</param>
 	void SetShaderResourceView(ID3D12GraphicsCommandList* commandList, UINT rootPrameterIndex, UINT texNumber);
 
+	/// <summary>
+	/// 描画用テクスチャコマンドの発行
+	/// </summary>
+	/// <param name="fileName">テクスチャ番号</param>
+	void SetTextureCommands(UINT texNumber);
+
+	/// <summary>
+	/// 読み込み
+	/// </summary>
+	/// <param name="fileName">ファイル名</param>
+	/// <returns>テクスチャハンドル</returns>
+	static uint32_t Load(const std::string& fileName);
+
 	// インスタンス
 	static TextureManager* GetInstance();
 
@@ -69,12 +82,14 @@ public: // メンバ関数
 	ID3D12DescriptorHeap* GetSrvHeap() { return srvHeap.Get(); }
 
 private: // メンバ変数
-	ComPtr<ID3D12DescriptorHeap> srvHeap;
+	ComPtr<ID3D12DescriptorHeap> srvHeap = nullptr;
 	D3D12_DESCRIPTOR_RANGE descriptorRange;
-	D3D12_HEAP_PROPERTIES textureHeapProp;
+	D3D12_HEAP_PROPERTIES textureHeapProp{};
+
+	std::array<Microsoft::WRL::ComPtr<ID3D12Resource>, MaxSRVCount> textureBuffers_;
 
 	// テクスチャ数
-	UINT texCount;
+	UINT texCount = 1024;
 
 	DirectXCommon* directXCommon_ = nullptr;
 
@@ -84,4 +99,3 @@ private:
 	TextureManager& operator=(const TextureManager&) = delete;
 	TextureManager(const TextureManager&) = delete;
 };
-

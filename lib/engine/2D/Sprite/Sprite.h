@@ -6,8 +6,8 @@ class Sprite
 {
 public:
 	void Initialize(TextureManager* textureManager);
-
-	void InitializeVertBuff();
+	
+	void InitializeVertexBuff();
 
 private:
 	TextureManager* textureManager_ = nullptr;

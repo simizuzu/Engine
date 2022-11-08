@@ -2,6 +2,9 @@
 
 #pragma comment(lib,"winmm.lib")
 
+WinApp::WinApp(){}
+WinApp::~WinApp(){}
+
 LRESULT WinApp::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
 	// メッセージで分岐

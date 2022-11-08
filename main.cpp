@@ -20,11 +20,6 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 	dxCommon_ = new DirectXCommon();
 	dxCommon_->Initialize();
 
-	// テクスチャマネージャ初期化
-	TextureManager* textureManager_ = nullptr;
-	textureManager_ = new TextureManager();
-	textureManager_->Initialize(dxCommon_);
-
 	// FPS固定初期化
 	FPS* fps_ = nullptr;
 	fps_ = new FPS();

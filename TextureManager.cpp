@@ -3,6 +3,11 @@
 
 using namespace DirectX;
 
+uint32_t TextureManager::Load(const std::string& fileName)
+{
+	return TextureManager::GetInstance()->LoadTexture(fileName);
+}
+
 void TextureManager::Initialize(DirectXCommon* directXCommon)
 {
 	HRESULT result;
@@ -31,7 +36,7 @@ void TextureManager::Initialize(DirectXCommon* directXCommon)
 	textureHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
 }
 
-void TextureManager::LoadTexture(const std::string& fileName)
+uint32_t TextureManager::LoadTexture(const std::string& fileName)
 {
 	if (texCount > 1024)
 	{

@@ -11,9 +11,9 @@ void DirectXCommon::Initialize()
 {
 	InitializeDXGI();
 	InitializeCommand();
-	CreateSwapChain();
-	CreatRtv();
-	CreateFence();
+	InitializeSwapChain();
+	InitializeRtv();
+	InitializeFence();
 }
 
 #pragma region 各初期化
@@ -82,7 +82,7 @@ void DirectXCommon::InitializeDXGI()
 #endif
 }
 
-void DirectXCommon::CreatRtv() {
+void DirectXCommon::InitializeRtv() {
 	// デスクリプタヒープの設定
 	rtvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV; // レンダーターゲットビュー
 	rtvHeapDesc.NumDescriptors = swapChainDesc.BufferCount;
@@ -111,7 +111,7 @@ void DirectXCommon::CreatRtv() {
 	}
 }
 
-void DirectXCommon::CreateSwapChain()
+void DirectXCommon::InitializeSwapChain()
 {
 	// IDXGISwapChain1のComPtrを用意
 	ComPtr<IDXGISwapChain1> swapChain1;
@@ -161,7 +161,7 @@ void DirectXCommon::InitializeCommand()
 	assert(SUCCEEDED(result));
 }
 
-void DirectXCommon::CreateFence()
+void DirectXCommon::InitializeFence()
 {
 	result = device->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 }

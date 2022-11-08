@@ -33,16 +33,18 @@ private:
 	// 背景色
 	FLOAT clearColor[4] = { 0.1f,0.25f, 0.5f,0.0f }; // 黄緑色
 
-	//DXGIまわり初期化
+	// DXGIまわり初期化
 	void InitializeDXGI();
-	//最終的なレンダーターゲットの生成
-	void CreatRtv();
-	//スワップチェインの生成
-	void CreateSwapChain();
-	//コマンドまわり初期化
+	// 最終的なレンダーターゲットの生成
+	void InitializeRtv();
+	// スワップチェインの生成
+	void InitializeSwapChain();
+	// コマンドまわり初期化
 	void InitializeCommand();
-	//フェンス生成
-	void CreateFence();
+	// フェンス生成
+	void InitializeFence();
+	// 深度バッファの初期化
+	void InitializeDepthBuff();
 	//デバッグレイヤーを有効にする
 	void EnableDebugLayer();
 	void BreakOnSeverity();

@@ -43,5 +43,10 @@ private: // メンバ変数
 	HWND hwnd = nullptr;
 	// ウィンドウクラスの設定
 	WNDCLASSEX w{};
-};
 
+private:
+	WinApp() = default;
+	~WinApp() = default;
+	WinApp& operator=(const WinApp&) = delete;
+	WinApp(const WinApp&) = delete;
+};

@@ -64,15 +64,14 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 		// 描画前処理
 		dxCommon_->PreDraw();
 
-		// FPS固定更新
-		fps_->UpdateFixFPS();
-
 #pragma region 最初のシーンの描画
 
 #pragma endregion
 
 		// 描画後処理
 		dxCommon_->PostDraw();
+		// FPS固定更新
+		fps_->UpdateFixFPS();
 	}
 #pragma endregion
 

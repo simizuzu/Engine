@@ -71,4 +71,10 @@ public:
 	ID3D12DescriptorHeap* GetRtvHeap();
 	ID3D12Fence* GetFence();
 	UINT64 GetFenceVal();
+
+private:
+	DirectXCommon() = default;
+	~DirectXCommon() = default;
+	DirectXCommon& operator=(const DirectXCommon&) = delete;
+	DirectXCommon(const DirectXCommon&) = delete;
 };

@@ -13,4 +13,3 @@ public: // ƒƒ“ƒo•Ï”
 	// ‹L˜^ŠÔ(FPSŒÅ’è—p)
 	std::chrono::steady_clock::time_point reference_;
 };
-

@@ -77,5 +77,11 @@ private: // ƒƒ“ƒo•Ï”
 	UINT texCount;
 
 	DirectXCommon* directXCommon_ = nullptr;
+
+private:
+	TextureManager() = default;
+	~TextureManager() = default;
+	TextureManager& operator=(const TextureManager&) = delete;
+	TextureManager(const TextureManager&) = delete;
 };
 

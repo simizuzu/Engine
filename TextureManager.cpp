@@ -3,6 +3,8 @@
 
 using namespace DirectX;
 
+TextureManager* TextureManager::textureManager_ = nullptr;
+
 uint32_t TextureManager::Load(const std::string& fileName)
 {
 	return TextureManager::GetInstance()->LoadTexture(fileName);
@@ -159,6 +161,11 @@ void TextureManager::SetShaderResourceView(ID3D12GraphicsCommandList* commandLis
 	// ハンドルのポインタずらし
 	srvHandle.ptr += static_cast<UINT64> (texCount) * incrementSize;
 	tmp.srvGpuHandle.ptr += static_cast<UINT64> (texCount) * incrementSize;
+}
+
+void TextureManager::Delete()
+{
+	delete textureManager_;
 }
 
 TextureManager* TextureManager::GetInstance()

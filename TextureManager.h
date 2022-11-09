@@ -75,6 +75,11 @@ public: // メンバ関数
 	/// <returns>テクスチャハンドル</returns>
 	static uint32_t Load(const std::string& fileName);
 
+	/// <summary>
+	/// 解放処理
+	/// </summary>
+	void Delete();
+
 	// インスタンス
 	static TextureManager* GetInstance();
 
@@ -92,6 +97,8 @@ private: // メンバ変数
 	UINT texCount = 1024;
 
 	DirectXCommon* directXCommon_ = nullptr;
+
+	static TextureManager* textureManager_;
 
 private:
 	TextureManager() = default;

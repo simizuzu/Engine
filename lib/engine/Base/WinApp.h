@@ -31,6 +31,11 @@ public: // メンバ関数
 	/// </summary>
 	void Finalize();
 
+	/// <summary>
+	/// 解放処理
+	/// </summary>
+	void Delete();
+
 	// シングルトン
 	static WinApp* GetInstance();
 
@@ -43,6 +48,7 @@ private: // メンバ変数
 	HWND hwnd = nullptr;
 	// ウィンドウクラスの設定
 	WNDCLASSEX w{};
+	static WinApp* winApp_;
 
 private:
 	WinApp();

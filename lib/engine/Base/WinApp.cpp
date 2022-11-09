@@ -5,6 +5,8 @@
 WinApp::WinApp(){}
 WinApp::~WinApp(){}
 
+WinApp* WinApp::winApp_ = nullptr;
+
 LRESULT WinApp::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
 	// メッセージで分岐
@@ -81,6 +83,11 @@ void WinApp::Finalize()
 {
 	// ウィンドウクラスを登録解除
 	UnregisterClass(w.lpszClassName, w.hInstance);
+}
+
+void WinApp::Delete()
+{
+	delete winApp_;
 }
 
 WinApp* WinApp::GetInstance()

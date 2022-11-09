@@ -49,6 +49,8 @@ private:
 	void EnableDebugLayer();
 	void BreakOnSeverity();
 
+	static DirectXCommon* dxCommon_;
+
 public:
 	static DirectXCommon* GetInstance();
 
@@ -74,6 +76,10 @@ public:
 	ID3D12Fence* GetFence();
 	UINT64 GetFenceVal();
 
+	/// <summary>
+	/// ‰ğ•úˆ—
+	/// </summary>
+	void Delete();
 private:
 	DirectXCommon() = default;
 	~DirectXCommon() = default;

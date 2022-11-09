@@ -12,12 +12,12 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 #pragma region 基盤システムの初期化
 	// WindowsAPI初期化
 	WinApp* winApp_ = nullptr;
-	winApp_ = new WinApp();
-	winApp_->GetInstance()->Initialize();
+	winApp_ = WinApp::GetInstance();
+	winApp_->Initialize();
 
 	// DirectX初期化
 	DirectXCommon* dxCommon_ = nullptr;
-	dxCommon_ = new DirectXCommon();
+	dxCommon_ = DirectXCommon::GetInstance();
 	dxCommon_->Initialize();
 
 	// FPS固定初期化
@@ -32,7 +32,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 
 	// スプライト共通部の初期化
 	TextureManager* textureManager_ = nullptr;
-	textureManager_ = new TextureManager();
+	textureManager_ = TextureManager::GetInstance();
 	textureManager_->Initialize(dxCommon_);
 
 #pragma endregion
@@ -74,15 +74,15 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 	// スプライト解放
 	delete sprite_;
 	// テクスチャ解放
-	delete textureManager_;
+	textureManager_->Delete();
 	// 入力解放
 	delete input_;
 	// DirectX解放
-	delete dxCommon_;
+	dxCommon_->Delete();
 	// WindowsAPIの終了処理
 	winApp_->Finalize();
 	// WinApp解放
-	delete winApp_;
+	winApp_->Delete();
 	// FPS解放
 	delete fps_;
 #pragma endregion

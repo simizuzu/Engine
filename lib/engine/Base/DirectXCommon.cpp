@@ -220,8 +220,9 @@ void DirectXCommon::InitializeDepthBuffer()
 #pragma endregion
 
 #pragma region 描画
-void DirectXCommon::PreDraw()
+void DirectXCommon::PreDraw(WinApp* winApp)
 {
+	winApp_ = winApp;
 	// バックバッファ番号を取得
 	UINT bbIndex = swapChain->GetCurrentBackBufferIndex();
 	// 書き込み可能に変更
@@ -236,15 +237,37 @@ void DirectXCommon::PreDraw()
 	rtvHandle.ptr += (static_cast<unsigned long long>(bbIndex)) * device->GetDescriptorHandleIncrementSize(rtvHeapDesc.Type);
 	commandList->OMSetRenderTargets(1, &rtvHandle, false, nullptr);
 
-	// 画面クリア
-	commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
-
 	// 深度ビュー作成
 	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT; // 深度地フォーマット
 	dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
-	dxCommon_->GetInstance()->GetDevice()->CreateDepthStencilView(
+	device->CreateDepthStencilView(
+		depthBuff.Get(),
+		&dsvDesc,
+		dsvHeap->GetCPUDescriptorHandleForHeapStart());
+	dsvHandle = dsvHeap->GetCPUDescriptorHandleForHeapStart();
+	commandList->OMSetRenderTargets(1, &rtvHandle, false, &dsvHandle);
 
-	)
+	// 画面クリア
+	commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+	commandList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+
+	// ビューポート領域の設定
+	viewport.Width = winApp->window_width;
+	viewport.Height = winApp->window_height;
+	viewport.TopLeftX = 0;
+	viewport.TopLeftY = 0;
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
+	// ビューポート設定コマンド
+	commandList->RSSetViewports(1, &viewport);
+
+	// シザー矩形
+	scissorRect.left = 0;
+	scissorRect.right = scissorRect.left + winApp->window_width;
+	scissorRect.top = 0;
+	scissorRect.bottom = scissorRect.top + winApp->window_height;
+	// シザー矩形設定コマンドを、コマンドリストに積む
+	commandList->RSSetScissorRects(1, &scissorRect);
 }
 
 void DirectXCommon::PostDraw()

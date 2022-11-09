@@ -34,6 +34,12 @@ private:
 	D3D12_RESOURCE_BARRIER barrierDesc{};
 	// 深度ビュー作成
 	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc{};
+	// レンダーターゲット設定
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle;
+	// ビューポート
+	D3D12_VIEWPORT viewport{};
+	// シザー矩形
+	D3D12_RECT scissorRect{};
 	// 背景色
 	FLOAT clearColor[4] = { 0.1f,0.25f, 0.5f,0.0f }; // 黄緑色
 
@@ -61,7 +67,7 @@ public:
 
 	// DirectX毎フレーム処理ここから
 	void Initialize();
-	void PreDraw();
+	void PreDraw(WinApp* winApp);
 	void PostDraw();
 	void ExecuteCommand();
 	// DirectX毎フレーム処理ここまで

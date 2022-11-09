@@ -163,6 +163,12 @@ void TextureManager::SetShaderResourceView(ID3D12GraphicsCommandList* commandLis
 	tmp.srvGpuHandle.ptr += static_cast<UINT64> (texCount) * incrementSize;
 }
 
+void TextureManager::SetTextureCommands(UINT texNumber)
+{
+	// ルートシグネチャの生成
+	ComPtr<ID3D12RootSignature> rootSignature;
+}
+
 void TextureManager::Delete()
 {
 	delete textureManager_;

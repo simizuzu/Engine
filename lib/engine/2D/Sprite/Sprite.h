@@ -77,6 +77,12 @@ public: // setter,getter
 	/// <param name="color">: 色{ red,blue,green,alpha }</param>
 	void SetColor(const Mathematics::Vector4& color) { color_ = color; }
 
+	/// <summary>
+	/// テクスチャ番号をセット
+	/// </summary>
+	/// <param name="textureIndex">: テクスチャ番号</param>
+	void SetTextureIndex(uint32_t textureIndex) { textureIndex_ = textureIndex; }
+
 	// 座標
 	const Mathematics::Vector2& GetPosition() const { return position_; }
 	// 角度
@@ -85,6 +91,8 @@ public: // setter,getter
 	const Mathematics::Vector4& GetColor() const { return color_; }
 	// サイズ
 	const Mathematics::Vector2& GetSize() const { return size_; }
+	// テクスチャ番号
+	uint32_t GetTextureIndex() { return textureIndex_; }
 
 
 private: // メンバ変数
@@ -96,6 +104,12 @@ private: // メンバ変数
 	ComPtr<ID3DBlob> psBlob;
 	// エラーオブジェクト
 	ComPtr<ID3DBlob> errorBlob;
+	// ルートシグネチャ
+	ComPtr<ID3D12RootSignature> rootsignature;
+	// ルートシグネチャのシリアライズ
+	ComPtr<ID3DBlob> rootSigBlob;
+	// パイプラインステート
+	ComPtr<ID3D12PipelineState> pipelineState;
 
 	D3D12_INPUT_ELEMENT_DESC inputLayout{};
 	// 座標
@@ -106,7 +120,10 @@ private: // メンバ変数
 	float rotation_ = 0.0f;
 	// 表示サイズ(単位はpixel)
 	Mathematics::Vector2 size_ = { 100.0f,100.0f };
+	// テクスチャ番号
+	uint32_t textureIndex_ = 0;
 
 	TextureManager* textureManager_ = nullptr;
 	DirectXCommon* dxCommon_ = nullptr;
+
 };

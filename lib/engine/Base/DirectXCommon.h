@@ -19,6 +19,8 @@ private:
 	Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue;
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> rtvHeap;
 	Microsoft::WRL::ComPtr<ID3D12Fence> fence;
+	Microsoft::WRL::ComPtr<ID3D12Resource> depthBuff;
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> dsvHeap;
 	std::vector< Microsoft::WRL::ComPtr<ID3D12Resource>> backBuffers;
 
 	// スワップチェーンの設定
@@ -30,6 +32,8 @@ private:
 	UINT64 fenceVal = 0;
 	//バリアーデスク
 	D3D12_RESOURCE_BARRIER barrierDesc{};
+	// 深度ビュー作成
+	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc{};
 	// 背景色
 	FLOAT clearColor[4] = { 0.1f,0.25f, 0.5f,0.0f }; // 黄緑色
 
@@ -44,12 +48,13 @@ private:
 	// フェンス生成
 	void InitializeFence();
 	// 深度バッファの初期化
-	void InitializeDepthBuff();
+	void InitializeDepthBuffer();
 	//デバッグレイヤーを有効にする
 	void EnableDebugLayer();
 	void BreakOnSeverity();
 
 	static DirectXCommon* dxCommon_;
+	WinApp* winApp_ = nullptr;
 
 public:
 	static DirectXCommon* GetInstance();

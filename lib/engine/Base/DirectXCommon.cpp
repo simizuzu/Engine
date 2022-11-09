@@ -167,6 +167,56 @@ void DirectXCommon::InitializeFence()
 {
 	result = device->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 }
+
+void DirectXCommon::InitializeDepthBuffer()
+{
+	HRESULT result;
+	winApp_ = WinApp::GetInstance();
+
+	// 深度バッファリソース設定
+	D3D12_RESOURCE_DESC depthResourceDesc{};
+	depthResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+	depthResourceDesc.Width = winApp_->window_width;   //レンダーターゲットに合わせる
+	depthResourceDesc.Height = winApp_->window_height; //レンダーターゲットに合わせる
+	depthResourceDesc.DepthOrArraySize = 1;
+	depthResourceDesc.Format = DXGI_FORMAT_D32_FLOAT; // 深度フォーマット
+	depthResourceDesc.SampleDesc.Count = 1;
+	depthResourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL; // デプスステンシル
+	// 深度地用ヒーププロパティ
+	D3D12_HEAP_PROPERTIES depthHeapProp{};
+	depthHeapProp.Type = D3D12_HEAP_TYPE_DEFAULT;
+	// 深度地のクリア設定
+	D3D12_CLEAR_VALUE depthClearValue{};
+	depthClearValue.DepthStencil.Depth = 1.0f; // 深度地1.0f（最大値）でクリア
+	depthClearValue.Format = DXGI_FORMAT_D32_FLOAT; // 深度地フォーマット
+
+	// 深度バッファ生成
+	result = device->CreateCommittedResource(
+		&depthHeapProp,
+		D3D12_HEAP_FLAG_NONE,
+		&depthResourceDesc,
+		D3D12_RESOURCE_STATE_DEPTH_WRITE, // 深度地書き込みに使用
+		&depthClearValue,
+		IID_PPV_ARGS(&depthBuff));
+	assert(SUCCEEDED(result));
+
+	// 深度ビュー(DSV)用デスクリプタヒープ作成
+	D3D12_DESCRIPTOR_HEAP_DESC dsvHeapDesc{};
+	dsvHeapDesc.NumDescriptors = 1; // 深度ビューは1つ
+	dsvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_DSV; // デプスステンシルビュー
+	result = device->CreateDescriptorHeap(&dsvHeapDesc, IID_PPV_ARGS(&dsvHeap));
+	assert(SUCCEEDED(result));
+
+	// 深度ビュー(DSV)作成
+	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc = {};
+	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT; // 深度地フォーマット
+	dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
+	device->CreateDepthStencilView(
+		depthBuff.Get(),
+		&dsvDesc,
+		dsvHeap->GetCPUDescriptorHandleForHeapStart());
+	assert(SUCCEEDED(result));
+}
 #pragma endregion
 
 #pragma region 描画
@@ -188,6 +238,13 @@ void DirectXCommon::PreDraw()
 
 	// 画面クリア
 	commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+
+	// 深度ビュー作成
+	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT; // 深度地フォーマット
+	dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
+	dxCommon_->GetInstance()->GetDevice()->CreateDepthStencilView(
+
+	)
 }
 
 void DirectXCommon::PostDraw()

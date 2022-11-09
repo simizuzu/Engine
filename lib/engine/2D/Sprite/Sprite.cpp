@@ -15,6 +15,11 @@ void Sprite::Initialize(TextureManager* textureManager)
 
 void Sprite::Update()
 {
+	
+}
+
+void Sprite::Draw()
+{
 }
 
 void Sprite::InitializeVertexBuff()
@@ -73,6 +78,7 @@ void Sprite::InitializeVertexBuff()
 
 void Sprite::InitializeShadeLoad()
 {
+	dxCommon_ = DirectXCommon::GetInstance();
 #pragma region シェーダ読み込み
 	//　頂点シェーダの読み込みとコンパイル
 	HRESULT result = D3DCompileFromFile(
@@ -136,7 +142,7 @@ void Sprite::InitializeShadeLoad()
 		},
 	};
 #pragma endregion
-#pragma region パイプライン
+#pragma region グラフィックスパイプライン
 	// グラフィックスパイプライン設定
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC pipelineDesc{};
 
@@ -165,5 +171,24 @@ void Sprite::InitializeShadeLoad()
 	pipelineDesc.NumRenderTargets = 1; // 描画対象は1つ
 	pipelineDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB; // 0~255指定のRGBA
 	pipelineDesc.SampleDesc.Count = 1; // 1ピクセルにつき1回サンプリング
+
+	// ルートシグネチャの設定
+	D3D12_ROOT_SIGNATURE_DESC rootSignatureDesc{};
+	rootSignatureDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_STREAM_OUTPUT;
+	// ルートシグネチャのシリアライズ
+	result = D3D12SerializeRootSignature(&rootSignatureDesc, D3D_ROOT_SIGNATURE_VERSION_1_0,
+		&rootSigBlob, &errorBlob);
+	assert(SUCCEEDED(result));
+	result = dxCommon_->GetDevice()->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(),
+		IID_PPV_ARGS(&rootsignature));
+	assert(SUCCEEDED(result));
+	rootSigBlob->Release();
+	// パイプラインにルートシグネチャをセット
+	pipelineDesc.pRootSignature = rootsignature.Get();
+
+	// パイプラインステートの生成
+	result = dxCommon_->GetDevice()->CreateGraphicsPipelineState(&pipelineDesc, IID_PPV_ARGS(&pipelineState));
+	assert(SUCCEEDED(result));
 #pragma endregion
+	
 }

@@ -58,6 +58,12 @@
     <Filter Include="ヘッダー ファイル\2D\Sprite">
       <UniqueIdentifier>{b390056c-8f9c-4869-9381-e6c6ea2497e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Camera">
+      <UniqueIdentifier>{3efd76ed-c76e-47ce-a9cf-43876499a3c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Camera">
+      <UniqueIdentifier>{c97cc52a-0cc2-4ddd-a619-75ffcd79f92f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -84,9 +90,6 @@
     <ClCompile Include="lib\engine\2D\Sprite\Sprite.cpp">
       <Filter>ソース ファイル\2D\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
-      <Filter>ソース ファイル\Base</Filter>
-    </ClCompile>
     <ClCompile Include="lib\engine\Math\Matrix4.cpp">
       <Filter>ソース ファイル\Math</Filter>
     </ClCompile>
@@ -102,7 +105,16 @@
     <ClCompile Include="Material.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Pipeline.cpp">
+    <ClCompile Include="WorldTransform.cpp">
+      <Filter>ソース ファイル\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\Camera\Camera.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\Base\Pipeline.cpp">
+      <Filter>ソース ファイル\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\Base\TextureManager.cpp">
       <Filter>ソース ファイル\Base</Filter>
     </ClCompile>
   </ItemGroup>
@@ -121,9 +133,6 @@
     </ClInclude>
     <ClInclude Include="lib\engine\Input\Keyboard.h">
       <Filter>ヘッダー ファイル\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>ヘッダー ファイル\Base</Filter>
     </ClInclude>
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h">
       <Filter>ヘッダー ファイル\2D\Sprite</Filter>
@@ -146,7 +155,16 @@
     <ClInclude Include="Material.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Pipeline.h">
+    <ClInclude Include="WorldTransform.h">
+      <Filter>ヘッダー ファイル\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\engine\Camera\Camera.h">
+      <Filter>ヘッダー ファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\engine\Base\Pipeline.h">
+      <Filter>ヘッダー ファイル\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\engine\Base\TextureManager.h">
       <Filter>ヘッダー ファイル\Base</Filter>
     </ClInclude>
   </ItemGroup>

@@ -57,7 +57,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 		input_->Update();
 
 		// •`‰æ‘Oˆ—
-		dxCommon_->PreDraw();
+		dxCommon_->PreDraw(winApp_);
 
 #pragma region Å‰‚ÌƒV[ƒ“‚Ì•`‰æ
 

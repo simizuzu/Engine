@@ -110,7 +110,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);$(ProjectDir)lib\engine\2D\Sprite;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);$(ProjectDir)lib\engine\2D\Sprite;$(ProjectDir)lib\engine\Camera;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -140,7 +140,10 @@
     <ClCompile Include="lib\engine\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="lib\engine\Base\DirectXCommon.cpp" />
     <ClCompile Include="lib\engine\Base\FPS.cpp" />
+    <ClCompile Include="lib\engine\Base\Pipeline.cpp" />
+    <ClCompile Include="lib\engine\Base\TextureManager.cpp" />
     <ClCompile Include="lib\engine\Base\WinApp.cpp" />
+    <ClCompile Include="lib\engine\Camera\Camera.cpp" />
     <ClCompile Include="lib\engine\Input\Input.cpp" />
     <ClCompile Include="lib\engine\Input\Keyboard.cpp" />
     <ClCompile Include="lib\engine\Math\DirectX12Math.cpp" />
@@ -150,14 +153,16 @@
     <ClCompile Include="lib\engine\Math\Vector4.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material.cpp" />
-    <ClCompile Include="Pipeline.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="WorldTransform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
     <ClInclude Include="lib\engine\Base\DirectXCommon.h" />
     <ClInclude Include="lib\engine\Base\FPS.h" />
+    <ClInclude Include="lib\engine\Base\Pipeline.h" />
+    <ClInclude Include="lib\engine\Base\TextureManager.h" />
     <ClInclude Include="lib\engine\Base\WinApp.h" />
+    <ClInclude Include="lib\engine\Camera\Camera.h" />
     <ClInclude Include="lib\engine\Input\Input.h" />
     <ClInclude Include="lib\engine\Input\Keyboard.h" />
     <ClInclude Include="lib\engine\Math\DirectX12Math.h" />
@@ -166,8 +171,7 @@
     <ClInclude Include="lib\engine\Math\Vector3.h" />
     <ClInclude Include="lib\engine\Math\Vector4.h" />
     <ClInclude Include="Material.h" />
-    <ClInclude Include="Pipeline.h" />
-    <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="WorldTransform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\Sprite.hlsli" />

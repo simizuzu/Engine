@@ -52,8 +52,6 @@ public: // メンバ関数
 	/// </summary>
 	void InitializeShadeLoad();
 
-	void CreateConstBuff()
-
 public: // setter,getter
 	/// <summary>
 	/// 座標をセット
@@ -96,7 +94,15 @@ public: // setter,getter
 	// テクスチャ番号
 	uint32_t GetTextureIndex() { return textureIndex_; }
 
+#pragma region pipelineクラス用
+	// 頂点シェーダオブジェクト
+	ComPtr<ID3DBlob> GetVsBlob() { return vsBlob; }
+	// ピクセルシェーダオブジェクト
+	ComPtr<ID3DBlob> GetPsBlob() { return psBlob; }
+	// エラーオブジェクト
+	ComPtr<ID3DBlob> GetErrorBlob() { return errorBlob; }
 
+#pragma endregion
 private: // メンバ変数
 	// 頂点バッファ
 	ComPtr<ID3D12Resource> vertBuff;

@@ -46,34 +46,26 @@ public: // メンバ関数
 	/// テクスチャ読み込み
 	/// </summary>
 	/// <param name="filename">テクスチャファイル名</param>
-	uint32_t LoadTexture(const std::string& fileName);
-
-	/// <summary>
-	/// デスクリプタヒープをセット（グラフィックスコマンド）
-	/// </summary>
-	/// <param name="commandList">コマンドリスト</param>
-	void SetGrapihcsSrvHeaps(ID3D12GraphicsCommandList* commandList);
-
-	/// <summary>
-	/// シェーダーリソースビューをセット
-	/// </summary>
-	/// <param name="commandList">コマンドリスト</param>
-	/// <param name="rootPrameterIndex">ルートパラメータ</param>
-	/// <param name="texNumber">テクスチャ番号</param>
-	void SetShaderResourceView(ID3D12GraphicsCommandList* commandList, UINT rootPrameterIndex, UINT texNumber);
-
-	/// <summary>
-	/// 描画用テクスチャコマンドの発行
-	/// </summary>
-	/// <param name="fileName">テクスチャ番号</param>
-	void SetTextureCommands(UINT texNumber);
+	TextureData LoadTexture(const std::string& fileName);
 
 	/// <summary>
 	/// 読み込み
 	/// </summary>
 	/// <param name="fileName">ファイル名</param>
 	/// <returns>テクスチャハンドル</returns>
-	static uint32_t Load(const std::string& fileName);
+	static TextureData Load(const std::string& fileName);
+
+	/// <summary>
+	/// テクスチャバッファの生成
+	/// </summary>
+	Microsoft::WRL::ComPtr<ID3D12Resource> CreateTexBuff(DirectX::TexMetadata& metadata, DirectX::ScratchImage& scratchImg);
+
+	/// <summary>
+	/// シェーダリソースビューの生成
+	/// </summary>
+	/// <param name="texbuff">テクスチャバッファ</param>
+	/// <param name="metadata"></param>
+	D3D12_GPU_DESCRIPTOR_HANDLE CreateShaderResourceView(ID3D12Resource* texBuff, DirectX::TexMetadata& metadata);
 
 	/// <summary>
 	/// 解放処理
@@ -90,15 +82,14 @@ private: // メンバ変数
 	ComPtr<ID3D12DescriptorHeap> srvHeap = nullptr;
 	D3D12_DESCRIPTOR_RANGE descriptorRange;
 	D3D12_HEAP_PROPERTIES textureHeapProp{};
-
 	// テクスチャバッファ
-	std::array<Microsoft::WRL::ComPtr<ID3D12Resource>, MaxSRVCount> textureBuffers_;
-
+	std::array<Microsoft::WRL::ComPtr<ID3D12Resource>, MaxSRVCount> texBuff_;
 	// テクスチャ数
-	UINT texCount = 1024;
+	UINT texCount;
+	// デフォルトテクスチャ格納ディレクトリ
+	static std::string DefaultTextureDirectoryPath;
 
 	DirectXCommon* dxCommon_ = nullptr;
-
 	static TextureManager* textureManager_;
 
 private:

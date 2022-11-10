@@ -138,6 +138,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="lib\engine\2D\Sprite\Sprite.cpp" />
+    <ClCompile Include="lib\engine\3D\WorldTransform.cpp" />
     <ClCompile Include="lib\engine\Base\DirectXCommon.cpp" />
     <ClCompile Include="lib\engine\Base\FPS.cpp" />
     <ClCompile Include="lib\engine\Base\Pipeline.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="lib\engine\Camera\Camera.cpp" />
     <ClCompile Include="lib\engine\Input\Input.cpp" />
     <ClCompile Include="lib\engine\Input\Keyboard.cpp" />
+    <ClCompile Include="lib\engine\Math\Affine.cpp" />
     <ClCompile Include="lib\engine\Math\DirectX12Math.cpp" />
     <ClCompile Include="lib\engine\Math\Matrix4.cpp" />
     <ClCompile Include="lib\engine\Math\Vector2.cpp" />
@@ -153,10 +155,10 @@
     <ClCompile Include="lib\engine\Math\Vector4.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material.cpp" />
-    <ClCompile Include="WorldTransform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
+    <ClInclude Include="lib\engine\3D\WorldTransform.h" />
     <ClInclude Include="lib\engine\Base\DirectXCommon.h" />
     <ClInclude Include="lib\engine\Base\FPS.h" />
     <ClInclude Include="lib\engine\Base\Pipeline.h" />
@@ -165,13 +167,13 @@
     <ClInclude Include="lib\engine\Camera\Camera.h" />
     <ClInclude Include="lib\engine\Input\Input.h" />
     <ClInclude Include="lib\engine\Input\Keyboard.h" />
+    <ClInclude Include="lib\engine\Math\Affine.h" />
     <ClInclude Include="lib\engine\Math\DirectX12Math.h" />
     <ClInclude Include="lib\engine\Math\Matrix4.h" />
     <ClInclude Include="lib\engine\Math\Vector2.h" />
     <ClInclude Include="lib\engine\Math\Vector3.h" />
     <ClInclude Include="lib\engine\Math\Vector4.h" />
     <ClInclude Include="Material.h" />
-    <ClInclude Include="WorldTransform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\Sprite.hlsli" />

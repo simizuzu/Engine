@@ -52,6 +52,8 @@ public: // メンバ関数
 	/// </summary>
 	void InitializeShadeLoad();
 
+	void CreateConstBuff()
+
 public: // setter,getter
 	/// <summary>
 	/// 座標をセット

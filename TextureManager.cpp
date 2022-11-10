@@ -15,7 +15,7 @@ void TextureManager::Initialize(DirectXCommon* directXCommon)
 	HRESULT result;
 
 	// メンバ変数に記録
-	directXCommon_ = directXCommon;
+	dxCommon_ = directXCommon;
 
 	// デスクリプタレンジの設定
 	descriptorRange.NumDescriptors = 1; // 1度の描画に使うテクスチャの数
@@ -92,7 +92,7 @@ uint32_t TextureManager::LoadTexture(const std::string& fileName)
 	textureResourceDesc.SampleDesc.Count = 1;
 
 	// テクスチャバッファの生成
-	result = directXCommon_->GetDevice()->CreateCommittedResource(
+	result = dxCommon_->GetDevice()->CreateCommittedResource(
 		&textureHeapProp,
 		D3D12_HEAP_FLAG_NONE,
 		&textureResourceDesc,
@@ -119,7 +119,7 @@ uint32_t TextureManager::LoadTexture(const std::string& fileName)
 	D3D12_CPU_DESCRIPTOR_HANDLE srvHandle = srvHeap->GetCPUDescriptorHandleForHeapStart();
 	tmp.srvGpuHandle = srvHeap->GetGPUDescriptorHandleForHeapStart();
 
-	UINT incrementSize = directXCommon_->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	UINT incrementSize = dxCommon_->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 
 	// ハンドルのポインタずらし
 	srvHandle.ptr += static_cast<UINT64> (texCount) * incrementSize;
@@ -133,7 +133,7 @@ uint32_t TextureManager::LoadTexture(const std::string& fileName)
 	srvDesc.Texture2D.MipLevels = static_cast<UINT>(metadata.mipLevels);
 
 	// ハンドルの指す位置にシェーダーリソースビュー生成
-	directXCommon_->GetDevice()->CreateShaderResourceView(tmp.texBuff.Get(), &srvDesc, srvHandle);
+	dxCommon_->GetDevice()->CreateShaderResourceView(tmp.texBuff.Get(), &srvDesc, srvHandle);
 
 	tmp.width = metadata.width;
 	tmp.height = metadata.height;
@@ -152,7 +152,7 @@ void TextureManager::SetShaderResourceView(ID3D12GraphicsCommandList* commandLis
 {
 	TextureData tmp{};
 
-	UINT incrementSize = directXCommon_->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	UINT incrementSize = dxCommon_->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 
 	//SRVヒープの先頭ハンドルを取得
 	D3D12_CPU_DESCRIPTOR_HANDLE srvHandle = srvHeap->GetCPUDescriptorHandleForHeapStart();

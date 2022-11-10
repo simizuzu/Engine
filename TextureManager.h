@@ -14,9 +14,9 @@ struct TextureData
 	// デスクリプタヒープ
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> srvHeap;
 	//GPUデスクリプタハンドル
-	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle;
+	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle{};
 	// デスクリプタレンジ
-	D3D12_DESCRIPTOR_RANGE descriptorRange;
+	D3D12_DESCRIPTOR_RANGE descriptorRange{};
 
 	// 横幅
 	size_t width = 0;
@@ -33,7 +33,7 @@ public: // エイリアステンプレート
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
 public: // 定数
-	static const size_t MaxSRVCount = 2056; // テクスチャの最大枚数
+	static const size_t MaxSRVCount = 256; // テクスチャの最大枚数
 
 public: // メンバ関数
 	/// <summary>
@@ -91,12 +91,13 @@ private: // メンバ変数
 	D3D12_DESCRIPTOR_RANGE descriptorRange;
 	D3D12_HEAP_PROPERTIES textureHeapProp{};
 
+	// テクスチャバッファ
 	std::array<Microsoft::WRL::ComPtr<ID3D12Resource>, MaxSRVCount> textureBuffers_;
 
 	// テクスチャ数
 	UINT texCount = 1024;
 
-	DirectXCommon* directXCommon_ = nullptr;
+	DirectXCommon* dxCommon_ = nullptr;
 
 	static TextureManager* textureManager_;
 

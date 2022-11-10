@@ -85,7 +85,7 @@ void Sprite::InitializeShadeLoad()
 		L"Resources/shaders/SpriteVS.hlsl",	// シェーダファイル名
 		nullptr,
 		D3D_COMPILE_STANDARD_FILE_INCLUDE,	// インクルード可能にする
-		"main", "vs_5_0",	// エンドリーポイント名、シェーダモデル指定
+		"main", "vs_5_0",	// エントリーポイント名、シェーダモデル指定
 		D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION, // デバック用設定
 		0,&vsBlob, &errorBlob
 	);

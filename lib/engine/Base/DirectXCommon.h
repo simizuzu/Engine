@@ -3,6 +3,7 @@
 #include <d3d12.h>
 #include <vector>
 #include <dxgi1_6.h>
+#include <cassert>
 
 #include "WinApp.h"
 

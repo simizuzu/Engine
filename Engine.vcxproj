@@ -147,7 +147,6 @@
     <ClCompile Include="lib\engine\Camera\Camera.cpp" />
     <ClCompile Include="lib\engine\Input\Input.cpp" />
     <ClCompile Include="lib\engine\Input\Keyboard.cpp" />
-    <ClCompile Include="lib\engine\Math\Affine.cpp" />
     <ClCompile Include="lib\engine\Math\DirectX12Math.cpp" />
     <ClCompile Include="lib\engine\Math\Matrix4.cpp" />
     <ClCompile Include="lib\engine\Math\Vector2.cpp" />
@@ -167,7 +166,6 @@
     <ClInclude Include="lib\engine\Camera\Camera.h" />
     <ClInclude Include="lib\engine\Input\Input.h" />
     <ClInclude Include="lib\engine\Input\Keyboard.h" />
-    <ClInclude Include="lib\engine\Math\Affine.h" />
     <ClInclude Include="lib\engine\Math\DirectX12Math.h" />
     <ClInclude Include="lib\engine\Math\Matrix4.h" />
     <ClInclude Include="lib\engine\Math\Vector2.h" />

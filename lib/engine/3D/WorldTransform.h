@@ -24,7 +24,7 @@ public:
 	/// <summary>
 	/// 定数バッファの生成
 	/// </summary>
-	void CreateConstBuff(UINT sizeVB);
+	void CreateConstBuff();
 
 	/// <summary>
 	/// マッピングする

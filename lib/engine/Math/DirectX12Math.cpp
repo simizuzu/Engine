@@ -83,10 +83,10 @@ namespace MyMathUtility
 		return matRotY;
 	}
 
-	Mathematics::Matrix4 MakeRotation(Mathematics::Matrix4& m, Mathematics::Vector3 rot)
-	{
-		
-	}
+	//Mathematics::Matrix4 MakeRotation(Mathematics::Matrix4& m, Mathematics::Vector3 rot)
+	//{
+	//	
+	//}
 
 	Mathematics::Matrix4 MakeTranslation(Mathematics::Matrix4& m, Mathematics::Vector3 trans)
 	{
@@ -98,20 +98,17 @@ namespace MyMathUtility
 		return matTrans;
 	}
 
-	Mathematics::Matrix4 CreateMatrix(const WorldTransform& worldTransform)
+	/*Mathematics::Matrix4 CreateMatrix(const WorldTransform& worldTransform)
 	{
 		Mathematics::Matrix4 matWorld;
 		matWorld = MakeIdentity();
 		matWorld = MakeScaling()
 		return Mathematics::Matrix4();
-	}
+	}*/
 
 	Mathematics::Matrix4 MatMulVector(Mathematics::Matrix4 m, Mathematics::Vector3 v)
 	{
 		return Mathematics::Matrix4();
 	}
 
-	
-
-	
 }

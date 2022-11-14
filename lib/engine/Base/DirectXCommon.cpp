@@ -14,6 +14,7 @@ void DirectXCommon::Initialize()
 	InitializeCommand();
 	InitializeSwapChain();
 	InitializeRtv();
+	InitializeDepthBuffer();
 	InitializeFence();
 }
 
@@ -141,7 +142,6 @@ void DirectXCommon::InitializeSwapChain()
 
 void DirectXCommon::InitializeCommand()
 {
-
 	// コマンドアロケータの生成
 	result = device->CreateCommandAllocator(
 		D3D12_COMMAND_LIST_TYPE_DIRECT,
@@ -162,53 +162,49 @@ void DirectXCommon::InitializeCommand()
 	assert(SUCCEEDED(result));
 }
 
-void DirectXCommon::InitializeFence()
-{
-	result = device->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
-}
-
 void DirectXCommon::InitializeDepthBuffer()
 {
 	HRESULT result;
 	winApp_ = WinApp::GetInstance();
 
-	// 深度バッファリソース設定
+	//リソース設定
 	D3D12_RESOURCE_DESC depthResourceDesc{};
 	depthResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-	depthResourceDesc.Width = winApp_->window_width;   //レンダーターゲットに合わせる
-	depthResourceDesc.Height = winApp_->window_height; //レンダーターゲットに合わせる
+	depthResourceDesc.Width = winApp_->window_width;//レンダーターゲットに合わせる
+	depthResourceDesc.Height = winApp_->window_height;//レンダーターゲットに合わせる
 	depthResourceDesc.DepthOrArraySize = 1;
-	depthResourceDesc.Format = DXGI_FORMAT_D32_FLOAT; // 深度フォーマット
+	depthResourceDesc.Format = DXGI_FORMAT_D32_FLOAT;//深度値フォーマット
 	depthResourceDesc.SampleDesc.Count = 1;
-	depthResourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL; // デプスステンシル
-	// 深度地用ヒーププロパティ
+	depthResourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;//デプスステンシル
+
+	//深度値用ヒーププロパティ
 	D3D12_HEAP_PROPERTIES depthHeapProp{};
 	depthHeapProp.Type = D3D12_HEAP_TYPE_DEFAULT;
-	// 深度地のクリア設定
+	//深度値のクリア設定
 	D3D12_CLEAR_VALUE depthClearValue{};
-	depthClearValue.DepthStencil.Depth = 1.0f; // 深度地1.0f（最大値）でクリア
-	depthClearValue.Format = DXGI_FORMAT_D32_FLOAT; // 深度地フォーマット
+	depthClearValue.DepthStencil.Depth = 1.0f;//深度値1.0f(最大値)でクリア
+	depthClearValue.Format = DXGI_FORMAT_D32_FLOAT;//深度値フォーマット
 
-	// 深度バッファ生成
+	//リソース生成
 	result = device->CreateCommittedResource(
 		&depthHeapProp,
 		D3D12_HEAP_FLAG_NONE,
 		&depthResourceDesc,
-		D3D12_RESOURCE_STATE_DEPTH_WRITE, // 深度地書き込みに使用
+		D3D12_RESOURCE_STATE_DEPTH_WRITE,//深度値書き込みに使用
 		&depthClearValue,
-		IID_PPV_ARGS(&depthBuff));
+		IID_PPV_ARGS(depthBuff.ReleaseAndGetAddressOf()));
 	assert(SUCCEEDED(result));
 
-	// 深度ビュー(DSV)用デスクリプタヒープ作成
+	//深度ビュー用デスクプリタヒープ生成
 	D3D12_DESCRIPTOR_HEAP_DESC dsvHeapDesc{};
-	dsvHeapDesc.NumDescriptors = 1; // 深度ビューは1つ
-	dsvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_DSV; // デプスステンシルビュー
-	result = device->CreateDescriptorHeap(&dsvHeapDesc, IID_PPV_ARGS(&dsvHeap));
+	dsvHeapDesc.NumDescriptors = 1;
+	dsvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
+	result = device->CreateDescriptorHeap(&dsvHeapDesc, IID_PPV_ARGS(dsvHeap.ReleaseAndGetAddressOf()));
 	assert(SUCCEEDED(result));
 
-	// 深度ビュー(DSV)作成
-	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc = {};
-	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT; // 深度地フォーマット
+	//深度ビュー作成
+	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc{};
+	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT;
 	dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
 	device->CreateDepthStencilView(
 		depthBuff.Get(),
@@ -216,6 +212,13 @@ void DirectXCommon::InitializeDepthBuffer()
 		dsvHeap->GetCPUDescriptorHandleForHeapStart());
 	assert(SUCCEEDED(result));
 }
+
+void DirectXCommon::InitializeFence()
+{
+	result = device->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
+	assert(SUCCEEDED(result));
+}
+
 #pragma endregion
 
 #pragma region 描画
@@ -234,16 +237,8 @@ void DirectXCommon::PreDraw(WinApp* winApp)
 	// 描画先変更
 	rtvHandle = rtvHeap->GetCPUDescriptorHandleForHeapStart();
 	rtvHandle.ptr += (static_cast<unsigned long long>(bbIndex)) * device->GetDescriptorHandleIncrementSize(rtvHeapDesc.Type);
-	commandList->OMSetRenderTargets(1, &rtvHandle, false, nullptr);
-
-	// 深度ビュー作成
-	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT; // 深度地フォーマット
-	dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
-	device->CreateDepthStencilView(
-		depthBuff.Get(),
-		&dsvDesc,
-		dsvHeap->GetCPUDescriptorHandleForHeapStart());
-	dsvHandle = dsvHeap->GetCPUDescriptorHandleForHeapStart();
+	//深度ステンシルビュー用デスクプリタヒープのハンドルを所得
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = dsvHeap->GetCPUDescriptorHandleForHeapStart();
 	commandList->OMSetRenderTargets(1, &rtvHandle, false, &dsvHandle);
 
 	// 画面クリア
@@ -257,6 +252,7 @@ void DirectXCommon::PreDraw(WinApp* winApp)
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0.0f;
 	viewport.MaxDepth = 1.0f;
+
 	// ビューポート設定コマンド
 	commandList->RSSetViewports(1, &viewport);
 
@@ -265,6 +261,7 @@ void DirectXCommon::PreDraw(WinApp* winApp)
 	scissorRect.right = scissorRect.left + winApp->window_width;
 	scissorRect.top = 0;
 	scissorRect.bottom = scissorRect.top + winApp->window_height;
+
 	// シザー矩形設定コマンドを、コマンドリストに積む
 	commandList->RSSetScissorRects(1, &scissorRect);
 }
@@ -339,7 +336,7 @@ DirectXCommon* DirectXCommon::GetInstance()
 	return &DirectXCore_;
 }
 
-#pragma region デバック関連
+#pragma region デバックレイヤー
 void DirectXCommon::EnableDebugLayer()
 {
 	//デバックレイヤーをオンに

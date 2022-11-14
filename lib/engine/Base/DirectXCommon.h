@@ -33,10 +33,6 @@ private:
 	UINT64 fenceVal = 0;
 	//バリアーデスク
 	D3D12_RESOURCE_BARRIER barrierDesc{};
-	// 深度ビュー作成
-	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc{};
-	// レンダーターゲット設定
-	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle;
 	// ビューポート
 	D3D12_VIEWPORT viewport{};
 	// シザー矩形

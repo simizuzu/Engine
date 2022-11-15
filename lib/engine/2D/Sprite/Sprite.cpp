@@ -5,10 +5,20 @@
 
 using namespace DirectX;
 
-void Sprite::Initialize(TextureManager* textureManager)
+void Sprite::StaticInitialize()
 {
-	textureManager_ = textureManager;
+}
 
+void Sprite::PreDraw(ID3D12GraphicsCommandList* cmdList, BlendMode blendMode)
+{
+}
+
+void Sprite::PostDraw()
+{
+}
+
+void Sprite::Initialize()
+{
 	InitializeVertexBuff();
 	InitializeShadeLoad();
 }
@@ -20,10 +30,6 @@ void Sprite::Update()
 
 void Sprite::Draw()
 {
-}
-
-void Sprite::InitializeVertexBuff()
-{
 	// 頂点データ
 	XMFLOAT3 vertices[] = {
 		{-0.5f, -0.5f, 0.0f}, // 左下
@@ -32,6 +38,10 @@ void Sprite::InitializeVertexBuff()
 	};
 	// 頂点データ全体のサイズ = 頂点データ一つ分のサイズ * 頂点データの要素数
 	UINT sizeVB = static_cast<UINT>(sizeof(XMFLOAT3) * _countof(vertices));
+}
+
+void Sprite::InitializeVertexBuff()
+{
 
 	// 頂点バッファの設定
 	D3D12_HEAP_PROPERTIES heapProp{};		// ヒープ設定
@@ -78,62 +88,6 @@ void Sprite::InitializeVertexBuff()
 
 void Sprite::InitializeShadeLoad()
 {
-	dxCommon_ = DirectXCommon::GetInstance();
-
-#pragma region シェーダ読み込み
-	//　頂点シェーダの読み込みとコンパイル
-	HRESULT result = D3DCompileFromFile(
-		L"Resources/shaders/SpriteVS.hlsl",	// シェーダファイル名
-		nullptr,
-		D3D_COMPILE_STANDARD_FILE_INCLUDE,	// インクルード可能にする
-		"main", "vs_5_0",	// エントリーポイント名、シェーダモデル指定
-		D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION, // デバック用設定
-		0, &vsBlob, &errorBlob
-	);
-
-	// シェーダのエラー内容を表示
-	if (FAILED(result))
-	{
-		// errorBlobからエラー内容をstring型にコピー
-		std::string error;
-		error.resize(errorBlob->GetBufferSize());
-
-		std::copy_n((char*)errorBlob->GetBufferPointer(),
-			errorBlob->GetBufferSize(),
-			error.begin());
-		error += "\n";
-		// エラー内容を出力ウィンドウに表示
-		OutputDebugStringA(error.c_str());
-		assert(0);
-	}
-
-	// ピクセルシェーダの読み込みとコンパイル
-	result = D3DCompileFromFile(
-		L"Resources/shaders/SpritePS.hlsl",	// シェーダファイル名
-		nullptr,
-		D3D_COMPILE_STANDARD_FILE_INCLUDE,	// インクルード可能にする
-		"main", "ps_5_0",	// エンドリーポイント名、シェーダモデル指定
-		D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION, // デバック用設定
-		0, &psBlob, &errorBlob
-	);
-
-	// エラーなら
-	if (FAILED(result))
-	{
-		// errorBlobからエラー内容をstring型にコピー
-		std::string error;
-		error.resize(errorBlob->GetBufferSize());
-
-		std::copy_n((char*)errorBlob->GetBufferPointer(),
-			errorBlob->GetBufferSize(),
-			error.begin());
-		error += "\n";
-		// エラー内容を出力ウィンドウに表示
-		OutputDebugStringA(error.c_str());
-		assert(0);
-	}
-#pragma endregion
-#pragma region 頂点レイアウト
-
-#pragma endregion
+	shader_->CreateSpriteShade();
+	pipeline_->CreateSpritePipeline();
 }

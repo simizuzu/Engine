@@ -6,14 +6,23 @@
 
 class Pipeline
 {
+public:
+	enum class BlendMode
+	{
+		None,	// ブレンド無し
+		Alpha,	// アルファ
+		Add,	// 加算
+		Sub,	// 減算
+		Mul,	// 乗算
+		Inv,	// 色反転
+
+		CountOfBlendMode, // 最大ブレンドモード数
+	};
+
 public: // エイリアステンプレート
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
 public: // メンバ関数
-	/// <summary>
-	/// 初期化
-	/// </summary>
-	void Initialize();
 
 	/// <summary>
 	/// パイプライン呼び出し用関数(スプライト)
@@ -23,23 +32,20 @@ public: // メンバ関数
 	/// <summary>
 	/// パイプライン呼び出し用関数(モデル)
 	/// </summary>
-	void CreateModelPipeline();
+	//void CreateModelPipeline();
+
+public:
+	void SetBlendMode(int blendMode) { };
 
 private: // メンバ変数
 	// 頂点バッファ
 	ComPtr<ID3D12Resource> vertBuff;
-	// 頂点シェーダオブジェクト
-	ComPtr<ID3DBlob> vsBlob;
-	// ピクセルシェーダオブジェクト
-	ComPtr<ID3DBlob> psBlob;
-	// エラーオブジェクト
-	ComPtr<ID3DBlob> errorBlob;
 	// ルートシグネチャ
 	ComPtr<ID3D12RootSignature> rootsignature;
-	// ルートシグネチャのシリアライズ
-	ComPtr<ID3DBlob> rootSigBlob;
 	// パイプラインステート
 	ComPtr<ID3D12PipelineState> pipelineState;
+	// ブレンドデスク
+	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc;
 
 	// クラス呼び出し
 	Sprite* sprite_ = nullptr;

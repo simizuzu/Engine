@@ -5,11 +5,12 @@
 
 #include "TextureManager.h"
 #include "DirectXCommon.h"
+#include "Shader.h"
+#include "Pipeline.h"
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Vector4.h"
 #include "Matrix4.h"
-
 
 class Sprite
 {
@@ -22,15 +23,71 @@ public:
 		RT,	// 右上
 	};
 
+	enum class BlendMode
+	{
+		None,	// ブレンド無し
+		Alpha,	// アルファ
+		Add,	// 加算
+		Sub,	// 減算
+		Mul,	// 乗算
+		Inv,	// 色反転
+
+		CountOfBlendMode, // 最大ブレンドモード数
+	};
+
+public: 
+	
+	/// <summary>
+	/// 頂点データ構造体
+	/// </summary>
+	struct VertexPosUv
+	{
+		Mathematics::Vector3 pos;
+		Mathematics::Vector2 uv;
+	};
+
+	struct ConstBufferData
+	{
+		Mathematics::Vector4 color;
+		Mathematics::Matrix4 mat;
+	};
+
 public: // エイリアステンプレート
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
+
+private: // メンバ変数
+	// 頂点バッファ
+	ComPtr<ID3D12Resource> vertBuff;
+	// 頂点シェーダオブジェクト
+	ComPtr<ID3DBlob> vsBlob;
+	// ピクセルシェーダオブジェクト
+	ComPtr<ID3DBlob> psBlob;
+	// エラーオブジェクト
+	ComPtr<ID3DBlob> errorBlob;
+	// ルートシグネチャ
+	ComPtr<ID3D12RootSignature> rootsignature;
+	// ルートシグネチャのシリアライズ
+	ComPtr<ID3DBlob> rootSigBlob;
+	// パイプラインステート
+	ComPtr<ID3D12PipelineState> pipelineState;
+
+	D3D12_INPUT_ELEMENT_DESC inputLayout{};
+	// 座標
+	Mathematics::Vector2 position_ = { 0.0f,0.0f };
+	// 色
+	Mathematics::Vector4 color_ = { 1, 1, 1, 1 };
+	// 角度
+	float rotation_ = 0.0f;
+	// 表示サイズ(単位はpixel)
+	Mathematics::Vector2 size_ = { 100.0f,100.0f };
+	// テクスチャ番号
+	uint32_t textureIndex_ = 0;
 
 public: // メンバ関数
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	/// <param name="textureManager">テキストマネージャー</param>
-	void Initialize(TextureManager* textureManager);
+	void Initialize();
 
 	/// <summary>
 	/// 更新
@@ -51,6 +108,23 @@ public: // メンバ関数
 	/// シェーダの読み込み関連の初期化
 	/// </summary>
 	void InitializeShadeLoad();
+
+public:
+	/// <summary>
+	/// 静的初期化
+	/// </summary>
+	static void StaticInitialize();
+
+	/// <summary>
+	/// 描画前処理
+	/// </summary>
+	/// <param name="cmdList">描画コマンドリスト</param>
+	static void PreDraw(ID3D12GraphicsCommandList* cmdList, BlendMode blendMode = BlendMode::None);
+
+	/// <summary>
+	/// 描画後処理
+	/// </summary>
+	static void PostDraw();
 
 public: // setter,getter
 	/// <summary>
@@ -103,35 +177,10 @@ public: // setter,getter
 	ComPtr<ID3DBlob> GetErrorBlob() { return errorBlob; }
 
 #pragma endregion
-private: // メンバ変数
-	// 頂点バッファ
-	ComPtr<ID3D12Resource> vertBuff;
-	// 頂点シェーダオブジェクト
-	ComPtr<ID3DBlob> vsBlob;
-	// ピクセルシェーダオブジェクト
-	ComPtr<ID3DBlob> psBlob;
-	// エラーオブジェクト
-	ComPtr<ID3DBlob> errorBlob;
-	// ルートシグネチャ
-	ComPtr<ID3D12RootSignature> rootsignature;
-	// ルートシグネチャのシリアライズ
-	ComPtr<ID3DBlob> rootSigBlob;
-	// パイプラインステート
-	ComPtr<ID3D12PipelineState> pipelineState;
 
-	D3D12_INPUT_ELEMENT_DESC inputLayout{};
-	// 座標
-	Mathematics::Vector2 position_ = { 0.0f,0.0f };
-	// 色
-	Mathematics::Vector4 color_ = { 1, 1, 1, 1 };
-	// 角度
-	float rotation_ = 0.0f;
-	// 表示サイズ(単位はpixel)
-	Mathematics::Vector2 size_ = { 100.0f,100.0f };
-	// テクスチャ番号
-	uint32_t textureIndex_ = 0;
-
+private: // クラス呼び出し
 	TextureManager* textureManager_ = nullptr;
 	DirectXCommon* dxCommon_ = nullptr;
-
+	Shader* shader_ = nullptr;
+	Pipeline* pipeline_ = nullptr;
 };

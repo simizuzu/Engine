@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="lib\engine\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="lib\engine\3D\WorldTransform.cpp" />
     <ClCompile Include="lib\engine\Base\DirectXCommon.cpp" />
@@ -154,8 +155,10 @@
     <ClCompile Include="lib\engine\Math\Vector4.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material.cpp" />
+    <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameScene.h" />
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
     <ClInclude Include="lib\engine\3D\WorldTransform.h" />
     <ClInclude Include="lib\engine\Base\DirectXCommon.h" />
@@ -172,6 +175,7 @@
     <ClInclude Include="lib\engine\Math\Vector3.h" />
     <ClInclude Include="lib\engine\Math\Vector4.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\Sprite.hlsli" />

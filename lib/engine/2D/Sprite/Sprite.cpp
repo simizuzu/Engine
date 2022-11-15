@@ -3,14 +3,54 @@
 
 #pragma comment(lib,"d3dcompiler.lib")
 
+using namespace Microsoft::WRL;
 using namespace DirectX;
+
+/// <summary>
+/// 静的メンバ変数の実体
+/// </summary>
+ID3D12Device* Sprite::device_ = nullptr;
+UINT Sprite::descriptorSize_;
+ID3D12GraphicsCommandList* Sprite::commandList_ = nullptr;
+ComPtr<ID3D12RootSignature> Sprite::rootSignature_;
+std::array<RootsigSetPip, 6> Sprite::pipelineState;
+Mathematics::Matrix4 Sprite::matProjection_;
+ComPtr<ID3DBlob> Sprite::vsBlob = nullptr;
+ComPtr<ID3DBlob> Sprite::psBlob = nullptr;
+Shader* Sprite::shader_ = nullptr;
+Pipeline* Sprite::pipeline_ = nullptr;
 
 void Sprite::StaticInitialize()
 {
+	device_ = DirectXCommon::GetInstance()->GetDevice();
+	commandList_ = DirectXCommon::GetInstance()->GetCommandList();
+
+	float width = static_cast<float>(WinApp::GetInstance()->window_width);
+	float height = static_cast<float>(WinApp::GetInstance()->window_height);
+
+	// デスクリプタサイズを取得
+	descriptorSize_ = device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+
+	// 平行投影
+	XMmatProjection_ = XMMatrixOrthographicOffCenterLH(
+		0.0f, winApp_->GetInstance()->window_width,
+		winApp_->GetInstance()->window_height, 0.0f,
+		0.0f, 1.0f);
+
+	shader_->CreateSpriteShade(vsBlob.Get(), psBlob.Get());
+
+	for (int i = 0; i < pipelineState.size(); i++)
+	{
+		pipeline_->CreateSpritePipeline(vsBlob.Get(), psBlob.Get(), (BlendMode)i, device_, pipelineState);
+	}
 }
 
-void Sprite::PreDraw(ID3D12GraphicsCommandList* cmdList, BlendMode blendMode)
+void Sprite::PreDraw()
 {
+	assert(Sprite::commandList_ == nullptr);
+
+	// コマンドリスト //
+
 }
 
 void Sprite::PostDraw()
@@ -20,7 +60,6 @@ void Sprite::PostDraw()
 void Sprite::Initialize()
 {
 	InitializeVertexBuff();
-	InitializeShadeLoad();
 }
 
 void Sprite::Update()
@@ -42,7 +81,6 @@ void Sprite::Draw()
 
 void Sprite::InitializeVertexBuff()
 {
-
 	// 頂点バッファの設定
 	D3D12_HEAP_PROPERTIES heapProp{};		// ヒープ設定
 	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;	// GPUへの転送用
@@ -84,10 +122,4 @@ void Sprite::InitializeVertexBuff()
 	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
 	vbView.SizeInBytes = sizeVB;
 	vbView.StrideInBytes = sizeof(XMFLOAT3);
-}
-
-void Sprite::InitializeShadeLoad()
-{
-	shader_->CreateSpriteShade();
-	pipeline_->CreateSpritePipeline();
 }

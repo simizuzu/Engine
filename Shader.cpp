@@ -6,7 +6,7 @@
 
 #pragma comment(lib,"d3dcompiler.lib")
 
-void Shader::CreateSpriteShade()
+void Shader::CreateSpriteShade(ID3DBlob* vsBlob, ID3DBlob* psBlob)
 {
 	//　頂点シェーダの読み込みとコンパイル
 	HRESULT result = D3DCompileFromFile(

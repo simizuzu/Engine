@@ -16,6 +16,6 @@ private: // ƒƒ“ƒo•Ï”
 	ComPtr<ID3DBlob> errorBlob;
 
 public: // ƒƒ“ƒoŠÖ”
-	void CreateSpriteShade();
+	void CreateSpriteShade(ID3DBlob* vsBlob, ID3DBlob* psBlob);
 
 };

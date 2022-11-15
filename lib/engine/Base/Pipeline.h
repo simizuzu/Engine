@@ -4,21 +4,26 @@
 #include "Sprite.h"
 #include "DirectXCommon.h"
 
+enum class BlendMode
+{
+	None,	// ブレンド無し
+	Alpha,	// アルファ
+	Add,	// 加算
+	Sub,	// 減算
+	Mul,	// 乗算
+	Inv,	// 色反転
+};
+
+struct RootsigSetPip
+{
+	// ルートシグネチャ
+	Microsoft::WRL::ComPtr<ID3D12RootSignature> rootsignature;
+	// パイプラインステート
+	Microsoft::WRL::ComPtr<ID3D12PipelineState> pipelineState;
+};
+
 class Pipeline
 {
-public:
-	enum class BlendMode
-	{
-		None,	// ブレンド無し
-		Alpha,	// アルファ
-		Add,	// 加算
-		Sub,	// 減算
-		Mul,	// 乗算
-		Inv,	// 色反転
-
-		CountOfBlendMode, // 最大ブレンドモード数
-	};
-
 public: // エイリアステンプレート
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
@@ -27,7 +32,7 @@ public: // メンバ関数
 	/// <summary>
 	/// パイプライン呼び出し用関数(スプライト)
 	/// </summary>
-	void CreateSpritePipeline();
+	static void CreateSpritePipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode blend,ID3D12Device* device, std::array<RootsigSetPip,6>&pipeline);
 
 	/// <summary>
 	/// パイプライン呼び出し用関数(モデル)
@@ -40,12 +45,6 @@ public:
 private: // メンバ変数
 	// 頂点バッファ
 	ComPtr<ID3D12Resource> vertBuff;
-	// ルートシグネチャ
-	ComPtr<ID3D12RootSignature> rootsignature;
-	// パイプラインステート
-	ComPtr<ID3D12PipelineState> pipelineState;
-	// ブレンドデスク
-	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc;
 
 	// クラス呼び出し
 	Sprite* sprite_ = nullptr;

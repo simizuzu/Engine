@@ -5,6 +5,7 @@
 
 #include "TextureManager.h"
 #include "DirectXCommon.h"
+#include "WinApp.h"
 #include "Shader.h"
 #include "Pipeline.h"
 #include "Vector2.h"
@@ -23,54 +24,51 @@ public:
 		RT,	// 右上
 	};
 
-	enum class BlendMode
-	{
-		None,	// ブレンド無し
-		Alpha,	// アルファ
-		Add,	// 加算
-		Sub,	// 減算
-		Mul,	// 乗算
-		Inv,	// 色反転
-
-		CountOfBlendMode, // 最大ブレンドモード数
-	};
-
-public: 
-	
-	/// <summary>
-	/// 頂点データ構造体
-	/// </summary>
-	struct VertexPosUv
-	{
-		Mathematics::Vector3 pos;
-		Mathematics::Vector2 uv;
-	};
-
-	struct ConstBufferData
-	{
-		Mathematics::Vector4 color;
-		Mathematics::Matrix4 mat;
-	};
+//public: 
+//	/// <summary>
+//	/// 頂点データ構造体
+//	/// </summary>
+//	struct VertexPosUv
+//	{
+//		Mathematics::Vector3 pos;
+//		Mathematics::Vector2 uv;
+//	};
+//
+//	struct ConstBufferData
+//	{
+//		Mathematics::Vector4 color;
+//		Mathematics::Matrix4 mat;
+//	};
 
 public: // エイリアステンプレート
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
+private: // 静的メンバ変数
+	// デバイス
+	static ID3D12Device* device_;
+	// デスクリプタサイズ
+	static UINT descriptorSize_;
+	// コマンドリスト
+	static ID3D12GraphicsCommandList* commandList_;
+	// ルートシグネチャ
+	static ComPtr<ID3D12RootSignature> rootSignature_;
+	// プロジェクション行列
+	static Mathematics::Matrix4 matProjection_;
+	// パイプラインステート
+	static std::array<RootsigSetPip, 6> pipelineState;
+	// 頂点シェーダオブジェクト
+	static ComPtr<ID3DBlob> vsBlob;
+	// ピクセルシェーダオブジェクト
+	static ComPtr<ID3DBlob> psBlob;
+
 private: // メンバ変数
 	// 頂点バッファ
 	ComPtr<ID3D12Resource> vertBuff;
-	// 頂点シェーダオブジェクト
-	ComPtr<ID3DBlob> vsBlob;
-	// ピクセルシェーダオブジェクト
-	ComPtr<ID3DBlob> psBlob;
 	// エラーオブジェクト
 	ComPtr<ID3DBlob> errorBlob;
-	// ルートシグネチャ
-	ComPtr<ID3D12RootSignature> rootsignature;
 	// ルートシグネチャのシリアライズ
 	ComPtr<ID3DBlob> rootSigBlob;
-	// パイプラインステート
-	ComPtr<ID3D12PipelineState> pipelineState;
-
+	// インプットレイアウト
 	D3D12_INPUT_ELEMENT_DESC inputLayout{};
 	// 座標
 	Mathematics::Vector2 position_ = { 0.0f,0.0f };
@@ -82,6 +80,8 @@ private: // メンバ変数
 	Mathematics::Vector2 size_ = { 100.0f,100.0f };
 	// テクスチャ番号
 	uint32_t textureIndex_ = 0;
+	// ブレンドモード
+	int blendMode = (int)BlendMode::Alpha;
 
 public: // メンバ関数
 	/// <summary>
@@ -104,22 +104,16 @@ public: // メンバ関数
 	/// </summary>
 	void InitializeVertexBuff();
 
+public: // 静的メンバ関数
 	/// <summary>
-	/// シェーダの読み込み関連の初期化
-	/// </summary>
-	void InitializeShadeLoad();
-
-public:
-	/// <summary>
-	/// 静的初期化
+	/// 初期化
 	/// </summary>
 	static void StaticInitialize();
 
 	/// <summary>
 	/// 描画前処理
 	/// </summary>
-	/// <param name="cmdList">描画コマンドリスト</param>
-	static void PreDraw(ID3D12GraphicsCommandList* cmdList, BlendMode blendMode = BlendMode::None);
+	static void PreDraw();
 
 	/// <summary>
 	/// 描画後処理
@@ -157,6 +151,11 @@ public: // setter,getter
 	/// <param name="textureIndex">: テクスチャ番号</param>
 	void SetTextureIndex(uint32_t textureIndex) { textureIndex_ = textureIndex; }
 
+	/// <summary>
+	/// ブレンドを設定
+	/// </summary>
+	void SetBlendMode(BlendMode);
+
 	// 座標
 	const Mathematics::Vector2& GetPosition() const { return position_; }
 	// 角度
@@ -168,19 +167,10 @@ public: // setter,getter
 	// テクスチャ番号
 	uint32_t GetTextureIndex() { return textureIndex_; }
 
-#pragma region pipelineクラス用
-	// 頂点シェーダオブジェクト
-	ComPtr<ID3DBlob> GetVsBlob() { return vsBlob; }
-	// ピクセルシェーダオブジェクト
-	ComPtr<ID3DBlob> GetPsBlob() { return psBlob; }
-	// エラーオブジェクト
-	ComPtr<ID3DBlob> GetErrorBlob() { return errorBlob; }
-
-#pragma endregion
-
 private: // クラス呼び出し
 	TextureManager* textureManager_ = nullptr;
 	DirectXCommon* dxCommon_ = nullptr;
-	Shader* shader_ = nullptr;
-	Pipeline* pipeline_ = nullptr;
+	static Shader* shader_;
+	static Pipeline* pipeline_;
+	static WinApp* winApp_;
 };

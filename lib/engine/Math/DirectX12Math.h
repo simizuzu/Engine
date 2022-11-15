@@ -36,6 +36,8 @@ namespace MyMathUtility
 	// ベクトルと行列の掛け算
 	Mathematics::Matrix4 MatMulVector(Mathematics::Matrix4 m, Mathematics::Vector3 v);
 
+	Mathematics::Matrix4 MakeOrthographic(float left, float right, float bottom, float top, float near_, float far_, Mathematics::Matrix4& matrix);
+
 	// 線形補間
 	float Lerp(float a, float b, float t);
 

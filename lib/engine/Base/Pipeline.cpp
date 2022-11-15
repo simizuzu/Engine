@@ -1,18 +1,13 @@
 #include "Pipeline.h"
 
-void Pipeline::CreateSpritePipeline()
+void Pipeline::CreateSpritePipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode blend, ID3D12Device* device, std::array<RootsigSetPip, 6>& pipeline)
 {
 	HRESULT result;
-	// 頂点シェーダオブジェクト
-	ComPtr<ID3DBlob> vsBlob;
-	// ピクセルシェーダオブジェクト
-	ComPtr<ID3DBlob> psBlob;
+
 	// ルートシグネチャのシリアライズ
 	ComPtr<ID3DBlob> rootSigBlob;
 	// エラーオブジェクト
 	ComPtr<ID3DBlob> errorBlob;
-	// シングルトン呼び出し
-	dxCommon_->GetInstance();
 
 	// 頂点レイアウト
 	D3D12_INPUT_ELEMENT_DESC inputLayout[] = {
@@ -44,12 +39,55 @@ void Pipeline::CreateSpritePipeline()
 	pipelineDesc.RasterizerState.DepthClipEnable = true;			// 深度クリッピングを有効に
 	// ブレンドステート
 	pipelineDesc.BlendState.RenderTarget[0];
-	blenddesc.RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;	// RGBA全てのチャンネルを描画
+	// ブレンドデスク
+	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = pipelineDesc.BlendState.RenderTarget[0]; // RGBA全てのチャンネルを描画
 	// 共通設定
 	blenddesc.RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;
 	blenddesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;	//加算
 	blenddesc.SrcBlendAlpha = D3D12_BLEND_ONE;		//ソースの値を100%使う
 	blenddesc.DestBlendAlpha = D3D12_BLEND_ZERO;	//デストの値を0%使う
+
+	switch (blend)
+	{
+	case BlendMode::None: // ブレンド無し
+		blenddesc.BlendEnable = false;
+		break;
+
+	case BlendMode::Alpha: // アルファ
+		blenddesc.BlendEnable = true;
+		blenddesc.BlendOp = D3D12_BLEND_OP_ADD;
+		blenddesc.SrcBlend = D3D12_BLEND_SRC_ALPHA;
+		blenddesc.DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
+		break;
+
+	case BlendMode::Add: // 加算
+		blenddesc.BlendEnable = true;
+		blenddesc.BlendOp = D3D12_BLEND_OP_ADD;
+		blenddesc.SrcBlend = D3D12_BLEND_SRC_ALPHA;
+		blenddesc.DestBlend = D3D12_BLEND_ONE;
+		break;
+
+	case BlendMode::Sub: // 減算
+		blenddesc.BlendEnable = true;
+		blenddesc.BlendOp = D3D12_BLEND_OP_REV_SUBTRACT;
+		blenddesc.SrcBlend = D3D12_BLEND_SRC_ALPHA;
+		blenddesc.DestBlend = D3D12_BLEND_ONE;
+		break;
+
+	case BlendMode::Mul: // 乗算
+		blenddesc.BlendEnable = true;
+		blenddesc.BlendOp = D3D12_BLEND_OP_ADD;
+		blenddesc.SrcBlend = D3D12_BLEND_ZERO;
+		blenddesc.DestBlend = D3D12_BLEND_SRC_COLOR;
+		break;
+
+	case BlendMode::Inv: // 色反転
+		blenddesc.BlendEnable = true;
+		blenddesc.BlendOp = D3D12_BLEND_OP_ADD;
+		blenddesc.SrcBlend = D3D12_BLEND_SRC_COLOR;;
+		blenddesc.DestBlend = D3D12_BLEND_ZERO;
+		break;
+	}
 
 	// 頂点レイアウトの設定
 	pipelineDesc.InputLayout.pInputElementDescs = inputLayout;
@@ -103,15 +141,15 @@ void Pipeline::CreateSpritePipeline()
 	// ルートシグネチャのシリアライズ
 	result = D3D12SerializeRootSignature(&rootSignatureDesc, D3D_ROOT_SIGNATURE_VERSION_1_0, &rootSigBlob, &errorBlob);
 	assert(SUCCEEDED(result));
-	result = dxCommon_->GetDevice()->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(), IID_PPV_ARGS(&rootsignature));
+	result = device->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(), IID_PPV_ARGS(&pipeline[(size_t)blend].rootsignature));
 	assert(SUCCEEDED(result));
 
 	rootSigBlob->Release();
 	// パイプラインにルートシグネチャをセット
-	pipelineDesc.pRootSignature = rootsignature.Get();
+	pipelineDesc.pRootSignature = pipeline[(size_t)blend].rootsignature.Get();
 
 	// パイプラインステートの生成
-	result = dxCommon_->GetDevice()->CreateGraphicsPipelineState(&pipelineDesc, IID_PPV_ARGS(&pipelineState));
+	result = device->CreateGraphicsPipelineState(&pipelineDesc, IID_PPV_ARGS(&pipeline[(size_t)blend].pipelineState));
 	assert(SUCCEEDED(result));
 }
 

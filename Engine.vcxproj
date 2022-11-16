@@ -142,8 +142,6 @@
     <ClCompile Include="lib\engine\3D\WorldTransform.cpp" />
     <ClCompile Include="lib\engine\Base\DirectXCommon.cpp" />
     <ClCompile Include="lib\engine\Base\FPS.cpp" />
-    <ClCompile Include="lib\engine\Base\Pipeline.cpp" />
-    <ClCompile Include="lib\engine\Base\TextureManager.cpp" />
     <ClCompile Include="lib\engine\Base\WinApp.cpp" />
     <ClCompile Include="lib\engine\Camera\Camera.cpp" />
     <ClCompile Include="lib\engine\Input\Input.cpp" />
@@ -156,7 +154,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MyGame.cpp" />
-    <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameScene.h" />
@@ -164,8 +161,6 @@
     <ClInclude Include="lib\engine\3D\WorldTransform.h" />
     <ClInclude Include="lib\engine\Base\DirectXCommon.h" />
     <ClInclude Include="lib\engine\Base\FPS.h" />
-    <ClInclude Include="lib\engine\Base\Pipeline.h" />
-    <ClInclude Include="lib\engine\Base\TextureManager.h" />
     <ClInclude Include="lib\engine\Base\WinApp.h" />
     <ClInclude Include="lib\engine\Camera\Camera.h" />
     <ClInclude Include="lib\engine\Input\Input.h" />
@@ -177,7 +172,6 @@
     <ClInclude Include="lib\engine\Math\Vector4.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MyGame.h" />
-    <ClInclude Include="Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\Sprite.hlsli" />

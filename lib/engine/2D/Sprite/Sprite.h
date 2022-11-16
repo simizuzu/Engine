@@ -122,7 +122,7 @@ public: // ƒƒ“ƒoŠÖ”
 	/// <param name="pos">À•W</param>
 	/// <param name="rot">‰ñ“]</param>
 	/// <param name="scale">Šg‘å—¦</param>
-	void DrawSprite(
+	static void DrawSprite(
 		TextureData& textureData, Mathematics::Vector2 position, Mathematics::Vector4 color, Mathematics::Vector2 scale, float rotation, 
 		Mathematics::Vector2 anchorpoint, bool flipX, bool flipY);
 

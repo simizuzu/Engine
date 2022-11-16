@@ -73,8 +73,8 @@ void Sprite::Update(Mathematics::Vector2 pos, Mathematics::Vector2 scale, float 
 	*constBuffMap = matWorld + matProjection_;
 }
 
-void Sprite::DrawSprite(TextureData& textureData, Mathematics::Vector2 position, Mathematics::Vector4 color, Mathematics::Vector2 scale, float rotation,
-	Mathematics::Vector2 anchorpoint, bool flipX, bool flipY)
+void Sprite::DrawSprite(TextureData& textureData, Mathematics::Vector2 position, Mathematics::Vector4 color = {1.0f,1.0f,1.0f,1.0f}, Mathematics::Vector2 scale = {1.0f,1.0f}, float rotation = 0.0f,
+	Mathematics::Vector2 anchorpoint = {0.0f,0.0f}, bool flipX = false, bool flipY = false)
 {
 	int isFlipX, isFlipY;
 	if (flipX == false)isFlipX = 1;

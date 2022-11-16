@@ -22,5 +22,5 @@ void GameScene::Update()
 
 void GameScene::Draw()
 {
-	sprite_->DrawSprite(tex, { 100.0f,100.0f });
+	sprite_->DrawSprite(tex, { 0.0f,0.0f });
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include <d3d12.h>
 #include <wrl.h>
+#include <array>
 #include "DirectXCommon.h"
 
 enum class BlendMode

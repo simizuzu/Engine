@@ -123,7 +123,7 @@ void Sprite::Update(Mathematics::Vector2 pos, Mathematics::Vector2 scale, float 
 	mScale = MakeScaling({ scale.x,scale.y,1.0f });
 	matWorld = mScale * mRot * mTrans;
 
-	*constBuffMap = matWorld + matProjection_;
+	*constBuffMap = matWorld * matProjection_;
 }
 
 void Sprite::DrawSprite(TextureData& textureData, Mathematics::Vector2 position, Mathematics::Vector2 scale, float rotation,

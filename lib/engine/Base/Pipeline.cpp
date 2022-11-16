@@ -130,21 +130,22 @@ void Pipeline::CreateSpritePipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMod
 
 	// ルートシグネチャの設定
 	D3D12_ROOT_SIGNATURE_DESC rootSignatureDesc{};
-	rootSignatureDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_STREAM_OUTPUT;
+	rootSignatureDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 	rootSignatureDesc.pParameters = rootParams;
 	rootSignatureDesc.NumParameters = _countof(rootParams);
 	rootSignatureDesc.pStaticSamplers = &sampleDesc;
 	rootSignatureDesc.NumStaticSamplers = 1;
+
 	// ルートシグネチャのシリアライズ
 	result = D3D12SerializeRootSignature(&rootSignatureDesc, D3D_ROOT_SIGNATURE_VERSION_1_0, &rootSigBlob, &errorBlob);
 	assert(SUCCEEDED(result));
-	result = device->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(), IID_PPV_ARGS(&pipeline[(size_t)blend].rootsignature));
+	result = device->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(), IID_PPV_ARGS(&pipeline[static_cast<size_t>(blend)].rootSignature));
 	assert(SUCCEEDED(result));
 
 	// パイプラインにルートシグネチャをセット
-	pipelineDesc.pRootSignature = rootsignature.Get();
+	pipelineDesc.pRootSignature = pipeline[static_cast<size_t>(blend)].rootSignature.Get();
 
 	// パイプラインステートの生成
-	result = device->CreateGraphicsPipelineState(&pipelineDesc, IID_PPV_ARGS(&pipelineState));
+	result = device->CreateGraphicsPipelineState(&pipelineDesc, IID_PPV_ARGS(&pipeline[static_cast<size_t>(blend)].pipelineState));
 	assert(SUCCEEDED(result));
 }

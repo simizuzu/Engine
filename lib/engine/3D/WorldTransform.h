@@ -10,12 +10,9 @@ struct ConstBufferDataWorldTransform
 	Mathematics::Matrix4 matWorld;
 };
 
-class WorldTransform
+struct WorldTransform
 {
-public: // エイリアステンプレート
-	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
-public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
@@ -36,9 +33,9 @@ public:
 	/// </summary>
 	void TransferMatrix();
 
-private:
+
 	// 定数バッファ
-	ComPtr<ID3D12Resource> constBuff_;
+	Microsoft::WRL::ComPtr<ID3D12Resource> constBuff_;
 	// マッピング済みアドレス
 	ConstBufferDataWorldTransform* constMap_ = nullptr;
 	// ローカルスケール

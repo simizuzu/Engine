@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include <memory>
 
 #include "Input.h"
 #include "WinApp.h"
@@ -6,6 +7,9 @@
 #include "FPS.h"
 #include "Sprite.h"
 #include "TextureManager.h"
+#include "GameScene.h"
+
+#include "MyGame.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
@@ -35,12 +39,18 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 	textureManager_ = TextureManager::GetInstance();
 	textureManager_->Initialize(dxCommon_);
 
+	std::unique_ptr<GameScene> gameScene = std::make_unique<GameScene>();
+	gameScene->Initialize();
+
+	MyGame game;
+	game.Initialize();
+
 #pragma endregion
 
 #pragma region 最初のシーンの初期化
 	// スプライトの初期化
 	Sprite* sprite_ = new Sprite();
-	sprite_->Initialize(textureManager_);
+	sprite_->StaticInitialize();
 #pragma endregion
 
 #pragma region ゲームループ
@@ -63,10 +73,15 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 
 #pragma endregion
 
+		gameScene->Update();
+		gameScene->Draw();
 		// 描画後処理
 		dxCommon_->PostDraw();
 		// FPS固定更新
 		fps_->UpdateFixFPS();
+
+		game.Draw();
+		game.Update();
 	}
 #pragma endregion
 
@@ -85,6 +100,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 	winApp_->Delete();
 	// FPS解放
 	delete fps_;
+
+	game.Finalize();
 #pragma endregion
 
 	return 0;

@@ -3,6 +3,7 @@
 #include <memory>
 #include <wrl.h>
 
+#include "DirectX12Math.h"
 #include "TextureManager.h"
 #include "DirectXCommon.h"
 #include "WinApp.h"
@@ -12,6 +13,21 @@
 #include "Vector3.h"
 #include "Vector4.h"
 #include "Matrix4.h"
+
+// 2D変換行列(定数バッファ)
+struct ConstBufferData
+{
+	Mathematics::Vector4 color;
+	Mathematics::Matrix4 mat;
+};
+
+/// 頂点データ構造体
+struct PosUvColor
+{
+	Mathematics::Vector3 pos;
+	Mathematics::Vector2 uv;
+	XMFLOAT4 color;
+};
 
 class Sprite
 {
@@ -23,22 +39,6 @@ public:
 		RB,	// 右下
 		RT,	// 右上
 	};
-
-//public: 
-//	/// <summary>
-//	/// 頂点データ構造体
-//	/// </summary>
-//	struct VertexPosUv
-//	{
-//		Mathematics::Vector3 pos;
-//		Mathematics::Vector2 uv;
-//	};
-//
-//	struct ConstBufferData
-//	{
-//		Mathematics::Vector4 color;
-//		Mathematics::Matrix4 mat;
-//	};
 
 public: // エイリアステンプレート
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
@@ -64,16 +64,32 @@ private: // 静的メンバ変数
 private: // メンバ変数
 	// 頂点バッファ
 	ComPtr<ID3D12Resource> vertBuff;
+	//頂点マップ
+	PosUvColor* vertMap;
+	//頂点バッファビュー
+	D3D12_VERTEX_BUFFER_VIEW vbView{};
+	//インデックスバッファの生成
+	Microsoft::WRL::ComPtr<ID3D12Resource>indexBuff;
+	//インデックスバッファをマッピング
+	uint16_t* indexMap;
+	//インデックスバッファビューの作成
+	D3D12_INDEX_BUFFER_VIEW ibView{};
 	// エラーオブジェクト
 	ComPtr<ID3DBlob> errorBlob;
 	// ルートシグネチャのシリアライズ
 	ComPtr<ID3DBlob> rootSigBlob;
 	// インプットレイアウト
 	D3D12_INPUT_ELEMENT_DESC inputLayout{};
+
 	// 座標
 	Mathematics::Vector2 position_ = { 0.0f,0.0f };
 	// 色
 	Mathematics::Vector4 color_ = { 1, 1, 1, 1 };
+
+	//定数バッファ
+	Microsoft::WRL::ComPtr<ID3D12Resource>constBuff;
+	Mathematics::Matrix4* constBuffMap = nullptr;
+
 	// 角度
 	float rotation_ = 0.0f;
 	// 表示サイズ(単位はpixel)
@@ -92,17 +108,33 @@ public: // メンバ関数
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update();
+	void Update(Mathematics::Vector2 pos, Mathematics::Vector2 scale, float rot);
 
 	/// <summary>
 	/// 描画
 	/// </summary>
-	void Draw();
+	void DrawCommandList(TextureData textureData);
+
+	/// <summary>
+	/// スプライト描画
+	/// </summary>
+	/// <param name="textureData">テクスチャデータ</param>
+	/// <param name="pos">座標</param>
+	/// <param name="rot">回転</param>
+	/// <param name="scale">拡大率</param>
+	void DrawSprite(
+		TextureData& textureData, Mathematics::Vector2 position, Mathematics::Vector4 color, Mathematics::Vector2 scale, float rotation, 
+		Mathematics::Vector2 anchorpoint, bool flipX, bool flipY);
 
 	/// <summary>
 	/// 頂点バッファ関連の初期化
 	/// </summary>
-	void InitializeVertexBuff();
+	void CreateVertexIndexBuff();
+
+	/// <summary>
+	/// 定数バッファ作成
+	/// </summary>
+	void CreateConstBuff();
 
 public: // 静的メンバ関数
 	/// <summary>
@@ -154,7 +186,7 @@ public: // setter,getter
 	/// <summary>
 	/// ブレンドを設定
 	/// </summary>
-	void SetBlendMode(BlendMode);
+	void SetBlendMode(BlendMode mode);
 
 	// 座標
 	const Mathematics::Vector2& GetPosition() const { return position_; }
@@ -173,4 +205,6 @@ private: // クラス呼び出し
 	static Shader* shader_;
 	static Pipeline* pipeline_;
 	static WinApp* winApp_;
+
+	//TextureData textureData;
 };

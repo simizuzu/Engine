@@ -23,20 +23,27 @@ namespace MyMathUtility
 	// 単位行列を求める
 	Mathematics::Matrix4 MakeIdentity();
 	// 拡大縮小を求める
-	Mathematics::Matrix4 MakeScaling(Mathematics::Matrix4 m, Mathematics::Vector3 scale);
+	Mathematics::Matrix4 MakeScaling(Mathematics::Vector3 scale);
 	// 回転行列を求める
-	Mathematics::Matrix4 MakeRotationZ(Mathematics::Matrix4 m, Mathematics::Vector3 rot);
-	Mathematics::Matrix4 MakeRotationX(Mathematics::Matrix4 m, Mathematics::Vector3 rot);
-	Mathematics::Matrix4 MakeRotationY(Mathematics::Matrix4 m, Mathematics::Vector3 rot);
-	Mathematics::Matrix4 MakeRotation(Mathematics::Matrix4 m, Mathematics::Vector3 rot);
+	Mathematics::Matrix4 MakeRotation(Mathematics::Vector3 rot);
 	// 平行移動行列を求める
-	Mathematics::Matrix4 MakeTranslation(Mathematics::Matrix4 m, Mathematics::Vector3 trans);
+	Mathematics::Matrix4 MakeTranslation(Mathematics::Vector3 trans);
 	// ワールド行列の計算
 	Mathematics::Matrix4 CreateMatrix(const WorldTransform& worldTransform);
+
+	/// <summary>
+	/// 1つ分のワールドトランスフォーム更新関数
+	/// </summary>
+	/// <param name="childWorldtrans">子のworldTransform</param>
+	void WorldTransUpdate(WorldTransform& childWorldtrans);
+
 	// ベクトルと行列の掛け算
 	Mathematics::Matrix4 MatMulVector(Mathematics::Matrix4 m, Mathematics::Vector3 v);
 
-	Mathematics::Matrix4 MakeOrthographic(float left, float right, float bottom, float top, float near_, float far_, Mathematics::Matrix4& matrix);
+	// 平行投影変換(左手系)
+	void MakeOrthogonalL(float left, float right, float bottom, float top, float near_, float far_, Mathematics::Matrix4& matrix);
+	// 平行投影変換(左手系)
+	void MakeOrthogonalR(float left, float right, float bottom, float top, float near_, float far_, Mathematics::Matrix4& matrix);
 
 	// 線形補間
 	float Lerp(float a, float b, float t);

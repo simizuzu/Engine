@@ -6,8 +6,11 @@
 
 #pragma comment(lib,"d3dcompiler.lib")
 
-void Shader::CreateSpriteShade(ID3DBlob* vsBlob, ID3DBlob* psBlob)
+void Shader::CreateSpriteShade()
 {
+	// エラーオブジェクト
+	ComPtr<ID3DBlob> errorBlob;
+
 	//　頂点シェーダの読み込みとコンパイル
 	HRESULT result = D3DCompileFromFile(
 		L"Resources/shaders/SpriteVS.hlsl",	// シェーダファイル名
@@ -17,7 +20,7 @@ void Shader::CreateSpriteShade(ID3DBlob* vsBlob, ID3DBlob* psBlob)
 		D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION, // デバック用設定
 		0, &vsBlob, &errorBlob
 	);
-
+	
 	// シェーダのエラー内容を表示
 	if (FAILED(result))
 	{

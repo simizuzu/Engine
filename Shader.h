@@ -12,10 +12,8 @@ private: // メンバ変数
 	ComPtr<ID3DBlob> vsBlob;
 	// ピクセルシェーダオブジェクト
 	ComPtr<ID3DBlob> psBlob;
-	// エラーオブジェクト
-	ComPtr<ID3DBlob> errorBlob;
 
 public: // メンバ関数
-	void CreateSpriteShade(ID3DBlob* vsBlob, ID3DBlob* psBlob);
+	void CreateSpriteShade();
 
 };

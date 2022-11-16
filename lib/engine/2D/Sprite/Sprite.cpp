@@ -36,7 +36,60 @@ void Sprite::StaticInitialize()
 	// 平行投影
 	MyMathUtility::MakeOrthogonalL(0.0f, width, height, 0.0f, 0.0f, 1.0f, matProjection_);
 
-	shader_->CreateSpriteShade(vsBlob.Get(), psBlob.Get());
+	// エラーオブジェクト
+	ComPtr<ID3DBlob> errorBlob;
+
+	//　頂点シェーダの読み込みとコンパイル
+	HRESULT result = D3DCompileFromFile(
+		L"Resources/shaders/SpriteVS.hlsl",	// シェーダファイル名
+		nullptr,
+		D3D_COMPILE_STANDARD_FILE_INCLUDE,	// インクルード可能にする
+		"main", "vs_5_0",	// エントリーポイント名、シェーダモデル指定
+		D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION, // デバック用設定
+		0, &vsBlob, &errorBlob
+	);
+
+	// シェーダのエラー内容を表示
+	if (FAILED(result))
+	{
+		// errorBlobからエラー内容をstring型にコピー
+		std::string error;
+		error.resize(errorBlob->GetBufferSize());
+
+		std::copy_n((char*)errorBlob->GetBufferPointer(),
+			errorBlob->GetBufferSize(),
+			error.begin());
+		error += "\n";
+		// エラー内容を出力ウィンドウに表示
+		OutputDebugStringA(error.c_str());
+		assert(0);
+	}
+
+	// ピクセルシェーダの読み込みとコンパイル
+	result = D3DCompileFromFile(
+		L"Resources/shaders/SpritePS.hlsl",	// シェーダファイル名
+		nullptr,
+		D3D_COMPILE_STANDARD_FILE_INCLUDE,	// インクルード可能にする
+		"main", "ps_5_0",	// エンドリーポイント名、シェーダモデル指定
+		D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION, // デバック用設定
+		0, &psBlob, &errorBlob
+	);
+
+	// エラーなら
+	if (FAILED(result))
+	{
+		// errorBlobからエラー内容をstring型にコピー
+		std::string error;
+		error.resize(errorBlob->GetBufferSize());
+
+		std::copy_n((char*)errorBlob->GetBufferPointer(),
+			errorBlob->GetBufferSize(),
+			error.begin());
+		error += "\n";
+		// エラー内容を出力ウィンドウに表示
+		OutputDebugStringA(error.c_str());
+		assert(0);
+	}
 
 	for (int i = 0; i < pipelineState.size(); i++)
 	{
@@ -73,8 +126,8 @@ void Sprite::Update(Mathematics::Vector2 pos, Mathematics::Vector2 scale, float 
 	*constBuffMap = matWorld + matProjection_;
 }
 
-void Sprite::DrawSprite(TextureData& textureData, Mathematics::Vector2 position, Mathematics::Vector4 color = {1.0f,1.0f,1.0f,1.0f}, Mathematics::Vector2 scale = {1.0f,1.0f}, float rotation = 0.0f,
-	Mathematics::Vector2 anchorpoint = {0.0f,0.0f}, bool flipX = false, bool flipY = false)
+void Sprite::DrawSprite(TextureData& textureData, Mathematics::Vector2 position, Mathematics::Vector2 scale, float rotation,
+	Mathematics::Vector2 anchorpoint, bool flipX, bool flipY)
 {
 	int isFlipX, isFlipY;
 	if (flipX == false)isFlipX = 1;
@@ -90,10 +143,10 @@ void Sprite::DrawSprite(TextureData& textureData, Mathematics::Vector2 position,
 	//頂点データ
 	PosUvColor vertices[] =
 	{
-		{{left,top,0.0f},{0.0f,0.0f},{color.x, color.y, color.z, color.w}},//左上インデックス0
-		{{left,bottom,0.0f},{0.0f,1.0f},{color.x, color.y, color.z, color.w}},//左下インデックス1
-		{{right,top,0.0f},{1.0f,0.0f},{color.x, color.y, color.z, color.w}},//右上インデックス2
-		{{right,bottom,0.0f},{1.0f,1.0f},{color.x, color.y, color.z, color.w}},//右下インデックス3
+		{{left,top,0.0f},{0.0f,0.0f}},//左上インデックス0
+		{{left,bottom,0.0f},{0.0f,1.0f}},//左下インデックス1
+		{{right,top,0.0f},{1.0f,0.0f}},//右上インデックス2
+		{{right,bottom,0.0f},{1.0f,1.0f}},//右下インデックス3
 	};
 
 	//インデックスデータ
@@ -261,42 +314,42 @@ void Sprite::SetBlendMode(BlendMode mode)
 	case BlendMode::None:
 
 		commandList_->SetPipelineState(pipelineState[0].pipelineState.Get());
-		commandList_->SetGraphicsRootSignature(pipelineState[0].rootsignature.Get());
+		commandList_->SetGraphicsRootSignature(pipelineState[0].rootSignature.Get());
 
 		break;
 
 	case BlendMode::Alpha:
 
 		commandList_->SetPipelineState(pipelineState[1].pipelineState.Get());
-		commandList_->SetGraphicsRootSignature(pipelineState[1].rootsignature.Get());
+		commandList_->SetGraphicsRootSignature(pipelineState[1].rootSignature.Get());
 
 		break;
 
 	case BlendMode::Add:
 
 		commandList_->SetPipelineState(pipelineState[2].pipelineState.Get());
-		commandList_->SetGraphicsRootSignature(pipelineState[2].rootsignature.Get());
+		commandList_->SetGraphicsRootSignature(pipelineState[2].rootSignature.Get());
 
 		break;
 
 	case BlendMode::Sub:
 
 		commandList_->SetPipelineState(pipelineState[3].pipelineState.Get());
-		commandList_->SetGraphicsRootSignature(pipelineState[3].rootsignature.Get());
+		commandList_->SetGraphicsRootSignature(pipelineState[3].rootSignature.Get());
 
 		break;
 
 	case BlendMode::Mul:
 
 		commandList_->SetPipelineState(pipelineState[4].pipelineState.Get());
-		commandList_->SetGraphicsRootSignature(pipelineState[4].rootsignature.Get());
+		commandList_->SetGraphicsRootSignature(pipelineState[4].rootSignature.Get());
 
 		break;
 
 	case BlendMode::Inv:
 
 		commandList_->SetPipelineState(pipelineState[5].pipelineState.Get());
-		commandList_->SetGraphicsRootSignature(pipelineState[5].rootsignature.Get());
+		commandList_->SetGraphicsRootSignature(pipelineState[5].rootSignature.Get());
 
 		break;
 	}

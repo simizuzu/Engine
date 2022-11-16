@@ -26,7 +26,7 @@ struct PosUvColor
 {
 	Mathematics::Vector3 pos;
 	Mathematics::Vector2 uv;
-	XMFLOAT4 color;
+	//Mathematics::Vector4 color;
 };
 
 class Sprite
@@ -60,6 +60,8 @@ private: // 静的メンバ変数
 	static ComPtr<ID3DBlob> vsBlob;
 	// ピクセルシェーダオブジェクト
 	static ComPtr<ID3DBlob> psBlob;
+	
+	static std::array<RootsigSetPip, 6>& pipeline;
 
 private: // メンバ変数
 	// 頂点バッファ
@@ -122,9 +124,9 @@ public: // メンバ関数
 	/// <param name="pos">座標</param>
 	/// <param name="rot">回転</param>
 	/// <param name="scale">拡大率</param>
-	static void DrawSprite(
-		TextureData& textureData, Mathematics::Vector2 position, Mathematics::Vector4 color, Mathematics::Vector2 scale, float rotation, 
-		Mathematics::Vector2 anchorpoint, bool flipX, bool flipY);
+	void DrawSprite(
+		TextureData& textureData, Mathematics::Vector2 position, Mathematics::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f,
+		Mathematics::Vector2 anchorpoint = { 0.0f,0.0f }, bool flipX = false, bool flipY = false);
 
 	/// <summary>
 	/// 頂点バッファ関連の初期化

@@ -39,6 +39,9 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 	textureManager_ = TextureManager::GetInstance();
 	textureManager_->Initialize(dxCommon_);
 
+	// スプライトの初期化
+	Sprite::StaticInitialize();
+
 	std::unique_ptr<GameScene> gameScene = std::make_unique<GameScene>();
 	gameScene->Initialize();
 
@@ -48,9 +51,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 #pragma endregion
 
 #pragma region 最初のシーンの初期化
-	// スプライトの初期化
-	Sprite* sprite_ = new Sprite();
-	sprite_->StaticInitialize();
+	
+
 #pragma endregion
 
 #pragma region ゲームループ
@@ -87,7 +89,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 
 #pragma region 基盤システムの終了
 	// スプライト解放
-	delete sprite_;
+	
 	// テクスチャ解放
 	textureManager_->Delete();
 	// 入力解放

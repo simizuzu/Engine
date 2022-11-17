@@ -110,7 +110,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);$(ProjectDir)lib\engine\2D\Sprite;$(ProjectDir)lib\engine\Camera;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);$(ProjectDir)lib\engine\2D\Sprite;$(ProjectDir)lib\engine\Camera;$(ProjectDir)lib\engine\Scene;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -137,9 +137,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="lib\engine\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="lib\engine\3D\WorldTransform.cpp" />
+    <ClCompile Include="lib\engine\Audio\Audio.cpp" />
     <ClCompile Include="lib\engine\Base\DirectXCommon.cpp" />
     <ClCompile Include="lib\engine\Base\FPS.cpp" />
     <ClCompile Include="lib\engine\Base\Pipeline.cpp" />
@@ -153,15 +153,16 @@
     <ClCompile Include="lib\engine\Math\Vector2.cpp" />
     <ClCompile Include="lib\engine\Math\Vector3.cpp" />
     <ClCompile Include="lib\engine\Math\Vector4.cpp" />
+    <ClCompile Include="lib\engine\Scene\GameScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MyGame.cpp" />
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameScene.h" />
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
     <ClInclude Include="lib\engine\3D\WorldTransform.h" />
+    <ClInclude Include="lib\engine\Audio\Audio.h" />
     <ClInclude Include="lib\engine\Base\DirectXCommon.h" />
     <ClInclude Include="lib\engine\Base\FPS.h" />
     <ClInclude Include="lib\engine\Base\Pipeline.h" />
@@ -175,6 +176,7 @@
     <ClInclude Include="lib\engine\Math\Vector2.h" />
     <ClInclude Include="lib\engine\Math\Vector3.h" />
     <ClInclude Include="lib\engine\Math\Vector4.h" />
+    <ClInclude Include="lib\engine\Scene\GameScene.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MyGame.h" />
     <ClInclude Include="Shader.h" />

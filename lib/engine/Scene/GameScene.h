@@ -1,9 +1,14 @@
 #pragma once
-#include "Sprite.h"
 #include <memory>
+
+#include "Camera.h"
+#include "Sprite.h"
 
 class GameScene
 {
+public: // エイリアステンプレート
+	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
+
 public: // メンバ関数
 	// コンストラクタ
 	GameScene();

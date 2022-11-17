@@ -45,6 +45,13 @@ namespace MyMathUtility
 	// •½s“Š‰e•ÏŠ·(¶èŒn)
 	void MakeOrthogonalR(float left, float right, float bottom, float top, float near_, float far_, Mathematics::Matrix4& matrix);
 
+	// ƒrƒ…[s—ñ‚Ìì¬
+	Mathematics::Matrix4 MakeLookAtLH( Mathematics::Vector3& eye,  Mathematics::Vector3& target, Mathematics::Vector3& up);
+	// “§‹“Š‰eì¬
+	Mathematics::Matrix4 MakePerspective(float fogAngleY, float aspectRatio, float nearZ, float farZ);
+	// ‹ts—ñ
+	Mathematics::Matrix4 MakeInverse(Mathematics::Matrix4& mat);
+
 	// üŒ`•âŠÔ
 	float Lerp(float a, float b, float t);
 

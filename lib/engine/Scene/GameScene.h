@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 
+#include "Input.h"
 #include "Camera.h"
 #include "Sprite.h"
 
@@ -24,6 +25,12 @@ public: // ƒƒ“ƒoŠÖ”
 public: // ƒƒ“ƒoŠÖ”
 
 private: // ƒƒ“ƒo•Ï”
+	Camera* viewProjection_ = nullptr;
+
+	Input* input_ = nullptr;
+	DirectXCommon* dxCommon_ = nullptr;
+	//TextureData textureHandle_;
+
 	std::unique_ptr<Sprite> sprite_;
 	TextureData tex;
 };

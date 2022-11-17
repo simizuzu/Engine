@@ -1,4 +1,13 @@
 #pragma once
+
+#include "WinApp.h"
+#include "DirectXCommon.h"
+#include "FPS.h"
+#include "Input.h"
+#include "TextureManager.h"
+#include "Sprite.h"
+#include "GameScene.h"
+
 class MyGame
 {
 public: // ƒƒ“ƒoŠÖ”
@@ -21,5 +30,13 @@ public: // ƒƒ“ƒoŠÖ”
 	/// •`‰æ
 	/// </summary>
 	void Draw();
+
+private:
+	WinApp* winApp_ = nullptr;
+	DirectXCommon* dxCommon_ = nullptr;
+	FPS* fps_ = nullptr;
+	Input* input_ = nullptr;
+	TextureManager* textureManager_ = nullptr;
+	std::unique_ptr<GameScene> gameScene = nullptr;
 };
 

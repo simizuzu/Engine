@@ -32,11 +32,6 @@ public: // ƒƒ“ƒoŠÖ”
 	void Draw();
 
 private:
-	WinApp* winApp_ = nullptr;
-	DirectXCommon* dxCommon_ = nullptr;
-	FPS* fps_ = nullptr;
-	Input* input_ = nullptr;
-	TextureManager* textureManager_ = nullptr;
-	std::unique_ptr<GameScene> gameScene = nullptr;
+
 };
 

@@ -56,10 +56,6 @@ private: // 静的メンバ変数
 	static Mathematics::Matrix4 matProjection_;
 	// パイプラインステート
 	static std::array<RootsigSetPip, 6> pipelineState;
-	// 頂点シェーダオブジェクト
-	static ComPtr<ID3DBlob> vsBlob;
-	// ピクセルシェーダオブジェクト
-	static ComPtr<ID3DBlob> psBlob;
 	
 	static std::array<RootsigSetPip, 6>& pipeline;
 
@@ -143,16 +139,6 @@ public: // 静的メンバ関数
 	/// 初期化
 	/// </summary>
 	static void StaticInitialize();
-
-	/// <summary>
-	/// 描画前処理
-	/// </summary>
-	static void PreDraw();
-
-	/// <summary>
-	/// 描画後処理
-	/// </summary>
-	static void PostDraw();
 
 public: // setter,getter
 	/// <summary>

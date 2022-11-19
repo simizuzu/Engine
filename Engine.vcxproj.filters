@@ -70,6 +70,12 @@
     <Filter Include="ヘッダー ファイル\Scene">
       <UniqueIdentifier>{cdb42a1a-f5b5-414d-91dd-4d8dc4b70dec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\3D\Model">
+      <UniqueIdentifier>{e63dfd67-5953-4176-8f55-b21c91eb64ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\3D\Model">
+      <UniqueIdentifier>{e989c97c-9f95-4582-b997-08cd55d5f294}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -135,6 +141,12 @@
     <ClCompile Include="lib\engine\Camera\Camera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="lib\engine\3D\Model\Model.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\3D\Model\Object3d.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engine\Math\DirectX12Math.h">
@@ -197,12 +209,18 @@
     <ClInclude Include="lib\engine\Camera\Camera.h">
       <Filter>ヘッダー ファイル\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="lib\engine\3D\Model\Model.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\engine\3D\Model\Object3d.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\Sprite.hlsli">
       <Filter>シェーダーファイル</Filter>
     </None>
-    <None Include="Resources\shaders\OBJShader.hlsli">
+    <None Include="Resources\shaders\OBJ.hlsli">
       <Filter>シェーダーファイル</Filter>
     </None>
   </ItemGroup>
@@ -213,10 +231,10 @@
     <FxCompile Include="Resources\shaders\SpriteVS.hlsl">
       <Filter>シェーダーファイル</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\OBJVShader.hlsl">
+    <FxCompile Include="Resources\shaders\OBJVS.hlsl">
       <Filter>シェーダーファイル</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\OBJPSShader.hlsl">
+    <FxCompile Include="Resources\shaders\OBJPS.hlsl">
       <Filter>シェーダーファイル</Filter>
     </FxCompile>
   </ItemGroup>

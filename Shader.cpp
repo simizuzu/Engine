@@ -6,7 +6,7 @@
 
 #pragma comment(lib,"d3dcompiler.lib")
 
-void Shader::CreateSpriteShade()
+void Shader::CreateSpriteShade(ComPtr<ID3DBlob>& vsBlob, ComPtr<ID3DBlob>& psBlob)
 {
 	// エラーオブジェクト
 	ComPtr<ID3DBlob> errorBlob;

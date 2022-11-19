@@ -7,13 +7,7 @@ class Shader
 public: // エイリアステンプレート
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
-private: // メンバ変数
-	// 頂点シェーダオブジェクト
-	ComPtr<ID3DBlob> vsBlob;
-	// ピクセルシェーダオブジェクト
-	ComPtr<ID3DBlob> psBlob;
-
 public: // メンバ関数
-	void CreateSpriteShade();
+	void CreateSpriteShade(ComPtr<ID3DBlob>& vsBlob, ComPtr<ID3DBlob>& psBlob);
 
 };

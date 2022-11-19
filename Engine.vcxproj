@@ -138,6 +138,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="lib\engine\2D\Sprite\Sprite.cpp" />
+    <ClCompile Include="lib\engine\3D\Model\Material.cpp" />
     <ClCompile Include="lib\engine\3D\Model\Model.cpp" />
     <ClCompile Include="lib\engine\3D\Model\Object3d.cpp" />
     <ClCompile Include="lib\engine\3D\WorldTransform.cpp" />
@@ -145,6 +146,7 @@
     <ClCompile Include="lib\engine\Base\DirectXCommon.cpp" />
     <ClCompile Include="lib\engine\Base\FPS.cpp" />
     <ClCompile Include="lib\engine\Base\Pipeline.cpp" />
+    <ClCompile Include="lib\engine\Base\Shader.cpp" />
     <ClCompile Include="lib\engine\Base\TextureManager.cpp" />
     <ClCompile Include="lib\engine\Base\WinApp.cpp" />
     <ClCompile Include="lib\engine\Camera\Camera.cpp" />
@@ -157,12 +159,11 @@
     <ClCompile Include="lib\engine\Math\Vector4.cpp" />
     <ClCompile Include="lib\engine\Scene\GameScene.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Material.cpp" />
     <ClCompile Include="MyGame.cpp" />
-    <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
+    <ClInclude Include="lib\engine\3D\Model\Material.h" />
     <ClInclude Include="lib\engine\3D\Model\Model.h" />
     <ClInclude Include="lib\engine\3D\Model\Object3d.h" />
     <ClInclude Include="lib\engine\3D\WorldTransform.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="lib\engine\Base\DirectXCommon.h" />
     <ClInclude Include="lib\engine\Base\FPS.h" />
     <ClInclude Include="lib\engine\Base\Pipeline.h" />
+    <ClInclude Include="lib\engine\Base\Shader.h" />
     <ClInclude Include="lib\engine\Base\TextureManager.h" />
     <ClInclude Include="lib\engine\Base\WinApp.h" />
     <ClInclude Include="lib\engine\Camera\Camera.h" />
@@ -181,9 +183,7 @@
     <ClInclude Include="lib\engine\Math\Vector3.h" />
     <ClInclude Include="lib\engine\Math\Vector4.h" />
     <ClInclude Include="lib\engine\Scene\GameScene.h" />
-    <ClInclude Include="Material.h" />
     <ClInclude Include="MyGame.h" />
-    <ClInclude Include="Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\OBJ.hlsli" />

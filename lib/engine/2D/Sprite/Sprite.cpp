@@ -293,3 +293,9 @@ void Sprite::SetBlendMode(BlendMode mode)
 		break;
 	}
 }
+
+void Sprite::Delete()
+{
+	delete shader_;
+	delete pipeline_;
+}

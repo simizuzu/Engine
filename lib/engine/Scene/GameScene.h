@@ -4,6 +4,7 @@
 #include "Input.h"
 #include "Camera.h"
 #include "Sprite.h"
+#include "Object3d.h"
 
 class GameScene
 {
@@ -29,7 +30,7 @@ private: // ƒƒ“ƒo•Ï”
 
 	Input* input_ = nullptr;
 	DirectXCommon* dxCommon_ = nullptr;
-	//TextureData textureHandle_;
+	Object3d* object3d_ = nullptr;
 
 	std::unique_ptr<Sprite> sprite_;
 	TextureData tex;

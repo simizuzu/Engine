@@ -8,7 +8,8 @@
 #include "Sprite.h"
 #include "TextureManager.h"
 #include "GameScene.h"
-
+#include "Shader.h"
+#include "Pipeline.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
@@ -19,7 +20,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 	FPS* fps_ = nullptr;
 	Input* input_ = nullptr;
 	TextureManager* textureManager_ = nullptr;
-	
+	Sprite* sprite_ = nullptr;
 
 	// WindowsAPI初期化
 	winApp_ = WinApp::GetInstance();
@@ -81,6 +82,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 #pragma region 基盤システムの終了
 	// テクスチャマネージャ解放
 	textureManager_->Delete();
+	// シェーダとパイプラインの解放
+	sprite_->Delete();
 	// 入力解放
 	delete input_;
 	// DirectX解放

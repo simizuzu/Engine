@@ -56,8 +56,6 @@ private: // 静的メンバ変数
 	static Mathematics::Matrix4 matProjection_;
 	// パイプラインステート
 	static std::array<RootsigSetPip, 6> pipelineState;
-	
-	static std::array<RootsigSetPip, 6>& pipeline;
 
 private: // メンバ変数
 	// 頂点バッファ
@@ -124,6 +122,12 @@ public: // メンバ関数
 		TextureData& textureData, Mathematics::Vector2 position, Mathematics::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f,
 		Mathematics::Vector2 anchorpoint = { 0.0f,0.0f }, bool flipX = false, bool flipY = false);
 
+	/// <summary>
+	/// シェーダーとパイプラインのDelete関数
+	/// </summary>
+	void Delete();
+
+private:
 	/// <summary>
 	/// 頂点バッファ関連の初期化
 	/// </summary>

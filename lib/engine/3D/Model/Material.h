@@ -1,63 +1,35 @@
 #pragma once
-
-#include <vector>
 #include <d3d12.h>
 #include <wrl.h>
+#include <string>
 
-#include "TextureManager.h"
+#include "DirectXCommon.h"
 
-struct ShaderFile
+#include "Vector2.h"
+#include "Vector3.h"
+#include "Vector4.h"
+#include "Matrix4.h"
+
+struct ConstBufferData
 {
-	//シェーダーファイルパス
-	std::wstring pFileName;
-	//エントリーポイント
-	std::string pEntrypoint;
-	//バージョン
-	std::string pTarget;
+	Mathematics::Vector3 ambient;
 };
 
 class Material
 {
+private: // エイリアステンプレート
+	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
+
 public:
-	//テクスチャデータ
-	TextureData textureData;
-
-	//頂点シェーダー
-	ShaderFile vsFiledata{ {},{"main"},{"vs_5_0"} };
-	//ピクセルシェーダー
-	ShaderFile psFiledata{ {},{"main"},{"ps_5_0"} };
-
-	//頂点レイアウト
-	std::vector<D3D12_INPUT_ELEMENT_DESC> inputLayouts;
-
-	//ルートパラメータ
-	std::vector<D3D12_ROOT_PARAMETER> rootParams;
-
-	//ブレンドステート
-	D3D12_RENDER_TARGET_BLEND_DESC blenddesc{};
-
-	//パイプラインステート
-	Microsoft::WRL::ComPtr<ID3D12PipelineState> pipelineState;
-
-	//ルートシグネチャ
-	Microsoft::WRL::ComPtr<ID3D12RootSignature> rootSignature;
-
-	bool depthFlag = true;
-public:
+	/// <summary>
+	/// 静的初期化
+	/// </summary>
+	/// <param name="device">デバイス</param>
+	static void StaticInitialize(DirectXCommon* device);
 
 	/// <summary>
-	/// 初期化
+	/// マテリアル生成
 	/// </summary>
-	void Initialize();
-
-	//void copy(const Material* material);
-	//void copy(const Material& material);
-	Material* copy();
-
-	Material() = default;
-	~Material() = default;
-
-private:
-	//コピーコンストラクタ・代入演算子削除
-	Material(const Material&) = delete;
+	/// <returns>生成されたマテリアル</returns>
+	static Material* Create();
 };

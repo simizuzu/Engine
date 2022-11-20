@@ -11,9 +11,9 @@ using namespace MyMathUtility;
 /// <summary>
 /// Ã“Iƒƒ“ƒo•Ï”‚ÌÀ‘Ì
 /// </summary>
-ID3D12Device* Sprite::device_ = nullptr;
+ComPtr<ID3D12Device> Sprite::device_;
 UINT Sprite::descriptorSize_;
-ID3D12GraphicsCommandList* Sprite::commandList_ = nullptr;
+ComPtr<ID3D12GraphicsCommandList> Sprite::commandList_;
 ComPtr<ID3D12RootSignature> Sprite::rootSignature_;
 std::array<RootsigSetPip, 6> Sprite::pipelineState;
 Mathematics::Matrix4 Sprite::matProjection_;

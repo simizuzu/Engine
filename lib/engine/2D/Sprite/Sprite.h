@@ -45,11 +45,11 @@ public: // エイリアステンプレート
 
 private: // 静的メンバ変数
 	// デバイス
-	static ID3D12Device* device_;
+	static ComPtr<ID3D12Device> device_;
 	// デスクリプタサイズ
 	static UINT descriptorSize_;
 	// コマンドリスト
-	static ID3D12GraphicsCommandList* commandList_;
+	static ComPtr<ID3D12GraphicsCommandList> commandList_;
 	// ルートシグネチャ
 	static ComPtr<ID3D12RootSignature> rootSignature_;
 	// プロジェクション行列

@@ -44,7 +44,7 @@ void Sprite::StaticInitialize()
 
 	for (int i = 0; i < pipelineState.size(); i++)
 	{
-		pipeline_->CreateSpritePipeline(vsBlob.Get(), psBlob.Get(), (BlendMode)i, device_, pipelineState);
+		pipeline_->CreateSpritePipeline(vsBlob.Get(), psBlob.Get(), (BlendMode)i, device_.Get(), pipelineState);
 	}
 }
 

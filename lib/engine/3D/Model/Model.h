@@ -89,7 +89,7 @@ private: // 静的メンバ変数
 	static ComPtr<ID3D12Resource> texBuff;
 	// シェーダリソースビューのハンドル(CPU)
 	D3D12_CPU_DESCRIPTOR_HANDLE cpuDescHandleSRV;
-		// シェーダリソースビューのハンドル(GPU)			 
+		// シェーダリソースビューのハンドル(GPU)
 	D3D12_GPU_DESCRIPTOR_HANDLE gpuDescHandleSRV;
 	// デスクリプタヒープ
 	static ComPtr<ID3D12DescriptorHeap> descHeap;

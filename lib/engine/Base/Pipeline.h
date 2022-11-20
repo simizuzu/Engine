@@ -34,10 +34,10 @@ public: // メンバ関数
 	/// </summary>
 	static void CreateSpritePipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode blend,ID3D12Device* device, std::array<RootsigSetPip,6>&pipeline);
 
+	/// <summary>
+	/// パイプライン呼び出し用関数(3Dオブジェクト)
+	/// </summary>
 	static void CreateObjPipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode blend, ID3D12Device* device);
-
-public:
-	void SetBlendMode(int blendMode) { };
 
 private: // メンバ変数
 	// 頂点バッファ

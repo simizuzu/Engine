@@ -1,11 +1,18 @@
 #include "Object3d.h"
 #include <windows.h>
 
+#include "DirectX12Math.h"
+
 /// <summary>
 /// 静的メンバ変数の実態
 /// </summary>
 Microsoft::WRL::ComPtr<ID3D12Device> Object3d::device_;
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> Object3d::cmdList_;
+Mathematics::Matrix4 Object3d::matView{};
+Mathematics::Matrix4 Object3d::matProjection{};
+Mathematics::Vector3 Object3d::eye = { 0.0f,3.0f,-10.0f };
+Mathematics::Vector3 Object3d::target = { 0.0f,0.0f,0.0f };
+Mathematics::Vector3 Object3d::up = { 0.0f,1.0f,0.0f };
 Pipeline* Object3d::pipeline = nullptr;
 
 void Object3d::StaticInitialize(ID3D12Device* device, int width, int height)
@@ -15,12 +22,18 @@ void Object3d::StaticInitialize(ID3D12Device* device, int width, int height)
 
 	Object3d::device_ = device;
 
+	// グラフィックスパイプラインの生成
+	CreateGraphicsPipeline();
+
 	Model::SetDevice(device);
 }
 
 void Object3d::CreateGraphicsPipeline()
 {
+	ComPtr<ID3DBlob> vsBlob; // 頂点シェーダオブジェクト
+	ComPtr<ID3DBlob> psBlob;	// ピクセルシェーダオブジェクト
 
+	pipeline->CreateObjPipeline(vsBlob.Get(), psBlob.Get(), BlendMode::None, device_.Get());
 }
 
 Object3d* Object3d::Create()
@@ -42,6 +55,12 @@ Object3d* Object3d::Create()
 	return object3d;
 }
 
+void Object3d::UpdateViewMatrix()
+{
+	// 視点座標
+
+}
+
 bool Object3d::Initialize()
 {
 	HRESULT result;
@@ -59,13 +78,13 @@ bool Object3d::Initialize()
 	resDesc.SampleDesc.Count = 1;
 	resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	result = device->CreateCommittedResource(
+	result = device_->CreateCommittedResource(
 		&heapProp,
 		D3D12_HEAP_FLAG_NONE,
 		&resDesc,
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
-		IID_PPV_ARGS(&constBuffB1));
+		IID_PPV_ARGS(&constBuffB0));
 	assert(SUCCEEDED(result));
 
 	return true;
@@ -73,12 +92,55 @@ bool Object3d::Initialize()
 
 void Object3d::Update()
 {
+	HRESULT result;
+	Mathematics::Matrix4 matScale, matRot, matTrans;
+
+	// スケール、回転、平行移動行列の計算
+	matScale = MyMathUtility::MakeScaling(scale);
+	matRot = MyMathUtility::MakeIdentity();
+	matRot = MyMathUtility::MakeRotation(rotation);
+	matTrans = MyMathUtility::MakeTranslation(position);
+
+	// ワールド行列の合成
+	matWorld = MyMathUtility::MakeIdentity();
+	matWorld *= matScale;
+	matWorld *= matRot;
+	matWorld *= matTrans;
+	matWorld *= matView;
+
+	// 親オブジェクトがあれば
+	if (parent != nullptr)
+	{
+		matWorld *= parent->matWorld;
+	}
+
+	// 定数バッファへデータ転送
+	ConstBufferDataB0* constMap = nullptr;
+	result = constBuffB0->Map(0, nullptr, (void**)&constMap);
+	constMap->mat = matWorld * matProjection;
+	constBuffB0->Unmap(0, nullptr);
 }
 
 void Object3d::Draw()
 {
-}
+	RootsigSetPip pipelineSet;
+	// nullチェック
+	assert(device_);
+	assert(Object3d::cmdList_);
 
-void Object3d::UpdateViewMatrix()
-{
+	// モデルの割り当てがなければ描画しない
+	if (model = nullptr)
+	{
+		return;
+	}
+
+	// パイプラインステートの設定
+	cmdList_->SetPipelineState(pipelineSet.pipelineState.Get());
+	// ルートシグネチャの設定
+	cmdList_->SetGraphicsRootSignature(pipelineSet.rootSignature.Get());
+	// 定数バッファビューをセット
+	cmdList_->SetGraphicsRootConstantBufferView(0, constBuffB0->GetGPUVirtualAddress());
+
+	// モデル描画
+	model->Draw(cmdList_.Get(), 1);
 }

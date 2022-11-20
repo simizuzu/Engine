@@ -34,6 +34,8 @@ public: // ÉÅÉìÉoä÷êî
 	/// </summary>
 	static void CreateSpritePipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode blend,ID3D12Device* device, std::array<RootsigSetPip,6>&pipeline);
 
+	static void CreateModelPipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode blend, ID3D12Device* device);
+
 public:
 	void SetBlendMode(int blendMode) { };
 

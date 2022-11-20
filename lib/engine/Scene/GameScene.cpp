@@ -2,7 +2,10 @@
 
 GameScene::GameScene(){}
 
-GameScene::~GameScene(){}
+GameScene::~GameScene()
+{
+	delete object3d_;
+}
 
 void GameScene::Initialize()
 {
@@ -11,8 +14,8 @@ void GameScene::Initialize()
 	sprite_->Initialize();
 	
 	// 3Dオブジェクト生成
-	object3d_ = Object3d::Create();
-	object3d_->Update();
+	/*object3d_ = Object3d::Create();
+	object3d_->Update();*/
 }
 
 void GameScene::Update()
@@ -26,10 +29,10 @@ void GameScene::Draw()
 #pragma endregion
 
 #pragma region 3Dオブジェクト描画
-	Object3d::PreDraw();
+	/*Object3d::PreDraw();
 
 
-	Object3d::PostDraw();
+	Object3d::PostDraw();*/
 #pragma endregion
 
 #pragma region 前景スプライト描画

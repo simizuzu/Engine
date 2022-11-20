@@ -8,8 +8,7 @@
 #include "Sprite.h"
 #include "TextureManager.h"
 #include "GameScene.h"
-#include "Shader.h"
-#include "Pipeline.h"
+#include "Object3d.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
@@ -42,8 +41,11 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 	textureManager_ = TextureManager::GetInstance();
 	textureManager_->Initialize(dxCommon_);
 
-	// スプライトの初期化
+	// スプライト静的初期化
 	Sprite::StaticInitialize();
+
+	// 3Dオブジェクト静的初期化
+	//Object3d::StaticInitialize(dxCommon_->GetDevice(), winApp_->window_width, winApp_->window_height);
 
 	std::unique_ptr<GameScene> gameScene = std::make_unique<GameScene>();
 	gameScene->Initialize();

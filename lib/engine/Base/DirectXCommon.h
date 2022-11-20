@@ -99,7 +99,6 @@ public:
 	template<typename T>
 	void CreateConstBuff(T*& buff, Microsoft::WRL::ComPtr<ID3D12Resource>& constBuff)
 	{
-
 		// 頂点バッファの設定
 		D3D12_HEAP_PROPERTIES heapProp{}; // ヒープ設定
 		heapProp.Type = D3D12_HEAP_TYPE_UPLOAD; // GPUへの転送用

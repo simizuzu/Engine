@@ -113,7 +113,7 @@ void Model::LoadTexture(const std::string& directoryPath, const std::string& fil
 	textureData = TextureManager::GetInstance()->LoadTexture(filepath);
 }
 
-void Model::Draw(ID3D12GraphicsCommandList* cmdList, UINT rootParamIndexMaterial)
+void Model::Draw(ID3D12GraphicsCommandList* cmdList)
 {
 	// 頂点バッファビューの設定
 	cmdList->IASetVertexBuffers(0, 1, &vbView);
@@ -121,16 +121,16 @@ void Model::Draw(ID3D12GraphicsCommandList* cmdList, UINT rootParamIndexMaterial
 	cmdList->IASetIndexBuffer(&ibView);
 
 	// 定数バッファビューをセット（マテリアル）
-	cmdList->SetGraphicsRootConstantBufferView(rootParamIndexMaterial, constBuffB1->GetGPUVirtualAddress());
+	cmdList->SetGraphicsRootConstantBufferView(2, constBuffB1->GetGPUVirtualAddress());
 
 	// デスクリプタヒープの配列
-	ID3D12DescriptorHeap* ppHeaps[] = { descHeap.Get() };
+	ID3D12DescriptorHeap* ppHeaps[] = { textureData.srvHeap.Get()};
 	cmdList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
 
 	if (material.textureFilename.size() > 0)
 	{
 		// シェーダリソースビューをセット
-		cmdList->SetGraphicsRootDescriptorTable(2, gpuDescHandleSRV);
+		cmdList->SetGraphicsRootDescriptorTable(1, textureData.srvGpuHandle);
 	}
 	// 描画コマンド
 	cmdList->DrawIndexedInstanced((UINT)indices.size(), 1, 0, 0, 0);

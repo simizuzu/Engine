@@ -230,25 +230,32 @@ void Pipeline::CreateObjPipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode b
 	pipelineDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB; // 0~255指定のRGBA
 	pipelineDesc.SampleDesc.Count = 1; // 1ピクセルにつき1回サンプリング
 
-	// ルートパラメータの設定
-	D3D12_ROOT_PARAMETER rootParams[2] = {};
-	// ルートパラメータの設定
-	rootParams[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;	// 定数バッファビュー
-	rootParams[0].Descriptor.ShaderRegister = 0;					// 定数バッファ番号
-	rootParams[0].Descriptor.RegisterSpace = 0;						// デフォルト値
-	rootParams[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;	// 全てのシェーダから見える
-
 	// デスクリプタレンジの設定
 	D3D12_DESCRIPTOR_RANGE descritorRange{};
 	descritorRange.NumDescriptors = 1;
 	descritorRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	descritorRange.BaseShaderRegister = 0;
 	descritorRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	// ルートパラメータの設定
+	D3D12_ROOT_PARAMETER rootParams[3] = {};
+	// 定数バッファ0番
+	rootParams[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;	// 定数バッファビュー
+	rootParams[0].Descriptor.ShaderRegister = 0;					// 定数バッファ番号
+	rootParams[0].Descriptor.RegisterSpace = 0;						// デフォルト値
+	rootParams[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;	// 全てのシェーダから見える
+
 	// テクスチャレジスタ0番
 	rootParams[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 	rootParams[1].DescriptorTable.pDescriptorRanges = &descritorRange;
 	rootParams[1].DescriptorTable.NumDescriptorRanges = 1;
 	rootParams[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+
+	//定数バッファ1番
+	rootParams[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;	//種類
+	rootParams[2].Descriptor.ShaderRegister = 1;					//デスクリプタレンジ
+	rootParams[2].Descriptor.RegisterSpace = 0;						//デスクリプタレンジ数
+	rootParams[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;	//すべてのシェーダから見えるバッファE
 
 	// テクスチャサンプラーの設定
 	D3D12_STATIC_SAMPLER_DESC sampleDesc{};

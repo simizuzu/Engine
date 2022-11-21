@@ -78,7 +78,7 @@ public:
 	/// </summary>
 	/// <param name="cmdList">コマンドリスト</param>
 	/// <param name="rootParamIndexMaterial">マテリアル用ルートパラメータ番号</param>
-	void Draw(ID3D12GraphicsCommandList* cmdList, UINT rootParamIndexMaterial);
+	void Draw(ID3D12GraphicsCommandList* cmdList);
 
 	static void SetDevice(ID3D12Device* device) { Model::device = device; };
 

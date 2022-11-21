@@ -70,7 +70,7 @@ public: // ƒƒ“ƒoŠÖ”
 	/// <summary>
 	/// XV
 	/// </summary>
-	void Update();
+	void Update(Camera* camera);
 
 	/// <summary>
 	/// •`‰æ

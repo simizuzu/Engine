@@ -106,7 +106,7 @@ bool Object3d::Initialize()
 	return true;
 }
 
-void Object3d::Update()
+void Object3d::Update(Camera* camera)
 {
 	HRESULT result;
 	Mathematics::Matrix4 matScale, matRot, matTrans;
@@ -149,7 +149,7 @@ void Object3d::Draw()
 	assert(Object3d::cmdList_);
 
 	// モデルの割り当てがなければ描画しない
-	if (model = nullptr)
+	if (model == nullptr)
 	{
 		return;
 	}
@@ -158,9 +158,11 @@ void Object3d::Draw()
 	cmdList_->SetPipelineState(pip.pipelineState.Get());
 	// ルートシグネチャの設定
 	cmdList_->SetGraphicsRootSignature(pip.rootSignature.Get());
+	// プリミティブ形状の設定コマンド
+	cmdList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
 	// 定数バッファビューをセット
 	cmdList_->SetGraphicsRootConstantBufferView(0, constBuffB0->GetGPUVirtualAddress());
 
 	// モデル描画
-	model->Draw(cmdList_.Get(), 1);
+	model->Draw(cmdList_.Get());
 }

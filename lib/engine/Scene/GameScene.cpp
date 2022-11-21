@@ -38,7 +38,7 @@ void GameScene::Update()
 		eye.z -= 0.01f;
 		camera_->SetEye(eye);
 	}
-	object3d_->Update();
+	object3d_->Update(camera_.get());
 	camera_->Update();
 }
 

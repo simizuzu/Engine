@@ -104,8 +104,16 @@ private: // 静的メンバ変数
 	static Material material;
 
 private: // メンバ変数
+	// リソース設定
+	D3D12_RESOURCE_DESC resDesc{};
+	// ヒープ設定
+	D3D12_HEAP_PROPERTIES heapProp{};
 	// 定数バッファ（マテリアル）
 	Microsoft::WRL::ComPtr<ID3D12Resource> constBuffB1;
+	// 頂点バッファ
+	Microsoft::WRL::ComPtr<ID3D12Resource> vertBuff;
+	//インデックスバッファの生成
+	Microsoft::WRL::ComPtr<ID3D12Resource>indexBuff;
 	// デスクリプタサイズ
 	UINT descriptorHandleIncrementSize;
 	// テクスチャデータ

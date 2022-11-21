@@ -40,8 +40,6 @@ public: // メンバ関数
 	static void CreateObjPipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode blend, ID3D12Device* device, RootsigSetPip& pipeline);
 
 private: // メンバ変数
-	// 頂点バッファ
-	ComPtr<ID3D12Resource> vertBuff;
 
 	// クラス呼び出し
 	DirectXCommon* dxCommon_ = nullptr;

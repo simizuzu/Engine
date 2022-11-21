@@ -235,6 +235,9 @@ void Model::LoadFromOBJInternal(const std::string& modelname)
 	}
 	// ファイルを閉じる
 	file.close();
+
+	CreateVBSize();
+	CreateIBSize();
 }
 
 void Model::InitializeDescriptorHeap()
@@ -289,4 +292,91 @@ void Model::CreateBuffers()
 		constMap1->alpha = material.alpha;
 		constBuffB1->Unmap(0, nullptr);
 	}
+}
+
+void Model::CreateVBSize()
+{
+	HRESULT result;
+	//頂点データ全体のサイズ
+	UINT sizeVB = static_cast<UINT>(sizeof(vertices[0]) * vertices.size());
+	
+	resDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+	resDesc.Width = sizeVB; // 頂点データ全体のサイズ
+	resDesc.Height = 1;
+	resDesc.DepthOrArraySize = 1;
+	resDesc.MipLevels = 1;
+	resDesc.SampleDesc.Count = 1;
+	resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+	// 頂点バッファの設定
+	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD; // GPUへの転送用
+
+	// 頂点バッファの生成
+	result = device->CreateCommittedResource(
+		&heapProp, // ヒープ設定
+		D3D12_HEAP_FLAG_NONE,
+		&resDesc, // リソース設定
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr,
+		IID_PPV_ARGS(&vertBuff));
+	assert(SUCCEEDED(result));
+
+	// GPU上のバッファに対応した仮想メモリ(メインメモリ上)を取得
+	VertexPosNormalUv* vertMap = nullptr;
+	result = vertBuff->Map(0, nullptr, (void**)&vertMap);
+	assert(SUCCEEDED(result));
+	// 全頂点に対して
+	for (int i = 0; i < vertices.size(); i++) {
+		vertMap[i] = vertices[i]; // 座標をコピー
+	}
+	// 繋がりを解除
+	vertBuff->Unmap(0, nullptr);
+
+	// 頂点バッファビューの作成
+	// GPU仮想アドレス
+	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
+	// 頂点バッファのサイズ
+	vbView.SizeInBytes = sizeVB;
+	// 頂点1つ分のデータサイズ
+	vbView.StrideInBytes = sizeof(vertices[0]);
+}
+
+void Model::CreateIBSize()
+{
+	HRESULT result;
+	//インデックスデータ全体のサイズ
+	UINT sizeIB = static_cast<UINT>(sizeof(indices[0]) * indices.size());
+
+	//リソース設定
+	resDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+	resDesc.Width = sizeIB;//インデックス情報が入る分のサイズ
+	resDesc.Height = 1;
+	resDesc.DepthOrArraySize = 1;
+	resDesc.MipLevels = 1;
+	resDesc.SampleDesc.Count = 1;
+	resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+	//インデックスバッファの生成
+	result = device->CreateCommittedResource(
+		&heapProp,//ヒープ設定
+		D3D12_HEAP_FLAG_NONE,
+		&resDesc,//リソース設定
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr,
+		IID_PPV_ARGS(&indexBuff));
+
+	//インデックスバッファをマッピング
+	uint16_t* indexMap = nullptr;
+	result = indexBuff->Map(0, nullptr, (void**)&indexMap);
+	//全インデックスに対して
+	for (int i = 0; i < indices.size(); i++) {
+		indexMap[i] = indices[i];//インデックスをコピー
+	}
+	//マッピング解除
+	indexBuff->Unmap(0, nullptr);
+
+	//インデックスバッファビューの作成
+	ibView.BufferLocation = indexBuff->GetGPUVirtualAddress();
+	ibView.Format = DXGI_FORMAT_R16_UINT;
+	ibView.SizeInBytes = sizeIB;
 }

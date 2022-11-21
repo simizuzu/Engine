@@ -52,6 +52,6 @@ void GameScene::Draw()
 	object3d_->Draw();
 
 #pragma region 前景スプライト描画
-	sprite_->DrawSprite(tex, { 100.0f,100.0f });
+	sprite_->DrawSprite(tex, { 10.0f,10.0f });
 #pragma endregion
 }

@@ -45,7 +45,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 	Sprite::StaticInitialize();
 
 	// 3Dオブジェクト静的初期化
-	//Object3d::StaticInitialize(dxCommon_->GetDevice(), winApp_->window_width, winApp_->window_height);
+	Object3d::StaticInitialize(dxCommon_->GetDevice(), winApp_->window_width, winApp_->window_height);
 
 	std::unique_ptr<GameScene> gameScene = std::make_unique<GameScene>();
 	gameScene->Initialize();
@@ -84,8 +84,6 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 #pragma region 基盤システムの終了
 	// テクスチャマネージャ解放
 	textureManager_->Delete();
-	// シェーダとパイプラインの解放
-	sprite_->Delete();
 	// 入力解放
 	delete input_;
 	// DirectX解放

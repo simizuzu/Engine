@@ -21,11 +21,11 @@ class Camera
 private:
 #pragma region ビュー行列設定
 	// 視点座標
-	Mathematics::Vector3 eye_ = { 0.0f, 0.0f, -100.0f };
+	Mathematics::Vector3 eye_;
 	// 注視点座標
-	Mathematics::Vector3 target_ = { 0, 0, 0 };
+	Mathematics::Vector3 target_;
 	// 上方向ベクトル
-	Mathematics::Vector3 up_ = { 0, 1, 0 };
+	Mathematics::Vector3 up_;
 #pragma endregion
 
 #pragma region 射影行列設定

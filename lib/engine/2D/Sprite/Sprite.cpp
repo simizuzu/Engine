@@ -17,15 +17,11 @@ ComPtr<ID3D12GraphicsCommandList> Sprite::commandList_;
 ComPtr<ID3D12RootSignature> Sprite::rootSignature_;
 std::array<RootsigSetPip, 6> Sprite::pipelineState;
 Mathematics::Matrix4 Sprite::matProjection_;
-Shader* Sprite::shader_ = nullptr;
-Pipeline* Sprite::pipeline_ = nullptr;
 
 void Sprite::StaticInitialize()
 {
 	device_ = DirectXCommon::GetInstance()->GetDevice();
 	commandList_ = DirectXCommon::GetInstance()->GetCommandList();
-	shader_ = new Shader();
-	pipeline_ = new Pipeline();
 
 	ComPtr<ID3DBlob> vsBlob;
 	ComPtr<ID3DBlob> psBlob;
@@ -40,11 +36,11 @@ void Sprite::StaticInitialize()
 	MyMathUtility::MakeOrthogonalL(0.0f, width, height, 0.0f, 0.0f, 1.0f, matProjection_);
 
 	// シェーダーの読み込み
-	shader_->CreateSpriteShade(vsBlob, psBlob);
+	Shader::CreateSpriteShade(vsBlob, psBlob);
 
 	for (int i = 0; i < pipelineState.size(); i++)
 	{
-		pipeline_->CreateSpritePipeline(vsBlob.Get(), psBlob.Get(), (BlendMode)i, device_.Get(), pipelineState);
+		Pipeline::CreateSpritePipeline(vsBlob.Get(), psBlob.Get(), (BlendMode)i, device_.Get(), pipelineState);
 	}
 }
 
@@ -292,10 +288,4 @@ void Sprite::SetBlendMode(BlendMode mode)
 
 		break;
 	}
-}
-
-void Sprite::Delete()
-{
-	delete shader_;
-	delete pipeline_;
 }

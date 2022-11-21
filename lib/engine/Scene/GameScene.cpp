@@ -17,7 +17,7 @@ void GameScene::Initialize()
 	sprite_->Initialize();
 	
 	model_ = std::make_unique<Model>();
-	model_.reset(Model::LoadFromObj("Resources/obj/skydome"));
+	model_.reset(Model::LoadFromObj("skydome"));
 
 #pragma region 3Dオブジェクト生成
 	object3d_ = Object3d::Create();

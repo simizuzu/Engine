@@ -11,7 +11,8 @@ Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> Object3d::cmdList_;
 Mathematics::Vector3 Object3d::eye = { 0.0f,3.0f,-10.0f };
 Mathematics::Vector3 Object3d::target = { 0.0f,0.0f,0.0f };
 Mathematics::Vector3 Object3d::up = { 0.0f,1.0f,0.0f };
-std::unique_ptr<Pipeline> Object3d::pipeline;
+std::unique_ptr<Pipeline> Object3d::pipeline = std::make_unique<Pipeline>();
+RootsigSetPip Object3d::pip;
 Camera* Object3d::camera = nullptr;
 
 void Object3d::StaticInitialize(ID3D12Device* device, int width, int height)
@@ -31,12 +32,12 @@ void Object3d::StaticInitialize(ID3D12Device* device, int width, int height)
 
 void Object3d::CreateGraphicsPipeline()
 {
-	pipeline = std::make_unique<Pipeline>();
-
 	ComPtr<ID3DBlob> vsBlob; // 頂点シェーダオブジェクト
 	ComPtr<ID3DBlob> psBlob;	// ピクセルシェーダオブジェクト
 
-	Pipeline::CreateObjPipeline(vsBlob.Get(), psBlob.Get(), BlendMode::None, device_.Get());
+	Shader::CreateObjShade(vsBlob, psBlob);
+
+	Pipeline::CreateObjPipeline(vsBlob.Get(), psBlob.Get(), BlendMode::None, device_.Get(),pip);
 }
 
 Object3d* Object3d::Create()
@@ -73,7 +74,7 @@ void Object3d::UpdateViewMatrix()
 
 void Object3d::InitializeCamera()
 {
-	camera->Initialize();
+	//camera->Initialize();
 }
 
 bool Object3d::Initialize()
@@ -141,7 +142,8 @@ void Object3d::Update()
 
 void Object3d::Draw()
 {
-	RootsigSetPip pipelineSet;
+	cmdList_ = DirectXCommon::GetInstance()->GetCommandList();
+
 	// nullチェック
 	assert(device_);
 	assert(Object3d::cmdList_);
@@ -153,9 +155,9 @@ void Object3d::Draw()
 	}
 
 	// パイプラインステートの設定
-	cmdList_->SetPipelineState(pipelineSet.pipelineState.Get());
+	cmdList_->SetPipelineState(pip.pipelineState.Get());
 	// ルートシグネチャの設定
-	cmdList_->SetGraphicsRootSignature(pipelineSet.rootSignature.Get());
+	cmdList_->SetGraphicsRootSignature(pip.rootSignature.Get());
 	// 定数バッファビューをセット
 	cmdList_->SetGraphicsRootConstantBufferView(0, constBuffB0->GetGPUVirtualAddress());
 

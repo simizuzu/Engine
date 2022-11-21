@@ -37,7 +37,7 @@ public: // メンバ関数
 	/// <summary>
 	/// パイプライン呼び出し用関数(3Dオブジェクト)
 	/// </summary>
-	static void CreateObjPipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode blend, ID3D12Device* device);
+	static void CreateObjPipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode blend, ID3D12Device* device, RootsigSetPip& pipeline);
 
 private: // メンバ変数
 	// 頂点バッファ

@@ -122,11 +122,6 @@ public: // メンバ関数
 		TextureData& textureData, Mathematics::Vector2 position, Mathematics::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f,
 		Mathematics::Vector2 anchorpoint = { 0.0f,0.0f }, bool flipX = false, bool flipY = false);
 
-	/// <summary>
-	/// シェーダーとパイプラインのDelete関数
-	/// </summary>
-	void Delete();
-
 private:
 	/// <summary>
 	/// 頂点バッファ関連の初期化
@@ -194,8 +189,6 @@ public: // setter,getter
 private: // クラス呼び出し
 	TextureManager* textureManager_ = nullptr;
 	DirectXCommon* dxCommon_ = nullptr;
-	static Shader* shader_;
-	static Pipeline* pipeline_;
 	static WinApp* winApp_;
 
 	//TextureData textureData;

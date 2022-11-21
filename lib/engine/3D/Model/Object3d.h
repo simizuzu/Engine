@@ -5,6 +5,7 @@
 #include "DirectXCommon.h"
 #include "Model.h"
 #include "Pipeline.h"
+#include "Shader.h"
 #include "WorldTransform.h"
 #include "Camera.h"
 
@@ -47,10 +48,8 @@ private:
 	static Microsoft::WRL::ComPtr<ID3D12Device> device_;
 	// コマンドリスト
 	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cmdList_;
-	// ビュー行列
-	//static Mathematics::Matrix4 matView;
-	// 射影行列
-	//static Mathematics::Matrix4 matProjection;
+	// パイプラインステート
+	static RootsigSetPip pip;
 	// 視点座標
 	static Mathematics::Vector3 eye;
 	// 注視点座標
@@ -59,6 +58,8 @@ private:
 	static Mathematics::Vector3 up;
 	// パイプライン
 	static std::unique_ptr<Pipeline> pipeline;
+	// カメラ
+	static Camera* camera;
 
 public: // メンバ関数
 	/// <summary>
@@ -96,8 +97,6 @@ private: // メンバ変数
 	Object3d* parent = nullptr;
 	// モデル
 	Model* model = nullptr;
-	// カメラ
-	static Camera* camera;
 	// ワールド行列
 	WorldTransform* worldTransform_ = nullptr;
 };

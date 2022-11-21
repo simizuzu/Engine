@@ -125,5 +125,15 @@ private:
 	/// 各種バッファ生成
 	/// </summary>
 	void CreateBuffers();
+
+	/// <summary>
+	/// 頂点データ全体のサイズ
+	/// </summary>
+	void CreateVBSize();
+
+	/// <summary>
+	/// インデックスデータ全体のサイズ
+	/// </summary>
+	void CreateIBSize();
 };
 

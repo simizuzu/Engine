@@ -9,17 +9,36 @@ GameScene::~GameScene()
 
 void GameScene::Initialize()
 {
+	camera_ = std::make_unique<Camera>();
+	camera_->Initialize();
+
 	tex = TextureManager::Load("Resources/Texture/enemy.png");
 	sprite_ = std::make_unique<Sprite>();
 	sprite_->Initialize();
 	
-	// 3Dオブジェクト生成
-	/*object3d_ = Object3d::Create();
-	object3d_->Update();*/
+	model_ = std::make_unique<Model>();
+	model_.reset(Model::LoadFromObj("Resources/obj/skydome"));
+
+#pragma region 3Dオブジェクト生成
+	object3d_ = Object3d::Create();
+
+#pragma endregion
+
+#pragma region 3Dオブジェクトを3Dモデルをひも付け
+	// オブジェクトにモデルをひも付ける
+	object3d_->SetModel(model_.get());
+
+#pragma endregion
 }
 
 void GameScene::Update()
 {
+	{
+		Mathematics::Vector3 eye = camera_->GetEye();
+		eye.z -= 0.01f;
+		camera_->SetEye(eye);
+	}
+	camera_->Update();
 }
 
 void GameScene::Draw()
@@ -29,11 +48,7 @@ void GameScene::Draw()
 #pragma endregion
 
 #pragma region 3Dオブジェクト描画
-	/*Object3d::PreDraw();
-
-
-	Object3d::PostDraw();*/
-#pragma endregion
+	object3d_->Draw();
 
 #pragma region 前景スプライト描画
 	sprite_->DrawSprite(tex, { 100.0f,100.0f });

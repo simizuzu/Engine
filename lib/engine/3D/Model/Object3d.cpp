@@ -8,12 +8,11 @@
 /// </summary>
 Microsoft::WRL::ComPtr<ID3D12Device> Object3d::device_;
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> Object3d::cmdList_;
-Mathematics::Matrix4 Object3d::matView{};
-Mathematics::Matrix4 Object3d::matProjection{};
 Mathematics::Vector3 Object3d::eye = { 0.0f,3.0f,-10.0f };
 Mathematics::Vector3 Object3d::target = { 0.0f,0.0f,0.0f };
 Mathematics::Vector3 Object3d::up = { 0.0f,1.0f,0.0f };
-Pipeline* Object3d::pipeline = nullptr;
+std::unique_ptr<Pipeline> Object3d::pipeline;
+Camera* Object3d::camera = nullptr;
 
 void Object3d::StaticInitialize(ID3D12Device* device, int width, int height)
 {
@@ -26,14 +25,18 @@ void Object3d::StaticInitialize(ID3D12Device* device, int width, int height)
 	CreateGraphicsPipeline();
 
 	Model::SetDevice(device);
+
+	InitializeCamera();
 }
 
 void Object3d::CreateGraphicsPipeline()
 {
+	pipeline = std::make_unique<Pipeline>();
+
 	ComPtr<ID3DBlob> vsBlob; // 頂点シェーダオブジェクト
 	ComPtr<ID3DBlob> psBlob;	// ピクセルシェーダオブジェクト
 
-	pipeline->CreateObjPipeline(vsBlob.Get(), psBlob.Get(), BlendMode::None, device_.Get());
+	Pipeline::CreateObjPipeline(vsBlob.Get(), psBlob.Get(), BlendMode::None, device_.Get());
 }
 
 Object3d* Object3d::Create()
@@ -58,7 +61,19 @@ Object3d* Object3d::Create()
 void Object3d::UpdateViewMatrix()
 {
 	// 視点座標
+	Mathematics::Vector3 eyeProjection = eye;
+	// 注視点座標
+	Mathematics::Vector3 targetPosition = target;
+	// 上方向
+	Mathematics::Vector3 upVector = up;
 
+	// カメラZ軸（視線方向）
+	Mathematics::Vector3 cameraAxisZ;
+}
+
+void Object3d::InitializeCamera()
+{
+	camera->Initialize();
 }
 
 bool Object3d::Initialize()
@@ -106,7 +121,6 @@ void Object3d::Update()
 	matWorld *= matScale;
 	matWorld *= matRot;
 	matWorld *= matTrans;
-	matWorld *= matView;
 
 	// 親オブジェクトがあれば
 	if (parent != nullptr)
@@ -114,10 +128,14 @@ void Object3d::Update()
 		matWorld *= parent->matWorld;
 	}
 
+	const Mathematics::Matrix4 matView = camera->GetMatView();
+	const Mathematics::Matrix4 matProjection = camera->GetMatProjection();
+
 	// 定数バッファへデータ転送
 	ConstBufferDataB0* constMap = nullptr;
 	result = constBuffB0->Map(0, nullptr, (void**)&constMap);
-	constMap->mat = matWorld * matProjection;
+	constMap->color = Mathematics::Vector4 (1.0f,1.0f,1.0f,1.0f);
+	constMap->mat = matWorld* matView * matProjection;
 	constBuffB0->Unmap(0, nullptr);
 }
 

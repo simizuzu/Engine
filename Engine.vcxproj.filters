@@ -76,6 +76,9 @@
     <Filter Include="ヘッダー ファイル\3D\Model">
       <UniqueIdentifier>{e989c97c-9f95-4582-b997-08cd55d5f294}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Users">
+      <UniqueIdentifier>{a952b3f1-648d-4889-b406-c6c1f7b974d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

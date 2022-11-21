@@ -32,7 +32,7 @@ private:
 	// カメラ画角
 	float fovAngleY = 0.0f;
 	// 手前
-	float nearZ_ = 0.0f;
+	float nearZ_ = 0.1f;
 	// 奥行き
 	float farZ_ = 1000.0f;
 	// アスペクト比(画面横幅/画面縦幅)
@@ -43,7 +43,9 @@ private:
 	// ビュー逆行列
 	Mathematics::Matrix4 matViewInverse_;
 	// 射影行列
-	Mathematics::Matrix4 matProjection_;
+	Mathematics::Matrix4 matProjection_;;
+	// カメラ距離
+	float distance = 50.0f;
 
 public:
 	/// <summary>
@@ -72,17 +74,17 @@ public:
 	void TransferMatrix();
 
 public:
-	const Mathematics::Matrix4& GetMatView();
-	const Mathematics::Matrix4& GetMatViewInverse();
-	const Mathematics::Matrix4& GetMatProjectio();
+	const Mathematics::Matrix4& GetMatView() { return matView_; }
+	const Mathematics::Matrix4& GetMatViewInverse() { return matViewInverse_; }
+	const Mathematics::Matrix4& GetMatProjection() { return matProjection_; }
 
-	const Mathematics::Vector3& GetEye();
-	const Mathematics::Vector3& GetTarget();
-	const Mathematics::Vector3& GetUp();
+	const Mathematics::Vector3& GetEye() { return eye_; }
+	const Mathematics::Vector3& GetTarget() { return target_; }
+	const Mathematics::Vector3& GetUp() { return up_; }
 
-	void SetEye(const Mathematics::Vector3& eye);
-	void SetTarget(const Mathematics::Vector3& target);
-	void SetUp(const Mathematics::Vector3& up);
-	void SetFarZ(const float& farZ);
-	void SetNearZ(const float& nearZ);
+	void SetEye(const Mathematics::Vector3& eye) { eye_ = eye; }
+	void SetTarget(const Mathematics::Vector3& target) { target_ = target; }
+	void SetUp(const Mathematics::Vector3& up) { up_ = up; }
+	void SetFarZ(const float& farZ) { farZ_ = farZ; }
+	void SetNearZ(const float& nearZ) { nearZ_ = nearZ; }
 };

@@ -5,6 +5,7 @@
 #include "Camera.h"
 #include "Sprite.h"
 #include "Object3d.h"
+#include "Model.h"
 
 class GameScene
 {
@@ -26,13 +27,13 @@ public: // ƒƒ“ƒoŠÖ”
 public: // ƒƒ“ƒoŠÖ”
 
 private: // ƒƒ“ƒo•Ï”
-	Camera* viewProjection_ = nullptr;
-
 	Input* input_ = nullptr;
 	DirectXCommon* dxCommon_ = nullptr;
 	Object3d* object3d_ = nullptr;
+	std::unique_ptr<Camera> camera_;
 
 	std::unique_ptr<Sprite> sprite_;
 	TextureData tex;
+	std::unique_ptr<Model> model_;
 };
 

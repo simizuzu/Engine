@@ -1,6 +1,5 @@
 #include "Model.h"
 
-#include <Windows.h>
 #include <DirectXTex.h>
 #include <fstream>
 #include <sstream>
@@ -9,12 +8,24 @@
 using namespace DirectX;
 using namespace Mathematics;
 
-Microsoft::WRL::ComPtr<ID3D12Device> Model::device = nullptr;
+/// <summary>
+/// 静的メンバ変数の実態
+/// </summary>
+Microsoft::WRL::ComPtr<ID3D12Device> Model::device;
+Microsoft::WRL::ComPtr<ID3D12Resource> Model::texBuff;
+Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> Model::descHeap;
+D3D12_VERTEX_BUFFER_VIEW Model::vbView{};
+D3D12_INDEX_BUFFER_VIEW Model::ibView{};
+std::vector<VertexPosNormalUv> Model::vertices;
+std::vector<unsigned short> Model::indices;
+Material Model::material;
 
 Model* Model::LoadFromObj(const std::string& modelname)
 {
 	// 新たなModel型のインスタンスをnewする
 	Model* model_ = new Model();
+	// デバイスを代入
+	device = DirectXCommon::GetInstance()->GetDevice();
 	// デスクリプタヒープの生成
 	model_->InitializeDescriptorHeap();
 	// 読み込み
@@ -130,9 +141,9 @@ void Model::LoadFromOBJInternal(const std::string& modelname)
 	// ファイルストリーム
 	std::ifstream file;
 
-	const std::string filename = modelname + ".obj";	// "triangle_mat.ogj"
-	const std::string directoryPath = "Resources/" + modelname + "/";	// "Resouces/triangle_mat/"
-	file.open(directoryPath + filename);	// "Resouces/triangle_mat/triangle_mat.obj"
+	const std::string filename = modelname + ".obj";	// "modelname.obj"
+	const std::string directoryPath = "Resources/" + modelname + "/";	// "Resouces/modelname/"
+	file.open(directoryPath + filename);	// "Resources/modelname/modelname.obj"
 
 	// ファイルオープン失敗をチェック
 	if (file.fail())

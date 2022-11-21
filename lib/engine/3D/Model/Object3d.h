@@ -1,10 +1,12 @@
 #pragma once
 #include <d3d12.h>
+#include <memory>
 
 #include "DirectXCommon.h"
 #include "Model.h"
 #include "Pipeline.h"
 #include "WorldTransform.h"
+#include "Camera.h"
 
 #include "Matrix4.h"
 
@@ -18,6 +20,7 @@ public:
 	struct ConstBufferDataB0
 	{
 		Mathematics::Matrix4 mat;	// 3D変換行列
+		Mathematics::Vector4 color;	// 色
 	};
 
 public: // 静的メンバ関数
@@ -28,17 +31,26 @@ public: // 静的メンバ関数
 	static Object3d* Create();
 
 private:
-	// 静的メンバ関数(非公開)
+	/// <summary>
+	/// ビュー行列を更新
+	/// </summary>
 	static void UpdateViewMatrix();
+
+	/// <summary>
+	/// カメラ初期化
+	/// </summary>
+	/// <param name="width">画面縦幅</param>
+	/// <param name="hegiht">画面横幅</param>
+	static void InitializeCamera();
 
 	// デバイス
 	static Microsoft::WRL::ComPtr<ID3D12Device> device_;
 	// コマンドリスト
 	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cmdList_;
 	// ビュー行列
-	static Mathematics::Matrix4 matView;
+	//static Mathematics::Matrix4 matView;
 	// 射影行列
-	static Mathematics::Matrix4 matProjection;
+	//static Mathematics::Matrix4 matProjection;
 	// 視点座標
 	static Mathematics::Vector3 eye;
 	// 注視点座標
@@ -46,7 +58,7 @@ private:
 	// 上方向ベクトル
 	static Mathematics::Vector3 up;
 	// パイプライン
-	static Pipeline* pipeline;
+	static std::unique_ptr<Pipeline> pipeline;
 
 public: // メンバ関数
 	/// <summary>
@@ -84,6 +96,8 @@ private: // メンバ変数
 	Object3d* parent = nullptr;
 	// モデル
 	Model* model = nullptr;
+	// カメラ
+	static Camera* camera;
 	// ワールド行列
 	WorldTransform* worldTransform_ = nullptr;
 };

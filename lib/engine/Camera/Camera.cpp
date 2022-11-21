@@ -9,6 +9,13 @@ ConstBufferDataViewProjection ConstMap;
 
 void Camera::Initialize()
 {
+	eye_ = { 0,0,-distance };//視点座標
+	target_ = { 0,0,0 };//注視点座標
+	up_ = { 0,1,0 };//上方向ベクトル
+
+	nearZ_ = 0.1f;
+	farZ_ = 1000.0f;
+
 	// アスペクト比を計算(画面横幅/画面縦幅)
 	aspect = 
 		static_cast<float>(WinApp::GetInstance()->window_width) /
@@ -80,60 +87,3 @@ void Camera::TransferMatrix()
 	ConstMap.projection = matProjection_;
 	ConstMap.cameraPos = eye_;
 }
-
-#pragma region getter setter
-const Mathematics::Matrix4& Camera::GetMatView()
-{
-	return matView_;
-}
-
-const Mathematics::Matrix4& Camera::GetMatViewInverse()
-{
-	return matViewInverse_;
-}
-
-const Mathematics::Matrix4& Camera::GetMatProjectio()
-{
-	return matProjection_;
-}
-
-const Mathematics::Vector3& Camera::GetEye()
-{
-	return eye_;
-}
-
-const Mathematics::Vector3& Camera::GetTarget()
-{
-	return target_;
-}
-
-const Mathematics::Vector3& Camera::GetUp()
-{
-	return up_;
-}
-
-void Camera::SetEye(const Mathematics::Vector3& eye)
-{
-	eye_ = eye;
-}
-
-void Camera::SetTarget(const Mathematics::Vector3& target)
-{
-	target_ = target;
-}
-
-void Camera::SetUp(const Mathematics::Vector3& up)
-{
-	up_ = up;
-}
-
-void Camera::SetFarZ(const float& farZ)
-{
-	farZ_ = farZ;
-}
-
-void Camera::SetNearZ(const float& nearZ)
-{
-	nearZ_ = nearZ;
-}
-#pragma endregion

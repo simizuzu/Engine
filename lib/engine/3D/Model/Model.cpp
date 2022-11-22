@@ -121,7 +121,7 @@ void Model::Draw(ID3D12GraphicsCommandList* cmdList)
 	cmdList->IASetIndexBuffer(&ibView);
 
 	// 定数バッファビューをセット（マテリアル）
-	cmdList->SetGraphicsRootConstantBufferView(2, constBuffB1->GetGPUVirtualAddress());
+	cmdList->SetGraphicsRootConstantBufferView(0, constBuffB1->GetGPUVirtualAddress());
 
 	// デスクリプタヒープの配列
 	ID3D12DescriptorHeap* ppHeaps[] = { textureData.srvHeap.Get()};

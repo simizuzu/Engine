@@ -30,7 +30,7 @@ private:
 
 #pragma region 射影行列設定
 	// カメラ画角
-	float fovAngleY = 0.0f;
+	float fovAngleY = MyMathUtility::degree2Radius * 45.0f;
 	// 手前
 	float nearZ_ = 0.1f;
 	// 奥行き

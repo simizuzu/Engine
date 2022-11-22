@@ -17,7 +17,7 @@ void GameScene::Initialize()
 	sprite_->Initialize();
 	
 	model_ = std::make_unique<Model>();
-	model_.reset(Model::LoadFromObj("skydome"));
+	model_.reset(Model::LoadFromObj("door"));
 
 #pragma region 3Dオブジェクト生成
 	object3d_ = Object3d::Create();
@@ -35,7 +35,7 @@ void GameScene::Update()
 {
 	{
 		Mathematics::Vector3 eye = camera_->GetEye();
-		eye.z -= 0.01f;
+		eye.z += 1.0f;
 		camera_->SetEye(eye);
 	}
 	object3d_->Update(camera_.get());

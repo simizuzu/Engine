@@ -21,7 +21,6 @@ public:
 	struct ConstBufferDataB0
 	{
 		Mathematics::Matrix4 mat;	// 3D変換行列
-		Mathematics::Vector4 color;	// 色
 	};
 
 public: // 静的メンバ関数
@@ -82,7 +81,7 @@ public: // メンバ関数
 
 private: // メンバ変数
 	// 定数バッファ
-	Microsoft::WRL::ComPtr <ID3D12Resource> constBuffB0;
+	ComPtr <ID3D12Resource> constBuffB0;
 	// 色
 	Mathematics::Vector4 color = { 1.0f,1.0f,1.0f,1.0f };
 	// ローカルスケール

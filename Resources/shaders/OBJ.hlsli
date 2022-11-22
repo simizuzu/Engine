@@ -1,8 +1,16 @@
-cbuffer cbuff0 : register(b0)
+// マテリアル
+cbuffer ConstBufferDataMaterial : register(b0)
 {
-    float4 color; // 色(RGBA)
-    matrix mat; // ３Ｄ変換行列
+	// 色(RGBA)
+    float4 color;
 };
+
+// 3D変換行列
+cbuffer ConstBufferDataTransform : register(b1)
+{
+    matrix mat; // 3D変換行列
+}
+
 
 // 頂点シェーダーからピクセルシェーダーへのやり取りに使用する構造体
 struct VSOutput

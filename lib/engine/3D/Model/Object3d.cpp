@@ -135,7 +135,6 @@ void Object3d::Update(Camera* camera)
 	// 定数バッファへデータ転送
 	ConstBufferDataB0* constMap = nullptr;
 	result = constBuffB0->Map(0, nullptr, (void**)&constMap);
-	constMap->color = Mathematics::Vector4 (1.0f,1.0f,1.0f,1.0f);
 	constMap->mat = matWorld* matView * matProjection;
 	constBuffB0->Unmap(0, nullptr);
 }
@@ -161,7 +160,7 @@ void Object3d::Draw()
 	// プリミティブ形状の設定コマンド
 	cmdList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
 	// 定数バッファビューをセット
-	cmdList_->SetGraphicsRootConstantBufferView(0, constBuffB0->GetGPUVirtualAddress());
+	cmdList_->SetGraphicsRootConstantBufferView(2, constBuffB0->GetGPUVirtualAddress());
 
 	// モデル描画
 	model->Draw(cmdList_.Get());

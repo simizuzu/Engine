@@ -132,7 +132,7 @@
     <ClCompile Include="lib\engine\Scene\GameScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="lib\engine\Audio\Audio.cpp">
+    <ClCompile Include="lib\engine\Audio\AudioManager.cpp">
       <Filter>ソース ファイル\Audio</Filter>
     </ClCompile>
     <ClCompile Include="lib\engine\Camera\Camera.cpp">
@@ -200,7 +200,7 @@
     <ClInclude Include="lib\engine\Scene\GameScene.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="lib\engine\Audio\Audio.h">
+    <ClInclude Include="lib\engine\Audio\AudioManager.h">
       <Filter>ヘッダー ファイル\Audio</Filter>
     </ClInclude>
     <ClInclude Include="lib\engine\Camera\Camera.h">

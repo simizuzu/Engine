@@ -23,9 +23,14 @@ public:
 	bool TriggerPushKey(BYTE keyNum);
 	bool TriggerReleaseKey(BYTE keyNum);
 
+	static Input* GetInstace();
 private:
-
 	BYTE oldkey[256] = {};
 	BYTE key[256] = {};
+
+	Input() = default;
+	~Input() = default;
+	Input(const Input&) = delete;
+	const Input& operator=(const Input&) = delete;
 };
 

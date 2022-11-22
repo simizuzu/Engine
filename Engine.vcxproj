@@ -142,7 +142,7 @@
     <ClCompile Include="lib\engine\3D\Model\Model.cpp" />
     <ClCompile Include="lib\engine\3D\Model\Object3d.cpp" />
     <ClCompile Include="lib\engine\3D\WorldTransform.cpp" />
-    <ClCompile Include="lib\engine\Audio\Audio.cpp" />
+    <ClCompile Include="lib\engine\Audio\AudioManager.cpp" />
     <ClCompile Include="lib\engine\Base\DirectXCommon.cpp" />
     <ClCompile Include="lib\engine\Base\FPS.cpp" />
     <ClCompile Include="lib\engine\Base\Pipeline.cpp" />
@@ -167,7 +167,7 @@
     <ClInclude Include="lib\engine\3D\Model\Model.h" />
     <ClInclude Include="lib\engine\3D\Model\Object3d.h" />
     <ClInclude Include="lib\engine\3D\WorldTransform.h" />
-    <ClInclude Include="lib\engine\Audio\Audio.h" />
+    <ClInclude Include="lib\engine\Audio\AudioManager.h" />
     <ClInclude Include="lib\engine\Base\DirectXCommon.h" />
     <ClInclude Include="lib\engine\Base\FPS.h" />
     <ClInclude Include="lib\engine\Base\Pipeline.h" />

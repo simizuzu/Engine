@@ -20,6 +20,12 @@ void Input::Update()
 	keyboard_->Update();
 }
 
+Input* Input::GetInstace()
+{
+	static Input instance;
+	return &instance;
+}
+
 bool Input::PushKey(BYTE keyNum) { // ‰Ÿ‚µ‚½ó‘Ô
 	return keyboard_->PushKey(keyNum);
 }

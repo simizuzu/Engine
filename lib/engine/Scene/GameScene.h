@@ -6,6 +6,7 @@
 #include "Sprite.h"
 #include "Object3d.h"
 #include "Model.h"
+#include "AudioManager.h"
 
 class GameScene
 {
@@ -35,5 +36,22 @@ private: // メンバ変数
 	std::unique_ptr<Sprite> sprite_;
 	TextureData tex;
 	std::unique_ptr<Model> model_;
+
+	// サウンド
+	uint32_t gameHandle = 0;
+
+	// シーン
+
+	enum Scene {
+		title,
+		appear,
+		game,
+		defeat,
+		gameover,
+		clear
+	};
+
+	//シーン
+	Scene scene = title;
 };
 

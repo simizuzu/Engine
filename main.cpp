@@ -9,6 +9,7 @@
 #include "TextureManager.h"
 #include "GameScene.h"
 #include "Object3d.h"
+#include "AudioManager.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
@@ -33,8 +34,12 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 	fps_ = new FPS();
 	fps_->InitializeFixFps();
 
+	// Audio初期化
+	AudioManager* audioManager = AudioManager::GetInstance();
+	audioManager->Initialize();
+
 	// Input初期化
-	input_ = new Input();
+	input_ = Input::GetInstace();
 	input_->Initialize();
 
 	// スプライト共通部の初期化
@@ -64,6 +69,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 #pragma region 更新
 		// 入力の更新
 		input_->Update();
+		audioManager->Update();
 		// ゲームシーンの毎フレーム処理
 		gameScene->Update();
 #pragma endregion
@@ -84,8 +90,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 #pragma region 基盤システムの終了
 	// テクスチャマネージャ解放
 	textureManager_->Delete();
-	// 入力解放
-	delete input_;
+	audioManager->Destroy();
 	// DirectX解放
 	dxCommon_->Delete();
 	// WindowsAPIの終了処理

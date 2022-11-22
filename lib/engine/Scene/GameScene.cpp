@@ -31,7 +31,7 @@ void GameScene::Initialize()
 #pragma region 3Dオブジェクトを3Dモデルをひも付け
 	// オブジェクトにモデルをひも付ける
 	object3d_->SetModel(model_.get());
-
+	object3d_->SetRotation({ 100.0f,40.0f,20.0f });
 #pragma endregion
 }
 
@@ -52,6 +52,7 @@ void GameScene::Update()
 		{
 			AudioManager::GetInstance()->StopWave(gameHandle);
 		}
+
 	}
 
 
@@ -85,11 +86,8 @@ void GameScene::Draw()
 		break;
 
 	case Scene::game:
-		if (input_->TriggerPushKey(DIK_1))
-		{
-			sprite_->DrawSprite(tex, { 10.0f,10.0f });
-			AudioManager::GetInstance()->StopWave(gameHandle);
-		}
+
+		sprite_->DrawSprite(tex, { 10.0f,10.0f });
 	}
 #pragma endregion
 }

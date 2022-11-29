@@ -36,13 +36,6 @@ private:
 	/// </summary>
 	static void UpdateViewMatrix();
 
-	/// <summary>
-	/// カメラ初期化
-	/// </summary>
-	/// <param name="width">画面縦幅</param>
-	/// <param name="hegiht">画面横幅</param>
-	static void InitializeCamera();
-
 	// デバイス
 	static Microsoft::WRL::ComPtr<ID3D12Device> device_;
 	// コマンドリスト
@@ -57,8 +50,6 @@ private:
 	static Mathematics::Vector3 up;
 	// パイプライン
 	static std::unique_ptr<Pipeline> pipeline;
-	// カメラ
-	static Camera* camera;
 
 public: // メンバ関数
 	/// <summary>

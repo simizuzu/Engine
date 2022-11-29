@@ -13,7 +13,6 @@ Mathematics::Vector3 Object3d::target = { 0.0f,0.0f,0.0f };
 Mathematics::Vector3 Object3d::up = { 0.0f,1.0f,0.0f };
 std::unique_ptr<Pipeline> Object3d::pipeline = std::make_unique<Pipeline>();
 RootsigSetPip Object3d::pip;
-Camera* Object3d::camera = nullptr;
 
 void Object3d::StaticInitialize(ID3D12Device* device, int width, int height)
 {
@@ -26,8 +25,6 @@ void Object3d::StaticInitialize(ID3D12Device* device, int width, int height)
 	CreateGraphicsPipeline();
 
 	Model::SetDevice(device);
-
-	InitializeCamera();
 }
 
 void Object3d::CreateGraphicsPipeline()
@@ -70,11 +67,6 @@ void Object3d::UpdateViewMatrix()
 
 	// ƒJƒƒ‰ZŽ²iŽ‹ü•ûŒüj
 	Mathematics::Vector3 cameraAxisZ;
-}
-
-void Object3d::InitializeCamera()
-{
-	//camera->Initialize();
 }
 
 bool Object3d::Initialize()

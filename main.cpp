@@ -15,47 +15,36 @@
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 #pragma region 基盤システムの初期化
 
-	WinApp* winApp_ = nullptr;
-	DirectXCommon* dxCommon_ = nullptr;
+	WinApp* winApp_ = WinApp::GetInstance();
+	DirectXCommon* dxCommon_ = DirectXCommon::GetInstance();
 	FPS* fps_ = nullptr;
-	Input* input_ = nullptr;
-	TextureManager* textureManager_ = nullptr;
+	Input* input_ = Input::GetInstace();
+	TextureManager* textureManager_ = TextureManager::GetInstance();
+	AudioManager* audioManager = AudioManager::GetInstance();
 	Sprite* sprite_ = nullptr;
 
 	// WindowsAPI初期化
-	winApp_ = WinApp::GetInstance();
 	winApp_->Initialize();
-
 	// DirectX初期化
-	dxCommon_ = DirectXCommon::GetInstance();
 	dxCommon_->Initialize();
-
 	// FPS固定初期化
 	fps_ = new FPS();
 	fps_->InitializeFixFps();
-
 	// Audio初期化
-	AudioManager* audioManager = AudioManager::GetInstance();
 	audioManager->Initialize();
-
 	// Input初期化
-	input_ = Input::GetInstace();
 	input_->Initialize();
 
 	// スプライト共通部の初期化
-	textureManager_ = TextureManager::GetInstance();
 	textureManager_->Initialize(dxCommon_);
-
 	// スプライト静的初期化
 	Sprite::StaticInitialize();
-
 	// 3Dオブジェクト静的初期化
 	Object3d::StaticInitialize(dxCommon_->GetDevice(), winApp_->window_width, winApp_->window_height);
+#pragma endregion
 
 	std::unique_ptr<GameScene> gameScene = std::make_unique<GameScene>();
 	gameScene->Initialize();
-
-#pragma endregion
 
 #pragma region ゲームループ
 	// ゲームループ
@@ -85,6 +74,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 		fps_->UpdateFixFPS();
 #pragma endregion
 	}
+
 #pragma endregion
 
 #pragma region 基盤システムの終了

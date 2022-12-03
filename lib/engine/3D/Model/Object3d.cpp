@@ -56,19 +56,6 @@ Object3d* Object3d::Create()
 	return object3d;
 }
 
-void Object3d::UpdateViewMatrix()
-{
-	// 視点座標
-	Mathematics::Vector3 eyeProjection = eye;
-	// 注視点座標
-	Mathematics::Vector3 targetPosition = target;
-	// 上方向
-	Mathematics::Vector3 upVector = up;
-
-	// カメラZ軸（視線方向）
-	Mathematics::Vector3 cameraAxisZ;
-}
-
 bool Object3d::Initialize()
 {
 	HRESULT result;
@@ -101,25 +88,25 @@ bool Object3d::Initialize()
 void Object3d::Update(Camera* camera)
 {
 	HRESULT result;
-	Mathematics::Matrix4 matScale, matRot, matTrans;
+	//Mathematics::Matrix4 matScale, matRot, matTrans;
 
-	// スケール、回転、平行移動行列の計算
-	matScale = MyMathUtility::MakeScaling(scale);
-	matRot = MyMathUtility::MakeIdentity();
-	matRot = MyMathUtility::MakeRotation(rotation);
-	matTrans = MyMathUtility::MakeTranslation(position);
+	//// スケール、回転、平行移動行列の計算
+	//matScale = MyMathUtility::MakeScaling(scale);
+	//matRot = MyMathUtility::MakeIdentity();
+	//matRot = MyMathUtility::MakeRotation(rotation);
+	//matTrans = MyMathUtility::MakeTranslation(position);
 
-	// ワールド行列の合成
-	matWorld = MyMathUtility::MakeIdentity();
-	matWorld *= matScale;
-	matWorld *= matRot;
-	matWorld *= matTrans;
+	//// ワールド行列の合成
+	//matWorld = MyMathUtility::MakeIdentity();
+	//matWorld *= matScale;
+	//matWorld *= matRot;
+	//matWorld *= matTrans;
 
-	// 親オブジェクトがあれば
-	if (parent != nullptr)
-	{
-		matWorld *= parent->matWorld;
-	}
+	//// 親オブジェクトがあれば
+	//if (parent != nullptr)
+	//{
+	//	matWorld *= parent->matWorld;
+	//}
 
 	const Mathematics::Matrix4 matView = camera->GetMatView();
 	const Mathematics::Matrix4 matProjection = camera->GetMatProjection();
@@ -127,6 +114,7 @@ void Object3d::Update(Camera* camera)
 	// 定数バッファへデータ転送
 	ConstBufferDataB0* constMap = nullptr;
 	result = constBuffB0->Map(0, nullptr, (void**)&constMap);
+	assert(SUCCEEDED(result));
 	constMap->mat = matWorld* matView * matProjection;
 	constBuffB0->Unmap(0, nullptr);
 }

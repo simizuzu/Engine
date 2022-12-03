@@ -31,11 +31,6 @@ public: // 静的メンバ関数
 	static Object3d* Create();
 
 private:
-	/// <summary>
-	/// ビュー行列を更新
-	/// </summary>
-	static void UpdateViewMatrix();
-
 	// デバイス
 	static Microsoft::WRL::ComPtr<ID3D12Device> device_;
 	// コマンドリスト

@@ -21,7 +21,7 @@ void GameScene::Initialize()
 	model_.reset(Model::LoadFromObj("door"));
 
 	gameHandle = AudioManager::GetInstance()->LoadAudio("Resources/music/titleBGM.mp3",0.05f);
-	AudioManager::GetInstance()->PlayWave(gameHandle, true);
+	//AudioManager::GetInstance()->PlayWave(gameHandle, true);
 
 #pragma region 3Dオブジェクト生成
 	object3d_ = Object3d::Create();
@@ -31,7 +31,7 @@ void GameScene::Initialize()
 #pragma region 3Dオブジェクトを3Dモデルをひも付け
 	// オブジェクトにモデルをひも付ける
 	object3d_->SetModel(model_.get());
-	object3d_->SetRotation({ 100.0f,40.0f,20.0f });
+	
 #pragma endregion
 }
 
@@ -40,6 +40,23 @@ void GameScene::Update()
 	switch (scene)
 	{
 	case title:
+		object3d_->SetRotation({ 100.0f,40.0f,20.0f });
+		object3d_->SetPosition({ 50.0f,0.0f,0.0f });
+		object3d_->SetScale({ 100.0f,100.0f,100.0f });
+
+		if (input_->PushKey(DIK_RIGHT))
+		{
+			Mathematics::Vector3 eye = camera_->GetEye();
+			eye.x -= 1.0f;
+			camera_->SetEye(eye);
+		}
+		else if (input_->PushKey(DIK_LEFT))
+		{
+			Mathematics::Vector3 eye = camera_->GetEye();
+			eye.x += 1.0f;
+			camera_->SetEye(eye);
+		}
+
 		if (input_->TriggerPushKey(DIK_SPACE))
 		{
 			scene = game;
@@ -54,7 +71,6 @@ void GameScene::Update()
 		}
 
 	}
-
 
 	/*{
 		Mathematics::Vector3 eye = camera_->GetEye();

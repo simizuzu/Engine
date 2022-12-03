@@ -20,7 +20,7 @@ void GameScene::Initialize()
 	model_ = std::make_unique<Model>();
 	model_.reset(Model::LoadFromObj("door"));
 
-	gameHandle = AudioManager::GetInstance()->LoadAudio("Resources/music/titleBGM.mp3");
+	gameHandle = AudioManager::GetInstance()->LoadAudio("Resources/music/titleBGM.mp3",0.05f);
 	AudioManager::GetInstance()->PlayWave(gameHandle, true);
 
 #pragma region 3Dオブジェクト生成

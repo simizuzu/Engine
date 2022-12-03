@@ -36,7 +36,7 @@ namespace MyMathUtility
 		return matIdentity;
 	}
 
-	Matrix4 MakeScaling(Vector3 scale)
+	Matrix4 MakeScaling(const Vector3& scale)
 	{
 		Matrix4 matScale;
 		matScale.m[0][0] = scale.x;
@@ -47,7 +47,7 @@ namespace MyMathUtility
 		return matScale;
 	}
 
-	Matrix4 MakeRotation(Vector3 rot)
+	Matrix4 MakeRotation(const Vector3& rot)
 	{
 		Matrix4 matRotX;
 		matRotX = MakeIdentity();
@@ -79,7 +79,7 @@ namespace MyMathUtility
 		return matRot;
 	}
 
-	Matrix4 MakeTranslation(Vector3 trans)
+	Matrix4 MakeTranslation(const Vector3& trans)
 	{
 		Matrix4 matTrans;
 		matTrans = MakeIdentity();
@@ -89,29 +89,29 @@ namespace MyMathUtility
 		return matTrans;
 	}
 
-	Matrix4 CreateMatrix(const WorldTransform& worldTransform)
-	{
-		Matrix4 matWorld;
+	//Matrix4 CreateMatrix(const WorldTransform& worldTransform)
+	//{
+	//	Matrix4 matWorld;
 
-		matWorld = MakeIdentity();
-		matWorld = MakeScaling(worldTransform.scale_);
-		matWorld = MakeRotation(worldTransform.rotation_);
-		matWorld = MakeTranslation(worldTransform.translation_);
+	//	matWorld = MakeIdentity();
+	//	matWorld = MakeScaling(worldTransform.scale_);
+	//	matWorld = MakeRotation(worldTransform.rotation_);
+	//	matWorld = MakeTranslation(worldTransform.translation_);
 
-		if (worldTransform.parent_ != nullptr)
-		{
-			matWorld *= worldTransform.parent_->matWorld_;
-		}
+	//	if (worldTransform.parent_ != nullptr)
+	//	{
+	//		matWorld *= worldTransform.parent_->matWorld_;
+	//	}
 
-		return matWorld;
-	}
+	//	return matWorld;
+	//}
 
-	void WorldTransUpdate(WorldTransform& childWorldtrans)
-	{
-		childWorldtrans.matWorld_ = CreateMatrix(childWorldtrans);			// 合成した行列の計算
-		childWorldtrans.matWorld_ *= childWorldtrans.parent_->matWorld_;	// parent_のワールド行列の掛け算代入
-		childWorldtrans.TransferMatrix();									// 行列の転送
-	}
+	//void WorldTransUpdate(WorldTransform& childWorldtrans)
+	//{
+	//	childWorldtrans.matWorld_ = CreateMatrix(childWorldtrans);			// 合成した行列の計算
+	//	childWorldtrans.matWorld_ *= childWorldtrans.parent_->matWorld_;	// parent_のワールド行列の掛け算代入
+	//	childWorldtrans.TransferMatrix();									// 行列の転送
+	//}
 
 	Matrix4 MatMulVector(Matrix4 m, Vector3 v)
 	{

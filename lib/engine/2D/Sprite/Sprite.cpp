@@ -50,7 +50,7 @@ void Sprite::Initialize()
 	CreateConstBuff();
 }
 
-void Sprite::Update(Mathematics::Vector2 pos, Mathematics::Vector2 scale, float rot)
+void Sprite::Update(const Mathematics::Vector2 pos, const Mathematics::Vector2 scale, float rot)
 {
 	Mathematics::Matrix4 mTrans, mRot, mScale, matWorld;
 	mTrans = MakeTranslation({ pos.x,pos.y,0.0f });

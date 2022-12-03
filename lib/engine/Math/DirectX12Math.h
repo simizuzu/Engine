@@ -23,19 +23,19 @@ namespace MyMathUtility
 	// 単位行列を求める
 	Mathematics::Matrix4 MakeIdentity();
 	// 拡大縮小を求める
-	Mathematics::Matrix4 MakeScaling(Mathematics::Vector3 scale);
+	Mathematics::Matrix4 MakeScaling(const Mathematics::Vector3& scale);
 	// 回転行列を求める
-	Mathematics::Matrix4 MakeRotation(Mathematics::Vector3 rot);
+	Mathematics::Matrix4 MakeRotation(const Mathematics::Vector3& rot);
 	// 平行移動行列を求める
-	Mathematics::Matrix4 MakeTranslation(Mathematics::Vector3 trans);
-	// ワールド行列の計算
-	Mathematics::Matrix4 CreateMatrix(const WorldTransform& worldTransform);
+	Mathematics::Matrix4 MakeTranslation(const Mathematics::Vector3& trans);
+	//// ワールド行列の計算
+	//Mathematics::Matrix4 CreateMatrix(const WorldTransform& worldTransform);
 
-	/// <summary>
-	/// 1つ分のワールドトランスフォーム更新関数
-	/// </summary>
-	/// <param name="childWorldtrans">子のworldTransform</param>
-	void WorldTransUpdate(WorldTransform& childWorldtrans);
+	///// <summary>
+	///// 1つ分のワールドトランスフォーム更新関数
+	///// </summary>
+	///// <param name="childWorldtrans">子のworldTransform</param>
+	//void WorldTransUpdate(WorldTransform& childWorldtrans);
 
 	// ベクトルと行列の掛け算
 	Mathematics::Matrix4 MatMulVector(Mathematics::Matrix4 m, Mathematics::Vector3 v);

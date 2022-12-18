@@ -63,10 +63,10 @@ public: // メンバ関数
 	void Draw();
 
 	// setter
-	void SetModel(Model* model) { this->model = model; }
-	void SetPosition(Mathematics::Vector3 position_) { position_ = position; }
-	void SetScale(Mathematics::Vector3 scale_) { scale_ = scale; }
-	void SetRotation(Mathematics::Vector3 rotation_) { rotation_ = rotation; }
+	void SetModel(Model* model);
+	void SetTranslation(Mathematics::Vector3 translation_);
+	void SetScale(Mathematics::Vector3 scale_);
+	void SetRotation(Mathematics::Vector3 rotation_);
 
 private: // メンバ変数
 	// 定数バッファ
@@ -78,7 +78,7 @@ private: // メンバ変数
 	// X,Y,Z軸回りのローカル回転角
 	Mathematics::Vector3 rotation = { 0.0f,0.0f,0.0f };
 	// ローカル座標
-	Mathematics::Vector3 position = { 0.0f,0.0f,0.0f };
+	Mathematics::Vector3 translation = { 0.0f,0.0f,0.0f };
 	// ワールド変換行列
 	Mathematics::Matrix4 matWorld;
 	// 親オブジェクト

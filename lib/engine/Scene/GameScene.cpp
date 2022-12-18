@@ -18,7 +18,7 @@ void GameScene::Initialize()
 	sprite_->Initialize();
 	
 	model_ = std::make_unique<Model>();
-	model_.reset(Model::LoadFromObj("door"));
+	model_.reset(Model::LoadFromObj("skydome"));
 
 	gameHandle = AudioManager::GetInstance()->LoadAudio("Resources/music/titleBGM.mp3",0.05f);
 	//AudioManager::GetInstance()->PlayWave(gameHandle, true);
@@ -40,8 +40,8 @@ void GameScene::Update()
 	switch (scene)
 	{
 	case title:
-		object3d_->SetRotation({ 100.0f,40.0f,20.0f });
-		object3d_->SetPosition({ 50.0f,0.0f,0.0f });
+		object3d_->SetRotation({ 0.0f,0.0f,0.0f });
+		object3d_->SetTranslation({ 0.0f,0.0f,0.0f });
 		object3d_->SetScale({ 100.0f,100.0f,100.0f });
 
 		if (input_->PushKey(DIK_RIGHT))

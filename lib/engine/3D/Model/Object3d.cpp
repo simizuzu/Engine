@@ -88,25 +88,25 @@ bool Object3d::Initialize()
 void Object3d::Update(Camera* camera)
 {
 	HRESULT result;
-	//Mathematics::Matrix4 matScale, matRot, matTrans;
+	Mathematics::Matrix4 matScale, matRot, matTrans;
 
-	//// スケール、回転、平行移動行列の計算
-	//matScale = MyMathUtility::MakeScaling(scale);
-	//matRot = MyMathUtility::MakeIdentity();
-	//matRot = MyMathUtility::MakeRotation(rotation);
-	//matTrans = MyMathUtility::MakeTranslation(position);
+	// スケール、回転、平行移動行列の計算
+	matScale = MyMathUtility::MakeScaling(scale);
+	matRot = MyMathUtility::MakeIdentity();
+	matRot = MyMathUtility::MakeRotation(rotation);
+	matTrans = MyMathUtility::MakeTranslation(translation);
 
-	//// ワールド行列の合成
-	//matWorld = MyMathUtility::MakeIdentity();
-	//matWorld *= matScale;
-	//matWorld *= matRot;
-	//matWorld *= matTrans;
+	// ワールド行列の合成
+	matWorld = MyMathUtility::MakeIdentity();
+	matWorld *= matScale;
+	matWorld *= matRot;
+	matWorld *= matTrans;
 
-	//// 親オブジェクトがあれば
-	//if (parent != nullptr)
-	//{
-	//	matWorld *= parent->matWorld;
-	//}
+	// 親オブジェクトがあれば
+	if (parent != nullptr)
+	{
+		matWorld *= parent->matWorld;
+	}
 
 	const Mathematics::Matrix4 matView = camera->GetMatView();
 	const Mathematics::Matrix4 matProjection = camera->GetMatProjection();
@@ -144,4 +144,24 @@ void Object3d::Draw()
 
 	// モデル描画
 	model->Draw(cmdList_.Get());
+}
+
+void Object3d::SetModel(Model* model)
+{
+	this->model = model;
+}
+
+void Object3d::SetScale(Mathematics::Vector3 scale_)
+{
+	scale = scale_;
+}
+
+void Object3d::SetTranslation(Mathematics::Vector3 translation_)
+{
+	translation = translation_;
+}
+
+void Object3d::SetRotation(Mathematics::Vector3 rotation_)
+{
+	rotation = rotation_;
 }

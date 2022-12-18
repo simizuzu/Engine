@@ -69,6 +69,8 @@ public: // メンバ関数
 	void SetRotation(Mathematics::Vector3 rotation_);
 
 private: // メンバ変数
+
+	// ------ワールドトランスフォーム-------//
 	// 定数バッファ
 	ComPtr <ID3D12Resource> constBuffB0;
 	// 色
@@ -83,8 +85,10 @@ private: // メンバ変数
 	Mathematics::Matrix4 matWorld;
 	// 親オブジェクト
 	Object3d* parent = nullptr;
+	//------------------------------------//
+	
 	// モデル
 	Model* model = nullptr;
 	// ワールド行列
-	WorldTransform* worldTransform_ = nullptr;
+	//WorldTransform* worldTransform_ = nullptr;
 };

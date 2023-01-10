@@ -65,7 +65,7 @@ private: // メンバ変数
 	//頂点バッファビュー
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
 	//インデックスバッファの生成
-	Microsoft::WRL::ComPtr<ID3D12Resource>indexBuff;
+	ComPtr<ID3D12Resource>indexBuff;
 	//インデックスバッファをマッピング
 	uint16_t* indexMap;
 	//インデックスバッファビューの作成
@@ -83,7 +83,7 @@ private: // メンバ変数
 	Mathematics::Vector4 color_ = { 1, 1, 1, 1 };
 
 	//定数バッファ
-	Microsoft::WRL::ComPtr<ID3D12Resource>constBuff;
+	ComPtr<ID3D12Resource>constBuff;
 	Mathematics::Matrix4* constBuffMap = nullptr;
 
 	// 角度

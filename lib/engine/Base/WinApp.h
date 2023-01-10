@@ -51,8 +51,8 @@ private: // ƒƒ“ƒo•Ï”
 	static WinApp* winApp_;
 
 private:
-	WinApp();
-	~WinApp();
+	WinApp() = default;
+	~WinApp() = default;
 	WinApp& operator=(const WinApp&) = delete;
 	WinApp(const WinApp&) = delete;
 };

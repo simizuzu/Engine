@@ -8,9 +8,6 @@
 /// </summary>
 Microsoft::WRL::ComPtr<ID3D12Device> Object3d::device_;
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> Object3d::cmdList_;
-Mathematics::Vector3 Object3d::eye = { 0.0f,3.0f,-10.0f };
-Mathematics::Vector3 Object3d::target = { 0.0f,0.0f,0.0f };
-Mathematics::Vector3 Object3d::up = { 0.0f,1.0f,0.0f };
 std::unique_ptr<Pipeline> Object3d::pipeline = std::make_unique<Pipeline>();
 RootsigSetPip Object3d::pip;
 

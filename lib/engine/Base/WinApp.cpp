@@ -2,9 +2,6 @@
 
 #pragma comment(lib,"winmm.lib")
 
-WinApp::WinApp(){}
-WinApp::~WinApp(){}
-
 WinApp* WinApp::winApp_ = nullptr;
 
 LRESULT WinApp::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)

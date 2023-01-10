@@ -63,10 +63,10 @@ public: // メンバ関数
 	void Draw();
 
 	// setter
-	void SetModel(Model* model) { this->model = model; }
-	void SetPosition(Mathematics::Vector3 position_) { position_ = position; }
-	void SetScale(Mathematics::Vector3 scale_) { scale_ = scale; }
-	void SetRotation(Mathematics::Vector3 rotation_) { rotation_ = rotation; }
+	void SetModel(Model* model);
+	void SetPosition(Mathematics::Vector3 position_);
+	void SetScale(Mathematics::Vector3 scale_);
+	void SetRotation(Mathematics::Vector3 rotation_);
 
 private: // メンバ変数
 	// 定数バッファ

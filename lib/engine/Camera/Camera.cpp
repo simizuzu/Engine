@@ -87,3 +87,8 @@ void Camera::TransferMatrix()
 	ConstMap.projection = matProjection_;
 	ConstMap.cameraPos = eye_;
 }
+
+const Mathematics::Matrix4& GetMatView()
+{
+	return matView_;
+}

@@ -7,6 +7,7 @@
 #include "Object3d.h"
 #include "Model.h"
 #include "AudioManager.h"
+#include "WorldTransform.h"
 
 class GameScene
 {
@@ -36,6 +37,8 @@ private: // メンバ変数
 	std::unique_ptr<Sprite> sprite_;
 	TextureData tex;
 	std::unique_ptr<Model> model_;
+
+	std::unique_ptr<WorldTransform> worldTransform_;
 
 	// サウンド
 	uint32_t gameHandle = 0;

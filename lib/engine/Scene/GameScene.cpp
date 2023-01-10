@@ -20,6 +20,8 @@ void GameScene::Initialize()
 	model_ = std::make_unique<Model>();
 	model_.reset(Model::LoadFromObj("skydome"));
 
+	worldTransform_ = std::make_unique<WorldTransform>();
+
 	gameHandle = AudioManager::GetInstance()->LoadAudio("Resources/music/titleBGM.mp3",0.05f);
 	//AudioManager::GetInstance()->PlayWave(gameHandle, true);
 
@@ -40,9 +42,9 @@ void GameScene::Update()
 	switch (scene)
 	{
 	case title:
-		object3d_->SetRotation({ 0.0f,0.0f,0.0f });
-		object3d_->SetTranslation({ 0.0f,0.0f,0.0f });
-		object3d_->SetScale({ 100.0f,100.0f,100.0f });
+		worldTransform_->SetRotation({ 0.0f,0.0f,0.0f });
+		worldTransform_->SetTranslation({ 0.0f,0.0f,0.0f });
+		worldTransform_->SetScale({ 100.0f,100.0f,100.0f });
 
 		if (input_->PushKey(DIK_RIGHT))
 		{
@@ -77,7 +79,7 @@ void GameScene::Update()
 		eye.z += 1.0f;
 		camera_->SetEye(eye);
 	}*/
-	object3d_->Update(camera_.get());
+	worldTransform_->TransferMatrix(camera_.get());
 	camera_->Update();
 }
 
@@ -88,7 +90,7 @@ void GameScene::Draw()
 #pragma endregion
 
 #pragma region 3Dオブジェクト描画
-	object3d_->Draw();
+	object3d_->Draw(worldTransform_.get());
 
 #pragma region 前景スプライト描画
 	switch (scene)

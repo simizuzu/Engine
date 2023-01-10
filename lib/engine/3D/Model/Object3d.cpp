@@ -8,10 +8,6 @@
 /// </summary>
 Microsoft::WRL::ComPtr<ID3D12Device> Object3d::device_;
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> Object3d::cmdList_;
-Mathematics::Vector3 Object3d::eye = { 0.0f,3.0f,-10.0f };
-Mathematics::Vector3 Object3d::target = { 0.0f,0.0f,0.0f };
-Mathematics::Vector3 Object3d::up = { 0.0f,1.0f,0.0f };
-std::unique_ptr<Pipeline> Object3d::pipeline = std::make_unique<Pipeline>();
 RootsigSetPip Object3d::pip;
 
 void Object3d::StaticInitialize(ID3D12Device* device, int width, int height)
@@ -29,8 +25,8 @@ void Object3d::StaticInitialize(ID3D12Device* device, int width, int height)
 
 void Object3d::CreateGraphicsPipeline()
 {
-	ComPtr<ID3DBlob> vsBlob; // 頂点シェーダオブジェクト
-	ComPtr<ID3DBlob> psBlob;	// ピクセルシェーダオブジェクト
+	Microsoft::WRL::ComPtr<ID3DBlob> vsBlob; // 頂点シェーダオブジェクト
+	Microsoft::WRL::ComPtr<ID3DBlob> psBlob;	// ピクセルシェーダオブジェクト
 
 	Shader::CreateObjShade(vsBlob, psBlob);
 
@@ -94,7 +90,7 @@ void Object3d::Update(Camera* camera)
 	matScale = MyMathUtility::MakeScaling(scale);
 	matRot = MyMathUtility::MakeIdentity();
 	matRot = MyMathUtility::MakeRotation(rotation);
-	matTrans = MyMathUtility::MakeTranslation(translation);
+	matTrans = MyMathUtility::MakeTranslation(position);
 
 	// ワールド行列の合成
 	matWorld = MyMathUtility::MakeIdentity();
@@ -151,14 +147,14 @@ void Object3d::SetModel(Model* model)
 	this->model = model;
 }
 
+void Object3d::SetPosition(Mathematics::Vector3 position_)
+{
+	position = position_;
+}
+
 void Object3d::SetScale(Mathematics::Vector3 scale_)
 {
 	scale = scale_;
-}
-
-void Object3d::SetTranslation(Mathematics::Vector3 translation_)
-{
-	translation = translation_;
 }
 
 void Object3d::SetRotation(Mathematics::Vector3 rotation_)

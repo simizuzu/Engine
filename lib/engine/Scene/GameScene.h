@@ -7,6 +7,7 @@
 #include "Object3d.h"
 #include "Model.h"
 #include "AudioManager.h"
+#include "WorldTransform.h"
 
 class GameScene
 {

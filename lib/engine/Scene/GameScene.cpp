@@ -41,19 +41,19 @@ void GameScene::Update()
 	{
 	case title:
 		object3d_->SetRotation({ 0.0f,0.0f,0.0f });
-		object3d_->SetTranslation({ 0.0f,0.0f,0.0f });
+		object3d_->SetPosition({ 0.0f,0.0f,0.0f });
 		object3d_->SetScale({ 100.0f,100.0f,100.0f });
 
 		if (input_->PushKey(DIK_RIGHT))
 		{
 			Mathematics::Vector3 eye = camera_->GetEye();
-			eye.x -= 1.0f;
+			eye.z -= 1.0f;
 			camera_->SetEye(eye);
 		}
 		else if (input_->PushKey(DIK_LEFT))
 		{
 			Mathematics::Vector3 eye = camera_->GetEye();
-			eye.x += 1.0f;
+			eye.z += 1.0f;
 			camera_->SetEye(eye);
 		}
 
@@ -69,7 +69,6 @@ void GameScene::Update()
 		{
 			AudioManager::GetInstance()->StopWave(gameHandle);
 		}
-
 	}
 
 	/*{

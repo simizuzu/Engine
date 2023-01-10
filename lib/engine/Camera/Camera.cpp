@@ -87,3 +87,60 @@ void Camera::TransferMatrix()
 	ConstMap.projection = matProjection_;
 	ConstMap.cameraPos = eye_;
 }
+
+#pragma region Getter&Setter
+const Mathematics::Matrix4& Camera::GetMatView()
+{
+	return matView_;
+}
+
+const Mathematics::Matrix4& Camera::GetMatViewInverse()
+{
+	return matViewInverse_;
+}
+
+const Mathematics::Matrix4& Camera::GetMatProjection()
+{
+	return matProjection_;
+}
+
+const Mathematics::Vector3& Camera::GetEye()
+{
+	return eye_;
+}
+
+const Mathematics::Vector3& Camera::GetTarget()
+{
+	return target_;
+}
+
+const Mathematics::Vector3& Camera::GetUp()
+{
+	return up_;
+}
+
+void Camera::SetEye(const Mathematics::Vector3& eye)
+{
+	eye_ = eye;
+}
+
+void Camera::SetTarget(const Mathematics::Vector3& target)
+{
+	target_ = target;
+}
+
+void Camera::SetUp(const Mathematics::Vector3& up)
+{
+	up_ = up;
+}
+
+void Camera::SetFarZ(const float& farZ)
+{
+	farZ_ = farZ;
+}
+
+void Camera::SetNearZ(const float& nearZ)
+{
+	nearZ_ = nearZ;
+}
+#pragma endregion

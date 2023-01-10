@@ -156,6 +156,12 @@
     <ClCompile Include="lib\engine\Base\Shader.cpp">
       <Filter>Engine\ソース ファイル\Base</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Users\ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Skydome.cpp">
+      <Filter>Users\ソースファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engine\Math\DirectX12Math.h">
@@ -220,6 +226,12 @@
     </ClInclude>
     <ClInclude Include="lib\engine\Base\Shader.h">
       <Filter>Engine\ヘッダー ファイル\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Users\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Skydome.h">
+      <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

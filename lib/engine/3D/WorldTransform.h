@@ -6,11 +6,6 @@
 #include "Matrix4.h"
 #include "Camera.h"
 
-struct ConstBufferDataWorldTransform
-{
-	Mathematics::Matrix4 matWorld;
-};
-
 class WorldTransform
 {
 public: // メンバ関数
@@ -47,7 +42,7 @@ private:
 	// 定数バッファ
 	Microsoft::WRL::ComPtr<ID3D12Resource> constBuff_;
 	// マッピング済みアドレス
-	ConstBufferDataWorldTransform* constMap_ = nullptr;
+	ConstBufferDataViewProjection* constMap_ = nullptr;
 
 	//初期化用のビュー行列計算
 	static Mathematics::Matrix4 defaultViewMat;
@@ -68,6 +63,4 @@ public:
 
 	// デバイス
 	DirectXCommon* device_ = nullptr;
-
-	
 };

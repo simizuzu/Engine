@@ -6,7 +6,9 @@ Mathematics::Matrix4 WorldTransform::defaultViewMat = { 1.0f, 0.0f, 0.0f, 0.0f, 
 
 void WorldTransform::Initialize()
 {
-	HRESULT result;
+	// 定数バッファを生成
+	CreateConstBuff();
+
 	Mathematics::Matrix4 matScale, matRot, matTrans;
 
 	// スケール、回転、平行移動行列の計算
@@ -16,9 +18,13 @@ void WorldTransform::Initialize()
 	matTrans = MyMathUtility::MakeTranslation(translation_);
 
 	// ワールド行列の合成
+	// 単位行列を代入
 	matWorld_ = MyMathUtility::MakeIdentity();
+	// ワールド行列にスケールを反映
 	matWorld_ *= matScale;
+	// ワールド行列に回転を反映
 	matWorld_ *= matRot;
+	// ワールド行列に平行移動を反映
 	matWorld_ *= matTrans;
 
 	//親行列の指定がある場合は、掛け算する
@@ -30,7 +36,7 @@ void WorldTransform::Initialize()
 	// 定数バッファに書き込み
 	constMap_->matWorld = matWorld_ * defaultViewMat * defaultProjectionMat;
 	constMap_->matWorld = matWorld_;
-	constMap_
+	constMap_->cameraPos = { 0,0,0 };
 }
 
 void WorldTransform::Update()
@@ -77,9 +83,13 @@ void WorldTransform::TransferMatrix(Camera* camera)
 	matTrans = MyMathUtility::MakeTranslation(translation_);
 
 	// ワールド行列の合成
+	// 単位行列を代入
 	matWorld_ = MyMathUtility::MakeIdentity();
+	// ワールド行列にスケールを反映
 	matWorld_ *= matScale;
+	// ワールド行列に回転を反映
 	matWorld_ *= matRot;
+	// ワールド行列に平行移動を反映
 	matWorld_ *= matTrans;
 
 	// 親オブジェクトがあれば
@@ -92,10 +102,9 @@ void WorldTransform::TransferMatrix(Camera* camera)
 	const Mathematics::Matrix4 matProjection = camera->GetMatProjection();
 
 	// 定数バッファへデータ転送
-	ConstBufferDataWorldTransform* constMap = nullptr;
-	result = constBuff_->Map(0, nullptr, (void**)&constMap);
+	result = constBuff_->Map(0, nullptr, (void**)&constMap_);
 	assert(SUCCEEDED(result));
-	constMap->matWorld = matWorld_ * matView * matProjection;
+	constMap_->matWorld = matWorld_ * matView * matProjection;
 	constBuff_->Unmap(0, nullptr);
 }
 

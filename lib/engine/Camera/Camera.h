@@ -3,9 +3,17 @@
 
 struct ConstBufferDataViewProjection
 {
-	Mathematics::Matrix4 view;       // ワールド → ビュー変換行列
-	Mathematics::Matrix4 projection; // ビュー → プロジェクション変換行列
-	Mathematics::Vector3 cameraPos;  // カメラ座標（ワールド座標）
+	// ワールド行列
+	Mathematics::Matrix4 world;
+	// ワールド座標
+	Mathematics::Matrix4 matWorld;
+
+	// ワールド → ビュー変換行列
+	Mathematics::Matrix4 view;
+	// ビュー → プロジェクション変換行列
+	Mathematics::Matrix4 projection;
+	// カメラ座標（ワールド座標）
+	Mathematics::Vector3 cameraPos;
 };
 
 struct ViewProjection
@@ -74,17 +82,17 @@ public:
 	void TransferMatrix();
 
 public:
-	const Mathematics::Matrix4& GetMatView() { return matView_; }
-	const Mathematics::Matrix4& GetMatViewInverse() { return matViewInverse_; }
-	const Mathematics::Matrix4& GetMatProjection() { return matProjection_; }
+	const Mathematics::Matrix4& GetMatView();
+	const Mathematics::Matrix4& GetMatViewInverse();
+	const Mathematics::Matrix4& GetMatProjection();
 
-	const Mathematics::Vector3& GetEye() { return eye_; }
-	const Mathematics::Vector3& GetTarget() { return target_; }
-	const Mathematics::Vector3& GetUp() { return up_; }
+	const Mathematics::Vector3& GetEye();
+	const Mathematics::Vector3& GetTarget();
+	const Mathematics::Vector3& GetUp();
 
-	void SetEye(const Mathematics::Vector3& eye) { eye_ = eye; }
-	void SetTarget(const Mathematics::Vector3& target) { target_ = target; }
-	void SetUp(const Mathematics::Vector3& up) { up_ = up; }
-	void SetFarZ(const float& farZ) { farZ_ = farZ; }
-	void SetNearZ(const float& nearZ) { nearZ_ = nearZ; }
+	void SetEye(const Mathematics::Vector3& eye);
+	void SetTarget(const Mathematics::Vector3& target);
+	void SetUp(const Mathematics::Vector3& up);
+	void SetFarZ(const float& farZ);
+	void SetNearZ(const float& nearZ);
 };

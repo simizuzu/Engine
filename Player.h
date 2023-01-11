@@ -17,7 +17,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(Model* model);
+	void Initialize(std::unique_ptr<Model>& model);
 
 	/// <summary>
 	/// 更新
@@ -47,11 +47,11 @@ private:
 	Mathematics::Vector3 bulletPos;
 
 	// プレイヤーのモデル
-	Model* playerModel_ = nullptr;
-	Model* bulletModel_ = nullptr;
+	std::unique_ptr<Model> playerModel_;
+	std::unique_ptr<Model> bulletModel_ = nullptr;
 	
-	Object3d* playerObject_ = nullptr;
-	Object3d* bulletObject_ = nullptr;
+	std::unique_ptr < Object3d> playerObject_ = nullptr;
+	std::unique_ptr < Object3d> bulletObject_ = nullptr;
 
 	// 入力
 	Input* input_ = nullptr;

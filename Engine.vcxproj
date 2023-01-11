@@ -160,6 +160,7 @@
     <ClCompile Include="lib\engine\Scene\GameScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="Skydome.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +186,7 @@
     <ClInclude Include="lib\engine\Math\Vector4.h" />
     <ClInclude Include="lib\engine\Scene\GameScene.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="Skydome.h" />
   </ItemGroup>
   <ItemGroup>

@@ -85,7 +85,7 @@ public:
 private: // 静的メンバ変数
 	static Microsoft::WRL::ComPtr<ID3D12Device> device;
 	// テクスチャバッファ
-	static Microsoft::WRL::ComPtr<ID3D12Resource> texBuff;
+	 Microsoft::WRL::ComPtr<ID3D12Resource> texBuff;
 	// シェーダリソースビューのハンドル(CPU)
 	D3D12_CPU_DESCRIPTOR_HANDLE cpuDescHandleSRV;
 		// シェーダリソースビューのハンドル(GPU)
@@ -93,15 +93,15 @@ private: // 静的メンバ変数
 	// デスクリプタヒープ
 	static Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeap;
 	// 頂点バッファビュー
-	static D3D12_VERTEX_BUFFER_VIEW vbView;
+	 D3D12_VERTEX_BUFFER_VIEW vbView;
 	// インデックスバッファビュー
-	static D3D12_INDEX_BUFFER_VIEW ibView;
+	 D3D12_INDEX_BUFFER_VIEW ibView;
 	// 頂点データ配列
-	static std::vector<VertexPosNormalUv> vertices;
+	 std::vector<VertexPosNormalUv> vertices;
 	// 頂点インデックス配列
-	static std::vector<unsigned short> indices;
+	 std::vector<unsigned short> indices;
 	// マテリアル
-	static Material material;
+	 Material material;
 
 private: // メンバ変数
 	// リソース設定

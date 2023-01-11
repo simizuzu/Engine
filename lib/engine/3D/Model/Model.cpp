@@ -12,13 +12,8 @@ using namespace Mathematics;
 /// ê√ìIÉÅÉìÉoïœêîÇÃé¿ë‘
 /// </summary>
 Microsoft::WRL::ComPtr<ID3D12Device> Model::device;
-Microsoft::WRL::ComPtr<ID3D12Resource> Model::texBuff;
 Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> Model::descHeap;
-D3D12_VERTEX_BUFFER_VIEW Model::vbView{};
-D3D12_INDEX_BUFFER_VIEW Model::ibView{};
-std::vector<VertexPosNormalUv> Model::vertices;
-std::vector<unsigned short> Model::indices;
-Material Model::material;
+
 
 Model* Model::LoadFromObj(const std::string& modelname)
 {

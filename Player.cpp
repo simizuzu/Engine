@@ -5,31 +5,32 @@ Player::~Player()
 {
 	/*delete playerModel_;
 	delete bulletModel_;*/
-	delete playerObject_;
-	delete bulletObject_;
+	/*delete playerObject_;
+	delete bulletObject_;*/
 }
 
-void Player::Initialize(Model* model)
+void Player::Initialize(std::unique_ptr<Model>& model)
 {
 	input_ = Input::GetInstace();
 
 	// NULLポインタチェック
 	assert(model);
-	playerModel_ = model;
-	bulletModel_ = Model::LoadFromObj("player");
+	bulletModel_.reset(Model::LoadFromObj("skydome"));
 
-	playerObject_ = Object3d::Create();
-	bulletObject_ = Object3d::Create();
-	playerObject_->SetModel(model);
-	bulletObject_->SetModel(bulletModel_);
+	playerObject_.reset(Object3d::Create());
+	bulletObject_.reset(Object3d::Create());
+	playerObject_->SetModel(model.get());
+	bulletObject_->SetModel(bulletModel_.get());
 
 	playerObject_->SetScale({ 1.0f,1.0f,1.0f });
+	bulletObject_->SetScale({ 10.0f,10.0f,10.0f });
 }
 
 void Player::Update(Camera* camera)
 {
 	// 行列を転送
 	playerObject_->Update(camera);
+	bulletObject_->Update(camera);
 
 	PlayerMove();
 }
@@ -37,9 +38,10 @@ void Player::Update(Camera* camera)
 void Player::Draw()
 {
 	playerObject_->Draw();
+	bulletObject_->Draw();
 	if (input_->TriggerPushKey(DIK_SPACE))
 	{
-		bulletObject_->Draw();
+		
 	}
 }
 
@@ -69,7 +71,7 @@ void Player::PlayerMove()
 
 void Player::BulletShot()
 {
-	bulletPos = playerPos;
+	//bulletPos = playerPos;
 
 
 }

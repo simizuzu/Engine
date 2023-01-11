@@ -4,7 +4,7 @@ GameScene::GameScene(){}
 
 GameScene::~GameScene()
 {
-	player_->~Player();
+	
 }
 
 void GameScene::Initialize()
@@ -20,7 +20,7 @@ void GameScene::Initialize()
 	//AudioManager::GetInstance()->PlayWave(gameHandle, true);
 
 	player_ = std::make_unique<Player>();
-	player_->Initialize(playerModel_.get());
+	player_->Initialize(playerModel_);
 }
 
 void GameScene::Update()

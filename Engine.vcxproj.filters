@@ -162,15 +162,6 @@
     <ClCompile Include="lib\engine\Base\Shader.cpp">
       <Filter>Engine\ソース ファイル\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Controller.cpp">
-      <Filter>Engine\ソース ファイル\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Engine\ソース ファイル\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionPrimitive.cpp">
-      <Filter>Engine\ソース ファイル\Collision</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerBullet.cpp">
       <Filter>Users\ヘッダーファイル</Filter>
     </ClCompile>
@@ -185,6 +176,15 @@
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Users\ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\Collision\CollisionPrimitive.cpp">
+      <Filter>Engine\ソース ファイル\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\Collision\Collision.cpp">
+      <Filter>Engine\ソース ファイル\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\Input\Controller.cpp">
+      <Filter>Engine\ソース ファイル\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -251,15 +251,6 @@
     <ClInclude Include="lib\engine\Base\Shader.h">
       <Filter>Engine\ヘッダー ファイル\Base</Filter>
     </ClInclude>
-    <ClInclude Include="Controller.h">
-      <Filter>Engine\ヘッダー ファイル\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>Engine\ヘッダー ファイル\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionPrimitive.h">
-      <Filter>Engine\ヘッダー ファイル\Collision</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
@@ -277,6 +268,15 @@
     </ClInclude>
     <ClInclude Include="GameCollisionConflg.h">
       <Filter>Users\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\engine\Collision\Collision.h">
+      <Filter>Engine\ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\engine\Collision\CollisionPrimitive.h">
+      <Filter>Engine\ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\engine\Input\Controller.h">
+      <Filter>Engine\ヘッダー ファイル\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

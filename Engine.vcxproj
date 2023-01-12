@@ -110,7 +110,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);$(ProjectDir)lib\engine\2D\Sprite;$(ProjectDir)lib\engine\Camera;$(ProjectDir)lib\engine\Scene;$(ProjectDir)lib\engine\3D\Model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Users;$(ProjectDir)lib\engine\Collision;$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);$(ProjectDir)lib\engine\2D\Sprite;$(ProjectDir)lib\engine\Camera;$(ProjectDir)lib\engine\Scene;$(ProjectDir)lib\engine\3D\Model;%(AdditionalIncludeDirectories);lib\engine\Collision;$(ProjectDir)Users;$(ProjectDir)lib\engine\Collision</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -126,7 +126,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);$(ProjectDir)lib\engine\2D\Sprite;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Users;$(ProjectDir)lib\engine\Collision;$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);$(ProjectDir)lib\engine\2D\Sprite;%(AdditionalIncludeDirectories);lib\engine\Collision;$(ProjectDir)Users;$(ProjectDir)lib\engine\Collision</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -137,9 +137,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CollisionPrimitive.cpp" />
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="lib\engine\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="lib\engine\3D\Model\Material.cpp" />
@@ -154,6 +151,9 @@
     <ClCompile Include="lib\engine\Base\TextureManager.cpp" />
     <ClCompile Include="lib\engine\Base\WinApp.cpp" />
     <ClCompile Include="lib\engine\Camera\Camera.cpp" />
+    <ClCompile Include="lib\engine\Collision\Collision.cpp" />
+    <ClCompile Include="lib\engine\Collision\CollisionPrimitive.cpp" />
+    <ClCompile Include="lib\engine\Input\Controller.cpp" />
     <ClCompile Include="lib\engine\Input\Input.cpp" />
     <ClCompile Include="lib\engine\Input\Keyboard.cpp" />
     <ClCompile Include="lib\engine\Math\DirectX12Math.cpp" />
@@ -169,9 +169,6 @@
     <ClCompile Include="Skydome.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CollisionPrimitive.h" />
-    <ClInclude Include="Collision.h" />
-    <ClInclude Include="Controller.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameCollisionConflg.h" />
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
@@ -187,6 +184,9 @@
     <ClInclude Include="lib\engine\Base\TextureManager.h" />
     <ClInclude Include="lib\engine\Base\WinApp.h" />
     <ClInclude Include="lib\engine\Camera\Camera.h" />
+    <ClInclude Include="lib\engine\Collision\Collision.h" />
+    <ClInclude Include="lib\engine\Collision\CollisionPrimitive.h" />
+    <ClInclude Include="lib\engine\Input\Controller.h" />
     <ClInclude Include="lib\engine\Input\Input.h" />
     <ClInclude Include="lib\engine\Input\Keyboard.h" />
     <ClInclude Include="lib\engine\Math\DirectX12Math.h" />

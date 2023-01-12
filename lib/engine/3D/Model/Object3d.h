@@ -6,7 +6,6 @@
 #include "Model.h"
 #include "Pipeline.h"
 #include "Shader.h"
-#include "WorldTransform.h"
 
 #include "Camera.h"
 #include "Matrix4.h"

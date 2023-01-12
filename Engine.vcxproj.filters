@@ -162,21 +162,6 @@
     <ClCompile Include="lib\engine\Base\Shader.cpp">
       <Filter>Engine\ソース ファイル\Base</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerBullet.cpp">
-      <Filter>Users\ヘッダーファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Skydome.cpp">
-      <Filter>Users\ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Rader.cpp">
-      <Filter>Users\ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Users\ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Users\ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="lib\engine\Collision\CollisionPrimitive.cpp">
       <Filter>Engine\ソース ファイル\Collision</Filter>
     </ClCompile>
@@ -185,6 +170,21 @@
     </ClCompile>
     <ClCompile Include="lib\engine\Input\Controller.cpp">
       <Filter>Engine\ソース ファイル\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Users\Skydome.cpp">
+      <Filter>Users\ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Users\Rader.cpp">
+      <Filter>Users\ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Users\PlayerBullet.cpp">
+      <Filter>Users\ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Users\Player.cpp">
+      <Filter>Users\ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Users\Enemy.cpp">
+      <Filter>Users\ソースファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -251,21 +251,6 @@
     <ClInclude Include="lib\engine\Base\Shader.h">
       <Filter>Engine\ヘッダー ファイル\Base</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Users\ヘッダーファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Skydome.h">
-      <Filter>Users\ヘッダーファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Rader.h">
-      <Filter>Users\ヘッダーファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerBullet.h">
-      <Filter>Users\ソースファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Users\ヘッダーファイル</Filter>
-    </ClInclude>
     <ClInclude Include="GameCollisionConflg.h">
       <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
@@ -277,6 +262,21 @@
     </ClInclude>
     <ClInclude Include="lib\engine\Input\Controller.h">
       <Filter>Engine\ヘッダー ファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Users\Skydome.h">
+      <Filter>Users\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Users\Rader.h">
+      <Filter>Users\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Users\PlayerBullet.h">
+      <Filter>Users\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Users\Player.h">
+      <Filter>Users\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Users\Enemy.h">
+      <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

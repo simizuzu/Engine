@@ -27,7 +27,7 @@ struct EnemyData
 	std::shared_ptr<Player> player_;
 };
 
-class Enemy : BoundingBox
+class Enemy : public BoundingBox
 {
 private:
 	GameScene* gamescene_ = nullptr;

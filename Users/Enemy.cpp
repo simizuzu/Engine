@@ -13,10 +13,10 @@ void Enemy::Initialize(EnemyData& data, Mathematics::Vector3& position)
 	initpos = position;
 	transform_.scale = { 3.0f,3.0f,3.0f };
 
-	//CreateOBB(enemymodel_->GetVertices(), transform_);
+	CreateOBB(enemymodel_->GetVertices(), transform_);
 
-	// Õ“Ë‘®«‚ğİ’è
-	//SetCollisionAttribute(CollisionAttributeEnemy);
+	//Õ“Ë‘®«‚ğİ’è
+	SetCollisionAttribute(CollisionAttributeEnemy);
 }
 
 void Enemy::Update()

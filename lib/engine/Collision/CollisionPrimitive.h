@@ -60,7 +60,7 @@ struct Sphere
 	float radius;
 };
 
-class BoundingBox : BaseCollision
+class BoundingBox : public BaseCollision
 {
 protected:
 	// ˆÊ’u

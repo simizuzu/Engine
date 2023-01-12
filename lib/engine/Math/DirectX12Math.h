@@ -3,7 +3,6 @@
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Matrix4.h"
-#include "WorldTransform.h"
 
 namespace MyMathUtility
 {
@@ -56,3 +55,9 @@ namespace MyMathUtility
 	float Lerp(float a, float b, float t);
 
 } // namespace MyMathUtility
+
+namespace Mathematics
+{
+	/// •ª—£²‚É“Š‰e‚³‚ê‚½²¬•ª‚©‚ç“Š‰eü•ª’·‚ğZo
+	float LenSegLineOfSeparateAxis(Vector3* sep, Vector3* e1, Vector3* e2, Vector3* e3 = 0);
+}

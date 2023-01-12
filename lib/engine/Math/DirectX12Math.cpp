@@ -326,4 +326,21 @@ namespace MyMathUtility
 
 		return retMat;
 	}
+
+	float LenSegLineOfSeparateAxis(Vector3* sep, Vector3* e1, Vector3* e2, Vector3* e3)
+	{
+		return 0.0f;
+	}
+}
+
+namespace Mathematics
+{
+	float LenSegLineOfSeparateAxis(Vector3* sep, Vector3* e1, Vector3* e2, Vector3* e3)
+	{
+		// 3‚Â‚Ì“àÏ‚Ìâ‘Î’l‚Ì˜a‚Å“Š‰eü•ª’·‚ğŒvZ
+		float r1 = fabs(sep->dot(*e1));
+		float r2 = fabs(sep->dot(*e2));
+		float r3 = e3 ? (fabs(sep->dot(*e3))) : 0;
+		return r1 + r2 + r3;
+	}
 }

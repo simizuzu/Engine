@@ -57,7 +57,7 @@ public: // メンバ関数
 	void SetScale(Mathematics::Vector3 scale_);
 	void SetRotation(Mathematics::Vector3 rotation_);
 
-private:
+public:
 	// 定数バッファ
 	Microsoft::WRL::ComPtr <ID3D12Resource> constBuffB0;
 	// 色
@@ -75,3 +75,8 @@ private:
 	// モデル
 	Model* model = nullptr;
 };
+
+namespace Mathematics
+{
+	Vector3 GetWorldPosition(Object3d& transform);
+}

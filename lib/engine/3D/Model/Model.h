@@ -143,5 +143,12 @@ private:
 	/// インデックスデータ全体のサイズ
 	/// </summary>
 	void CreateIBSize();
+
+public:
+	virtual void ModelInitialize();
+
+	virtual const std::vector<VertexPosNormalUv> GetVertices();
+
+	//virtual void Initialize() = 0;
 };
 

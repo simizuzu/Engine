@@ -73,3 +73,9 @@ void GameScene::Draw()
 
 #pragma endregion
 }
+
+GameScene* GameScene::GetInstance()
+{
+	static GameScene instance;
+	return &instance;
+}

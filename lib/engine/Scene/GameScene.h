@@ -27,7 +27,14 @@ public: // メンバ関数
 	// 描画
 	void Draw();
 
-public: // メンバ関数
+	//ゲッター
+	static GameScene* GetInstance();
+	int GetSceneNum();
+	void SetSceneNum(int sceneNum);
+
+	void Collision();
+
+	void Reset();
 
 private: // メンバ変数
 	Input* input_ = nullptr;
@@ -59,5 +66,10 @@ private: // メンバ変数
 
 	//シーン
 	Scene scene = title;
+
+private:
+	//コピーコンストラクタ・代入演算子削除
+	GameScene& operator=(const GameScene&) = delete;
+	GameScene(const GameScene&) = delete;
 };
 

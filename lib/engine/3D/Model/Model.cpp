@@ -31,6 +31,11 @@ Model* Model::LoadFromObj(const std::string& modelname)
 	return model_;
 }
 
+void Model::ModelInitialize()
+{
+	
+}
+
 void Model::LoadMaterial(const std::string& directoryPath, const std::string& filename)
 {
 	// ファイルストリーム
@@ -374,4 +379,9 @@ void Model::CreateIBSize()
 	ibView.BufferLocation = indexBuff->GetGPUVirtualAddress();
 	ibView.Format = DXGI_FORMAT_R16_UINT;
 	ibView.SizeInBytes = sizeIB;
+}
+
+const std::vector<VertexPosNormalUv> Model::GetVertices()
+{
+	return vertices;
 }

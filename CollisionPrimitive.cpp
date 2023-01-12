@@ -1,4 +1,4 @@
-#include "ColisionPrimitive.h"
+#include "CollisionPrimitive.h"
 
 const uint32_t BaseCollision::GetCollisionAttribute()
 {

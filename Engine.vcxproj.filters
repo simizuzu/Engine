@@ -88,6 +88,12 @@
     <Filter Include="Users\ヘッダーファイル\Scene">
       <UniqueIdentifier>{cdb42a1a-f5b5-414d-91dd-4d8dc4b70dec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソース ファイル\Collision">
+      <UniqueIdentifier>{81d8fa0e-832d-4769-87ef-581ca72dd4a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダー ファイル\Collision">
+      <UniqueIdentifier>{36737aef-d22d-4247-8501-b9e6e3ef91d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -162,7 +168,16 @@
     <ClCompile Include="Skydome.cpp">
       <Filter>Users\ソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Engine\ソース ファイル\Input</Filter>
+    </ClCompile>
     <ClCompile Include="PlayerBullet.cpp">
+      <Filter>Users\ヘッダーファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Engine\ソース ファイル\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="ColisionPrimitive.cpp">
       <Filter>Engine\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -236,7 +251,16 @@
     <ClInclude Include="Skydome.h">
       <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Engine\ヘッダー ファイル\Input</Filter>
+    </ClInclude>
     <ClInclude Include="PlayerBullet.h">
+      <Filter>Users\ソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Engine\ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="ColisionPrimitive.h">
       <Filter>Engine\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

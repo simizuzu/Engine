@@ -137,6 +137,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ColisionPrimitive.cpp" />
+    <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="lib\engine\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="lib\engine\3D\Model\Material.cpp" />
     <ClCompile Include="lib\engine\3D\Model\Model.cpp" />
@@ -164,6 +167,9 @@
     <ClCompile Include="Skydome.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ColisionPrimitive.h" />
+    <ClInclude Include="Collision.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
     <ClInclude Include="lib\engine\3D\Model\Material.h" />
     <ClInclude Include="lib\engine\3D\Model\Model.h" />

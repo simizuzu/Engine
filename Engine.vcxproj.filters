@@ -186,6 +186,9 @@
     <ClCompile Include="Users\Enemy.cpp">
       <Filter>Users\ソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="GameCamera.cpp">
+      <Filter>Users\ソースファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engine\Math\DirectX12Math.h">
@@ -276,6 +279,9 @@
       <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
     <ClInclude Include="Users\Enemy.h">
+      <Filter>Users\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCamera.h">
       <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
   </ItemGroup>

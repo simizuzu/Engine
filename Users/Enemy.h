@@ -2,7 +2,7 @@
 #include "Model.h"
 #include "Object3d.h"
 #include "Model.h"
-#include "Camera.h"
+#include "GameCamera.h"
 #include "CollisionPrimitive.h"
 #include "Sprite.h"
 #include "GameCollisionConflg.h"
@@ -22,7 +22,7 @@ struct EnemyData
 	// モデル
 	std::shared_ptr<Model> enemyModel_;
 	// カメラ
-	std::shared_ptr<Camera> camera_;
+	std::shared_ptr<GameCamera> camera_;
 	// プレイヤー
 	std::shared_ptr<Player> player_;
 };
@@ -35,7 +35,7 @@ private:
 	// モデル
 	std::shared_ptr<Model> enemymodel_;
 	// カメラ
-	std::shared_ptr<Camera> camera_;
+	std::shared_ptr<GameCamera> camera_;
 	// プレイヤー
 	std::shared_ptr<Player>player_;
 

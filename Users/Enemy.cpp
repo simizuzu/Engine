@@ -15,12 +15,47 @@ void Enemy::Initialize(EnemyData& data, Mathematics::Vector3& position)
 
 	CreateOBB(enemymodel_->GetVertices(), transform_);
 
-	//衝突属性を設定
+	// 衝突属性を設定
 	SetCollisionAttribute(CollisionAttributeEnemy);
+	// 衝突対象を自分以外に設定
+	SetCollisionMask(~CollisionAttributeEnemy);
+	collsionName_ = "Enemy";
 }
 
 void Enemy::Update()
 {
+	switch (phase)
+	{
+	case Phase::Approach://接近フェーズ
+		ApproachMove();
+		break;
+	case Phase::Around://周回フェーズ
+		AroundMove();
+		break;
+	default:
+		break;
+	}
+
+	transform_.Update(camera_->GetThirdPersonCamera());
+
+	if (attackInterval > 0)
+	{
+		attackInterval--;
+	}
+
+	printf("Hp:::%d\n", hp);
+
+	UpdateOBB(transform_);
+
+	if (hp <= 0 && hitTimer == 29)
+	{
+		AudioManager::GetInstance()->PlayWave(destroySE);
+
+	}
+	if (hp <= 0 && hitTimer == 0)
+	{
+		isDead = true;
+	}
 }
 
 void Enemy::Draw()

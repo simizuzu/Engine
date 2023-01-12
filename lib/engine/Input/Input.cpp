@@ -32,6 +32,23 @@ Input* Input::GetInstace()
 }
 
 #pragma region キーボード
+unsigned char Input::GetKeyTime(int keyName)
+{
+	if (PushKey(keyName))
+	{
+		key[keyName]++;
+		if (key[keyName] >= 255)
+		{
+			key[keyName] = 254;
+		}
+	}
+	else
+	{
+		key[keyName] = 0;
+	}
+	return key[keyName];
+}
+
 bool Input::PushKey(BYTE keyNum) { // 押した状態
 	return keyboard_->PushKey(keyNum);
 }

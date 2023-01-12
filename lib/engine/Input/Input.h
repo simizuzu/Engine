@@ -22,6 +22,7 @@ public:
 	void Initialize();
 	void Update();
 
+	unsigned char GetKeyTime(int keyName);
 	bool PushKey(BYTE keyNum);
 	bool ReleaseKey(BYTE keyNum);
 	bool TriggerPushKey(BYTE keyNum);

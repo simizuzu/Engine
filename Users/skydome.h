@@ -1,8 +1,8 @@
 #pragma once
 #include <memory>
 
-#include "Model.h"
-#include "Object3d.h"
+#include "lib/engine/3D/Model/Model.h"
+#include "lib/engine/3D/Model/Object3d.h"
 
 class skydome
 {

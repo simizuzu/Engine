@@ -1,8 +1,8 @@
 #pragma once
 #include "door.h"
-#include "Object3d.h"
+#include "lib/engine/3D/Model/Object3d.h"
 #include"DirectX12Math.h"
-#include"Model.h"
+#include "lib/engine/3D/Model/Model.h"
 #include"Sprite.h"
 
 class DoorManager

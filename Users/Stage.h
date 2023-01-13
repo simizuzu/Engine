@@ -2,8 +2,8 @@
 #include <memory>
 
 #include "Input.h"
-#include "Object3d.h"
-#include "Camera.h"
+#include "lib/engine/3D/Model/Object3d.h"
+#include "lib/engine/Camera/Camera.h"
 
 class Stage
 {

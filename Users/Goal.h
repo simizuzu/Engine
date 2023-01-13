@@ -1,7 +1,7 @@
 #pragma once
-#include "Object3d.h"
-#include "Camera.h"
-#include "Model.h"
+#include "lib/engine/3D/Model/Object3d.h"
+#include "lib/engine/Camera/Camera.h"
+#include "lib/engine/3D/Model/Model.h"
 
 #include <memory>
 

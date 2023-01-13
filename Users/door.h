@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Input.h"
-#include "Object3d.h"
+#include "lib/engine/3D/Model/Object3d.h"
 #include"DirectX12Math.h"
-#include"Model.h"
+#include "lib/engine/3D/Model/Model.h"
 
 
 class door

@@ -1,8 +1,8 @@
 #pragma once
-#include"Model.h"
+#include"lib/engine/3D/Model/Model.h"
 #include"RailCamera.h"
 #include"Player.h"
-#include"Camera.h"
+#include"lib/engine/Camera/Camera.h"
 class BranchPoint
 {
 public:

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Camera.h"
-#include "Object3d.h"
+#include "lib/engine/Camera/Camera.h"
+#include "lib/engine/3D/Model/Object3d.h"
 
 class ResultCamera
 {

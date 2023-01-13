@@ -4,10 +4,10 @@ void GameCamera::Initialize()
 {
 	input_ = Input::GetInstace();
 
-	thirdPersonCamera_ = std::make_unique<Camera>();
-	thirdPersonCamera_->SetFarZ(40000.0f);
-	thirdPersonCamera_->Initialize();
-	thirdPersonTransform_.position = { 0.0f,4000.0f,-5000.0f };
+	GameCamera_ = std::make_unique<Camera>();
+	GameCamera_->SetFarZ(40000.0f);
+	GameCamera_->Initialize();
+	GameCameraTransform_.position = { 0.0f,4000.0f,-5000.0f };
 }
 
 void GameCamera::Update()
@@ -20,20 +20,20 @@ void GameCamera::Update()
 	float rotationSpeed = 0.01f;
 
 	// コントローラー操作
-	thirdPersonTransform_.rotation.y += rotationSpeed * input_->GetLeftStickVec().x;
-	thirdPersonTransform_.rotation.x += rotationSpeed * input_->GetLeftStickVec().y;
+	GameCameraTransform_.rotation.y += rotationSpeed * input_->GetLeftStickVec().x;
+	GameCameraTransform_.rotation.x += rotationSpeed * input_->GetLeftStickVec().y;
 
 	// キーボード操作
-	thirdPersonTransform_.rotation.y += rotationSpeed * input_->GetKeyTime(DIK_D) / 254.0f;
-	thirdPersonTransform_.rotation.y += rotationSpeed * -input_->GetKeyTime(DIK_A) / 254.0f;
-	thirdPersonTransform_.rotation.x += rotationSpeed * input_->GetKeyTime(DIK_W) / 254.0f;
-	thirdPersonTransform_.rotation.x += rotationSpeed * -input_->GetKeyTime(DIK_S) / 254.0f;
+	GameCameraTransform_.rotation.y += rotationSpeed * input_->GetKeyTime(DIK_D) / 254.0f;
+	GameCameraTransform_.rotation.y += rotationSpeed * -input_->GetKeyTime(DIK_A) / 254.0f;
+	GameCameraTransform_.rotation.x += rotationSpeed * input_->GetKeyTime(DIK_W) / 254.0f;
+	GameCameraTransform_.rotation.x += rotationSpeed * -input_->GetKeyTime(DIK_S) / 254.0f;
 
-	front.x = thirdPersonTransform_.position.x + cosf(thirdPersonTransform_.rotation.y - MyMathUtility::PIHalf);
-	front.y = thirdPersonTransform_.position.y + cosf(thirdPersonTransform_.rotation.x - MyMathUtility::PIHalf);
-	front.z = thirdPersonTransform_.position.z - sinf(thirdPersonTransform_.rotation.y - MyMathUtility::PIHalf);
+	front.x = GameCameraTransform_.position.x + cosf(GameCameraTransform_.rotation.y - MyMathUtility::PIHalf);
+	front.y = GameCameraTransform_.position.y + cosf(GameCameraTransform_.rotation.x - MyMathUtility::PIHalf);
+	front.z = GameCameraTransform_.position.z - sinf(GameCameraTransform_.rotation.y - MyMathUtility::PIHalf);
 
-	frontVec = front - thirdPersonTransform_.position;
+	frontVec = front - GameCameraTransform_.position;
 	frontNormVec = frontVec.normalize();
 	front_ = frontNormVec;
 	Move();
@@ -41,9 +41,9 @@ void GameCamera::Update()
 	ThirdPersonUpdate(moveSpeed_, rotSpeed_);
 }
 
-Camera* GameCamera::GetThirdPersonCamera()
+Camera* GameCamera::GetCamera()
 {
-	return thirdPersonCamera_.get();
+	return GameCamera_.get();
 }
 
 float GameCamera::GetSpeed()
@@ -51,15 +51,20 @@ float GameCamera::GetSpeed()
 	return speed_;
 }
 
+Object3d* GameCamera::GetTransform()
+{
+	return &GameCameraTransform_;
+}
+
 Mathematics::Vector3 GameCamera::GetWorldPosition()
 {
-	return Mathematics::GetWorldPosition(thirdPersonTransform_);
+	return Mathematics::GetWorldPosition(GameCameraTransform_);
 }
 
 void GameCamera::SetPos(Mathematics::Vector3 pos)
 {
-	thirdPersonTransform_.position = pos;
-	thirdPersonTransform_.rotation = { 0.0f,0.0f,0.0f };
+	GameCameraTransform_.position = pos;
+	GameCameraTransform_.rotation = { 0.0f,0.0f,0.0f };
 	speed_ = minSpeed_;
 	acceleration_ = 0.0f;
 }
@@ -93,23 +98,23 @@ void GameCamera::Move()
 void GameCamera::ThirdPersonUpdate(Mathematics::Vector3& move, Mathematics::Vector3& rot)
 {
 	//ワールドトランスフォームの数値を加算
-	thirdPersonTransform_.position.x += move.x;
-	thirdPersonTransform_.position.y -= move.y;
-	thirdPersonTransform_.position.z += move.z;
-	thirdPersonTransform_.rotation += rot;
+	GameCameraTransform_.position.x += move.x;
+	GameCameraTransform_.position.y -= move.y;
+	GameCameraTransform_.position.z += move.z;
+	GameCameraTransform_.rotation += rot;
 
 	//ワールドトランスフォームの更新
-	thirdPersonTransform_.matWorld = Mathematics::MakeWorldMatrix4(thirdPersonTransform_);
-	thirdPersonCamera_->eye_ = Mathematics::GetWorldPosition(thirdPersonTransform_);
+	GameCameraTransform_.matWorld = Mathematics::MakeWorldMatrix4(GameCameraTransform_);
+	GameCamera_->eye_ = Mathematics::GetWorldPosition(GameCameraTransform_);
 
 	//ワールド前方ベクトル
 	Mathematics::Vector3 forward(0, 0, 1);
 	//レールカメラの回転を反映
-	forward = Mathematics::Vec3Mat4Mul(forward, thirdPersonTransform_.matWorld);
+	forward = Mathematics::Vec3Mat4Mul(forward, GameCameraTransform_.matWorld);
 	//視点から前方に適当な距離進んだ位置が注視点
-	thirdPersonCamera_->target_ = thirdPersonCamera_->eye_ + forward;
+	GameCamera_->target_ = GameCamera_->eye_ + forward;
 	//ワールド上方ベクトル
 	Mathematics::Vector3 up(0, 1, 0);
 	//レールカメラの回転を反映(レールカメラの上方ベクトル)
-	thirdPersonCamera_->up_ = Mathematics::Vec3Mat4Mul(up, thirdPersonTransform_.matWorld);
+	GameCamera_->up_ = Mathematics::Vec3Mat4Mul(up, GameCameraTransform_.matWorld);
 }

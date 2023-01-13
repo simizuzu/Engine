@@ -25,7 +25,7 @@ struct PlayerData
 	uint32_t fighterSE = 0;
 };
 
-class Player : BoundingBox
+class Player : public BoundingBox
 {
 public:
 	Player() = default;
@@ -34,7 +34,7 @@ public:
 	/// <summary>
 	/// èâä˙âª
 	/// </summary>
-	void Initialize(Mathematics::Vector3 pos, PlayerData data);
+	void Initialize();
 
 	/// <summary>
 	/// çXêV
@@ -94,7 +94,14 @@ private:
 	bool initflag = true;
 	bool animationFlag = false;
 
+	bool damageFlag = false;
+	float damageAlpha = 0.5;
+
+	Object3d trans;
 	Mathematics::Vector3 oldTranslation_;
+	Mathematics::Vector3 worldPos_;
+	Mathematics::Vector3 velocity_;
+	Mathematics::Vector3 tmp;
 
 	int32_t hp = 4;
 	uint32_t fighterSE = 0;

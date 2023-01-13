@@ -34,7 +34,7 @@ private:
 	GameScene* gamescene_ = nullptr;
 
 	// モデル
-	std::shared_ptr<Model> enemymodel_;
+	std::shared_ptr<Model> enemyModel_;
 	std::shared_ptr<Object3d> enemyObject_;
 	// カメラ
 	std::shared_ptr<GameCamera> camera_;
@@ -65,7 +65,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(EnemyData& data, Mathematics::Vector3& position);
+	void Initialize();
 
 	/// <summary>
 	/// 更新処理

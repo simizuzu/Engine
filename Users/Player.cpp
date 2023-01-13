@@ -1,39 +1,44 @@
 #include "Player.h"
 #include <cassert>
 
-void Player::Initialize(Mathematics::Vector3 pos, PlayerData data)
+void Player::Initialize()
 {
 	// シングルトン
 	input_ = Input::GetInstace();
 
-	// NULLポインタチェック
-	assert(model);
-
+	playerModel_.reset(Model::LoadFromObj("Tyoinori"));
 	playerObject_.reset(Object3d::Create());
-	playerObject_->SetModel(model.get());
+	playerObject_->SetModel(playerModel_.get());
 
-	playerObject_->SetScale({ 1.0f,1.0f,1.0f });
+	transform_ = std::make_unique<Object3d>();
+	transform_->Initialize();
+	transform_->parent = camera_->GetTransform();
+	transform_->position = { 0.0f, -18.0f, 30.0f };
+	transform_->scale = { 10.0f,10.0f,10.0f };
+
+	CreateOBB(playerModel_->GetVertices(), *transform_);
+
+	// 衝突属性を設定
+	SetCollisionAttribute(CollisionAttributePlayer);
+	//衝突対象を自分以外に設定
+	SetCollisionMask(~CollisionAttributePlayer);
+
+	collsionName_ = "Player";
+
+	trans.Create();
 }
 
-void Player::Update(Camera* camera,INT32& sceneNum)
+void Player::Update(Camera* camera, INT32& sceneNum)
 {
 	// 行列を転送
 	playerObject_->Update(camera);
 
-	if (initflag)
-	{
-		AudioManager::GetInstance()->PlayWave(fighterSE, true);
-		initflag = false;
-	}
-
 	oldTranslation_ = GetWorldPosition();
 
-	if (animationFlag == false)
-	{
-		PlayerMove(sceneNum);
-		Rotate();
-		transform_->Update(camera_->GetThirdPersonCamera());
-	}
+	PlayerMove(sceneNum);
+	Rotate();
+	transform_->Update(camera_->GetCamera());
+
 	UpdateOBB(*transform_);
 
 	//体力が0以下になったら
@@ -42,7 +47,7 @@ void Player::Update(Camera* camera,INT32& sceneNum)
 		//ゲームオーバーシーン
 		if (animationFlag == false)
 		{
-			AudioManager::GetInstance()->StopWave(fighterSE);
+
 		}
 		animationFlag = true;
 		if (animationFlag == true)
@@ -53,22 +58,16 @@ void Player::Update(Camera* camera,INT32& sceneNum)
 		if (alpha >= 1.0f)
 		{
 			animationFlag = false;
-			AudioManager::GetInstance()->PlayWave(gameOverScene, true);
-			uint32_t gameScene = AudioManager::GetInstance()->LoadAudio("Resources/sano/gameScene.mp3");
-			AudioManager::GetInstance()->StopWave(gameScene);
 			sceneNum = 2;
 		}
 	}
 
-	silenPullUp->Update(silenPullUpTransform);
-	silenReturn->Update(silenReturnTransform);
+	worldPos_ = camera_->GetWorldPosition();
+	velocity_ = { 0, 0, 5000.0f };
+	tmp = velocity_ = Mathematics::Vec3Mat4Mul(velocity_, camera_->GetTransform()->matWorld);
 
-	WorldPos = camera_->GetWorldPosition();
-	velocity2 = { 0, 0, 5000.0f };
-	tmp = velocity2 = AliceMathF::Vec3Mat4Mul(velocity2, camera_->GetFirstPersonTransform()->matWorld);
-
-	tmpTrasn.translation = WorldPos;
-	tmpTrasn.TransUpdate(camera_->GetThirdPersonCamera());
+	trans.position = worldPos_;
+	trans.Update(camera_->GetCamera());
 
 	//終了処理
 	if (GetWorldPosition().x <= -11600 || GetWorldPosition().x >= 11600 || GetWorldPosition().z <= -11600 || GetWorldPosition().z >= 11600)
@@ -82,8 +81,6 @@ void Player::Update(Camera* camera,INT32& sceneNum)
 		if (alpha >= 1.0f)
 		{
 			animationFlag = false;
-			AudioManager::GetInstance()->StopWave(fighterSE);
-			AudioManager::GetInstance()->PlayWave(gameOverScene, true);
 			sceneNum = 2;
 		}
 	}
@@ -99,8 +96,6 @@ void Player::Update(Camera* camera,INT32& sceneNum)
 		if (alpha >= 1.0f)
 		{
 			animationFlag = false;
-			AudioManager::GetInstance()->StopWave(fighterSE);
-			AudioManager::GetInstance()->PlayWave(gameOverScene, true);
 			sceneNum = 2;
 		}
 	}
@@ -117,18 +112,19 @@ void Player::Update(Camera* camera,INT32& sceneNum)
 	{
 		damageAlpha = 0.5f;
 	}
-
-	sceneChange->Update(sceneChangeTransform, { 1.0,1.0,1.0,alpha });
-	damageEffect->Update(damageEffectTransform, { 1.0,1.0,1.0,damageAlpha });
 }
 
 void Player::Draw()
 {
 	playerObject_->Draw();
-	if (input_->TriggerPushKey(DIK_SPACE))
+	
+
+	/*if (animationFlag == true)
 	{
-		
-	}
+		sceneChange->Draw(sceneChangeTex_);
+	}*/
+
+	worldPos_ = worldPos_ + tmp;
 }
 
 void Player::PlayerMove(INT32& sceneNum)
@@ -162,10 +158,17 @@ void Player::OnCollision()
 
 Object3d* Player::GetTransform()
 {
-	return nullptr;
+	return transform_.get();
 }
 
 Mathematics::Vector3 Player::GetWorldPosition()
 {
-	return Mathematics::Vector3();
+	//ワールド座標を入れる変数
+	Mathematics::Vector3 worldPos;
+	//ワールド行列の平行移動成分を取得(ワールド座標)
+	worldPos.x = transform_->matWorld.m[3][0];
+	worldPos.y = transform_->matWorld.m[3][1];
+	worldPos.z = transform_->matWorld.m[3][2];
+
+	return worldPos;
 }

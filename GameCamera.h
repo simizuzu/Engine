@@ -20,10 +20,10 @@ private:
 	char PADING[4]{};
 	Input* input_ = nullptr;
 
-	std::unique_ptr<Camera> thirdPersonCamera_;
+	std::unique_ptr<Camera> GameCamera_;
 
 	Mathematics::Vector3 front_ = { 0.0f,0.0f,speed_ };
-	Object3d thirdPersonTransform_;
+	Object3d GameCameraTransform_;
 
 public:
 	/// <summary>
@@ -36,9 +36,9 @@ public:
 	/// </summary>
 	void Update();
 
-	Camera* GetThirdPersonCamera();
+	Camera* GetCamera();
 	float GetSpeed();
-	Object3d* GetFirstPersonTransform();
+	Object3d* GetTransform();
 	Mathematics::Vector3 GetWorldPosition();
 	void SetPos(Mathematics::Vector3 pos);
 

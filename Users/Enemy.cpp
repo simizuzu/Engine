@@ -1,20 +1,26 @@
 #include "Enemy.h"
 
-void Enemy::Initialize(EnemyData& data, Mathematics::Vector3& position)
+void Enemy::Initialize()
 {
 	gamescene_ = GameScene::GetInstance();
 
-	enemymodel_ = data.enemyModel_;
-	camera_ = data.camera_;
-	player_ = data.player_;
+	enemyModel_ = std::make_unique<Model>();
+	enemyModel_.reset(Model::LoadFromObj("ring"));
+
+	camera_ = std::make_unique<GameCamera>();
+	camera_->Initialize();
+	player_ = std::make_unique<Player>();
+
+	Mathematics::Vector3 position = { -12000.0f,4000.0f,12000.0f };
 
 	transform_.Create();
+	transform_.SetModel(enemyModel_.get());
 	transform_.position = position;
 	initpos = position;
 	transform_.scale = { 3.0f,3.0f,3.0f };
 
-	CreateOBB(enemymodel_->GetVertices(), transform_);
-	transform_.SetModel(enemymodel_.get());
+	CreateOBB(enemyModel_->GetVertices(), transform_);
+	transform_.SetModel(enemyModel_.get());
 
 	// Õ“Ë‘®«‚ðÝ’è
 	SetCollisionAttribute(CollisionAttributeEnemy);
@@ -37,14 +43,12 @@ void Enemy::Update()
 		break;
 	}
 
-	transform_.Update(camera_->GetThirdPersonCamera());
+	transform_.Update(camera_->GetCamera());
 
 	if (attackInterval > 0)
 	{
 		attackInterval--;
 	}
-
-	printf("Hp:::%d\n", hp);
 
 	UpdateOBB(transform_);
 

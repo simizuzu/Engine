@@ -30,7 +30,7 @@ public: // メンバ関数
 	//ゲッター
 	static GameScene* GetInstance();
 	int GetSceneNum();
-	void SetSceneNum(int sceneNum);
+	void SetSceneNum(int sceneNumber);
 
 	void Collision();
 
@@ -39,14 +39,12 @@ public: // メンバ関数
 private: // メンバ変数
 	Input* input_ = nullptr;
 	DirectXCommon* dxCommon_ = nullptr;
-	Object3d* object3d_ = nullptr;
-	std::unique_ptr<Camera> camera_;
+	std::unique_ptr<GameCamera> GameCamera_;
 	AudioManager* audioManager_ = nullptr;
 
-	uint32_t gameScene = 0;
-	uint32_t titleScene = 0;
-	uint32_t gameClearScene = 0;
-
+	uint32_t gameBGM = 0;
+	uint32_t titleBGM = 0;
+	uint32_t gameClearBGM = 0;
 
 	std::unique_ptr<Sprite> titleBack;
 	TextureData titleTex{};
@@ -61,16 +59,17 @@ private: // メンバ変数
 	Object3d gameOverTrans{};
 
 	//モデル
-	EnemyData enemyData;
-	RadarData radarData;
+	//EnemyData enemyData;
 	PlayerData playerData;
 
-	std::unique_ptr<Model>skydome;
+	std::unique_ptr<Model>skydomeModel;
+	std::unique_ptr<Object3d> skydomeObject;
 	Object3d skydomeTransform;
-	std::unique_ptr<Model>ground;
+	std::unique_ptr<Model>groundModel;
+	std::unique_ptr<Object3d> groundObject;
 	Object3d groundTransform;
 
-	std::shared_ptr<Player>player_;
+	std::shared_ptr<Player> player_;
 
 	std::unique_ptr<GameCollisionManager> collisionManager_;
 
@@ -143,7 +142,6 @@ private: // メンバ変数
 
 	std::shared_ptr<GameCamera> gameCamera;
 
-	Radar* radar_ = nullptr;
 	//宣言
 	INT32 sceneNum = 0;
 	char PADING[4]{};

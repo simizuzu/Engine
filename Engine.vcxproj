@@ -107,18 +107,18 @@
     <ClCompile Include="lib\engine\Math\Vector4.cpp" />
     <ClCompile Include="lib\engine\Scene\GameScene.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="RailCamera.cpp" />
-    <ClCompile Include="skydome.cpp" />
-    <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Users\BranchPoint.cpp" />
     <ClCompile Include="Users\door.cpp" />
     <ClCompile Include="Users\DoorManager.cpp" />
     <ClCompile Include="Users\Goal.cpp" />
     <ClCompile Include="Users\Object.cpp" />
     <ClCompile Include="Users\ObjectManager.cpp" />
+    <ClCompile Include="Users\Player.cpp" />
+    <ClCompile Include="Users\RailCamera.cpp" />
     <ClCompile Include="Users\ResultCamera.cpp" />
+    <ClCompile Include="Users\skydome.cpp" />
     <ClCompile Include="Users\SpeedUpChance.cpp" />
+    <ClCompile Include="Users\Stage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
@@ -145,18 +145,18 @@
     <ClInclude Include="lib\engine\Math\Vector3.h" />
     <ClInclude Include="lib\engine\Math\Vector4.h" />
     <ClInclude Include="lib\engine\Scene\GameScene.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="RailCamera.h" />
-    <ClInclude Include="skydome.h" />
-    <ClInclude Include="Stage.h" />
     <ClInclude Include="Users\BranchPoint.h" />
     <ClInclude Include="Users\door.h" />
     <ClInclude Include="Users\DoorManager.h" />
     <ClInclude Include="Users\Goal.h" />
     <ClInclude Include="Users\Object.h" />
     <ClInclude Include="Users\ObjectManager.h" />
+    <ClInclude Include="Users\Player.h" />
+    <ClInclude Include="Users\RailCamera.h" />
     <ClInclude Include="Users\ResultCamera.h" />
+    <ClInclude Include="Users\skydome.h" />
     <ClInclude Include="Users\SpeedUpChance.h" />
+    <ClInclude Include="Users\Stage.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\OBJ.hlsli" />

@@ -27,9 +27,11 @@ private:
 	std::list<std::unique_ptr<BranchPoint>>branchPoints;
 
 	//本体
-	std::unique_ptr<objModel> firstModel_;
+	std::unique_ptr<Model> firstModel_;
+	std::unique_ptr<Object3d> firstObject_;
 
-	std::unique_ptr<objModel> secondModel_;
+	std::unique_ptr<Model> secondModel_;
+	std::unique_ptr<Object3d> secondObject_;
 
 	//コピーコンストラクタ・代入演算子削除
 	SpeedUpChance& operator=(const SpeedUpChance&) = delete;

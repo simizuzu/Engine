@@ -2,7 +2,7 @@
 
 void GameScene::Initialize()
 {
-	input_ = Input::GetInstace();
+	input_ = Input::GetInstance();
 	camera_ = std::make_unique<Camera>();
 	camera_->Initialize();
 	

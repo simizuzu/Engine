@@ -39,7 +39,7 @@ void Player::Update()
 		//ù‰ñ
 		Rotate();
 
-		if (Input::GetInstace()->TriggerPushKey(DIK_SPACE) && jumpFlag == 0 && !squatFlag)
+		if (Input::GetInstance()->TriggerPushKey(DIK_SPACE) && jumpFlag == 0 && !squatFlag)
 		{
 			jumpFlag = 1;
 		}
@@ -133,11 +133,11 @@ void Player::JumpReset()
 
 void Player::Move()
 {
-	if (Input::GetInstace()->PushKey(DIK_A) || Input::GetInstace()->PushKey(DIK_LEFT))
+	if (Input::GetInstance()->PushKey(DIK_A) || Input::GetInstance()->PushKey(DIK_LEFT))
 	{
 		worldTransform_->position += {-0.03f, 0.0f, 0.0f};
 	}
-	else if (Input::GetInstace()->PushKey(DIK_D) || Input::GetInstace()->PushKey(DIK_RIGHT))
+	else if (Input::GetInstance()->PushKey(DIK_D) || Input::GetInstance()->PushKey(DIK_RIGHT))
 	{
 		worldTransform_->position += {0.03f, 0.0f, 0.0f};
 	}
@@ -153,12 +153,12 @@ void Player::Move()
 
 void Player::Rotate()
 {
-	if (Input::GetInstace()->PushKey(DIK_A) || Input::GetInstace()->PushKey(DIK_LEFT))
+	if (Input::GetInstance()->PushKey(DIK_A) || Input::GetInstance()->PushKey(DIK_LEFT))
 	{
 		Complement(worldTransform_->rotation.y, -40.0f * MyMathUtility::degree2Radius, 10);//‰¡
 
 	}
-	else if (Input::GetInstace()->PushKey(DIK_D) || Input::GetInstace()->PushKey(DIK_RIGHT))
+	else if (Input::GetInstance()->PushKey(DIK_D) || Input::GetInstance()->PushKey(DIK_RIGHT))
 	{
 		Complement(worldTransform_->rotation.y, 40.0f * MyMathUtility::degree2Radius, 10);//‰¡
 	}
@@ -206,8 +206,8 @@ void Player::Jump()
 
 void Player::Squat()
 {
-	if (Input::GetInstace()->TriggerPushKey(DIK_DOWN) && !jumpFlag && !squatFlag ||
-		Input::GetInstace()->TriggerPushKey(DIK_S) && !jumpFlag && !squatFlag)
+	if (Input::GetInstance()->TriggerPushKey(DIK_DOWN) && !jumpFlag && !squatFlag ||
+		Input::GetInstance()->TriggerPushKey(DIK_S) && !jumpFlag && !squatFlag)
 	{
 		squatFlag = true;
 		rollStopFlag = true;

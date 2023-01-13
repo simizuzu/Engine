@@ -1,8 +1,8 @@
 #pragma once
-#include "Transform.h"
+#include "Object3d.h"
 #include "Camera.h"
-#include "objModel.h"
-#include "EngineMathUtility.h"
+#include "Model.h"
+
 #include <memory>
 
 class Goal
@@ -23,8 +23,8 @@ public:
 	void Draw(Camera* camera);
 
 private:
-	std::unique_ptr<objModel> model_;
-	std::unique_ptr<Transform> worldTransform_;
+	std::unique_ptr<Model> model_;
+	std::unique_ptr<Object3d> worldTransform_;
 
 	//コピーコンストラクタ・代入演算子削除
 	Goal& operator=(const Goal&) = delete;

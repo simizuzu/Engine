@@ -26,7 +26,7 @@ void door::Initialize(Mathematics::Vector3 trans, Mathematics::Vector3 Rot)
 	door2worldTransform_->SetModel(door2model_.get());
 	door3worldTransform_->SetModel(door3model_.get());
 
-	input_ = Input::GetInstace();
+	input_ = Input::GetInstance();
 
 	door1worldTransform_->SetPosition(Mathematics::Vector3(trans.x, trans.y, trans.z + 0.3f));
 	door2worldTransform_->SetPosition(trans);

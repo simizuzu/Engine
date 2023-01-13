@@ -38,7 +38,7 @@ public:
 	Mathematics::Vector2 GetLeftStickVec(const Mathematics::Vector2& deadZoneRange = { 1.0f,1.0f });
 	Mathematics::Vector2 GetRightStickVec(const Mathematics::Vector2& deadZoneRange = { 1.0f,1.0f });
 
-	static Input* GetInstace();
+	static Input* GetInstance();
 private:
 	BYTE oldkey[256] = {};
 	BYTE key[256] = {};

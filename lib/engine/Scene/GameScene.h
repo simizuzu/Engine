@@ -9,9 +9,16 @@
 #include "Model.h"
 #include "AudioManager.h"
 
-#include "skydome.h"
-#include "Stage.h"
-#include "Player.h"
+#include"Users/Stage.h"
+#include"Users/RailCamera.h"
+#include"Users/ResultCamera.h"
+#include"Users/ObjectManager.h"
+#include"Users/Player.h"
+#include"Users/skydome.h"
+#include"Users/door.h"
+#include"Users/SpeedUpChance.h"
+#include"Users/DoorManager.h"
+#include"Users/Goal.h"
 
 class GameScene
 {

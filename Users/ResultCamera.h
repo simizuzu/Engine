@@ -1,7 +1,7 @@
 #pragma once
 
-#include"Camera.h"
-#include"Transform.h"
+#include "Camera.h"
+#include "Object3d.h"
 
 class ResultCamera
 {
@@ -13,7 +13,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(Transform* worldTransform);
+	void Initialize(Object3d* worldTransform);
 
 	/// <summary>
 	/// 毎フレーム処理
@@ -27,18 +27,18 @@ public:
 
 	Camera* GetViewProjection();
 
-	Transform* GetWorldTransformPtr();
+	Object3d* GetWorldTransformPtr();
 
-	void addRot(EngineMathF::Vector3 rot);
-	void addTranslation(EngineMathF::Vector3 translation);
+	void addRot(Mathematics::Vector3 rot);
+	void addTranslation(Mathematics::Vector3 translation);
 
-	void setTranslation(EngineMathF::Vector3 translation);
+	void setTranslation(Mathematics::Vector3 translation);
 
 private:
 
 	std::unique_ptr<Camera> viewProjection_;
 
-	Transform worldTransform_;
+	std::unique_ptr<Object3d>worldTransform_;
 
 	//コピーコンストラクタ・代入演算子削除
 	ResultCamera& operator=(const ResultCamera&) = delete;

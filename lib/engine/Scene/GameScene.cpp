@@ -103,6 +103,7 @@ void GameScene::Update()
 			nowTime = static_cast<int>(time(NULL)) - startTime;
 
 			camera_ = railCamera_->GetViewProjection();
+			skydome_->Update(camera_);
 		}
 		else if (startGameFrg == false)
 		{

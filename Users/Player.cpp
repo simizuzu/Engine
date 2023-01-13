@@ -10,6 +10,7 @@ void Player::Initialize(Object3d* trans)
 	model_.reset(Model::LoadFromObj("tire"));
 	worldTransform_ = std::make_unique<Object3d>();
 	worldTransform_.reset(Object3d::Create());
+	worldTransform_->SetModel(model_.get());
 	worldTransform_->parent = trans;
 	worldTransform_->SetPosition({ 0.0f, -2.0f, 10.0f });
 	worldTransform_->Initialize();

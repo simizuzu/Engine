@@ -14,13 +14,19 @@ void GameScene::Initialize()
 
 	player_ = std::make_unique<Player>();
 	player_->Initialize(playerModel_);
+
+	titleBack = std::make_unique<Sprite>();
+	titleBack->Initialize();
 }
 
 void GameScene::Update()
 {
-	switch (scene)
+	switch (sceneNum)
 	{
-	case title:
+	case 0: // タイトルシーン
+		
+		titleBack->Update({});
+
 		player_->Update(camera_.get());
 
 		if (input_->PushKey(DIK_RIGHT))

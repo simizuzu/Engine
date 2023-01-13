@@ -11,8 +11,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "GameCamera.h"
-#include "Radar.h"
-#include "GameCollisionConflg.h"
+#include "GameCollisionManager.h"
 
 class GameScene
 {

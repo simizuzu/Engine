@@ -1,6 +1,9 @@
 #pragma once
 #include "door.h"
-#include"Sprite2D.h"
+#include "Object3d.h"
+#include"DirectX12Math.h"
+#include"Model.h"
+#include"Sprite.h"
 
 class DoorManager
 {
@@ -12,7 +15,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(EngineMathF::Vector3 vector);
+	void Initialize(Mathematics::Vector3 vector);
 
 	/// <summary>
 	/// 毎フレーム処理
@@ -36,13 +39,13 @@ public:
 private:
 	std::unique_ptr<door> door_[4]={};
 	
-	EngineMathF::Vector3 vector_;
+	Mathematics::Vector3 vector_;
 
-	EngineMathF::Vector3 moveVector_;
+	Mathematics::Vector3 moveVector_;
 
 	TextureData textureHandle_;
-	Transform transform_;
-	std::unique_ptr<Sprite2D> sprite_;
+	std::unique_ptr<Object3d> transform_;
+	std::unique_ptr<Sprite> sprite_;
 
 	//コピーコンストラクタ・代入演算子削除
 	DoorManager& operator=(const DoorManager&) = delete;

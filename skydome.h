@@ -19,7 +19,7 @@ public:
 
 private:
 	// ワールドトランスフォーム
-	std::shared_ptr<Object3d> transform_;;
+	std::shared_ptr<Object3d> transform_;
 	// モデル
 	std::shared_ptr<Model> model_;
 

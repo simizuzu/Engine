@@ -8,46 +8,46 @@ door::~door()
 {
 }
 
-void door::Initialize(EngineMathF::Vector3 trans, EngineMathF::Vector3 Rot)
+void door::Initialize(Mathematics::Vector3 trans, Mathematics::Vector3 Rot)
 {
-	door1worldTransform_.Initialize();
-	door2worldTransform_.Initialize();
-	door3worldTransform_.Initialize();
+	door1worldTransform_.reset(Object3d::Create());
+	door2worldTransform_.reset(Object3d::Create());
+	door3worldTransform_.reset(Object3d::Create());
 
-	door1model_ = std::make_unique<objModel>();
-	door2model_ = std::make_unique<objModel>();
-	door3model_ = std::make_unique<objModel>();
+	door1model_ = std::make_unique<Model>();
+	door2model_ = std::make_unique<Model>();
+	door3model_ = std::make_unique<Model>();
 
-	door1model_->Initialize();
-	door2model_->Initialize();
-	door3model_->Initialize();
+	door1model_.reset(Model::LoadFromObj("door"));
+	door2model_.reset(Model::LoadFromObj("door2"));
+	door3model_.reset(Model::LoadFromObj("door3"));
 
-	door1model_->Create("Resources/door", true);
-	door2model_->Create("Resources/door2", true);
-	door3model_->Create("Resources/door3", true);
+	door1worldTransform_->SetModel(door1model_.get());
+	door2worldTransform_->SetModel(door2model_.get());
+	door3worldTransform_->SetModel(door3model_.get());
 
-	input_ = Input::GetInstance();
+	input_ = Input::GetInstace();
 
-	door1worldTransform_.translation = EngineMathF::Vector3(trans.x, trans.y, trans.z + 0.3f);
-	door2worldTransform_.translation = trans;
-	door3worldTransform_.translation = trans;
+	door1worldTransform_->SetPosition(Mathematics::Vector3(trans.x, trans.y, trans.z + 0.3f));
+	door2worldTransform_->SetPosition(trans);
+	door3worldTransform_->SetPosition(trans);
 
-	door1worldTransform_.scale = { 10.0f,10.0f,1.0f };
-	door2worldTransform_.scale = { 10.0f,10.0f,1.0f };
-	door3worldTransform_.scale = { 10.0f,10.0f,1.0f };
+	door1worldTransform_->SetScale({ 10.0f,10.0f,1.0f });
+	door2worldTransform_->SetScale({ 10.0f,10.0f,1.0f });
+	door3worldTransform_->SetScale({ 10.0f,10.0f,1.0f });
 
-	door1worldTransform_.rotation = Rot;
-	door2worldTransform_.rotation = Rot;
-	door3worldTransform_.rotation = Rot;
+	door1worldTransform_->SetRotation(Rot);
+	door2worldTransform_->SetRotation(Rot);
+	door3worldTransform_->SetRotation(Rot);
 }
 
-void door::Mash(EngineMathF::Vector3 vector)
+void door::Mash(Mathematics::Vector3 vector)
 {
-	if (input_->TriggerPush(DIK_SPACE))
+	if (input_->TriggerPushKey(DIK_SPACE))
 	{
 		mashNum_++;
-		door2worldTransform_.translation -= vector;
-		door3worldTransform_.translation += vector;
+		door2worldTransform_->position-= vector;
+		door3worldTransform_->position += vector;
 	}
 	if (mashNum_ > 10)
 	{
@@ -56,20 +56,20 @@ void door::Mash(EngineMathF::Vector3 vector)
 	}
 }
 
-void door::Update(EngineMathF::Vector3 vector)
+void door::Update(Mathematics::Vector3 vector)
 {
 	Mash(vector);
 }
 
 void door::Draw(Camera* camera)
 {
-	door1worldTransform_.TransUpdate(camera);
-	door2worldTransform_.TransUpdate(camera);
-	door3worldTransform_.TransUpdate(camera);
+	door1worldTransform_->Update(camera);
+	door2worldTransform_->Update(camera);
+	door3worldTransform_->Update(camera);
 
-	door1model_->Draw(&door1worldTransform_);
-	door2model_->Draw(&door2worldTransform_);
-	door3model_->Draw(&door3worldTransform_);
+	door3worldTransform_->Draw();
+	door3worldTransform_->Draw();
+	door3worldTransform_->Draw();
 }
 
 bool door::GetMashFlag()
@@ -82,10 +82,10 @@ UINT door::GetMashNum()
 	return mashNum_;
 }
 
-void door::Reset(EngineMathF::Vector3 trans)
+void door::Reset(Mathematics::Vector3 trans)
 {
 	mashFlag_ = false;
-	door1worldTransform_.translation = EngineMathF::Vector3(trans.x, trans.y, trans.z + 0.3f);
-	door2worldTransform_.translation = trans;
-	door3worldTransform_.translation = trans;
+	door1worldTransform_->position = Mathematics::Vector3(trans.x, trans.y, trans.z + 0.3f);
+	door2worldTransform_->position = trans;
+	door3worldTransform_->position = trans;
 }

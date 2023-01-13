@@ -1,8 +1,10 @@
 #pragma once
 
 #include "Input.h"
-#include "Transform.h"
-#include "objModel.h"
+#include "Object3d.h"
+#include"DirectX12Math.h"
+#include"Model.h"
+
 
 class door
 {
@@ -15,12 +17,12 @@ public:
 	// <summary>
 	/// èâä˙âª
 	/// </summary>
-	void Initialize(EngineMathF::Vector3 trans, EngineMathF::Vector3 Rot);
+	void Initialize(Mathematics::Vector3 trans, Mathematics::Vector3 Rot);
 
 	/// <summary>
 	/// ñàÉtÉåÅ[ÉÄèàóù
 	/// </summary>
-	void Update(EngineMathF::Vector3 vector);
+	void Update(Mathematics::Vector3 vector);
 
 	/// <summary>
 	/// ï`âÊ
@@ -29,26 +31,26 @@ public:
 
 	bool GetMashFlag();
 
-	void Reset(EngineMathF::Vector3 trans);
+	void Reset(Mathematics::Vector3 trans);
 
 	UINT GetMashNum();
 
 private:
 
 	//òAë≈èàóù
-	void Mash(EngineMathF::Vector3 vector);
+	void Mash(Mathematics::Vector3 vector);
 
 	bool mashFlag_ = false;
 	char PADING[3]{};
 	UINT mashNum_ = 0;
 
-	Transform door1worldTransform_;
-	Transform door2worldTransform_;
-	Transform door3worldTransform_;
+	std::unique_ptr<Object3d> door1worldTransform_;
+	std::unique_ptr<Object3d> door2worldTransform_;
+	std::unique_ptr<Object3d> door3worldTransform_;
 
-	std::unique_ptr<objModel> door1model_;
-	std::unique_ptr<objModel> door2model_;
-	std::unique_ptr<objModel> door3model_;
+	std::unique_ptr<Model> door1model_;
+	std::unique_ptr<Model> door2model_;
+	std::unique_ptr<Model> door3model_;
 
 	Input* input_ = nullptr;
 

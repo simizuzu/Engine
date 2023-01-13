@@ -60,9 +60,9 @@ bool RailCamera::Update(bool GetCrashFlag, int frequencyInvocationDoor)
 			else
 			{
 				Mathematics::Vector3 move = { 0,0,1.0f * speed };
-				Mathematics::Vector3 Rot = { 0,3.0f * Mathematics::Deg2Rad,0 };
+				Mathematics::Vector3 Rot = { 0,3.0f * MyMathUtility::degree2Radius,0 };
 
-				if (worldTransform_->rotation.y >= 30.0f * Mathematics::Deg2Rad)
+				if (worldTransform_->rotation.y >= 30.0f * MyMathUtility::degree2Radius)
 				{
 					worldTransform_->position = { -vector.x * 10,0.0f,rotRange[0] - vector.z * 10 };
 
@@ -93,9 +93,9 @@ bool RailCamera::Update(bool GetCrashFlag, int frequencyInvocationDoor)
 			else
 			{
 				EngineMathF::Vector3 move = { vector * speed };
-				EngineMathF::Vector3 Rot = { 0,12 * EngineMathF::Deg2Rad,0 };
+				EngineMathF::Vector3 Rot = { 0,12 * MyMathUtility::degree2Radius,0 };
 
-				if (worldTransform->rotation.y >= 150.0f * EngineMathF::Deg2Rad)
+				if (worldTransform->rotation.y >= 150.0f * MyMathUtility::degree2Radius)
 				{
 					worldTransform_->position = { vector.x * 750 - vector.x * 10,0.0f,rotRange[1] + vector.z * 10 };
 					currentSide = side::Third;
@@ -105,9 +105,9 @@ bool RailCamera::Update(bool GetCrashFlag, int frequencyInvocationDoor)
 					worldTransform_->rotation += (Rot);
 					worldTransform_->position += move;
 				}
-				if (worldTransform_->rotation.y > 150.0f * EngineMathF::Deg2Rad)
+				if (worldTransform_->rotation.y > 150.0f * MyMathUtility::degree2Radius)
 				{
-					worldTransform_->rotation.y = 150.0f * EngineMathF::Deg2Rad;
+					worldTransform_->rotation.y = 150.0f * MyMathUtility::degree2Radius;
 				}
 			}
 			break;
@@ -125,9 +125,9 @@ bool RailCamera::Update(bool GetCrashFlag, int frequencyInvocationDoor)
 			else
 			{
 				EngineMathF::Vector3 move = { vector.x * speed,vector.y * speed,-vector.z * speed };
-				EngineMathF::Vector3 Rot = { 0,3 * EngineMathF::Deg2Rad,0 };
+				EngineMathF::Vector3 Rot = { 0,3 * MyMathUtility::degree2Radius,0 };
 
-				if (worldTransform_->rotation.y >= 180.0f * EngineMathF::Deg2Rad)
+				if (worldTransform_->rotation.y >= 180.0f * MyMathUtility::degree2Radius)
 				{
 					worldTransform_->position = { vector.x * 750 * 2,0.0f,750 + 10 };
 					currentSide = side::Fourth;
@@ -137,9 +137,9 @@ bool RailCamera::Update(bool GetCrashFlag, int frequencyInvocationDoor)
 					worldTransform_->rotation += (Rot);
 					worldTransform_->position += move;
 				}
-				if (worldTransform_->rotation.y > 180.0f * EngineMathF::Deg2Rad)
+				if (worldTransform_->rotation.y > 180.0f * MyMathUtility::degree2Radius)
 				{
-					worldTransform_->rotation.y = 180.0f * EngineMathF::Deg2Rad;
+					worldTransform_->rotation.y = 180.0f * MyMathUtility::degree2Radius;
 				}
 			}
 			break;
@@ -159,7 +159,7 @@ bool RailCamera::Update(bool GetCrashFlag, int frequencyInvocationDoor)
 				EngineMathF::Vector3 move = { 0,0,-1.0f * speed };
 				EngineMathF::Vector3 Rot = { 0,3 * EngineMathF::Deg2Rad,0 };
 
-				if (worldTransform_->rotation.y >= 210.0f * EngineMathF::Deg2Rad)
+				if (worldTransform_->rotation.y >= 210.0f * MyMathUtility::degree2Radius)
 				{
 					worldTransform_->position = { vector.x * 750 * 2 + vector.x * 10,0.0f,vector.z * 10 };
 					currentSide = side::Fifth;
@@ -169,9 +169,9 @@ bool RailCamera::Update(bool GetCrashFlag, int frequencyInvocationDoor)
 					worldTransform_->rotation += (Rot);
 					worldTransform_->position += move;
 				}
-				if (worldTransform_->rotation.y > 210.0f * EngineMathF::Deg2Rad)
+				if (worldTransform_->rotation.y > 210.0f * MyMathUtility::degree2Radius)
 				{
-					worldTransform_->rotation.y = 210.0f * EngineMathF::Deg2Rad;
+					worldTransform_->rotation.y = 210.0f * MyMathUtility::degree2Radius;
 				}
 			}
 			break;
@@ -191,7 +191,7 @@ bool RailCamera::Update(bool GetCrashFlag, int frequencyInvocationDoor)
 				EngineMathF::Vector3 move = { -vector.x * speed,-vector.y * speed,-vector.z * speed };
 				EngineMathF::Vector3 Rot = { 0,12 * EngineMathF::Deg2Rad,0 };
 
-				if (worldTransform_->rotation.y >= 330.0f * EngineMathF::Deg2Rad)
+				if (worldTransform_->rotation.y >= 330.0f * MyMathUtility::degree2Radius)
 				{
 					worldTransform_->position = { vector.x * 750 + vector.x * 10,0,rotRange[4] - vector.z * 10 };
 
@@ -202,9 +202,9 @@ bool RailCamera::Update(bool GetCrashFlag, int frequencyInvocationDoor)
 					worldTransform_->rotation += (Rot);
 					worldTransform_->position += move;
 				}
-				if (worldTransform_->rotation.y > 330.0f * EngineMathF::Deg2Rad)
+				if (worldTransform_->rotation.y > 330.0f * MyMathUtility::degree2Radius)
 				{
-					worldTransform_->rotation.y = 330.0f * EngineMathF::Deg2Rad;
+					worldTransform_->rotation.y = 330.0f * MyMathUtility::degree2Radius;
 				}
 			}
 			break;
@@ -223,7 +223,7 @@ bool RailCamera::Update(bool GetCrashFlag, int frequencyInvocationDoor)
 			{
 				EngineMathF::Vector3 move = { -vector.x * speed,vector.y * speed,vector.z * speed };
 
-				if (worldTransform_->rotation.y >= 360.0f * EngineMathF::Deg2Rad)
+				if (worldTransform_->rotation.y >= 360.0f * MyMathUtility::degree2Radius)
 				{
 					worldTransform_->position = { 0.0,0.0f,-10.0f };
 
@@ -242,9 +242,9 @@ bool RailCamera::Update(bool GetCrashFlag, int frequencyInvocationDoor)
 
 					IsLapReset = true;
 				}
-				if (worldTransform_->rotation.y > 360.0f * EngineMathF::Deg2Rad)
+				if (worldTransform_->rotation.y > 360.0f * MyMathUtility::degree2Radius)
 				{
-					worldTransform_->rotation.y = 360.0f * EngineMathF::Deg2Rad;
+					worldTransform_->rotation.y = 360.0f * MyMathUtility::degree2Radius;
 				}
 			}
 			break;
@@ -309,52 +309,52 @@ bool RailCamera::Update(bool GetCrashFlag, int frequencyInvocationDoor)
 			}
 			break;
 		case side::Fourth:
-			playerz = worldTransform_.translation.z + 10.0f;
+			playerz = worldTransform_->position.z + 10.0f;
 			if (playerz > rotRange[3])
 			{
 				EngineMathF::Vector3 move = { 0,0,-1.0f * speed };
-				worldTransform_.translation += move;
+				worldTransform_->position += move;
 			}
 			if (playerz <= rotRange[3])
 			{
 				EngineMathF::Vector3 Rot = { 0,30 * EngineMathF::Deg2Rad,0 };
 
-				worldTransform_.rotation += (Rot);
-				worldTransform_.translation = { vector.x * 750 * 2 + vector.x * 10,0.0f,vector.z * 10 };
+				worldTransform_->rotation += (Rot);
+				worldTransform_->position = { vector.x * 750 * 2 + vector.x * 10,0.0f,vector.z * 10 };
 
 				currentSide = side::Fifth;
 			}
 			break;
 		case side::Fifth:
-			playerz = worldTransform_.translation.z + vector.z * 10.0f;
+			playerz = worldTransform_->position.z + vector.z * 10.0f;
 			if (playerz > rotRange[4])
 			{
 				EngineMathF::Vector3 move = { -vector.x * speed,-vector.y * speed,-vector.z * speed };
-				worldTransform_.translation += move;
+				worldTransform_->position += move;
 			}
 			else if (playerz <= rotRange[4])
 			{
 				EngineMathF::Vector3 Rot = { 0,120 * EngineMathF::Deg2Rad,0 };
 
-				worldTransform_.rotation += (Rot);
-				worldTransform_.translation = { vector.x * 750 + vector.x * 10,0,rotRange[4] - vector.z * 10 };
+				worldTransform_->rotation += (Rot);
+				worldTransform_->position = { vector.x * 750 + vector.x * 10,0,rotRange[4] - vector.z * 10 };
 
 				currentSide = side::Sixth;
 			}
 			break;
 		case side::Sixth:
-			playerz = worldTransform_.translation.z - vector.z * 10.0f;
+			playerz = worldTransform_->position.z - vector.z * 10.0f;
 			if (playerz < rotRange[5])
 			{
 				EngineMathF::Vector3 move = { -vector.x * speed ,vector.y * speed ,vector.z * speed };
-				worldTransform_.translation += move;
+				worldTransform_->position += move;
 			}
 			else if (playerz >= rotRange[5])
 			{
 				EngineMathF::Vector3 Rot = { 0,30 * EngineMathF::Deg2Rad,0 };
 
-				worldTransform_.rotation += (Rot);
-				worldTransform_.translation = { 0.0,0.0f,-10.0f };
+				worldTransform_->rotation += (Rot);
+				worldTransform_->position = { 0.0,0.0f,-10.0f };
 
 				IsLapReset = true;
 

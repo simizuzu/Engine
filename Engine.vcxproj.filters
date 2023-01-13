@@ -171,12 +171,6 @@
     <ClCompile Include="lib\engine\Input\Controller.cpp">
       <Filter>Engine\ソース ファイル\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Users\Skydome.cpp">
-      <Filter>Users\ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Users\Radar.cpp">
-      <Filter>Users\ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Users\PlayerBullet.cpp">
       <Filter>Users\ソースファイル</Filter>
     </ClCompile>
@@ -187,6 +181,9 @@
       <Filter>Users\ソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="GameCamera.cpp">
+      <Filter>Users\ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCollisionManager.cpp">
       <Filter>Users\ソースファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -266,12 +263,6 @@
     <ClInclude Include="lib\engine\Input\Controller.h">
       <Filter>Engine\ヘッダー ファイル\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Users\Skydome.h">
-      <Filter>Users\ヘッダーファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Users\Radar.h">
-      <Filter>Users\ヘッダーファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Users\PlayerBullet.h">
       <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
@@ -282,6 +273,9 @@
       <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
     <ClInclude Include="GameCamera.h">
+      <Filter>Users\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCollisionManager.h">
       <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
   </ItemGroup>

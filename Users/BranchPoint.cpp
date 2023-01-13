@@ -1,30 +1,35 @@
 #include "BranchPoint.h"
+#include"Collision.h"
 
-void BranchPoint::Initialize(const EngineMathF::Vector3& pos, const EngineMathF::Vector3& rot, const EngineMathF::Vector3& size, objModel* bodyModel, std::function<void(void)>left, std::function<void(void)>right)
+void BranchPoint::Initialize(const Mathematics::Vector3& pos, const Mathematics::Vector3& rot, const Mathematics::Vector3& size, Model* bodyModel, std::function<void(void)>left, std::function<void(void)>right)
 {
 	bodyModel_ = bodyModel;
-	bodyWorldTransform_.translation = pos;
-	bodyWorldTransform_.scale = { 12.0f,12.0f,12.0f };
-	bodyWorldTransform_.rotation = rot;
-	bodyWorldTransform_.Initialize();
-	bodyWorldTransform_.MakeWorldMatrix();
-	collider_.center = EngineMathF::GetWorldPosition(bodyWorldTransform_);
+	bodyWorldTransform_->SetModel(bodyModel_);
+	bodyWorldTransform_.reset(Object3d::Create());
+	bodyWorldTransform_->position = pos;
+	bodyWorldTransform_->scale = { 12.0f,12.0f,12.0f };
+	bodyWorldTransform_->rotation = rot;
+	bodyWorldTransform_->matWorld = Mathematics::MakeWorldMatrix4(*bodyWorldTransform_);
+
+	collider_.center = Mathematics::GetWorldPosition(*bodyWorldTransform_);
 	collider_.size = {
-		size.x* bodyWorldTransform_.scale.x,
-		size.y* bodyWorldTransform_.scale.y,
-		size.z* bodyWorldTransform_.scale.z };
+		size.x* bodyWorldTransform_->scale.x,
+		size.y* bodyWorldTransform_->scale.y,
+		size.z* bodyWorldTransform_->scale.z };
 
 	left_ = left;
 	right_ = right;
+
+	boundingBox_ = std::make_unique<BoundingBox>();
 }
 
 void BranchPoint::Update(Player* player)
 {
-	if (!passingFlag_&&CheckAABB2AABB(player->GetCollider(), collider_))
+	if (!passingFlag_&& boundingBox_->CheckAABBToAABB(player->GetCollider(), collider_))
 	{
 		passingFlag_ = true;
 
-		if (player->GetWorldTransform().translation.x > 0)
+		if (player->GetWorldTransform().position.x > 0)
 		{
 			left_();
 		}
@@ -37,7 +42,7 @@ void BranchPoint::Update(Player* player)
 
 void BranchPoint::Draw(Camera* camera)
 {
-	bodyWorldTransform_.TransUpdate(camera);
-	bodyModel_->Draw(&bodyWorldTransform_);
+	bodyWorldTransform_->Update(camera);
+	bodyWorldTransform_->Draw();
 
 }

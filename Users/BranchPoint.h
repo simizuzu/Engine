@@ -1,5 +1,4 @@
 #pragma once
-#include"EngineMathUtility.h"
 #include"Model.h"
 #include"RailCamera.h"
 #include"Player.h"
@@ -10,7 +9,7 @@ public:
 	/// <summary>
 	/// èâä˙âª
 	/// </summary>
-	void Initialize(const EngineMathF::Vector3& pos, const EngineMathF::Vector3& rot, const EngineMathF::Vector3& size, objModel* bodyModel, std::function<void(void)>left, std::function<void(void)>right);
+	void Initialize(const Mathematics::Vector3& pos, const Mathematics::Vector3& rot, const Mathematics::Vector3& size, Model* bodyModel, std::function<void(void)>left, std::function<void(void)>right);
 
 	/// <summary>
 	/// ñàÉtÉåÅ[ÉÄèàóù
@@ -24,8 +23,8 @@ public:
 
 private:
 	//ñ{ëÃ
-	objModel* bodyModel_ = nullptr;
-	Transform bodyWorldTransform_;
+	Model* bodyModel_ = nullptr;
+	std::unique_ptr<Object3d> bodyWorldTransform_;
 
 	AABB collider_;
 
@@ -33,6 +32,8 @@ private:
 	std::function<void()>right_;
 
 	bool passingFlag_ = false;
+
+	std::unique_ptr<BoundingBox> boundingBox_;
 
 	char PADING[7]{};
 };

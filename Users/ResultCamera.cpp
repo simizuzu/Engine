@@ -10,13 +10,14 @@ ResultCamera::~ResultCamera()
 
 void ResultCamera::Initialize(Object3d* worldTransform)
 {
+	worldTransform_.reset(Object3d::Create());
 	worldTransform_->parent = worldTransform;
 
 	//ワールドトランスフォームの初期設定
 	worldTransform_->position = {2.0f,-2.0f,11.5f};
 	worldTransform_->rotation = { 0.0,250.0f * MyMathUtility::degree2Radius,0.0f };
 
-	viewProjection_ = std::make_unique<Camera>();
+	viewProjection_ = new Camera();
 	viewProjection_->SetFarZ(12000.0f);
 	//ビュープロジェクションの初期化
 	viewProjection_->Initialize();
@@ -44,7 +45,7 @@ void ResultCamera::Draw() {}
 
 Camera* ResultCamera::GetViewProjection()
 {
-	return viewProjection_.get();
+	return viewProjection_;
 }
 
 Object3d* ResultCamera::GetWorldTransformPtr()

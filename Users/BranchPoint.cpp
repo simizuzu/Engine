@@ -4,8 +4,9 @@
 void BranchPoint::Initialize(const Mathematics::Vector3& pos, const Mathematics::Vector3& rot, const Mathematics::Vector3& size, Model* bodyModel, std::function<void(void)>left, std::function<void(void)>right)
 {
 	bodyModel_ = bodyModel;
-	bodyWorldTransform_->SetModel(bodyModel_);
+	
 	bodyWorldTransform_.reset(Object3d::Create());
+	bodyWorldTransform_->SetModel(bodyModel_);
 	bodyWorldTransform_->position = pos;
 	bodyWorldTransform_->scale = { 12.0f,12.0f,12.0f };
 	bodyWorldTransform_->rotation = rot;

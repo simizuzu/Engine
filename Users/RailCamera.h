@@ -57,7 +57,7 @@ public:
 	Mathematics::Vector3 GetVector();
 private:
 
-	std::unique_ptr<Camera> viewProjection_;
+	Camera* viewProjection_ = nullptr;
 	std::unique_ptr<Object3d> worldTransform_;
 
 	Mathematics::Vector3 vector = { 0,0,0 };

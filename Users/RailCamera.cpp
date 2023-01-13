@@ -10,11 +10,12 @@ RailCamera::~RailCamera()
 
 void RailCamera::Initialize(const Mathematics::Vector3& position, const Mathematics::Vector3& rotaion)
 {
+	worldTransform_.reset(Object3d::Create());
 	//ワールドトランスフォームの初期設定
 	worldTransform_->position = position;
 	worldTransform_->rotation = rotaion;
 
-	viewProjection_ = std::make_unique<Camera>();
+	viewProjection_ = new Camera();
 	viewProjection_->SetFarZ(12000.0f);
 	//ビュープロジェクションの初期化
 	viewProjection_->Initialize();
@@ -428,7 +429,7 @@ void RailCamera::SpeedDown()
 
 Camera* RailCamera::GetViewProjection()
 {
-	return viewProjection_.get();
+	return viewProjection_;
 }
 
 Object3d* RailCamera::GetWorldTransformPtr()

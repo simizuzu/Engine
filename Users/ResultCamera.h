@@ -36,7 +36,7 @@ public:
 
 private:
 
-	std::unique_ptr<Camera> viewProjection_;
+	Camera* viewProjection_ = nullptr;
 
 	std::unique_ptr<Object3d>worldTransform_;
 

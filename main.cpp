@@ -18,7 +18,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 	WinApp* winApp_ = WinApp::GetInstance();
 	DirectXCommon* dxCommon_ = DirectXCommon::GetInstance();
 	FPS* fps_ = nullptr;
-	Input* input_ = Input::GetInstace();
+	Input* input_ = Input::GetInstance();
 	TextureManager* textureManager_ = TextureManager::GetInstance();
 	AudioManager* audioManager = AudioManager::GetInstance();
 	Sprite* sprite_ = nullptr;

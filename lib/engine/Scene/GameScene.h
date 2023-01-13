@@ -11,7 +11,7 @@
 
 #include "skydome.h"
 #include "Stage.h"
-
+#include "Player.h"
 
 class GameScene
 {

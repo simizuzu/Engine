@@ -180,6 +180,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Users\ソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="RailCamera.cpp">
+      <Filter>Engine\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engine\Math\DirectX12Math.h">
@@ -262,6 +265,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Users\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="RailCamera.h">
+      <Filter>Engine\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

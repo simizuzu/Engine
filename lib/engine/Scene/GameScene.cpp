@@ -1,12 +1,5 @@
 #include "GameScene.h"
 
-GameScene::GameScene(){}
-
-GameScene::~GameScene()
-{
-	
-}
-
 void GameScene::Initialize()
 {
 	camera_ = std::make_unique<Camera>();

@@ -174,7 +174,7 @@
     <ClCompile Include="Users\Skydome.cpp">
       <Filter>Users\ソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Users\Rader.cpp">
+    <ClCompile Include="Users\Radar.cpp">
       <Filter>Users\ソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="Users\PlayerBullet.cpp">
@@ -269,7 +269,7 @@
     <ClInclude Include="Users\Skydome.h">
       <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Users\Rader.h">
+    <ClInclude Include="Users\Radar.h">
       <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
     <ClInclude Include="Users\PlayerBullet.h">

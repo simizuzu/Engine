@@ -111,7 +111,7 @@
     <ClCompile Include="Users\Enemy.cpp" />
     <ClCompile Include="Users\Player.cpp" />
     <ClCompile Include="Users\PlayerBullet.cpp" />
-    <ClCompile Include="Users\Rader.cpp" />
+    <ClCompile Include="Users\Radar.cpp" />
     <ClCompile Include="Users\Skydome.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -144,7 +144,7 @@
     <ClInclude Include="Users\Enemy.h" />
     <ClInclude Include="Users\Player.h" />
     <ClInclude Include="Users\PlayerBullet.h" />
-    <ClInclude Include="Users\Rader.h" />
+    <ClInclude Include="Users\Radar.h" />
     <ClInclude Include="Users\Skydome.h" />
   </ItemGroup>
   <ItemGroup>

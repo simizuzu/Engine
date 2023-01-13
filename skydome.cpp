@@ -8,7 +8,7 @@ void skydome::Initialize()
 	transform_.reset(Object3d::Create());
 	transform_->SetModel(model_.get());
 	// ƒXƒP[ƒ‹‚ðÝ’è
-	//transform_->SetScale({ 10000.0f,10000.0f,10000.0f });
+	transform_->SetScale({ 10000.0f,10000.0f,10000.0f });
 }
 
 void skydome::Update(Camera* camera)

@@ -19,9 +19,9 @@ public:
 
 private:
 	// ワールドトランスフォーム
-	std::unique_ptr<Object3d> transform_;;
+	std::shared_ptr<Object3d> transform_;;
 	// モデル
-	std::unique_ptr<Model> model_;
+	std::shared_ptr<Model> model_;
 
 	//コピーコンストラクタ・代入演算子削除
 	skydome& operator=(const skydome&) = delete;

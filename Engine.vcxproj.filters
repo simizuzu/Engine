@@ -141,9 +141,6 @@
     <ClCompile Include="lib\engine\3D\WorldTransform.cpp">
       <Filter>Engine\ソース ファイル\3D</Filter>
     </ClCompile>
-    <ClCompile Include="lib\engine\Scene\GameScene.cpp">
-      <Filter>Users\ソースファイル\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="lib\engine\Audio\AudioManager.cpp">
       <Filter>Engine\ソース ファイル\Audio</Filter>
     </ClCompile>
@@ -172,7 +169,13 @@
       <Filter>Engine\ソース ファイル\Input</Filter>
     </ClCompile>
     <ClCompile Include="skydome.cpp">
-      <Filter>Engine\ソース ファイル</Filter>
+      <Filter>Users\ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>Users\ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\Scene\GameScene.cpp">
+      <Filter>Users\ソースファイル\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -218,9 +221,6 @@
     <ClInclude Include="lib\engine\3D\WorldTransform.h">
       <Filter>Engine\ヘッダー ファイル\3D</Filter>
     </ClInclude>
-    <ClInclude Include="lib\engine\Scene\GameScene.h">
-      <Filter>Users\ヘッダーファイル\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="lib\engine\Audio\AudioManager.h">
       <Filter>Engine\ヘッダー ファイル\Audio</Filter>
     </ClInclude>
@@ -248,8 +248,14 @@
     <ClInclude Include="lib\engine\Input\Controller.h">
       <Filter>Engine\ヘッダー ファイル\Input</Filter>
     </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Users\ヘッダーファイル</Filter>
+    </ClInclude>
     <ClInclude Include="skydome.h">
-      <Filter>Engine\ヘッダー ファイル</Filter>
+      <Filter>Users\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\engine\Scene\GameScene.h">
+      <Filter>Users\ヘッダーファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

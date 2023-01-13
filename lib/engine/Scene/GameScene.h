@@ -10,6 +10,7 @@
 #include "AudioManager.h"
 
 #include "skydome.h"
+#include "Stage.h"
 
 
 class GameScene
@@ -32,10 +33,13 @@ private: // クラス読み込み
 	DirectXCommon* dxCommon_ = nullptr;
 	std::unique_ptr<Camera> camera_;
 
-	std::unique_ptr<skydome> skydome_;
-
+	// スプライト
 	TextureData titleTex_;
 	std::unique_ptr<Sprite> titleSprite_;
+
+	std::unique_ptr<skydome> skydome_;
+	std::unique_ptr<Stage> stage_;
+
 
 	uint16_t scene = 0;
 private:

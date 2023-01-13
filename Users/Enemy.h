@@ -7,6 +7,7 @@
 #include "Sprite.h"
 #include "GameCollisionConflg.h"
 #include "GameScene.h"
+#include "DirectX12Math.h"
 
 enum class Phase
 {
@@ -34,6 +35,7 @@ private:
 
 	// モデル
 	std::shared_ptr<Model> enemymodel_;
+	std::shared_ptr<Object3d> enemyObject_;
 	// カメラ
 	std::shared_ptr<GameCamera> camera_;
 	// プレイヤー

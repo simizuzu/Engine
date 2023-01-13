@@ -327,6 +327,123 @@ namespace MyMathUtility
 		return retMat;
 	}
 
+	// 二つの値がほぼ等しいか
+	bool Approximately(float a, float b)
+	{
+		float tmp = 1e-06f * std::max(fabs(a), fabs(b));
+
+		float tmp2 = EPSILON * 8.0f;
+
+		if (fabs(b - a) < std::max(tmp, tmp2))
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	float Sin(float sin)
+	{
+		return std::sinf(sin);
+	}
+
+	float Asin(float sin)
+	{
+		return std::asinf(sin);
+	}
+
+	float Cos(float cos)
+	{
+		return std::cosf(cos);
+	}
+
+	float Acos(float cos)
+	{
+		return std::acosf(cos);
+	}
+
+	float Tan(float tan)
+	{
+		return std::tanf(tan);
+	}
+
+	float Atan(float tan)
+	{
+		return std::atanf(tan);
+	}
+
+	float Atan2(float y, float x)
+	{
+		return std::atan2f(y, x);
+	}
+
+	void Complement(float& x1, float x2, float flame)
+	{
+		//距離を出す
+		float distanceX = x2 - x1;
+		//距離をflameで割った値
+		float dividedDistanceX = distanceX / flame;
+
+		//距離をflameで割った値を足す
+		x1 += dividedDistanceX;
+	}
+
+	float Clamp(float Value, const float low, const float high)
+	{
+		if (high < Value)
+		{
+			Value = high;
+		}
+
+		if (Value < low)
+		{
+			Value = low;
+		}
+
+		return Value;
+	}
+
+	float Clamp0To1(float val)
+	{
+		if (val < 0.0f)
+		{
+			return 0.0f;
+		}
+		if (val > 1.0f)
+		{
+			return 1.0f;
+		}
+
+		return val;
+	}
+
+	// 線形補間(0～1)
+	float Lerp(float a, float b, float t)
+	{
+		return a + (b - a) * Clamp0To1(t);
+	}
+
+	Vector3 Lerp(Vector3 a, Vector3 b, float t)
+	{
+		Vector3 tmp;
+		tmp.x = a.x + (b.x - a.x) * Clamp0To1(t);
+		tmp.y = a.y + (b.y - a.y) * Clamp0To1(t);
+		tmp.z = a.z + (b.z - a.z) * Clamp0To1(t);
+		return tmp;
+	}
+
+	Vector3 HermiteGetPoint(Vector3 p0, Vector3 p1, Vector3 v0, Vector3 v1, float t)
+	{
+		Vector3 c0 = 2.0f * p0 + -2.0f * p1 + v0 + v1;
+		Vector3 c1 = -3.0f * p0 + 3.0f * p1 + -2.0f * v0 - v1;
+		Vector3 c2 = v0;
+		Vector3 c3 = p0;
+
+		float t2 = t * t;
+		float t3 = t2 * t;
+		return c0 * t3 + c1 * t2 + c2 * t + c3;
+	}
+
 	float LenSegLineOfSeparateAxis(Vector3* sep, Vector3* e1, Vector3* e2, Vector3* e3)
 	{
 		return 0.0f;
@@ -335,6 +452,57 @@ namespace MyMathUtility
 
 namespace Mathematics
 {
+	Vector3 Vec3Mat4Mul(Vector3& vec, Matrix4& mat)
+	{
+		Vector3 retVec = {};
+
+		retVec.x = vec.x * mat.m[0][0] + vec.y * mat.m[1][0] + vec.z * mat.m[2][0];
+		retVec.y = vec.x * mat.m[0][1] + vec.y * mat.m[1][1] + vec.z * mat.m[2][1];
+		retVec.z = vec.x * mat.m[0][2] + vec.y * mat.m[1][2] + vec.z * mat.m[2][2];
+
+		return retVec;
+	}
+
+	Vector3 CatMullRomSpline(std::vector<Vector3>& points, float t)
+	{
+
+		float length = static_cast<float>(points.size());
+		float progress = (length - 1) * t;
+		float index = std::floor(progress);
+		float weight = progress - index;
+
+		if (MyMathUtility::Approximately(weight, 0.0f) && index >= length - 1)
+		{
+			index = length - 2;
+			weight = 1;
+		}
+
+		Vector3 p0 = points[static_cast<size_t>(index)];
+		Vector3 p1 = points[static_cast<size_t>(index + 1.0f)];
+		Vector3 p2;
+		Vector3 p3;
+
+		if (index > 0.0f)
+		{
+			p2 = 0.5f * (points[static_cast<size_t>(index + 1.0f)] - points[static_cast<size_t>(index - 1.0f)]);
+		}
+		else
+		{
+			p2 = points[static_cast<size_t>(index + 1.0f)] - points[static_cast<size_t>(index)];
+		}
+
+		if (index < length - 2.0f)
+		{
+			p3 = 0.5f * (points[static_cast<size_t>(index + 2.0f)] - points[static_cast<size_t>(index)]);
+		}
+		else
+		{
+			p3 = points[static_cast<size_t>(index + 1.0f)] - points[static_cast<size_t>(index)];
+		}
+
+		return MyMathUtility::HermiteGetPoint(p0, p1, p2, p3, weight);
+	}
+
 	float LenSegLineOfSeparateAxis(Vector3* sep, Vector3* e1, Vector3* e2, Vector3* e3)
 	{
 		// 3つの内積の絶対値の和で投影線分長を計算

@@ -78,4 +78,5 @@ public:
 namespace Mathematics
 {
 	Vector3 GetWorldPosition(Object3d& transform);
+	Matrix4 MakeWorldMatrix4(Object3d& transform);
 }

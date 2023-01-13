@@ -175,4 +175,27 @@ namespace Mathematics
 
 		return worldPos;
 	}
+
+	Matrix4 MakeWorldMatrix4(Object3d& transform)
+	{
+		Matrix4 matWorld = MyMathUtility::MakeIdentity();
+		Matrix4 matScale, matRot, matTrans;
+
+		// ƒXƒP[ƒŠƒ“ƒO”{—¦
+		matScale = MyMathUtility::MakeScaling(transform.scale);
+		// ‰ñ“]s—ñ
+		matRot = MyMathUtility::MakeRotation(transform.rotation);
+		// ˆÚ“®—Ê
+		matTrans = MyMathUtility::MakeTranslation(transform.position);
+
+		// matWorld‚ÉŠ|‚¯ŽZ
+		matWorld = matScale * matRot * matTrans;
+
+		if (transform.parent)
+		{
+			matWorld *= transform.parent->matWorld;
+		}
+
+		return matWorld;
+	}
 }

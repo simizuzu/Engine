@@ -5,55 +5,98 @@
 #include "Model.h"
 #include "Input.h"
 #include "Object3d.h"
-#include "Camera.h"
+#include "GameCamera.h"
+#include "WinApp.h"
+#include "GameCollisionConflg.h"
+#include "AudioManager.h"
+#include "CollisionPrimitive.h"
+#include "Sprite.h"
 
+class Enemy;
 
-class Player
+struct PlayerData
+{
+	std::shared_ptr<Model> playerModel_;
+	std::shared_ptr<GameCamera> camera_;
+	TextureData sceneChangeTex;
+	TextureData silenPullUpTex;
+	TextureData silenReturnTex;
+
+	uint32_t fighterSE = 0;
+};
+
+class Player : BoundingBox
 {
 public:
 	Player() = default;
-	~Player();
+	~Player() = default;
 
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(std::unique_ptr<Model>& model);
+	void Initialize(Mathematics::Vector3 pos, PlayerData data);
 
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update(Camera* camera);
+	void Update(Camera* camera,INT32& sceneNum);
 
 	/// <summary>
 	/// 描画
 	/// </summary>
 	void Draw();
 
-private:
 	/// <summary>
 	/// プレイヤーの挙動
 	/// </summary>
-	void PlayerMove();
+	void PlayerMove(INT32& sceneNum);
+	void Rotate();
+	// 移動補完
+	void Complement(float& x1, float x2, float flame);
 
 	/// <summary>
-	/// 弾の挙動
+	/// 当たった判定
 	/// </summary>
-	void BulletShot();
+	virtual void OnCollision()override;
+
+	// ゲッター
+	Object3d* GetTransform();
+	Mathematics::Vector3 GetWorldPosition();
 
 private:
+	Input* input_ = nullptr;
+
 	// プレイヤーの座標
 	Mathematics::Vector3 playerPos;
-	// 弾の座標
-	Mathematics::Vector3 bulletPos;
 
 	// プレイヤーのモデル
-	std::unique_ptr<Model> playerModel_;
-	std::unique_ptr<Model> bulletModel_ = nullptr;
-	
-	std::unique_ptr < Object3d> playerObject_ = nullptr;
-	std::unique_ptr < Object3d> bulletObject_ = nullptr;
+	std::shared_ptr<Model> playerModel_;	
+	std::unique_ptr < Object3d> playerObject_;
 
-	// 入力
-	Input* input_ = nullptr;
+	std::unique_ptr<Object3d> transform_{};
+	
+	// カメラ
+	std::shared_ptr<GameCamera> camera_;
+
+	std::unique_ptr<Sprite>silenPullUp;
+	TextureData silenPullUpTex_{};
+	Object3d silenPullUpTransform;
+
+	std::unique_ptr<Sprite>silenReturn;
+	TextureData silenReturnTex_{};
+	Object3d silenReturnTransform;
+
+	
+
+private:
+	float speed_ = 600.0f;
+	float alpha = 0.0f;
+	bool initflag = true;
+	bool animationFlag = false;
+
+	Mathematics::Vector3 oldTranslation_;
+
+	int32_t hp = 4;
+	uint32_t fighterSE = 0;
 };
 

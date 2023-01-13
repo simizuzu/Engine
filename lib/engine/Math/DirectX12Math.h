@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 
 #include "Vector2.h"
 #include "Vector3.h"
@@ -10,6 +11,9 @@ namespace MyMathUtility
 	const float PI = 3.141592654f;
 	constexpr float degree2Radius = 3.1415926535897931f / 180.0f;
 	constexpr float PIHalf = 3.1415926535897931f / 2.0f;
+
+	//ε(イプシロン)
+	constexpr float EPSILON = 2.2204460492503131E-16f;
 
 	// 長さを求める(2次元)
 	float Vector2Length(const Mathematics::Vector2& v);
@@ -51,13 +55,49 @@ namespace MyMathUtility
 	// 逆行列
 	Mathematics::Matrix4 MakeInverse(Mathematics::Matrix4& mat);
 
+	// 値が等しいか確認する
+	bool Approximately(float a, float b);
+
 	// 線形補間
 	float Lerp(float a, float b, float t);
+	Mathematics::Vector3 Lerp(Mathematics::Vector3 a, Mathematics::Vector3 b, float t);
+
+	/// <summary>
+	/// エルミート曲線
+	/// </summary>
+	/// <param name="p0">制御点</param>
+	/// <param name="p1">制御点</param>
+	/// <param name="v0">制御点</param>
+	/// <param name="v1">制御点</param>
+	/// <param name="t">時間(0.0～1.0)</param>
+	/// <returns></returns>
+	Mathematics::Vector3 HermiteGetPoint(Mathematics::Vector3 p0, Mathematics::Vector3 p1, Mathematics::Vector3 v0, Mathematics::Vector3 v1, float t);
+
+	// Sin,Cos,Tan関数
+	float Sin(float sin);
+	float Cos(float cos);
+	float Tan(float tan);
+
+	float Asin(float sin);
+	float Acos(float cos);
+	float Atan(float tan);
+	float Atan2(float y, float x);
+
+	void Complement(float& x1, float x2, float flame);
+
+	float Clamp(float Value, const float low, const float high);
+	float Clamp0To1(float val);
 
 } // namespace MyMathUtility
 
 namespace Mathematics
 {
+	// ベクトルと行列の掛け算
+	Vector3 Vec3Mat4Mul(Vector3& vec, Matrix4& mat);
+
+	// キャットムルーロムスプライン曲線
+	Vector3 CatMullRomSpline(std::vector<Vector3>& points, float t);
+
 	/// 分離軸に投影された軸成分から投影線分長を算出
 	float LenSegLineOfSeparateAxis(Vector3* sep, Vector3* e1, Vector3* e2, Vector3* e3 = 0);
 }

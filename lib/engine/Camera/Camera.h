@@ -28,7 +28,7 @@ struct ViewProjection
 
 class Camera
 {
-private:
+public:
 #pragma region ビュー行列設定
 	// 視点座標
 	Mathematics::Vector3 eye_;
@@ -38,6 +38,7 @@ private:
 	Mathematics::Vector3 up_;
 #pragma endregion
 
+private:
 #pragma region 射影行列設定
 	// カメラ画角
 	float fovAngleY = MyMathUtility::degree2Radius * 45.0f;

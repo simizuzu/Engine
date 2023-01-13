@@ -4,11 +4,13 @@
 #include "Input.h"
 #include "Camera.h"
 #include "Sprite.h"
+#include "TextureManager.h"
 #include "Object3d.h"
 #include "Model.h"
 #include "AudioManager.h"
 
 #include "skydome.h"
+
 
 class GameScene
 {
@@ -31,6 +33,9 @@ private: // ÉNÉâÉXì«Ç›çûÇ›
 	std::unique_ptr<Camera> camera_;
 
 	std::unique_ptr<skydome> skydome_;
+
+	TextureData titleTex_;
+	std::unique_ptr<Sprite> titleSprite_;
 
 	uint16_t scene = 0;
 private:

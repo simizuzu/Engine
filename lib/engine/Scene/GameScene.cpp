@@ -6,6 +6,11 @@ void GameScene::Initialize()
 	camera_ = std::make_unique<Camera>();
 	camera_->Initialize();
 
+	// スプライト
+	titleTex_ = TextureManager::GetInstance()->
+	titleSprite_ = std::make_unique<Sprite>();
+
+	// クラス
 	skydome_ = std::make_unique<skydome>();
 	skydome_->Initialize();
 }

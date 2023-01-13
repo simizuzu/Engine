@@ -82,8 +82,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameCamera.cpp" />
-    <ClCompile Include="GameCollisionManager.cpp" />
     <ClCompile Include="lib\engine\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="lib\engine\3D\Model\Material.cpp" />
     <ClCompile Include="lib\engine\3D\Model\Model.cpp" />
@@ -109,14 +107,8 @@
     <ClCompile Include="lib\engine\Math\Vector4.cpp" />
     <ClCompile Include="lib\engine\Scene\GameScene.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Users\Enemy.cpp" />
-    <ClCompile Include="Users\Player.cpp" />
-    <ClCompile Include="Users\PlayerBullet.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameCamera.h" />
-    <ClInclude Include="GameCollisionConflg.h" />
-    <ClInclude Include="GameCollisionManager.h" />
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
     <ClInclude Include="lib\engine\3D\Model\Material.h" />
     <ClInclude Include="lib\engine\3D\Model\Model.h" />
@@ -141,9 +133,6 @@
     <ClInclude Include="lib\engine\Math\Vector3.h" />
     <ClInclude Include="lib\engine\Math\Vector4.h" />
     <ClInclude Include="lib\engine\Scene\GameScene.h" />
-    <ClInclude Include="Users\Enemy.h" />
-    <ClInclude Include="Users\Player.h" />
-    <ClInclude Include="Users\PlayerBullet.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\OBJ.hlsli" />

@@ -28,8 +28,8 @@ void GameScene::Initialize()
 	doorManager_ = std::make_unique<DoorManager>();
 	goalModel_ = std::make_unique<Goal>();
 
-	player_->Initialize(railCamera_->GetWorldTransformPtr());
 	railCamera_->Initialize(Mathematics::Vector3{ 0.0,0.0f,-10.0f }, { 0,0,0 });
+	player_->Initialize(railCamera_->GetWorldTransformPtr());
 	resultCamera_->Initialize(railCamera_->GetWorldTransformPtr());
 	stage_->Initialize();
 	skydome_->Initialize();
@@ -103,7 +103,7 @@ void GameScene::Update()
 			nowTime = static_cast<int>(time(NULL)) - startTime;
 
 			camera_ = railCamera_->GetViewProjection();
-			skydome_->Update(camera_);
+			
 		}
 		else if (startGameFrg == false)
 		{
@@ -153,6 +153,8 @@ void GameScene::Update()
 		break;
 	}
 	camera_->Update();
+	skydome_->Update(camera_);
+	stage_->Update(camera_);
 }
 
 void GameScene::Draw()

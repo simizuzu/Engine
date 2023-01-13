@@ -177,6 +177,9 @@
     <ClCompile Include="lib\engine\Scene\GameScene.cpp">
       <Filter>Users\ソースファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Users\ソースファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engine\Math\DirectX12Math.h">
@@ -256,6 +259,9 @@
     </ClInclude>
     <ClInclude Include="lib\engine\Scene\GameScene.h">
       <Filter>Users\ヘッダーファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

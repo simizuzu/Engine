@@ -5,7 +5,7 @@ void GameScene::Initialize()
 	input_ = Input::GetInstace();
 	camera_ = std::make_unique<Camera>();
 	camera_->Initialize();
-	TextureManager::GetInstance();
+	
 
 	// スプライト
 	titleTex_ = TextureManager::Load("Resources/Texture/title.png");

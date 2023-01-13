@@ -480,7 +480,7 @@ Mathematics::Vector3 RailCamera::GetVector()
 void RailCamera::Move()
 {
 	//ワールドトランスフォームの更新
-	Mathematics::MakeWorldMatrix4(*worldTransform_);
+	worldTransform_->matWorld = Mathematics::MakeWorldMatrix4(*worldTransform_);
 
 	viewProjection_->eye_ = Mathematics::GetWorldPosition(*worldTransform_);
 	//ワールド前方ベクトル

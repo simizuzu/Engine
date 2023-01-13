@@ -101,6 +101,8 @@ void GameScene::Update()
 				}
 			}
 			nowTime = static_cast<int>(time(NULL)) - startTime;
+
+			camera_ = railCamera_->GetViewProjection();
 		}
 		else if (startGameFrg == false)
 		{

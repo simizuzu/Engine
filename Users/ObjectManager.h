@@ -1,8 +1,7 @@
 #pragma once
 #include"Object.h"
-#include"EngineMathUtility.h"
 #include"player.h"
-
+#include "CollisionPrimitive.h"
 
 class ObjectManager
 {
@@ -25,11 +24,14 @@ public:
 	/// </summary>
 	void Draw(Camera* camera);
 	
-	void  Reset();
+	void Reset();
 private:
-
 	std::list<std::unique_ptr<Object>>objects_;
-	std::unique_ptr<objModel> objectModel_;
+	std::unique_ptr<Model> objectModel_;
+	std::unique_ptr<Object3d> cubeObject_;
+
+	std::unique_ptr<BoundingBox> aabbToSphere_;
+
 	Player* player_ = nullptr;
 
 	//コピーコンストラクタ・代入演算子削除

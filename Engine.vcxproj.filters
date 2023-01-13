@@ -201,9 +201,6 @@
     <ClCompile Include="Users\ObjectManager.cpp">
       <Filter>Engine\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Users\Particle.cpp">
-      <Filter>Engine\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Users\ResultCamera.cpp">
       <Filter>Engine\ソース ファイル</Filter>
     </ClCompile>
@@ -312,9 +309,6 @@
       <Filter>Engine\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Users\ObjectManager.h">
-      <Filter>Engine\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Users\Particle.h">
       <Filter>Engine\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Users\ResultCamera.h">

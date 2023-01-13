@@ -3,9 +3,14 @@
 void ObjectManager::Initialize(Player* player)
 {
 	player_ = player;
-	objectModel_ = std::make_unique<objModel>();
-	objectModel_->Initialize();
-	objectModel_->Create("Resources/cube");
+	objectModel_ = std::make_unique<Model>();
+	objectModel_.reset(Model::LoadFromObj("cube"));
+	cubeObject_ = std::make_unique<Object3d>();
+	cubeObject_.reset(Object3d::Create());
+	cubeObject_->SetModel(objectModel_.get());
+
+	aabbToSphere_ = std::make_unique<BoundingBox>();
+	
 	Reset();
 }
 
@@ -55,7 +60,7 @@ void ObjectManager::Reset()
 			if (j != 3 && j != 4)
 			{
 				object = std::make_unique<Object>();
-				object->Initialize({ 67.0f - j * 1.75f, 2.5f - 2.0f * i, 850.0f + j * 1.0f }, { 0.0f, 30.0f * EngineMathF::Deg2Rad, 0.0f }, 1.0f, objectModel_.get());
+				object->Initialize({ 67.0f - j * 1.75f, 2.5f - 2.0f * i, 850.0f + j * 1.0f }, { 0.0f, 30.0f * MyMathUtility::degree2Radius, 0.0f }, 1.0f, objectModel_.get());
 				objects_.push_back(std::move(object));
 			}
 		}
@@ -66,7 +71,7 @@ void ObjectManager::Reset()
 	{
 
 		object = std::make_unique<Object>();
-		object->Initialize({ 298.0f - j * 1.75f, -1.5f , 1250.0f + j * 1.0f }, { 0.0f, 30.0f * EngineMathF::Deg2Rad, 0.0f }, 1.0f, objectModel_.get());
+		object->Initialize({ 298.0f - j * 1.75f, -1.5f , 1250.0f + j * 1.0f }, { 0.0f, 30.0f * MyMathUtility::degree2Radius, 0.0f }, 1.0f, objectModel_.get());
 		objects_.push_back(std::move(object));
 	}
 
@@ -80,7 +85,7 @@ void ObjectManager::Reset()
 			for (float i = 0; i < 5; i++)
 			{
 				object = std::make_unique<Object>();
-				object->Initialize({ (490.0f + i * 1.75f) + j * 1.0f, 2.5f - 2.0f * k, (1200.0f + i * 1.0f) - j * 1.75f }, { 0.0f, 60.0f * EngineMathF::Deg2Rad, 0.0f }, 1.0f, objectModel_.get());
+				object->Initialize({ (490.0f + i * 1.75f) + j * 1.0f, 2.5f - 2.0f * k, (1200.0f + i * 1.0f) - j * 1.75f }, { 0.0f, 60.0f * MyMathUtility::degree2Radius, 0.0f }, 1.0f, objectModel_.get());
 				objects_.push_back(std::move(object));
 			}
 		}
@@ -93,7 +98,7 @@ void ObjectManager::Reset()
 			for (float i = 0; i < 5; i++)
 			{
 				object = std::make_unique<Object>();
-				object->Initialize({ (653.5f + i * 1.75f) + j * 1.0f, 2.5f - 2.0f * k, (900.0f + i * 1.0f) - j * 1.75f }, { 0.0f, 60.0f * EngineMathF::Deg2Rad, 0.0f }, 1.0f, objectModel_.get());
+				object->Initialize({ (653.5f + i * 1.75f) + j * 1.0f, 2.5f - 2.0f * k, (900.0f + i * 1.0f) - j * 1.75f }, { 0.0f, 60.0f * MyMathUtility::degree2Radius, 0.0f }, 1.0f, objectModel_.get());
 				objects_.push_back(std::move(object));
 			}
 		}
@@ -158,14 +163,14 @@ void ObjectManager::Reset()
 		if (i != 1 && i != 2 && i != 5 && i != 6)
 		{
 			object = std::make_unique<Object>();
-			object->Initialize({ 699.0f - i * 1.75f, -1.5f , -100.0f + i * 1.0f }, { 0.0f, 30.0f * EngineMathF::Deg2Rad, 0.0f }, 1.0f, objectModel_.get());
+			object->Initialize({ 699.0f - i * 1.75f, -1.5f , -100.0f + i * 1.0f }, { 0.0f, 30.0f * MyMathUtility::degree2Radius, 0.0f }, 1.0f, objectModel_.get());
 
 			objects_.push_back(std::move(object));
 		}
 		else
 		{
 			object = std::make_unique<Object>();
-			object->Initialize({ 699.0f - i * 1.75f, 0.5f , -100.0f + i * 1.0f }, { 0.0f, 30.0f * EngineMathF::Deg2Rad, 0.0f }, 1.0f, objectModel_.get());
+			object->Initialize({ 699.0f - i * 1.75f, 0.5f , -100.0f + i * 1.0f }, { 0.0f, 30.0f * MyMathUtility::degree2Radius, 0.0f }, 1.0f, objectModel_.get());
 
 			objects_.push_back(std::move(object));
 		}
@@ -180,7 +185,7 @@ void ObjectManager::Reset()
 			for (float i = 0; i < 5; i++)
 			{
 				object = std::make_unique<Object>();
-				object->Initialize({ (586.0f - i * 1.75f) - j * 1.0f, 2.5f - 2.0f * k, (-284.0f + i * 1.0f) - j * 1.75f }, { 0.0f, 30.0f * EngineMathF::Deg2Rad, 0.0f }, 1.0f, objectModel_.get());
+				object->Initialize({ (586.0f - i * 1.75f) - j * 1.0f, 2.5f - 2.0f * k, (-284.0f + i * 1.0f) - j * 1.75f }, { 0.0f, 30.0f * MyMathUtility::degree2Radius, 0.0f }, 1.0f, objectModel_.get());
 				objects_.push_back(std::move(object));
 			}
 		}
@@ -193,7 +198,7 @@ void ObjectManager::Reset()
 			for (float i = 0; i < 5; i++)
 			{
 				object = std::make_unique<Object>();
-				object->Initialize({ (506.0f - i * 1.75f) - j * 1.0f, 2.5f - 2.0f * k, (-439.0f + i * 1.0f) - j * 1.75f }, { 0.0f, 30.0f * EngineMathF::Deg2Rad, 0.0f }, 1.0f, objectModel_.get());
+				object->Initialize({ (506.0f - i * 1.75f) - j * 1.0f, 2.5f - 2.0f * k, (-439.0f + i * 1.0f) - j * 1.75f }, { 0.0f, 30.0f * MyMathUtility::degree2Radius, 0.0f }, 1.0f, objectModel_.get());
 				objects_.push_back(std::move(object));
 			}
 		}
@@ -205,7 +210,7 @@ void ObjectManager::Reset()
 	for (float i = 0; i < 9; i++)
 	{
 		object = std::make_unique<Object>();
-		object->Initialize({ 50.0f + i * 1.75f, -1.5f, -100.0f + i * 1.0f }, { 0.0f,60.0f * EngineMathF::Deg2Rad, 0.0f }, 1.0f, objectModel_.get());
+		object->Initialize({ 50.0f + i * 1.75f, -1.5f, -100.0f + i * 1.0f }, { 0.0f,60.0f * MyMathUtility::degree2Radius, 0.0f }, 1.0f, objectModel_.get());
 
 		objects_.push_back(std::move(object));
 	}
@@ -222,7 +227,7 @@ void ObjectManager::Update()
 	{
 		object->Update();
 
-		if (CheckAABB2SPHERE(player_->GetCollider(), object->GetCollider()))
+		if (aabbToSphere_->CheckAABBToSphere(player_->GetCollider(), object->GetCollider()))
 		{
 			object->OnCollision();
 			player_->OnCollision();

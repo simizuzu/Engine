@@ -1,10 +1,10 @@
 #include "Object.h"
 
-void Object::Initialize(const EngineMathF::Vector3& pos, const EngineMathF::Vector3& rot, float radius, objModel* model)
+void Object::Initialize(const Mathematics::Vector3& pos, const Mathematics::Vector3& rot, float radius, Model* model)
 {
-	worldTransform_ = std::make_unique<Transform>();
+	worldTransform_ = std::make_unique<Object3d>();
 
-	worldTransform_->translation = pos;
+	worldTransform_->position = pos;
 	worldTransform_->scale = { 1.0f,1.0f,1.0f };
 	worldTransform_->rotation = rot;
 
@@ -12,7 +12,7 @@ void Object::Initialize(const EngineMathF::Vector3& pos, const EngineMathF::Vect
 
 	model_ = model;
 
-	collider_.center = worldTransform_->translation;
+	collider_.center = worldTransform_->position;
 	collider_.radius = radius;
 }
 
@@ -23,11 +23,11 @@ void Object::Update()
 
 void Object::Draw(Camera* camera)
 {
-	worldTransform_->TransUpdate(camera);
-	model_->Draw(worldTransform_.get());
+	worldTransform_->Update(camera);
+	worldTransform_->Draw();
 }
 
-SPHERE& Object::GetCollider()
+Sphere& Object::GetCollider()
 {
 	return collider_;
 }

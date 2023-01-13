@@ -117,7 +117,6 @@
     <ClCompile Include="Users\Goal.cpp" />
     <ClCompile Include="Users\Object.cpp" />
     <ClCompile Include="Users\ObjectManager.cpp" />
-    <ClCompile Include="Users\Particle.cpp" />
     <ClCompile Include="Users\ResultCamera.cpp" />
     <ClCompile Include="Users\SpeedUpChance.cpp" />
   </ItemGroup>
@@ -156,7 +155,6 @@
     <ClInclude Include="Users\Goal.h" />
     <ClInclude Include="Users\Object.h" />
     <ClInclude Include="Users\ObjectManager.h" />
-    <ClInclude Include="Users\Particle.h" />
     <ClInclude Include="Users\ResultCamera.h" />
     <ClInclude Include="Users\SpeedUpChance.h" />
   </ItemGroup>

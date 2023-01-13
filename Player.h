@@ -8,6 +8,7 @@
 
 class Player
 {
+public:
 	// コンストラクタ・デストラクタ
 	Player();
 	~Player();

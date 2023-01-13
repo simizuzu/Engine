@@ -8,6 +8,7 @@
 #include "Model.h"
 #include "AudioManager.h"
 
+#include "skydome.h"
 
 class GameScene
 {
@@ -24,9 +25,14 @@ public: // メンバ関数
 	void Draw();
 
 
-private: // メンバ変数
+private: // クラス読み込み
 	Input* input_ = nullptr;
 	DirectXCommon* dxCommon_ = nullptr;
+	std::unique_ptr<Camera> camera_;
+
+	std::unique_ptr<skydome> skydome_;
+
+	uint16_t scene = 0;
 private:
 
 };

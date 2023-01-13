@@ -107,6 +107,7 @@
     <ClCompile Include="lib\engine\Math\Vector4.cpp" />
     <ClCompile Include="lib\engine\Scene\GameScene.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="skydome.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
@@ -133,6 +134,7 @@
     <ClInclude Include="lib\engine\Math\Vector3.h" />
     <ClInclude Include="lib\engine\Math\Vector4.h" />
     <ClInclude Include="lib\engine\Scene\GameScene.h" />
+    <ClInclude Include="skydome.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\OBJ.hlsli" />

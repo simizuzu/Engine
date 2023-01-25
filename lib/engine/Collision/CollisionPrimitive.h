@@ -1,8 +1,9 @@
 #pragma once
+#include <vector>
 #include <array>
 #include <string>
 #include "Vector3.h"
-#include "Object3d.h"
+#include "lib/engine/3D/Model/Object3d.h"
 
 /// <summary>
 /// Õ“Ë”»’èŠî’êƒNƒ‰ƒX

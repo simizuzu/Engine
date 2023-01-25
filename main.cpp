@@ -7,8 +7,8 @@
 #include "FPS.h"
 #include "Sprite.h"
 #include "TextureManager.h"
-#include "GameScene.h"
-#include "Object3d.h"
+#include "lib/engine/Scene/GameScene.h"
+#include "lib/engine/3D/Model/Object3d.h"
 #include "AudioManager.h"
 
 // Windowsアプリでのエントリーポイント(main関数)

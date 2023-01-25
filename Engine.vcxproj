@@ -44,10 +44,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)DirectXTex;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)imgui;$(SolutionDir)DirectXTex;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)DirectXTex;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)imgui;$(SolutionDir)DirectXTex;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -57,6 +57,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)Users;$(ProjectDir)lib\engine\Collision;$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);$(ProjectDir)lib\engine\2D\Sprite;$(ProjectDir)lib\engine\Camera;$(ProjectDir)lib\engine\Scene;$(ProjectDir)lib\engine\3D\Model;%(AdditionalIncludeDirectories);lib\engine\Collision;$(ProjectDir)Users;$(ProjectDir)lib\engine\Collision</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -73,6 +74,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)Users;$(ProjectDir)lib\engine\Collision;$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);$(ProjectDir)lib\engine\2D\Sprite;%(AdditionalIncludeDirectories);lib\engine\Collision;$(ProjectDir)Users;$(ProjectDir)lib\engine\Collision</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -145,10 +147,14 @@
     <FxCompile Include="Resources\shaders\OBJPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
     <FxCompile Include="Resources\shaders\OBJVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
@@ -162,6 +168,14 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="lib\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">
+      <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
+    </ProjectReference>
+    <ProjectReference Include="lib\imgui\imgui.vcxproj">
+      <Project>{d704c778-cbe7-4819-892f-6673c62d9d88}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

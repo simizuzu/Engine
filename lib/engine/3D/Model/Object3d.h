@@ -7,7 +7,7 @@
 #include "Pipeline.h"
 #include "Shader.h"
 
-#include "Camera.h"
+#include "lib/engine/Camera/Camera.h"
 #include "Matrix4.h"
 
 class Object3d

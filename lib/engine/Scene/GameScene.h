@@ -2,10 +2,10 @@
 #include <memory>
 
 #include "Input.h"
-#include "Camera.h"
+#include "lib/engine/Camera/Camera.h"
 #include "Sprite.h"
-#include "Object3d.h"
-#include "Model.h"
+#include "lib/engine/3D/Model/Object3d.h"
+#include "lib/engine/3D/Model/Model.h"
 #include "AudioManager.h"
 
 #include "GameCollisionManager.h"

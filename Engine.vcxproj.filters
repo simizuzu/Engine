@@ -171,18 +171,6 @@
     <ClCompile Include="lib\engine\Input\Controller.cpp">
       <Filter>Engine\ソース ファイル\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Users\PlayerBullet.cpp">
-      <Filter>Users\ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Users\Player.cpp">
-      <Filter>Users\ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Users\Enemy.cpp">
-      <Filter>Users\ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GameCamera.cpp">
-      <Filter>Users\ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="GameCollisionManager.cpp">
       <Filter>Users\ソースファイル</Filter>
     </ClCompile>
@@ -262,18 +250,6 @@
     </ClInclude>
     <ClInclude Include="lib\engine\Input\Controller.h">
       <Filter>Engine\ヘッダー ファイル\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Users\PlayerBullet.h">
-      <Filter>Users\ヘッダーファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Users\Player.h">
-      <Filter>Users\ヘッダーファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Users\Enemy.h">
-      <Filter>Users\ヘッダーファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GameCamera.h">
-      <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
     <ClInclude Include="GameCollisionManager.h">
       <Filter>Users\ヘッダーファイル</Filter>

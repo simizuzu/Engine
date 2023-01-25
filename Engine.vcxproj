@@ -82,7 +82,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameCollisionManager.cpp" />
     <ClCompile Include="lib\engine\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="lib\engine\3D\Model\Material.cpp" />
     <ClCompile Include="lib\engine\3D\Model\Model.cpp" />
@@ -98,6 +97,7 @@
     <ClCompile Include="lib\engine\Camera\Camera.cpp" />
     <ClCompile Include="lib\engine\Collision\Collision.cpp" />
     <ClCompile Include="lib\engine\Collision\CollisionPrimitive.cpp" />
+    <ClCompile Include="lib\engine\Collision\GameCollisionManager.cpp" />
     <ClCompile Include="lib\engine\Input\Controller.cpp" />
     <ClCompile Include="lib\engine\Input\Input.cpp" />
     <ClCompile Include="lib\engine\Input\Keyboard.cpp" />
@@ -110,8 +110,6 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameCollisionConflg.h" />
-    <ClInclude Include="GameCollisionManager.h" />
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
     <ClInclude Include="lib\engine\3D\Model\Material.h" />
     <ClInclude Include="lib\engine\3D\Model\Model.h" />
@@ -127,6 +125,8 @@
     <ClInclude Include="lib\engine\Camera\Camera.h" />
     <ClInclude Include="lib\engine\Collision\Collision.h" />
     <ClInclude Include="lib\engine\Collision\CollisionPrimitive.h" />
+    <ClInclude Include="lib\engine\Collision\GameCollisionConflg.h" />
+    <ClInclude Include="lib\engine\Collision\GameCollisionManager.h" />
     <ClInclude Include="lib\engine\Input\Controller.h" />
     <ClInclude Include="lib\engine\Input\Input.h" />
     <ClInclude Include="lib\engine\Input\Keyboard.h" />

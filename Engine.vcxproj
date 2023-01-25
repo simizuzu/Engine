@@ -100,6 +100,7 @@
     <ClCompile Include="lib\engine\Collision\Collision.cpp" />
     <ClCompile Include="lib\engine\Collision\CollisionPrimitive.cpp" />
     <ClCompile Include="lib\engine\Collision\GameCollisionManager.cpp" />
+    <ClCompile Include="lib\engine\ImGui\ImGuiManager.cpp" />
     <ClCompile Include="lib\engine\Input\Controller.cpp" />
     <ClCompile Include="lib\engine\Input\Input.cpp" />
     <ClCompile Include="lib\engine\Input\Keyboard.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="lib\engine\Collision\CollisionPrimitive.h" />
     <ClInclude Include="lib\engine\Collision\GameCollisionConflg.h" />
     <ClInclude Include="lib\engine\Collision\GameCollisionManager.h" />
+    <ClInclude Include="lib\engine\ImGui\ImGuiManager.h" />
     <ClInclude Include="lib\engine\Input\Controller.h" />
     <ClInclude Include="lib\engine\Input\Input.h" />
     <ClInclude Include="lib\engine\Input\Keyboard.h" />

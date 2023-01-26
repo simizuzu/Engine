@@ -8,6 +8,8 @@
 #include "TextureManager.h"
 #include "ImGuiManager.h"
 #include "GameScene.h"
+#include "TitleScene.h"
+#include "BaseScene.h"
 
 // ƒQ[ƒ€‘S‘Ì
 class Framework
@@ -40,6 +42,9 @@ protected:
 	FPS* fps_ = nullptr;
 	TextureManager* textureManager_ = nullptr;
 	std::unique_ptr<GameScene> gameScene;
+	std::unique_ptr<TitleScene> titleScene;
 	ImGuiManager* imGuiManager = nullptr;
+
+	std::unique_ptr < BaseScene> baseScene;
 };
 

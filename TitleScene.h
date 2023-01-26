@@ -1,8 +1,10 @@
 #pragma once
 #include "BaseScene.h"
+#include "TextureManager.h"
+#include "Sprite.h"
 
 // タイトルシーン
-class TitleScene : BaseScene
+class TitleScene : public BaseScene
 {
 public: // メンバ関数
 
@@ -27,6 +29,7 @@ public: // メンバ関数
 	void Finalize() override;
 
 private:
-
+	TextureData tex;
+	std::unique_ptr<Sprite> sprite_;
 };
 

@@ -2,10 +2,10 @@
 #include <memory>
 
 #include "Input.h"
-#include "lib/engine/Camera/Camera.h"
+#include "Camera.h"
 #include "Sprite.h"
-#include "lib/engine/3D/Model/Object3d.h"
-#include "lib/engine/3D/Model/Model.h"
+#include "Object3d.h"
+#include "Model.h"
 #include "AudioManager.h"
 
 #include "GameCollisionManager.h"
@@ -35,6 +35,7 @@ private: // メンバ変数
 	INT32 sceneNum = 0;
 	char PADING[4]{};
 
+	float pos[2] = {100,100};
 private:
 	//コピーコンストラクタ・代入演算子削除
 	GameScene& operator=(const GameScene&) = delete;

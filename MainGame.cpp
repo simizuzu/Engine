@@ -5,10 +5,8 @@ void MainGame::Initialize()
 	// 基底クラスの初期化処理
 	Framework::Initialize();
 
-
 	textureManager_ = TextureManager::GetInstance();
 	imGuiManager = ImGuiManager::GetInstance();
-
 
 	// スプライト共通部の初期化
 	textureManager_->Initialize(dxCommon_);

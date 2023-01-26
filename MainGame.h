@@ -1,8 +1,6 @@
 #pragma once
 
-
 #include "TextureManager.h"
-
 #include "ImGuiManager.h"
 #include "GameScene.h"
 #include "Object3d.h"
@@ -27,7 +25,6 @@ public: // メンバ関数
 private:
 	// ゲーム終了フラグ
 	bool endRequest_ = false;
-
 
 	TextureManager* textureManager_ = nullptr;
 	ImGuiManager* imGuiManager = nullptr;

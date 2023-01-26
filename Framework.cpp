@@ -6,11 +6,15 @@ void Framework::Initialize()
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstace();
 	audioManager = AudioManager::GetInstance();
-
+	textureManager_ = TextureManager::GetInstance();
+	
 	// WindowsAPI初期化
 	winApp_->Initialize();
 	// DirectX初期化
 	dxCommon_->Initialize();
+	// スプライト共通部の初期化
+	textureManager_->Initialize(dxCommon_);
+
 	// Audio初期化
 	audioManager->Initialize();
 	// Input初期化
@@ -24,6 +28,10 @@ void Framework::Initialize()
 
 void Framework::Finalize()
 {
+	// テクスチャマネージャ解放
+	textureManager_->Delete();
+
+	// オーディオマネージャー初期化
 	audioManager->Destroy();
 	// DirectX解放
 	dxCommon_->Delete();
@@ -45,6 +53,7 @@ void Framework::Update()
 	// 入力の更新
 	input_->Update();
 	audioManager->Update();
+
 }
 
 void Framework::Run()

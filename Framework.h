@@ -5,6 +5,7 @@
 #include "FPS.h"
 #include "Sprite.h"
 #include "AudioManager.h"
+#include "TextureManager.h"
 
 // ƒQ[ƒ€‘S‘Ì
 class Framework
@@ -35,5 +36,7 @@ protected:
 	AudioManager* audioManager = nullptr;
 	Input* input_ = nullptr;
 	FPS* fps_ = nullptr;
+	TextureManager* textureManager_ = nullptr;
+
 };
 

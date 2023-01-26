@@ -4,15 +4,10 @@ void MainGame::Initialize()
 {
 	// 基底クラスの初期化処理
 	Framework::Initialize();
-
-	textureManager_ = TextureManager::GetInstance();
 	imGuiManager = ImGuiManager::GetInstance();
 
-	// スプライト共通部の初期化
-	textureManager_->Initialize(dxCommon_);
 	// ImGui初期化
 	imGuiManager->Initialize(winApp_, dxCommon_);
-	
 	// 3Dオブジェクト静的初期化
 	Object3d::StaticInitialize(dxCommon_->GetDevice(), winApp_->window_width, winApp_->window_height);
 
@@ -22,11 +17,8 @@ void MainGame::Initialize()
 
 void MainGame::Finalize()
 {
-	// テクスチャマネージャ解放
-	textureManager_->Delete();
 	// ImGui解放
 	imGuiManager->Finalize();
-
 	// 基底クラスの終了処理
 	Framework::Finalize();
 }

@@ -35,7 +35,9 @@ private: // メンバ変数
 	INT32 sceneNum = 0;
 	char PADING[4]{};
 
+	// ImGuiデバック用
 	float pos[2] = {100,100};
+
 private:
 	//コピーコンストラクタ・代入演算子削除
 	GameScene& operator=(const GameScene&) = delete;

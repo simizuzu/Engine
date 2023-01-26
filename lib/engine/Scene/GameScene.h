@@ -8,10 +8,11 @@
 #include "Model.h"
 #include "AudioManager.h"
 #include "BaseScene.h"
+#include "TextureManager.h"
 
 #include "GameCollisionManager.h"
 
-class GameScene : BaseScene
+class GameScene : public BaseScene
 {
 public: // メンバ関数
 	// コンストラクタ
@@ -31,8 +32,12 @@ public: // メンバ関数
 
 private: // メンバ変数
 	Input* input_ = nullptr;
+	std::unique_ptr<Camera> camera;
 	DirectXCommon* dxCommon_ = nullptr;
 	AudioManager* audioManager_ = nullptr;
+
+	TextureData tex;
+	std::unique_ptr<Sprite> sprite_;
 
 	//宣言
 	INT32 sceneNum = 0;

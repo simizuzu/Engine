@@ -410,4 +410,9 @@ ID3D12Fence* DirectXCommon::GetFence() {
 UINT64 DirectXCommon::GetFenceVal() {
 	return fenceVal;
 }
+
+size_t DirectXCommon::GetBackBufferCount() const
+{
+	return backBuffers.size();
+}
 #pragma endregion

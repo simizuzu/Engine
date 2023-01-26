@@ -7,9 +7,10 @@
 #include "FPS.h"
 #include "Sprite.h"
 #include "TextureManager.h"
-#include "lib/engine/Scene/GameScene.h"
-#include "lib/engine/3D/Model/Object3d.h"
+#include "GameScene.h"
+#include "Object3d.h"
 #include "AudioManager.h"
+#include "ImGuiManager.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
@@ -21,6 +22,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 	Input* input_ = Input::GetInstace();
 	TextureManager* textureManager_ = TextureManager::GetInstance();
 	AudioManager* audioManager = AudioManager::GetInstance();
+	ImGuiManager* imGuiManager = ImGuiManager::GetInstance();
 	Sprite* sprite_ = nullptr;
 
 	// WindowsAPI初期化
@@ -34,6 +36,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 	audioManager->Initialize();
 	// Input初期化
 	input_->Initialize();
+	// ImGui初期化
+	imGuiManager->Initialize(winApp_,dxCommon_);
 
 	// スプライト共通部の初期化
 	textureManager_->Initialize(dxCommon_);
@@ -56,11 +60,15 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 			break;
 		}
 #pragma region 更新
+		// ImGui更新処理開始
+		imGuiManager->Begin();
 		// 入力の更新
 		input_->Update();
 		audioManager->Update();
 		// ゲームシーンの毎フレーム処理
 		gameScene->Update();
+		// ImGui更新処理終了
+		imGuiManager->End();
 #pragma endregion
 
 #pragma region 描画
@@ -68,6 +76,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 		dxCommon_->PreDraw(winApp_);
 		// ゲームシーンの描画
 		gameScene->Draw();
+		//ImGui描画
+		imGuiManager->Draw(dxCommon_);
 		// 描画後処理
 		dxCommon_->PostDraw();
 		// FPS固定更新
@@ -81,6 +91,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 	// テクスチャマネージャ解放
 	textureManager_->Delete();
 	audioManager->Destroy();
+	// ImGui解放
+	imGuiManager->Finalize();
 	// DirectX解放
 	dxCommon_->Delete();
 	// WindowsAPIの終了処理

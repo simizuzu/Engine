@@ -84,6 +84,8 @@ public:
 	ID3D12Fence* GetFence();
 	UINT64 GetFenceVal();
 
+	size_t GetBackBufferCount() const;
+
 	/// <summary>
 	/// ‰ğ•úˆ—
 	/// </summary>

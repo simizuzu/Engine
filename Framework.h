@@ -1,4 +1,10 @@
 #pragma once
+#include "WinApp.h"
+#include "DirectXCommon.h"
+#include "Input.h"
+#include "FPS.h"
+#include "Sprite.h"
+#include "AudioManager.h"
 
 // ゲーム全体
 class Framework
@@ -19,10 +25,15 @@ public: // メンバ関数
 	// 実行
 	void Run();
 
-private:
+protected:
 	// ゲーム終了フラグ
 	bool endRequest_ = false;
 
-	
+	WinApp* winApp_ = nullptr;
+	DirectXCommon* dxCommon_ = nullptr;
+	Sprite* sprite_ = nullptr;
+	AudioManager* audioManager = nullptr;
+	Input* input_ = nullptr;
+	FPS* fps_ = nullptr;
 };
 

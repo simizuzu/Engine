@@ -5,7 +5,6 @@
 void GameScene::Initialize()
 {
 	input_ = Input::GetInstace();
-
 }
 
 void GameScene::Update()

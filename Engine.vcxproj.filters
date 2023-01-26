@@ -177,6 +177,12 @@
     <ClCompile Include="lib\engine\ImGui\ImGuiManager.cpp">
       <Filter>Engine\ソース ファイル\Imgui</Filter>
     </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>Engine\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework.cpp">
+      <Filter>Engine\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engine\Math\DirectX12Math.h">
@@ -259,6 +265,12 @@
     </ClInclude>
     <ClInclude Include="lib\engine\ImGui\ImGuiManager.h">
       <Filter>Engine\ヘッダー ファイル\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>Engine\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework.h">
+      <Filter>Engine\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

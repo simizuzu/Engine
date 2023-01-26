@@ -7,10 +7,11 @@
 #include "Object3d.h"
 #include "Model.h"
 #include "AudioManager.h"
+#include "BaseScene.h"
 
 #include "GameCollisionManager.h"
 
-class GameScene
+class GameScene : BaseScene
 {
 public: // メンバ関数
 	// コンストラクタ
@@ -19,11 +20,13 @@ public: // メンバ関数
 	~GameScene() = default;
 
 	//　初期化
-	void Initialize();
+	void Initialize() override;
 	// 更新
-	void Update();
+	void Update() override;
 	// 描画
-	void Draw();
+	void Draw() override;
+	// 終了処理
+	void Finalize() override;
 
 
 private: // メンバ変数

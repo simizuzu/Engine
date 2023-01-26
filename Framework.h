@@ -6,6 +6,8 @@
 #include "Sprite.h"
 #include "AudioManager.h"
 #include "TextureManager.h"
+#include "ImGuiManager.h"
+#include "GameScene.h"
 
 // ƒQ[ƒ€‘S‘Ì
 class Framework
@@ -37,6 +39,7 @@ protected:
 	Input* input_ = nullptr;
 	FPS* fps_ = nullptr;
 	TextureManager* textureManager_ = nullptr;
-
+	std::unique_ptr<GameScene> gameScene;
+	ImGuiManager* imGuiManager = nullptr;
 };
 

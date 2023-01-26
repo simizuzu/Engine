@@ -18,3 +18,7 @@ void GameScene::Draw()
 {
 	
 }
+
+void GameScene::Finalize()
+{
+}

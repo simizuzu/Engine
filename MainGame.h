@@ -1,8 +1,8 @@
 #pragma once
 
-#include "GameScene.h"
+
 #include "Object3d.h"
-#include "ImGuiManager.h"
+
 #include "Framework.h"
 
 // ゲーム全体
@@ -24,9 +24,5 @@ public: // メンバ関数
 private:
 	// ゲーム終了フラグ
 	bool endRequest_ = false;
-
-
-	std::unique_ptr<GameScene> gameScene;
-	ImGuiManager* imGuiManager = nullptr;
 };
 

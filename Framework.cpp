@@ -7,30 +7,37 @@ void Framework::Initialize()
 	input_ = Input::GetInstace();
 	audioManager = AudioManager::GetInstance();
 	textureManager_ = TextureManager::GetInstance();
-	
+	imGuiManager = ImGuiManager::GetInstance();
+
 	// WindowsAPI初期化
 	winApp_->Initialize();
+	// FPS固定初期化
+	fps_ = new FPS();
+	fps_->InitializeFixFps();
 	// DirectX初期化
 	dxCommon_->Initialize();
 	// スプライト共通部の初期化
 	textureManager_->Initialize(dxCommon_);
-
 	// Audio初期化
 	audioManager->Initialize();
+	// ImGui初期化
+	imGuiManager->Initialize(winApp_, dxCommon_);
 	// Input初期化
 	input_->Initialize();
 	// スプライト静的初期化
 	Sprite::StaticInitialize();
-	// FPS固定初期化
-	fps_ = new FPS();
-	fps_->InitializeFixFps();
+
+	gameScene = std::make_unique<GameScene>();
+	gameScene->Initialize();
 }
 
 void Framework::Finalize()
 {
+	gameScene->Finalize();
+	// ImGui解放
+	imGuiManager->Finalize();
 	// テクスチャマネージャ解放
 	textureManager_->Delete();
-
 	// オーディオマネージャー初期化
 	audioManager->Destroy();
 	// DirectX解放
@@ -54,6 +61,12 @@ void Framework::Update()
 	input_->Update();
 	audioManager->Update();
 
+	// ImGui更新処理開始
+	imGuiManager->Begin();
+	// ゲームシーンの毎フレーム処理
+	gameScene->Update();
+	// ImGui更新処理終了
+	imGuiManager->End();
 }
 
 void Framework::Run()
@@ -73,6 +86,8 @@ void Framework::Run()
 		dxCommon_->PreDraw(winApp_);
 		// 描画
 		Draw();
+		//ImGui描画
+		imGuiManager->Draw(dxCommon_);
 		dxCommon_->PostDraw();
 		// FPS固定更新
 		fps_->UpdateFixFPS();

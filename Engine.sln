@@ -9,10 +9,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXTex", "lib\DirectXTe
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imgui", "lib\imgui\imgui.vcxproj", "{D704C778-CBE7-4819-892F-6673C62D9D88}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{521802D4-D0AD-4FEC-82AA-D5A2815720D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Profile|x64 = Profile|x64
+		Profile|x86 = Profile|x86
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
@@ -21,6 +25,10 @@ Global
 		{4CA6D941-F97F-4185-B1E4-593C2B8E02BC}.Debug|x64.Build.0 = Debug|x64
 		{4CA6D941-F97F-4185-B1E4-593C2B8E02BC}.Debug|x86.ActiveCfg = Debug|x64
 		{4CA6D941-F97F-4185-B1E4-593C2B8E02BC}.Debug|x86.Build.0 = Debug|x64
+		{4CA6D941-F97F-4185-B1E4-593C2B8E02BC}.Profile|x64.ActiveCfg = Release|x64
+		{4CA6D941-F97F-4185-B1E4-593C2B8E02BC}.Profile|x64.Build.0 = Release|x64
+		{4CA6D941-F97F-4185-B1E4-593C2B8E02BC}.Profile|x86.ActiveCfg = Release|x64
+		{4CA6D941-F97F-4185-B1E4-593C2B8E02BC}.Profile|x86.Build.0 = Release|x64
 		{4CA6D941-F97F-4185-B1E4-593C2B8E02BC}.Release|x64.ActiveCfg = Release|x64
 		{4CA6D941-F97F-4185-B1E4-593C2B8E02BC}.Release|x64.Build.0 = Release|x64
 		{4CA6D941-F97F-4185-B1E4-593C2B8E02BC}.Release|x86.ActiveCfg = Release|x64
@@ -29,6 +37,10 @@ Global
 		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Debug|x64.Build.0 = Debug|x64
 		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Debug|x86.ActiveCfg = Debug|x64
 		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Debug|x86.Build.0 = Debug|x64
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Profile|x64.ActiveCfg = Profile|x64
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Profile|x64.Build.0 = Profile|x64
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Profile|x86.ActiveCfg = Profile|x64
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Profile|x86.Build.0 = Profile|x64
 		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Release|x64.ActiveCfg = Release|x64
 		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Release|x64.Build.0 = Release|x64
 		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Release|x86.ActiveCfg = Release|x64
@@ -37,6 +49,10 @@ Global
 		{D704C778-CBE7-4819-892F-6673C62D9D88}.Debug|x64.Build.0 = Debug|x64
 		{D704C778-CBE7-4819-892F-6673C62D9D88}.Debug|x86.ActiveCfg = Debug|Win32
 		{D704C778-CBE7-4819-892F-6673C62D9D88}.Debug|x86.Build.0 = Debug|Win32
+		{D704C778-CBE7-4819-892F-6673C62D9D88}.Profile|x64.ActiveCfg = Release|x64
+		{D704C778-CBE7-4819-892F-6673C62D9D88}.Profile|x64.Build.0 = Release|x64
+		{D704C778-CBE7-4819-892F-6673C62D9D88}.Profile|x86.ActiveCfg = Release|Win32
+		{D704C778-CBE7-4819-892F-6673C62D9D88}.Profile|x86.Build.0 = Release|Win32
 		{D704C778-CBE7-4819-892F-6673C62D9D88}.Release|x64.ActiveCfg = Release|x64
 		{D704C778-CBE7-4819-892F-6673C62D9D88}.Release|x64.Build.0 = Release|x64
 		{D704C778-CBE7-4819-892F-6673C62D9D88}.Release|x86.ActiveCfg = Release|Win32
@@ -44,6 +60,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77} = {521802D4-D0AD-4FEC-82AA-D5A2815720D9}
+		{D704C778-CBE7-4819-892F-6673C62D9D88} = {521802D4-D0AD-4FEC-82AA-D5A2815720D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5EE29BB8-C219-45E1-8A5A-E96646CE6E49}

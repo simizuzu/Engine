@@ -40,12 +40,16 @@ private: // メンバ変数
 	TextureData tex;
 	std::unique_ptr<Sprite> sprite_;
 
+	Object3d* tyoinoriObj = nullptr;
+	std::unique_ptr<Model> tyoinori;
+
 	//宣言
 	INT32 sceneNum = 0;
 	char PADING[4]{};
 
 	// ImGuiデバック用
 	Mathematics::Vector2 pos = {100,100};
+	Mathematics::Vector3 posObj = { 0,0,0 };
 
 private:
 	//コピーコンストラクタ・代入演算子削除

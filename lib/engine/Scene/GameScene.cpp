@@ -13,6 +13,12 @@ void GameScene::Initialize()
 	sprite_ = std::make_unique<Sprite>();
 	sprite_->Initialize();
 
+	tyoinori = std::make_unique<Model>();
+
+	tyoinori.reset(Model::LoadFromObj("Tyoinori"));
+	tyoinoriObj = Object3d::Create();
+	tyoinoriObj->SetModel(tyoinori.get());
+
 	sceneManager_ = SceneManager::GetInstance();
 }
 
@@ -29,12 +35,23 @@ void GameScene::Update()
 	ImGui::SliderFloat2("position", &pos.x, 0.0f, 500.0f, "%.1f");
 	ImGui::End();
 
+	ImGui::Begin("Obj");
+	ImGui::SetWindowSize({ 500,100 });
+	ImGui::SliderFloat3("obj", &posObj.x, 0.0f, 500.0f, "%.1f");
+	ImGui::End();
+
+	tyoinoriObj->SetPosition({ posObj.x, posObj.y ,posObj.z });
+	tyoinoriObj->SetScale({100.0f,100.0f,100.0f});
+	tyoinoriObj->Update(camera.get());
+
 	camera->Update();
 }
 
 void GameScene::Draw()
 {
-	sprite_->DrawSprite(tex, {pos.x,pos.y});
+	
+	tyoinoriObj->Draw();
+	sprite_->DrawSprite(tex, { pos.x,pos.y });
 }
 
 void GameScene::Finalize()

@@ -27,13 +27,17 @@ void Framework::Initialize()
 	// スプライト静的初期化
 	Sprite::StaticInitialize();
 
-	gameScene = std::make_unique<GameScene>();
-	gameScene->Initialize();
+	/*gameScene = std::make_unique<GameScene>();
+	gameScene->Initialize();*/
+
+	sceneManager_ = SceneManager::GetInstance();
 }
 
 void Framework::Finalize()
 {
-	gameScene->Finalize();
+	//gameScene->Finalize();
+	sceneManager_->Finalize();
+
 	// ImGui解放
 	imGuiManager->Finalize();
 	// テクスチャマネージャ解放
@@ -64,7 +68,9 @@ void Framework::Update()
 	// ImGui更新処理開始
 	imGuiManager->Begin();
 	// ゲームシーンの毎フレーム処理
-	gameScene->Update();
+	//gameScene->Update();
+	sceneManager_->Update();
+	
 	// ImGui更新処理終了
 	imGuiManager->End();
 }

@@ -114,6 +114,7 @@
     <ClCompile Include="lib\engine\Scene\GameScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +148,7 @@
     <ClInclude Include="lib\engine\Math\Vector4.h" />
     <ClInclude Include="lib\engine\Scene\GameScene.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <ItemGroup>

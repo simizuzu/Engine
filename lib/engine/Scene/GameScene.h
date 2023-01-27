@@ -9,6 +9,7 @@
 #include "AudioManager.h"
 #include "BaseScene.h"
 #include "TextureManager.h"
+#include "SceneManager.h"
 
 #include "GameCollisionManager.h"
 

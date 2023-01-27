@@ -10,6 +10,7 @@
 #include "GameScene.h"
 #include "TitleScene.h"
 #include "BaseScene.h"
+#include "SceneManager.h"
 
 // ƒQ[ƒ€‘S‘Ì
 class Framework
@@ -45,6 +46,7 @@ protected:
 	std::unique_ptr<TitleScene> titleScene;
 	ImGuiManager* imGuiManager = nullptr;
 
-	std::unique_ptr<BaseScene> baseScene;
+	//std::unique_ptr<BaseScene> baseScene;
+	SceneManager* sceneManager_ = nullptr;
 };
 

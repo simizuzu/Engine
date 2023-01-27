@@ -1,17 +1,6 @@
 #include "BaseScene.h"
 
-void BaseScene::Initialize()
+void BaseScene::SetSceneManager(SceneManager* sceneManager)
 {
-}
-
-void BaseScene::Update()
-{
-}
-
-void BaseScene::Draw()
-{
-}
-
-void BaseScene::Finalize()
-{
+	sceneManager_ = sceneManager;
 }

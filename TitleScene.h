@@ -2,6 +2,9 @@
 #include "BaseScene.h"
 #include "TextureManager.h"
 #include "Sprite.h"
+#include "Input.h"
+#include "GameScene.h"
+#include "SceneManager.h"
 
 // タイトルシーン
 class TitleScene : public BaseScene
@@ -29,6 +32,8 @@ public: // メンバ関数
 	void Finalize() override;
 
 private:
+	Input* input = nullptr;
+	SceneManager* sceneManager_= nullptr;
 	TextureData tex;
 	std::unique_ptr<Sprite> sprite_;
 };

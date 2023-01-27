@@ -7,8 +7,8 @@ void MainGame::Initialize()
 	// 3Dオブジェクト静的初期化
 	Object3d::StaticInitialize(dxCommon_->GetDevice(), winApp_->window_width, winApp_->window_height);
 
-	baseScene = std::make_unique<TitleScene>();
-	baseScene->Initialize();
+	BaseScene* scene = new TitleScene();
+	sceneManager_->SetNextScene(scene);
 }
 
 void MainGame::Finalize()
@@ -26,5 +26,6 @@ void MainGame::Update()
 void MainGame::Draw()
 {
 	// ゲームシーンの描画
-	baseScene->Draw();
+	//baseScene->Draw();
+	sceneManager_->Draw();
 }

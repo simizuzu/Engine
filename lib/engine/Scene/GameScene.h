@@ -45,7 +45,7 @@ private: // メンバ変数
 	char PADING[4]{};
 
 	// ImGuiデバック用
-	float pos[2] = {100,100};
+	Mathematics::Vector2 pos = {100,100};
 
 private:
 	//コピーコンストラクタ・代入演算子削除

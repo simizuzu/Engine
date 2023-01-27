@@ -22,15 +22,19 @@ void GameScene::Update()
 	{
 		sceneManager_->ChangeScene("TITLE");
 	}
+
 	// ImGuiウィンドウの表示オン
+	ImGui::Begin("GameScene");
 	ImGui::SetWindowSize({ 500,100 });
-	ImGui::SliderFloat2("position", pos, 0.0f, 1280.0f, "%1f");
+	ImGui::SliderFloat2("position", &pos.x, 0.0f, 500.0f, "%.1f");
+	ImGui::End();
+
 	camera->Update();
 }
 
 void GameScene::Draw()
 {
-	sprite_->DrawSprite(tex, { 0.0f,0.0f });
+	sprite_->DrawSprite(tex, {pos.x,pos.y});
 }
 
 void GameScene::Finalize()

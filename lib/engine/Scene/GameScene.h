@@ -10,17 +10,15 @@
 #include "BaseScene.h"
 #include "TextureManager.h"
 #include "SceneManager.h"
+#include "TitleScene.h"
 
 #include "GameCollisionManager.h"
 
 class GameScene : public BaseScene
 {
 public: // メンバ関数
-	// コンストラクタ
 	GameScene() = default;
-	// デストラクタ
 	~GameScene() = default;
-
 	//　初期化
 	void Initialize() override;
 	// 更新
@@ -37,6 +35,8 @@ private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	AudioManager* audioManager_ = nullptr;
 
+	SceneManager* sceneManager_ = nullptr;
+
 	TextureData tex;
 	std::unique_ptr<Sprite> sprite_;
 
@@ -49,6 +49,7 @@ private: // メンバ変数
 
 private:
 	//コピーコンストラクタ・代入演算子削除
+
 	GameScene& operator=(const GameScene&) = delete;
 	GameScene(const GameScene&) = delete;
 };

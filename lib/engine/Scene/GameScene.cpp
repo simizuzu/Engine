@@ -20,10 +20,7 @@ void GameScene::Update()
 {
 	if (input_->TriggerPushKey(DIK_SPACE))
 	{
-		// ゲームプレイシーン（次シーンを生成）
-		BaseScene* scene = new TitleScene();
-		// シーン切り替え依頼
-		sceneManager_->SetNextScene(scene);
+		sceneManager_->ChangeScene("TITLE");
 	}
 	// ImGuiウィンドウの表示オン
 	ImGui::SetWindowSize({ 500,100 });

@@ -7,8 +7,9 @@ void MainGame::Initialize()
 	// 3Dオブジェクト静的初期化
 	Object3d::StaticInitialize(dxCommon_->GetDevice(), winApp_->window_width, winApp_->window_height);
 
-	BaseScene* scene = new TitleScene();
-	sceneManager_->SetNextScene(scene);
+	sceneFactory_ = new SceneFactory();
+	SceneManager::GetInstance()->SetSceneFactory(sceneFactory_);
+	SceneManager::GetInstance()->ChangeScene("TITLE");
 }
 
 void MainGame::Finalize()

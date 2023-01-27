@@ -14,10 +14,7 @@ void TitleScene::Update()
 {
 	if (input->TriggerPushKey(DIK_SPACE))
 	{
-		// ゲームプレイシーン（次シーンを生成）
-		BaseScene* scene = new GameScene();
-		// シーン切り替え依頼
-		sceneManager_->SetNextScene(scene);
+		sceneManager_->ChangeScene("GAMEPLAY");
 	}
 }
 

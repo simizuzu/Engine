@@ -114,10 +114,12 @@
     <ClCompile Include="lib\engine\Scene\GameScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="SceneFactory.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractSceneFactory.h" />
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
@@ -148,6 +150,7 @@
     <ClInclude Include="lib\engine\Math\Vector4.h" />
     <ClInclude Include="lib\engine\Scene\GameScene.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>

@@ -37,6 +37,7 @@ void Framework::Finalize()
 {
 	//gameScene->Finalize();
 	sceneManager_->Finalize();
+	delete sceneFactory_;
 
 	// ImGui‰ð•ú
 	imGuiManager->Finalize();

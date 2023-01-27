@@ -11,6 +11,9 @@ class TitleScene : public BaseScene
 {
 public: // ƒƒ“ƒoŠÖ”
 
+	TitleScene() = default;
+	~TitleScene() = default;
+
 	/// <summary>
 	/// ‰Šú‰»
 	/// </summary>

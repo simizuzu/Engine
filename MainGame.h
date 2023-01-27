@@ -1,9 +1,7 @@
 #pragma once
-
-
 #include "Object3d.h"
-
 #include "Framework.h"
+#include "SceneFactory.h"
 
 // ƒQ[ƒ€‘S‘Ì
 class MainGame : public Framework

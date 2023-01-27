@@ -7,10 +7,11 @@
 #include "AudioManager.h"
 #include "TextureManager.h"
 #include "ImGuiManager.h"
-#include "GameScene.h"
-#include "TitleScene.h"
+//#include "GameScene.h"
+//#include "TitleScene.h"
 #include "BaseScene.h"
 #include "SceneManager.h"
+#include "AbstractSceneFactory.h"
 
 // ÉQÅ[ÉÄëSëÃ
 class Framework
@@ -42,11 +43,10 @@ protected:
 	Input* input_ = nullptr;
 	FPS* fps_ = nullptr;
 	TextureManager* textureManager_ = nullptr;
-	std::unique_ptr<GameScene> gameScene;
-	std::unique_ptr<TitleScene> titleScene;
 	ImGuiManager* imGuiManager = nullptr;
 
 	//std::unique_ptr<BaseScene> baseScene;
 	SceneManager* sceneManager_ = nullptr;
+	AbstractSceneFactory* sceneFactory_ = nullptr;
 };
 

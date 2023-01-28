@@ -59,7 +59,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)lib\engine\Scene;$(ProjectDir)lib\engine\Imgui;$(ProjectDir)Users;$(ProjectDir)lib\engine\Collision;$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Camera;$(ProjectDir)lib\engine\3D\Model;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);$(ProjectDir)lib\engine\2D\Sprite;%(AdditionalIncludeDirectories);lib\engine\Collision</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Users\Scene;$(ProjectDir)lib\engine\Scene;$(ProjectDir)lib\engine\Imgui;$(ProjectDir)Users;$(ProjectDir)lib\engine\Collision;$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Camera;$(ProjectDir)lib\engine\3D\Model;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);$(ProjectDir)lib\engine\2D\Sprite;%(AdditionalIncludeDirectories);lib\engine\Collision</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -76,7 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)lib\engine\Scene;$(ProjectDir)lib\engine\Imgui;$(ProjectDir)Users;$(ProjectDir)lib\engine\Collision;$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Camera;$(ProjectDir)lib\engine\3D\Model;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);$(ProjectDir)lib\engine\2D\Sprite;%(AdditionalIncludeDirectories);lib\engine\Collision</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Users\Scene;$(ProjectDir)lib\engine\Scene;$(ProjectDir)lib\engine\Imgui;$(ProjectDir)Users;$(ProjectDir)lib\engine\Collision;$(ProjectDir)lib\engine\Base;$(ProjectDir)lib\engine\Input;$(ProjectDir)lib\engine\Math;$(ProjectDir)lib\engine\2D;$(ProjectDir)lib\engine\3D;$(ProjectDir)lib\engine\Camera;$(ProjectDir)lib\engine\3D\Model;$(ProjectDir)lib\engine\Audio;$(ProjectDir)Resources\shaders;$(ProjectDir);$(ProjectDir)lib\engine\2D\Sprite;%(AdditionalIncludeDirectories);lib\engine\Collision</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -88,8 +88,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BaseScene.cpp" />
-    <ClCompile Include="Framework.cpp" />
     <ClCompile Include="lib\engine\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="lib\engine\3D\Model\Material.cpp" />
     <ClCompile Include="lib\engine\3D\Model\Model.cpp" />
@@ -115,17 +113,16 @@
     <ClCompile Include="lib\engine\Math\Vector2.cpp" />
     <ClCompile Include="lib\engine\Math\Vector3.cpp" />
     <ClCompile Include="lib\engine\Math\Vector4.cpp" />
-    <ClCompile Include="lib\engine\Scene\GameScene.cpp" />
+    <ClCompile Include="lib\engine\Scene\BaseScene.cpp" />
+    <ClCompile Include="lib\engine\Scene\Framework.cpp" />
+    <ClCompile Include="lib\engine\Scene\SceneManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainGame.cpp" />
-    <ClCompile Include="SceneFactory.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="Users\Scene\GameScene.cpp" />
+    <ClCompile Include="Users\Scene\MainGame.cpp" />
+    <ClCompile Include="Users\Scene\SceneFactory.cpp" />
+    <ClCompile Include="Users\Scene\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AbstractSceneFactory.h" />
-    <ClInclude Include="BaseScene.h" />
-    <ClInclude Include="Framework.h" />
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
     <ClInclude Include="lib\engine\3D\Model\Material.h" />
     <ClInclude Include="lib\engine\3D\Model\Model.h" />
@@ -152,11 +149,14 @@
     <ClInclude Include="lib\engine\Math\Vector2.h" />
     <ClInclude Include="lib\engine\Math\Vector3.h" />
     <ClInclude Include="lib\engine\Math\Vector4.h" />
-    <ClInclude Include="lib\engine\Scene\GameScene.h" />
-    <ClInclude Include="MainGame.h" />
-    <ClInclude Include="SceneFactory.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="lib\engine\Scene\AbstractSceneFactory.h" />
+    <ClInclude Include="lib\engine\Scene\BaseScene.h" />
+    <ClInclude Include="lib\engine\Scene\Framework.h" />
+    <ClInclude Include="lib\engine\Scene\SceneManager.h" />
+    <ClInclude Include="Users\Scene\GameScene.h" />
+    <ClInclude Include="Users\Scene\MainGame.h" />
+    <ClInclude Include="Users\Scene\SceneFactory.h" />
+    <ClInclude Include="Users\Scene\TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\OBJ.hlsli" />

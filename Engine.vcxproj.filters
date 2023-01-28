@@ -186,26 +186,26 @@
     <ClCompile Include="lib\engine\ImGui\ImGuiManager.cpp">
       <Filter>Engine\ソース ファイル\Imgui</Filter>
     </ClCompile>
-    <ClCompile Include="lib\engine\Scene\GameScene.cpp">
-      <Filter>Users\ソースファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="MainGame.cpp">
-      <Filter>Users\ソースファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneFactory.cpp">
-      <Filter>Users\ソースファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>Users\ソースファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseScene.cpp">
+    <ClCompile Include="lib\engine\Scene\BaseScene.cpp">
       <Filter>Engine\ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Framework.cpp">
+    <ClCompile Include="lib\engine\Scene\Framework.cpp">
       <Filter>Engine\ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
+    <ClCompile Include="lib\engine\Scene\SceneManager.cpp">
       <Filter>Engine\ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Users\Scene\GameScene.cpp">
+      <Filter>Users\ソースファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Users\Scene\MainGame.cpp">
+      <Filter>Users\ソースファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Users\Scene\SceneFactory.cpp">
+      <Filter>Users\ソースファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Users\Scene\TitleScene.cpp">
+      <Filter>Users\ソースファイル\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -287,29 +287,29 @@
     <ClInclude Include="lib\engine\ImGui\ImGuiManager.h">
       <Filter>Engine\ヘッダー ファイル\Imgui</Filter>
     </ClInclude>
-    <ClInclude Include="lib\engine\Scene\GameScene.h">
-      <Filter>Users\ヘッダーファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="MainGame.h">
-      <Filter>Users\ヘッダーファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneFactory.h">
-      <Filter>Users\ヘッダーファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleScene.h">
-      <Filter>Users\ヘッダーファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="AbstractSceneFactory.h">
+    <ClInclude Include="lib\engine\Scene\AbstractSceneFactory.h">
       <Filter>Engine\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="BaseScene.h">
+    <ClInclude Include="lib\engine\Scene\SceneManager.h">
       <Filter>Engine\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Framework.h">
+    <ClInclude Include="lib\engine\Scene\Framework.h">
       <Filter>Engine\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h">
+    <ClInclude Include="lib\engine\Scene\BaseScene.h">
       <Filter>Engine\ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Users\Scene\GameScene.h">
+      <Filter>Users\ヘッダーファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Users\Scene\MainGame.h">
+      <Filter>Users\ヘッダーファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Users\Scene\SceneFactory.h">
+      <Filter>Users\ヘッダーファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Users\Scene\TitleScene.h">
+      <Filter>Users\ヘッダーファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

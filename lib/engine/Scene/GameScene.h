@@ -40,7 +40,7 @@ private: // ƒƒ“ƒo•Ï”
 	TextureData tex;
 	std::unique_ptr<Sprite> sprite_;
 
-	Object3d* tyoinoriObj = nullptr;
+	std::unique_ptr<Object3d> tyoinoriObj;
 	std::unique_ptr<Model> tyoinori;
 
 	//éŒ¾

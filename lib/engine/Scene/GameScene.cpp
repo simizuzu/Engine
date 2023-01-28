@@ -16,7 +16,7 @@ void GameScene::Initialize()
 	tyoinori = std::make_unique<Model>();
 
 	tyoinori.reset(Model::LoadFromObj("Tyoinori"));
-	tyoinoriObj = Object3d::Create();
+	tyoinoriObj.reset(Object3d::Create());
 	tyoinoriObj->SetModel(tyoinori.get());
 
 	sceneManager_ = SceneManager::GetInstance();

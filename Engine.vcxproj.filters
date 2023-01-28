@@ -293,10 +293,10 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Engine\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractSceneFactory.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="SceneFactory.h">
+      <Filter>Engine\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractSceneFactory.h">
       <Filter>Engine\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

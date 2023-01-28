@@ -27,9 +27,6 @@ void Framework::Initialize()
 	// スプライト静的初期化
 	Sprite::StaticInitialize();
 
-	/*gameScene = std::make_unique<GameScene>();
-	gameScene->Initialize();*/
-
 	sceneManager_ = SceneManager::GetInstance();
 }
 

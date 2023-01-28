@@ -7,8 +7,6 @@
 #include "AudioManager.h"
 #include "TextureManager.h"
 #include "ImGuiManager.h"
-//#include "GameScene.h"
-//#include "TitleScene.h"
 #include "BaseScene.h"
 #include "SceneManager.h"
 #include "AbstractSceneFactory.h"
@@ -45,7 +43,6 @@ protected:
 	TextureManager* textureManager_ = nullptr;
 	ImGuiManager* imGuiManager = nullptr;
 
-	//std::unique_ptr<BaseScene> baseScene;
 	SceneManager* sceneManager_ = nullptr;
 	AbstractSceneFactory* sceneFactory_ = nullptr;
 };

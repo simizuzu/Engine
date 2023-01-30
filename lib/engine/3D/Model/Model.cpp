@@ -14,7 +14,6 @@ using namespace Mathematics;
 Microsoft::WRL::ComPtr<ID3D12Device> Model::device;
 Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> Model::descHeap;
 
-
 Model* Model::LoadFromObj(const std::string& modelname)
 {
 	// 新たなModel型のインスタンスをnewする
@@ -29,11 +28,6 @@ Model* Model::LoadFromObj(const std::string& modelname)
 	model_->CreateBuffers();
 
 	return model_;
-}
-
-void Model::ModelInitialize()
-{
-	
 }
 
 void Model::LoadMaterial(const std::string& directoryPath, const std::string& filename)

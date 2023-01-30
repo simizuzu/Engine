@@ -3,24 +3,7 @@
 #include <wrl.h>
 #include <array>
 #include "DirectXCommon.h"
-
-enum class BlendMode
-{
-	None,	// ブレンド無し
-	Alpha,	// アルファ
-	Add,	// 加算
-	Sub,	// 減算
-	Mul,	// 乗算
-	Inv,	// 色反転
-};
-
-struct RootsigSetPip
-{
-	// ルートシグネチャ
-	Microsoft::WRL::ComPtr<ID3D12RootSignature> rootSignature;
-	// パイプラインステート
-	Microsoft::WRL::ComPtr<ID3D12PipelineState> pipelineState;
-};
+#include "EngineUtility.h"
 
 class Pipeline
 {

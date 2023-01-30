@@ -12,13 +12,7 @@
 
 #include "TextureManager.h"
 #include "DirectXCommon.h"
-
-struct VertexPosNormalUv
-{
-	Mathematics::Vector3 pos;		// xyz座標
-	Mathematics::Vector3 normal;	// 法線ベクトル
-	Mathematics::Vector2 uv;		// uv座標
-};
+#include "EngineUtility.h"
 
 struct Material
 {
@@ -145,7 +139,7 @@ private:
 	void CreateIBSize();
 
 public:
-	virtual void ModelInitialize();
+	//virtual void ModelInitialize();
 
 	virtual const std::vector<VertexPosNormalUv> GetVertices();
 

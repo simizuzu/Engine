@@ -4,29 +4,7 @@
 #include "DirectX12Math.h"
 #include "DirectXCommon.h"
 #include "WinApp.h"
-
-struct ConstBufferDataViewProjection
-{
-	// ワールド行列
-	Mathematics::Matrix4 world;
-	// ワールド座標
-	Mathematics::Matrix4 matWorld;
-
-	// ワールド → ビュー変換行列
-	Mathematics::Matrix4 view;
-	// ビュー → プロジェクション変換行列
-	Mathematics::Matrix4 projection;
-	// カメラ座標（ワールド座標）
-	Mathematics::Vector3 cameraPos;
-};
-
-struct ViewProjection
-{
-	// 定数バッファ
-	Microsoft::WRL::ComPtr<ID3D12Resource> constBuff_;
-	// マッピング済みアドレス
-	ConstBufferDataViewProjection* constBuffMap = nullptr;
-};
+#include "EngineUtility.h"
 
 class Camera
 {

@@ -6,23 +6,7 @@
 #include <wrl.h>
 #include <DirectXTex.h>
 #include <array>
-
-struct TextureData
-{
-	// テクスチャバッファ
-	Microsoft::WRL::ComPtr<ID3D12Resource> texBuff;
-	// デスクリプタヒープ
-	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> srvHeap;
-	//GPUデスクリプタハンドル
-	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle{};
-	// デスクリプタレンジ
-	D3D12_DESCRIPTOR_RANGE descriptorRange{};
-
-	// 横幅
-	size_t width = 0;
-	// 縦幅
-	size_t height = 0;
-};
+#include "EngineUtility.h"
 
 /// <summary>
 /// テクスチャマネージャ

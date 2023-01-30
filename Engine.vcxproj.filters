@@ -207,6 +207,9 @@
     <ClCompile Include="Users\Scene\TitleScene.cpp">
       <Filter>Users\ソースファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="EngineUtility.cpp">
+      <Filter>Engine\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engine\Math\DirectX12Math.h">
@@ -310,6 +313,9 @@
     </ClInclude>
     <ClInclude Include="Users\Scene\TitleScene.h">
       <Filter>Users\ヘッダーファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineUtility.h">
+      <Filter>Engine\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

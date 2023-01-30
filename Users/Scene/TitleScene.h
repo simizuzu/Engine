@@ -35,9 +35,11 @@ public: // ƒƒ“ƒoŠÖ”
 	void Finalize() override;
 
 private:
-	Input* input = nullptr;
+	Input* input_ = nullptr;
 	SceneManager* sceneManager_= nullptr;
 	TextureData tex;
 	std::unique_ptr<Sprite> sprite_;
+
+	Mathematics::Vector2 pos = { 0,0 };
 };
 

@@ -37,9 +37,6 @@ private: // ƒƒ“ƒo•Ï”
 
 	SceneManager* sceneManager_ = nullptr;
 
-	TextureData tex;
-	std::unique_ptr<Sprite> sprite_;
-
 	std::unique_ptr<Object3d> tyoinoriObj;
 	std::unique_ptr<Model> tyoinori;
 

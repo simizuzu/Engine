@@ -106,6 +106,9 @@
     <Filter Include="Users\ヘッダーファイル\Scene">
       <UniqueIdentifier>{b9d46f5b-a8a1-4e6c-a773-c1fb8519a9f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ヘッダー ファイル\Base\Utility">
+      <UniqueIdentifier>{a5417002-6899-4620-9d41-4365d63e4186}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -206,9 +209,6 @@
     </ClCompile>
     <ClCompile Include="Users\Scene\TitleScene.cpp">
       <Filter>Users\ソースファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineUtility.cpp">
-      <Filter>Engine\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -314,8 +314,8 @@
     <ClInclude Include="Users\Scene\TitleScene.h">
       <Filter>Users\ヘッダーファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="EngineUtility.h">
-      <Filter>Engine\ヘッダー ファイル</Filter>
+    <ClInclude Include="lib\engine\Base\Utility\EngineUtility.h">
+      <Filter>Engine\ヘッダー ファイル\Base\Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

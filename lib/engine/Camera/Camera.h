@@ -2,6 +2,8 @@
 #include <wrl.h>
 #include <d3d12.h>
 #include "DirectX12Math.h"
+#include "DirectXCommon.h"
+#include "WinApp.h"
 
 struct ConstBufferDataViewProjection
 {

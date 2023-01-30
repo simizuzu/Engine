@@ -1,8 +1,4 @@
 #include "Camera.h"
-#include "DirectXCommon.h"
-#include "WinApp.h"
-
-using namespace MyMathUtility;
 
 ViewProjection viewPro;
 ConstBufferDataViewProjection ConstMap;
@@ -71,11 +67,11 @@ void Camera::Map()
 void Camera::UpdateMatrix()
 {
 	// ビュー行列の生成
-	matView_ = MakeLookAtLH(eye_, target_, up_);
+	matView_ = MyMathUtility::MakeLookAtLH(eye_, target_, up_);
 	// 逆行列
-	matViewInverse_ = MakeInverse(matView_);
+	matViewInverse_ = MyMathUtility::MakeInverse(matView_);
 	// 透視投影の生成
-	matProjection_ = MakePerspective(fovAngleY, aspect, nearZ_, farZ_);
+	matProjection_ = MyMathUtility::MakePerspective(fovAngleY, aspect, nearZ_, farZ_);
 	// 定数バッファに転送
 	TransferMatrix();
 }

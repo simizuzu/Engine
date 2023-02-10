@@ -61,6 +61,12 @@ struct Sphere
 	float radius;
 };
 
+struct Plane
+{
+	Mathematics::Vector3 normal = { 0.0f,1.0f,0.0f };
+	float distance = 0.0f;
+};
+
 class BoundingBox : public BaseCollision
 {
 protected:

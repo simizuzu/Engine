@@ -47,6 +47,11 @@ private: // メンバ変数
 	// ImGuiデバック用
 	Mathematics::Vector2 pos = {100,100};
 	Mathematics::Vector3 posObj = { 0,0,0 };
+	
+	Mathematics::Vector3 cameraPos = { 0,0,0 };
+
+	// サウンド
+	uint32_t gameHandle_ = 0;
 
 private:
 	//コピーコンストラクタ・代入演算子削除

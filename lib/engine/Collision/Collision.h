@@ -3,11 +3,19 @@
 #include "Vector3.h"
 #include "Vector4.h"
 
-#include "lib/engine/Collision/CollisionPrimitive.h"
+#include "CollisionPrimitive.h"
 
 class Collision
 {
 public:
+	/// <summary>
+	/// 球と平面の当たり判定
+	/// </summary>
+	/// <param name="sphere">球</param>
+	/// <param name="plane">平面</param>
+	/// <param name="inter">交点（平面上の最近接点）</param>
+	/// <returns交差しているか否か></returns>
+	static bool CheckSpere2Plane(const Sphere& sphere, const Plane& plane, Mathematics::Vector3* inter = nullptr);
 
 	/// <summary>
 	/// OBBとOBBの当たり判定(参照渡し)

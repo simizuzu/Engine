@@ -327,6 +327,11 @@ namespace MyMathUtility
 		return retMat;
 	}
 
+	Mathematics::Vector3 Dot(Mathematics::Vector3& a, Mathematics::Vector3 b)
+	{
+		return Mathematics::Vector3();
+	}
+
 	// “ñ‚Â‚Ì’l‚ª‚Ù‚Ú“™‚µ‚¢‚©
 	bool Approximately(float a, float b)
 	{

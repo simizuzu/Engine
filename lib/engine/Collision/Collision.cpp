@@ -1,25 +1,24 @@
 #include "Collision.h"
 
-bool Collision::CheckSpere2Plane(const Sphere& sphere, const Plane& plane, Mathematics::Vector3* inter)
+bool Collision::CheckSpere2Plane(const Sphere& sphere, const Plane& plane, Mathematics::Vector4* inter)
 {
-    // 座標系の原点から球の中心座標への距離
-    Mathematics::Vector3 distV = MyMathUtility::Dot(sphere.center, plane.normal);
-    // 平面の原点距離を減算することで、平面と球の中心との距離が出る
-    float dist = distV - plane.distance;
-    // 距離の絶対値が半径より大きければ当たっていない
-    if (fabsf(dist) > sphere.radius)
-    {
-        return false;
-    }
+	float distV = sphere.center.dot(plane.normal);
 
-    // 疑似交点を計算
-    if (inter)
-    {
-        // 平面上の最近接点を、疑似交点をする
-        *inter = -dist * plane.normal + sphere.center;
-    }
+	float dist = distV - plane.distance;
 
-    return true;
+	if (fabs(dist) > sphere.radius)
+	{
+		return false;
+	}
+
+// 擬似交点を計算
+	if (inter)
+	{
+		// 平面上の再接近点を、疑似交点とする
+		*inter = -dist * plane.normal + sphere.center;
+	}
+
+	return true;
 }
 
 bool Collision::CheckOBBToOBB(BoundingBox& obb1, BoundingBox& obb2)

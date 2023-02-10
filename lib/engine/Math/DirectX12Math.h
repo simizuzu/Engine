@@ -55,8 +55,6 @@ namespace MyMathUtility
 	// 逆行列
 	Mathematics::Matrix4 MakeInverse(Mathematics::Matrix4& mat);
 
-	Mathematics::Vector3 Dot(const Mathematics::Vector3& a, const Mathematics::Vector3 b);
-
 	// 値が等しいか確認する
 	bool Approximately(float a, float b);
 

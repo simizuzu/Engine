@@ -3,6 +3,7 @@
 #include <array>
 #include <string>
 #include "Vector3.h"
+#include "Vector4.h"
 #include "Object3d.h"
 
 /// <summary>
@@ -56,14 +57,14 @@ struct AABB
 struct Sphere
 {
 	// íÜêSç¿ïW
-	Mathematics::Vector3 center;
+	Mathematics::Vector4 center;
 	// îºåa
 	float radius;
 };
 
 struct Plane
 {
-	Mathematics::Vector3 normal = { 0.0f,1.0f,0.0f };
+	Mathematics::Vector4 normal = { 0.0f,1.0f,0.0f,0.0f };
 	float distance = 0.0f;
 };
 

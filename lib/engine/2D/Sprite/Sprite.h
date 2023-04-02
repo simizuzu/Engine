@@ -122,6 +122,22 @@ public: // メンバ関数
 		TextureData& textureData, Mathematics::Vector2 position, Mathematics::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f,
 		Mathematics::Vector2 anchorpoint = { 0.0f,0.0f }, bool flipX = false, bool flipY = false);
 
+	/*/// <summary>
+	/// スプライトのクリップ描画
+	/// </summary>
+	/// <param name="textureData">テクスチャデータ</param>
+	/// <param name="clipCenter">切り取るの中心座標</param>
+	/// <param name="clipRadius">切り取る半径</param>
+	/// <param name="position">座標</param>
+	/// <param name="scale">大きさ</param>
+	/// <param name="rotation">回転</param>
+	/// <param name="flipX">X軸反転</param>
+	/// <param name="flipY">Y軸反転</param>
+	void DrawSpriteClip(
+		TextureData& textureData, Mathematics::Vector2 clipCenter, Mathematics::Vector2 clipRadius,
+		Mathematics::Vector2 position, Mathematics::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f,
+		bool flipX = false, bool flipY = false);*/
+
 private:
 	/// <summary>
 	/// 頂点バッファ関連の初期化

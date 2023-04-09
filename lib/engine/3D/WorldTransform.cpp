@@ -61,11 +61,6 @@ void WorldTransform::Update(Camera* camera, bool billboradFlag)
 	}
 }
 
-D3D12_GPU_VIRTUAL_ADDRESS WorldTransform::GetGpuAddress()
-{
-	return constBuffer_->GetGPUVirtualAddress();
-}
-
 void WorldTransform::CreateConstBuffer()
 {
 	HRESULT result;
@@ -94,3 +89,23 @@ void WorldTransform::CreateConstBuffer()
 	assert(SUCCEEDED(result));
 }
 
+
+void WorldTransform::SetTranslation(Mathematics::Vector3 translation)
+{
+	translation_ = translation;
+}
+
+void WorldTransform::SetScale(Mathematics::Vector3 scale)
+{
+	scale_ = scale;
+}
+
+void WorldTransform::SetRotation(Mathematics::Vector3 rotation)
+{
+	rotation_ = rotation;
+}
+
+D3D12_GPU_VIRTUAL_ADDRESS WorldTransform::GetGpuAddress()
+{
+	return constBuffer_->GetGPUVirtualAddress();
+}

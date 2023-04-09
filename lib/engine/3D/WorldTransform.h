@@ -12,7 +12,12 @@ public:
 	//更新
 	void Update(Camera* camera,bool billboradFlag = false);
 
-	//ゲッター
+
+public:	//セッター・ゲッター
+	void SetTranslation(Mathematics::Vector3 translation);
+	void SetScale(Mathematics::Vector3 scale);
+	void SetRotation(Mathematics::Vector3 rotation);
+
 	D3D12_GPU_VIRTUAL_ADDRESS GetGpuAddress();
 
 private: //メンバ関数

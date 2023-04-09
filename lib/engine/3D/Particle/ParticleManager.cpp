@@ -8,26 +8,18 @@ Microsoft::WRL::ComPtr<ID3D12Device> ParticleManager::device_;
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> ParticleManager::cmdList_;
 RootsigSetPip ParticleManager::pip;
 
-UINT ParticleManager::descriptorHandleIncrementSize = 0;
-Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> ParticleManager::descHeap;
-Microsoft::WRL::ComPtr<ID3D12Resource> ParticleManager::vertBuff;
-Microsoft::WRL::ComPtr<ID3D12Resource> ParticleManager::texbuff;
-CD3DX12_CPU_DESCRIPTOR_HANDLE ParticleManager::cpuDescHandleSRV;
-CD3DX12_GPU_DESCRIPTOR_HANDLE ParticleManager::gpuDescHandleSRV;
-
-D3D12_VERTEX_BUFFER_VIEW ParticleManager::vbView{};
-VertexPos ParticleManager::vertices[vertexCount];
-
-Mathematics::Matrix4 ParticleManager::matView;
-Mathematics::Matrix4 ParticleManager::matProjection{};
-
 void ParticleManager::StaticInitialize(ID3D12Device* device, ID3D12GraphicsCommandList* cmdList)
 {
 	assert(device);
 	ParticleManager::device_ = device;
 	ParticleManager::cmdList_ = cmdList;
-	InitializeDescriptorHeap();
 	CreateCraphicsPipeline();
+}
+
+
+void ParticleManager::Initialize()
+{
+	InitializeDescriptorHeap();
 	CreateModel();
 }
 

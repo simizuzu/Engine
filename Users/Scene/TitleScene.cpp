@@ -30,9 +30,17 @@ void TitleScene::Initialize()
 	skydomeObj->SetModel(skydome.get());
 #pragma endregion
 
+#pragma region Particle
 	particles_ = std::make_unique<ParticleManager>();
+	particles_->Initialize();
 	particles_->LoadTexture(L"Resources/effect.png");
 	particleTrans_.Initialize();
+
+	particles2_ = std::make_unique<ParticleManager>();
+	particles2_->Initialize();
+	particles2_->LoadTexture(L"Resources/Texture/warning.png");
+	particleTrans2_.Initialize();
+#pragma endregion
 
 	sceneManager_ = SceneManager::GetInstance();
 }
@@ -48,19 +56,23 @@ void TitleScene::Update()
 
 	camera->SetTarget({ cameraPos.x ,cameraPos.y ,cameraPos.z });
 
-	//sprite_->SetSize({ 0.01f,0.01f });
-
 	tyoinoriObj->SetScale({ 10.0f,10.0f,10.0f });
 	tyoinoriObj->SetPosition({ 20.0f,0.0f,0.0f });
 	tyoinoriObj->Update(camera.get());
 
 	skydomeObj->SetScale({ 0.1f,0.1f,0.1f });
-	skydomeObj->SetPosition({ -20.0f,0.0f,0.0f });
+	skydomeObj->SetPosition({ 0.0f,0.0f,0.0f });
 	skydomeObj->Update(camera.get());
 
 	particles_->RandParticle();
 	particles_->Update();
-	particleTrans_.Update(camera.get(),true);
+	particleTrans_.SetTranslation({ 20.0f,0.0f,0.0f });
+	particleTrans_.Update(camera.get());
+
+	particles2_->RandParticle();
+	particles2_->Update();
+	particleTrans2_.SetTranslation({ -20.0f,0.0f,0.0f });
+	particleTrans2_.Update(camera.get());
 
 	camera->Update();
 }
@@ -72,6 +84,7 @@ void TitleScene::Draw()
 	skydomeObj->Draw();
 	tyoinoriObj->Draw();
 	particles_->Draw(&particleTrans_);
+	particles2_->Draw(&particleTrans2_);
 }
 
 void TitleScene::Finalize()

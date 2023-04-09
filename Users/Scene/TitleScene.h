@@ -61,8 +61,13 @@ private:
 	std::unique_ptr<Model> skydome;
 #pragma endregion
 
+#pragma region Particle
 	std::unique_ptr<ParticleManager> particles_;
 	WorldTransform particleTrans_;
+
+	std::unique_ptr<ParticleManager> particles2_;
+	WorldTransform particleTrans2_;
+#pragma endregion 
 
 	//ImGuiデバッグ用
 	Mathematics::Vector3 cameraPos = { 0,0,0 };

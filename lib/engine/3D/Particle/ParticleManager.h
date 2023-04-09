@@ -11,17 +11,21 @@ class ParticleManager
 {
 public:
 	static void StaticInitialize(ID3D12Device* device, ID3D12GraphicsCommandList* cmdList);
-	static void LoadTexture(const wchar_t* texturename);
+
 private:
-	static void InitializeDescriptorHeap();
+	void InitializeDescriptorHeap();
 	static void CreateCraphicsPipeline();
 
-	static void CreateModel();
-
 public:
+
+	void Initialize();
+	
 	void Draw(WorldTransform* transform);
 
 	void Update();
+
+	void LoadTexture(const wchar_t* texturename);
+	void CreateModel();
 
 	void Add(int life, Mathematics::Vector3 position, Mathematics::Vector3 velocity, Mathematics::Vector3 accel, float start_scale, float end_scale, Mathematics::Vector4 s_color, Mathematics::Vector4 e_color);
 
@@ -38,18 +42,18 @@ private:
 	// パイプラインステート
 	static RootsigSetPip pip;
 
-	static Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeap;
-	static Microsoft::WRL::ComPtr<ID3D12Resource> vertBuff;
-	static Microsoft::WRL::ComPtr<ID3D12Resource> texbuff;
-	static CD3DX12_CPU_DESCRIPTOR_HANDLE cpuDescHandleSRV;
-	static CD3DX12_GPU_DESCRIPTOR_HANDLE gpuDescHandleSRV;
-	static UINT descriptorHandleIncrementSize;
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeap;
+	Microsoft::WRL::ComPtr<ID3D12Resource> vertBuff;
+	Microsoft::WRL::ComPtr<ID3D12Resource> texbuff;
+	CD3DX12_CPU_DESCRIPTOR_HANDLE cpuDescHandleSRV;
+	CD3DX12_GPU_DESCRIPTOR_HANDLE gpuDescHandleSRV;
+	UINT descriptorHandleIncrementSize;
 	// 頂点データ配列
-	static VertexPos vertices[vertexCount];
-	static D3D12_VERTEX_BUFFER_VIEW vbView;
+	VertexPos vertices[vertexCount];
+	D3D12_VERTEX_BUFFER_VIEW vbView;
 
-	static Mathematics::Matrix4 matView;
-	static Mathematics::Matrix4 matProjection;
+	Mathematics::Matrix4 matView;
+	Mathematics::Matrix4 matProjection;
 
 private:
 	Microsoft::WRL::ComPtr<ID3D12Resource> constBuff;

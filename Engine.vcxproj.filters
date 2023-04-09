@@ -213,11 +213,11 @@
     <ClCompile Include="Users\Scene\TitleScene.cpp">
       <Filter>Users\ソースファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="lib\engine\3D\Particle\ParticleManager.cpp">
-      <Filter>Engine\ソース ファイル\3D</Filter>
-    </ClCompile>
     <ClCompile Include="lib\engine\3D\WorldTransform.cpp">
       <Filter>Engine\ソース ファイル\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\3D\Particle\ParticleManager.cpp">
+      <Filter>Engine\ソース ファイル\3D\Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

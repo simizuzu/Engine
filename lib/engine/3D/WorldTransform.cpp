@@ -43,30 +43,20 @@ void WorldTransform::Update(Camera* camera, bool billboradFlag)
 	}
 	else
 	{
-		//Mathematics::Matrix4 mat = camera->GetMatView();
+		Mathematics::Matrix4 mat = camera->GetMatView();
 
-		//mat.m[3][0] = 0;
-		//mat.m[3][1] = 0;
-		//mat.m[3][2] = 0;
-		//mat.m[3][3] = 1;
+		mat.m[3][0] = 0;
+		mat.m[3][1] = 0;
+		mat.m[3][2] = 0;
+		mat.m[3][3] = 1;
 
-		//matWorld = matScale * matRot * matTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
-
-		////定数バッファへデータ転送
-		//ConstBufferDataB0* constMap = nullptr;
-		//result = constBuffer_->Map(0, nullptr, (void**)&constMap);
-		//assert(SUCCEEDED(result));
-		//constMap->mat = matWorld;
-		//constBuffer_->Unmap(0, nullptr);
-
-		const Mathematics::Matrix4 matView = camera->GetMatView();
-		const Mathematics::Matrix4 matProjection = camera->GetMatProjection();
+		matWorld = matScale * matRot * matTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
 
 		//定数バッファへデータ転送
 		ConstBufferDataB0* constMap = nullptr;
 		result = constBuffer_->Map(0, nullptr, (void**)&constMap);
 		assert(SUCCEEDED(result));
-		constMap->mat = matWorld * matView * matProjection;
+		constMap->mat = matWorld;
 		constBuffer_->Unmap(0, nullptr);
 	}
 }

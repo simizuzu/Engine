@@ -29,10 +29,6 @@ void TitleScene::Update()
 	ImGui::SliderFloat3("camera", &cameraPos.y, -10.0f, 40.0f, "%.1f");
 	ImGui::End();
 
-	if (input_->TriggerPushKey(DIK_SPACE) || input_->TriggerButton(A))
-	{
-		sceneManager_->ChangeScene("GAMEPLAY");
-	}
 	camera->SetTarget({ cameraPos.x ,cameraPos.y ,cameraPos.z });
 
 	tyoinoriObj->SetScale({ 10.0f,10.0f,10.0f });

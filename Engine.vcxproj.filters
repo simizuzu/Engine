@@ -109,6 +109,12 @@
     <Filter Include="Engine\ヘッダー ファイル\Base\Utility">
       <UniqueIdentifier>{a5417002-6899-4620-9d41-4365d63e4186}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソース ファイル\3D\Particle">
+      <UniqueIdentifier>{db9ac287-89df-4b7a-9350-d6d3076df92e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダー ファイル\3D\Particle">
+      <UniqueIdentifier>{e7bc7cb2-6b19-4b3a-a242-ddeee7edc915}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -152,9 +158,6 @@
     </ClCompile>
     <ClCompile Include="lib\engine\Base\TextureManager.cpp">
       <Filter>Engine\ソース ファイル\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\engine\3D\WorldTransform.cpp">
-      <Filter>Engine\ソース ファイル\3D</Filter>
     </ClCompile>
     <ClCompile Include="lib\engine\Audio\AudioManager.cpp">
       <Filter>Engine\ソース ファイル\Audio</Filter>
@@ -210,6 +213,12 @@
     <ClCompile Include="Users\Scene\TitleScene.cpp">
       <Filter>Users\ソースファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="lib\engine\3D\Particle\ParticleManager.cpp">
+      <Filter>Engine\ソース ファイル\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\3D\WorldTransform.cpp">
+      <Filter>Engine\ソース ファイル\3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engine\Math\DirectX12Math.h">
@@ -250,9 +259,6 @@
     </ClInclude>
     <ClInclude Include="lib\engine\Base\TextureManager.h">
       <Filter>Engine\ヘッダー ファイル\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\engine\3D\WorldTransform.h">
-      <Filter>Engine\ヘッダー ファイル\3D</Filter>
     </ClInclude>
     <ClInclude Include="lib\engine\Audio\AudioManager.h">
       <Filter>Engine\ヘッダー ファイル\Audio</Filter>
@@ -317,12 +323,24 @@
     <ClInclude Include="lib\engine\Base\Utility\EngineUtility.h">
       <Filter>Engine\ヘッダー ファイル\Base\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="lib\engine\3D\Particle\ParticleManager.h">
+      <Filter>Engine\ヘッダー ファイル\3D\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\engine\Base\AvoidWarning.h">
+      <Filter>Engine\ヘッダー ファイル\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\engine\3D\WorldTransform.h">
+      <Filter>Engine\ヘッダー ファイル\3D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\Sprite.hlsli">
       <Filter>Engine\シェーダーファイル</Filter>
     </None>
     <None Include="Resources\shaders\OBJ.hlsli">
+      <Filter>Engine\シェーダーファイル</Filter>
+    </None>
+    <None Include="..\NekoYanagi\Resources\shaders\Particle.hlsli">
       <Filter>Engine\シェーダーファイル</Filter>
     </None>
   </ItemGroup>
@@ -337,6 +355,15 @@
       <Filter>Engine\シェーダーファイル</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\OBJPS.hlsl">
+      <Filter>Engine\シェーダーファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="..\NekoYanagi\Resources\shaders\ParticleGS.hlsl">
+      <Filter>Engine\シェーダーファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="..\NekoYanagi\Resources\shaders\ParticlePS.hlsl">
+      <Filter>Engine\シェーダーファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="..\NekoYanagi\Resources\shaders\ParticleVS.hlsl">
       <Filter>Engine\シェーダーファイル</Filter>
     </FxCompile>
   </ItemGroup>

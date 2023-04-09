@@ -9,6 +9,8 @@
 
 #include "Sprite.h"
 #include "Object3d.h"
+#include "ParticleManager.h"
+#include "WorldTransform.h"
 
 // タイトルシーン
 class TitleScene : public BaseScene
@@ -42,11 +44,25 @@ private:
 	Input* input_ = nullptr;
 	std::unique_ptr<Camera> camera;
 	SceneManager* sceneManager_= nullptr;
+#pragma region Sprite
 	TextureData tex;
 	std::unique_ptr<Sprite> sprite_;
 
+	TextureData tex2;
+	std::unique_ptr<Sprite> warningSprite_;
+
+#pragma endregion
+
+#pragma region OBJ
 	std::unique_ptr<Object3d> tyoinoriObj;
 	std::unique_ptr<Model> tyoinori;
+
+	std::unique_ptr<Object3d> skydomeObj;
+	std::unique_ptr<Model> skydome;
+#pragma endregion
+
+	std::unique_ptr<ParticleManager> particles_;
+	WorldTransform particleTrans_;
 
 	//ImGuiデバッグ用
 	Mathematics::Vector3 cameraPos = { 0,0,0 };

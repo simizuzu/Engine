@@ -6,6 +6,8 @@ void MainGame::Initialize()
 	Framework::Initialize();
 	// 3Dオブジェクト静的初期化
 	Object3d::StaticInitialize(dxCommon_->GetDevice(), winApp_->window_width, winApp_->window_height);
+	//パーティクルマネージャー静的初期化
+	ParticleManager::StaticInitialize(dxCommon_->GetDevice(), dxCommon_->GetCommandList());
 
 	sceneFactory_ = new SceneFactory();
 	SceneManager::GetInstance()->SetSceneFactory(sceneFactory_);

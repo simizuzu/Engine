@@ -93,3 +93,4 @@ void WorldTransform::CreateConstBuffer()
 		IID_PPV_ARGS(&constBuffer_));
 	assert(SUCCEEDED(result));
 }
+

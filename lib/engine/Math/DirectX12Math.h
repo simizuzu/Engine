@@ -40,6 +40,8 @@ namespace MyMathUtility
 	///// <param name="childWorldtrans">子のworldTransform</param>
 	//void WorldTransUpdate(WorldTransform& childWorldtrans);
 
+	void SinCos(float& sin_, float& cos_, float angle);
+
 	// ベクトルと行列の掛け算
 	Mathematics::Matrix4 MatMulVector(Mathematics::Matrix4 m, Mathematics::Vector3 v);
 

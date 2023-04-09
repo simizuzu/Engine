@@ -57,11 +57,11 @@ void TitleScene::Update()
 	camera->SetTarget({ cameraPos.x ,cameraPos.y ,cameraPos.z });
 
 	tyoinoriObj->SetScale({ 10.0f,10.0f,10.0f });
-	tyoinoriObj->SetPosition({ 20.0f,0.0f,0.0f });
+	tyoinoriObj->SetPosition({ 0.0f,-20.0f,0.0f });
 	tyoinoriObj->Update(camera.get());
 
-	skydomeObj->SetScale({ 0.1f,0.1f,0.1f });
-	skydomeObj->SetPosition({ 0.0f,0.0f,0.0f });
+	skydomeObj->SetScale({ 0.05f,0.05f,0.05f });
+	skydomeObj->SetPosition({ 0.0f,0.0f,-20.0f });
 	skydomeObj->Update(camera.get());
 
 	particles_->RandParticle();

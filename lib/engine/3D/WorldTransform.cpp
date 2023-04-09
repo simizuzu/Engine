@@ -50,7 +50,7 @@ void WorldTransform::Update(Camera* camera, bool billboradFlag)
 		mat.m[3][2] = 0;
 		mat.m[3][3] = 1;
 
-		matWorld = matScale * matRot * matTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
+		matWorld = matScale * matRot * mat * matTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
 
 		//定数バッファへデータ転送
 		ConstBufferDataB0* constMap = nullptr;

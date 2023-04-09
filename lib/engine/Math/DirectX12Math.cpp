@@ -113,6 +113,13 @@ namespace MyMathUtility
 	//	childWorldtrans.TransferMatrix();									// 行列の転送
 	//}
 
+	//sin、cosを両方出す
+	void SinCos(float& sin_, float& cos_, float angle)
+	{
+		sin_ = Sin(angle);
+		cos_ = Cos(angle);
+	}
+
 	Matrix4 MatMulVector(Matrix4 m, Vector3 v)
 	{
 		return Matrix4();
@@ -198,31 +205,27 @@ namespace MyMathUtility
 	{
 		// アスペクト比を作成
 
-		float sinFov = std::sin(0.5f * fogAngleY);
-		float cosFov = std::cos(0.5f * fogAngleY);
-
-		float height = cosFov / sinFov;
-		float width = height / aspectRatio;
-		float range = farZ / (farZ - nearZ);
-
 		Matrix4 matrix;
+		float sinFov = 0.0f;
+		float cosFov = 0.0f;
+		SinCos(sinFov, cosFov, 0.5f * fogAngleY);
+
+		float range = farZ / (farZ - nearZ);
+		float height = cosFov / sinFov;
+
 		matrix.m[0][0] = height / aspectRatio;
+
 		matrix.m[1][1] = cosFov / sinFov;
+
 		matrix.m[2][2] = range;
 		matrix.m[2][3] = 1.0f;
+
 		matrix.m[3][2] = -range * nearZ;
 
-		matrix.m[0][1] = 0.0f;
-		matrix.m[0][2] = 0.0f;
-		matrix.m[0][3] = 0.0f;
-		matrix.m[1][0] = 0.0f;
-		matrix.m[1][2] = 0.0f;
-		matrix.m[1][3] = 0.0f;
-		matrix.m[2][0] = 0.0f;
-		matrix.m[2][1] = 0.0f;
-		matrix.m[3][0] = 0.0f;
-		matrix.m[3][1] = 0.0f;
-		matrix.m[3][3] = 0.0f;
+		matrix.m[0][1] = matrix.m[0][2] = matrix.m[0][3] =
+			matrix.m[1][0] = matrix.m[1][2] = matrix.m[1][3] =
+			matrix.m[2][0] = matrix.m[2][1] =
+			matrix.m[3][0] = matrix.m[3][1] = matrix.m[3][3] = 0.0f;
 
 		return matrix;
 	}

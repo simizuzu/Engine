@@ -95,17 +95,19 @@ namespace Mathematics
 	{
 		Matrix4 temp(*this);
 
-		for (int i = 0; i < 4; i++)
+		for (size_t i = 0; i < 4; i++)
 		{
-			for (int j = 0; j < 4; j++)
+			for (size_t j = 0; j < 4; j++)
 			{
-				float f = 0.0f;
-				for (int k = 0; k < 4; k++)
+				double f = 0.0;
+				for (size_t k = 0; k < 4; k++)
 				{
-					f += temp.m[i][k] * mat.m[k][j];
+					f += (double)temp.m[i][k] * (double)mat.m[k][j];
+
+					m[i][j] = (float)f;
 				}
 
-				m[i][j] = f;
+
 			}
 		}
 		return *this;

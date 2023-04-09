@@ -340,7 +340,7 @@
     <None Include="Resources\shaders\OBJ.hlsli">
       <Filter>Engine\シェーダーファイル</Filter>
     </None>
-    <None Include="..\NekoYanagi\Resources\shaders\Particle.hlsli">
+    <None Include="Resources\shaders\Particle.hlsli">
       <Filter>Engine\シェーダーファイル</Filter>
     </None>
   </ItemGroup>
@@ -357,13 +357,13 @@
     <FxCompile Include="Resources\shaders\OBJPS.hlsl">
       <Filter>Engine\シェーダーファイル</Filter>
     </FxCompile>
-    <FxCompile Include="..\NekoYanagi\Resources\shaders\ParticleGS.hlsl">
+    <FxCompile Include="Resources\shaders\ParticleGS.hlsl">
       <Filter>Engine\シェーダーファイル</Filter>
     </FxCompile>
-    <FxCompile Include="..\NekoYanagi\Resources\shaders\ParticlePS.hlsl">
+    <FxCompile Include="Resources\shaders\ParticlePS.hlsl">
       <Filter>Engine\シェーダーファイル</Filter>
     </FxCompile>
-    <FxCompile Include="..\NekoYanagi\Resources\shaders\ParticleVS.hlsl">
+    <FxCompile Include="Resources\shaders\ParticleVS.hlsl">
       <Filter>Engine\シェーダーファイル</Filter>
     </FxCompile>
   </ItemGroup>

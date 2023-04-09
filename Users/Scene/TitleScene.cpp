@@ -67,7 +67,7 @@ void TitleScene::Update()
 	particles_->RandParticle();
 	particles_->Update();
 	particleTrans_.SetTranslation({ 20.0f,0.0f,0.0f });
-	particleTrans_.Update(camera.get());
+	particleTrans_.Update(camera.get(),true);
 
 	particles2_->RandParticle();
 	particles2_->Update();

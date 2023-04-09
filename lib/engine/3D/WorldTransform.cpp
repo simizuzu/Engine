@@ -43,14 +43,14 @@ void WorldTransform::Update(Camera* camera, bool billboradFlag)
 	}
 	else
 	{
-		Mathematics::Matrix4 mat = camera->GetMatView();
+		Mathematics::Matrix4 mat = camera->GetMatViewInverse();
 
 		mat.m[3][0] = 0;
 		mat.m[3][1] = 0;
 		mat.m[3][2] = 0;
 		mat.m[3][3] = 1;
 
-		matWorld = matScale * matRot * mat * matTrans * camera->GetMatViewInverse() * camera->GetMatProjection();
+		matWorld = matScale * matRot * mat * matTrans * camera->GetMatView() * camera->GetMatProjection();
 
 		//定数バッファへデータ転送
 		ConstBufferDataB0* constMap = nullptr;

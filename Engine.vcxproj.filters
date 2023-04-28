@@ -115,6 +115,12 @@
     <Filter Include="Engine\ヘッダー ファイル\3D\Particle">
       <UniqueIdentifier>{e7bc7cb2-6b19-4b3a-a242-ddeee7edc915}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソース ファイル\Editer">
+      <UniqueIdentifier>{75f669c4-9b04-44ac-ac32-0d7db6f1fc7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダー ファイル\Editer">
+      <UniqueIdentifier>{123cbbb0-4b07-4ae5-89d7-461f53b15647}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -218,6 +224,9 @@
     </ClCompile>
     <ClCompile Include="lib\engine\3D\Particle\ParticleManager.cpp">
       <Filter>Engine\ソース ファイル\3D\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelLoader.cpp">
+      <Filter>Engine\ソース ファイル\Editer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -331,6 +340,9 @@
     </ClInclude>
     <ClInclude Include="lib\engine\3D\WorldTransform.h">
       <Filter>Engine\ヘッダー ファイル\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelLoader.h">
+      <Filter>Engine\ヘッダー ファイル\Editer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <map>
 
 #include "Input.h"
 #include "Camera.h"
@@ -12,7 +13,7 @@
 #include "SceneManager.h"
 #include "TitleScene.h"
 
-#include "GameCollisionManager.h"
+#include "LevelLoader.h"
 
 class GameScene : public BaseScene
 {
@@ -37,8 +38,10 @@ private: // メンバ変数
 
 	SceneManager* sceneManager_ = nullptr;
 
-	std::unique_ptr<Object3d> tyoinoriObj;
-	std::unique_ptr<Model> tyoinori;
+	std::unique_ptr<Object3d> objCylinder;
+	std::unique_ptr<Object3d> objCube;
+	std::unique_ptr<Model> cylinder;
+	std::unique_ptr<Model> cube;
 
 	//宣言
 	INT32 sceneNum = 0;
@@ -46,12 +49,15 @@ private: // メンバ変数
 
 	// ImGuiデバック用
 	Mathematics::Vector2 pos = {100,100};
-	Mathematics::Vector3 posObj = { 0,0,0 };
 	
 	Mathematics::Vector3 cameraPos = { 0,0,0 };
 
+	LevelData* levelData = nullptr;
+	std::map<std::string, Model*> models;
+
 	// サウンド
 	uint32_t gameHandle_ = 0;
+	std::vector<Object3d*> objects;
 
 private:
 	//コピーコンストラクタ・代入演算子削除

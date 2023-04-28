@@ -19,7 +19,7 @@ class GameScene : public BaseScene
 {
 public: // メンバ関数
 	GameScene() = default;
-	~GameScene() = default;
+	~GameScene();
 	//　初期化
 	void Initialize() override;
 	// 更新
@@ -38,10 +38,11 @@ private: // メンバ変数
 
 	SceneManager* sceneManager_ = nullptr;
 
-	std::unique_ptr<Object3d> objCylinder;
-	std::unique_ptr<Object3d> objCube;
-	std::unique_ptr<Model> cylinder;
-	std::unique_ptr<Model> cube;
+	Object3d* objCylinder = nullptr;
+	Object3d* objCube = nullptr;
+	Model* Sphere = nullptr;
+	Model* Tire = nullptr;
+	Model* Map01 = nullptr;
 
 	//宣言
 	INT32 sceneNum = 0;

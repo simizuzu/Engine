@@ -47,6 +47,12 @@ void TitleScene::Initialize()
 
 void TitleScene::Update()
 {
+	if (input_->TriggerPushKey(DIK_SPACE) || input_->TriggerButton(A))
+	{
+		sceneManager_->ChangeScene("GAME");
+		//AudioManager::GetInstance()->StopWave(gameHandle_);
+	}
+
 	ImGui::Begin("camera");
 	ImGui::SetWindowSize({ 500,100 });
 	ImGui::SetWindowPos({ 100,100 });

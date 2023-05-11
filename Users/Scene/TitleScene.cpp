@@ -79,12 +79,12 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	sprite_->DrawSprite(tex, { 500.0f,200.0f },{0.5f,0.5f});
-	warningSprite_->DrawSprite(tex2, { 20.0f,20.0f });
-	skydomeObj->Draw();
+	//sprite_->DrawSprite(tex, { 500.0f,200.0f },{0.5f,0.5f});
+	//warningSprite_->DrawSprite(tex2, { 20.0f,20.0f });
+	//skydomeObj->Draw();
 	tyoinoriObj->Draw();
-	particles_->Draw(&particleTrans_);
-	particles2_->Draw(&particleTrans2_);
+	//particles_->Draw(&particleTrans_);
+	//particles2_->Draw(&particleTrans2_);
 }
 
 void TitleScene::Finalize()

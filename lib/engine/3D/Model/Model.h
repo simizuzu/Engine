@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <wrl.h>
+#include <unordered_map>
 
 #include "Vector2.h"
 #include "Vector3.h"
@@ -54,7 +55,7 @@ public:
 	/// OBJファイルから3Dモデルを読み込む
 	/// </summary>
 	/// <returns>モデル</returns>
-	static Model* LoadFromObj(const std::string& modelname);
+	static Model* LoadFromObj(const std::string& modelname, bool smoothing = false);
 
 	/// <summary>
 	/// マテリアル読み込み
@@ -112,6 +113,10 @@ private: // メンバ変数
 	UINT descriptorHandleIncrementSize;
 	// テクスチャデータ
 	TextureData textureData;
+
+	//頂点法線スムージング用データ
+	std::unordered_map<unsigned short, std::vector<unsigned short>> smoothData;
+
 private:
 	/// <summary>
 	/// OBJファイルから3Dモデルを読み込む
@@ -137,6 +142,24 @@ private:
 	/// インデックスデータ全体のサイズ
 	/// </summary>
 	void CreateIBSize();
+
+	/// <summary>
+	/// 頂点データの数を取得
+	/// </summary>
+	/// <returns>頂点データの取得</returns>
+	inline size_t GetVertexCount();
+
+	/// <summary>
+	/// エッジ平滑化データの追加
+	/// </summary>
+	/// <param name="indexPosition">座標インデックス</param>
+	/// <param name="indexVertex">頂点インデックス</param>
+	void AddSmoothData(unsigned short indexPosition, unsigned short indexVertex);
+
+	/// <summary>
+	/// 平滑化された頂点法線の計算
+	/// </summary>
+	void CalculateSmoothedVertexNormals();
 
 public:
 	//virtual void ModelInitialize();

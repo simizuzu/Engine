@@ -6,8 +6,6 @@
 
 using namespace Microsoft::WRL;
 
-DirectXCommon* DirectXCommon::dxCommon_ = nullptr;
-
 void DirectXCommon::Initialize()
 {
 	InitializeDXGI();
@@ -323,11 +321,6 @@ void DirectXCommon::SetBackScreenColor(float red, float green, float blue, float
 	clearColor[1] = green;
 	clearColor[2] = blue;
 	clearColor[3] = alpha;
-}
-
-void DirectXCommon::Delete()
-{
-	delete dxCommon_;
 }
 
 DirectXCommon* DirectXCommon::GetInstance()

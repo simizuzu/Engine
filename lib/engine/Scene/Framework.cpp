@@ -42,8 +42,6 @@ void Framework::Finalize()
 	textureManager_->Delete();
 	// オーディオマネージャー初期化
 	audioManager->Destroy();
-	// DirectX解放
-	dxCommon_->Delete();
 	// WindowsAPIの終了処理
 	winApp_->Finalize();
 	// WinApp解放

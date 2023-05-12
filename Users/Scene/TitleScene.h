@@ -73,5 +73,7 @@ private:
 	Mathematics::Vector3 cameraPos = { 0,0,0 };
 
 	Mathematics::Vector2 pos = { 0,0 };
+
+	float rot = 0.0f;
 };
 

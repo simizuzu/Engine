@@ -119,6 +119,7 @@
     <ClCompile Include="lib\engine\Scene\BaseScene.cpp" />
     <ClCompile Include="lib\engine\Scene\Framework.cpp" />
     <ClCompile Include="lib\engine\Scene\SceneManager.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Users\Scene\GameScene.cpp" />
     <ClCompile Include="Users\Scene\MainGame.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="lib\engine\Scene\BaseScene.h" />
     <ClInclude Include="lib\engine\Scene\Framework.h" />
     <ClInclude Include="lib\engine\Scene\SceneManager.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="Users\Scene\GameScene.h" />
     <ClInclude Include="Users\Scene\MainGame.h" />
     <ClInclude Include="Users\Scene\SceneFactory.h" />

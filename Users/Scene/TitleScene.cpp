@@ -20,9 +20,10 @@ void TitleScene::Initialize()
 
 #pragma region OBJ
 	tyoinori = std::make_unique<Model>();
-	tyoinori.reset(Model::LoadFromObj("tyoinori"));
+	tyoinori.reset(Model::LoadFromObj("Enemy"));
 	tyoinoriObj.reset(Object3d::Create());
 	tyoinoriObj->SetModel(tyoinori.get());
+	tyoinoriObj->SetScale({ 10.0f,10.0f,10.0f });
 
 	skydome = std::make_unique<Model>();
 	skydome.reset(Model::LoadFromObj("skydome"));
@@ -42,39 +43,33 @@ void TitleScene::Initialize()
 	particleTrans2_.Initialize();
 #pragma endregion
 
+	//camera->SetEye({ 0.0f, 0.0f, 0.0f });
+
 	sceneManager_ = SceneManager::GetInstance();
 }
 
 void TitleScene::Update()
 {
-	ImGui::Begin("camera");
+	camera->Update();
+	/*ImGui::Begin("camera");
 	ImGui::SetWindowSize({ 500,100 });
 	ImGui::SetWindowPos({ 100,100 });
 	ImGui::SliderFloat2("camera", &cameraPos.y, -10.0f, 100.0f, "%.1f");
 	ImGui::SliderFloat3("camera", &cameraPos.x, -10.0f, 100.0f, "%.1f");
-	ImGui::End();
+	ImGui::End();*/
+	//tyoinoriObj->SetPosition({ 0.0f,-20.0f,0.0f });
 
-	camera->SetTarget({ cameraPos.x ,cameraPos.y ,cameraPos.z });
-
-	tyoinoriObj->SetScale({ 10.0f,10.0f,10.0f });
-	tyoinoriObj->SetPosition({ 0.0f,-20.0f,0.0f });
+	if (input_->PushKey(DIK_RIGHT))
+	{
+		rot++;
+	}
+	else if (input_->PushKey(DIK_LEFT))
+	{
+		rot--;
+	}
+	tyoinoriObj->SetRotation({ 0.0f,rot,0.0f });
 	tyoinoriObj->Update(camera.get());
 
-	skydomeObj->SetScale({ 0.05f,0.05f,0.05f });
-	skydomeObj->SetPosition({ 0.0f,0.0f,-20.0f });
-	skydomeObj->Update(camera.get());
-
-	particles_->RandParticle();
-	particles_->Update();
-	particleTrans_.SetTranslation({ 20.0f,0.0f,0.0f });
-	particleTrans_.Update(camera.get(),true);
-
-	particles2_->RandParticle();
-	particles2_->Update();
-	particleTrans2_.SetTranslation({ -20.0f,0.0f,0.0f });
-	particleTrans2_.Update(camera.get());
-
-	camera->Update();
 }
 
 void TitleScene::Draw()

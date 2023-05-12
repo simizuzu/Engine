@@ -14,7 +14,7 @@ using namespace Mathematics;
 Microsoft::WRL::ComPtr<ID3D12Device> Model::device;
 Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> Model::descHeap;
 
-Model* Model::LoadFromObj(const std::string& modelname)
+Model* Model::LoadFromObj(const std::string& modelname, bool smoothing)
 {
 	// 新たなModel型のインスタンスをnewする
 	Model* model_ = new Model();
@@ -379,3 +379,34 @@ const std::vector<VertexPosNormalUv> Model::GetVertices()
 {
 	return vertices;
 }
+
+#pragma region スムージング
+inline size_t Model::GetVertexCount()
+{
+	return vertices.size();
+}
+
+void Model::AddSmoothData(unsigned short indexPosition, unsigned short indexVertex)
+{
+}
+
+void Model::CalculateSmoothedVertexNormals()
+{
+	auto itr = smoothData.begin();
+	for (; itr != smoothData.end(); ++itr)
+	{
+		//各面用の共通頂点コレクション
+		std::vector<unsigned short>& v = itr->second;
+		//全長店の法線を平均する
+		Mathematics::Vector4 normal = {};
+		for (unsigned short index : v)
+		{
+			normal.x += vertices[index].normal.x;
+			normal.y += vertices[index].normal.y;
+			normal.z += vertices[index].normal.z;
+			normal.w += 0.0f;
+		}
+		normal = 
+	}
+}
+#pragma endregion

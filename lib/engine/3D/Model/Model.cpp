@@ -23,7 +23,7 @@ Model* Model::LoadFromObj(const std::string& modelname, bool smoothing)
 	// デスクリプタヒープの生成
 	model_->InitializeDescriptorHeap();
 	// 読み込み
-	model_->LoadFromOBJInternal(modelname);
+	model_->LoadFromOBJInternal(modelname,smoothing);
 	// バッファ生成
 	model_->CreateBuffers();
 
@@ -130,7 +130,7 @@ void Model::Draw(ID3D12GraphicsCommandList* cmdList)
 	cmdList->DrawIndexedInstanced((UINT)indices.size(), 1, 0, 0, 0);
 }
 
-void Model::LoadFromOBJInternal(const std::string& modelname)
+void Model::LoadFromOBJInternal(const std::string& modelname,bool smoothing)
 {
 	// ファイルストリーム
 	std::ifstream file;
@@ -190,6 +190,11 @@ void Model::LoadFromOBJInternal(const std::string& modelname)
 				vertex.normal = normals[indexNormal - 1];
 				vertex.uv = texcoords[indexTexcoord - 1];
 				vertices.emplace_back(vertex);
+				//エッジ平滑化用のデータを追加
+				if (smoothing)
+				{
+					AddSmoothData(indexPosition, (unsigned short)GetVertexCount() - 1);
+				}
 				// インデックスデータの追加
 				indices.emplace_back((unsigned short)indices.size());
 			}
@@ -229,6 +234,12 @@ void Model::LoadFromOBJInternal(const std::string& modelname)
 	}
 	// ファイルを閉じる
 	file.close();
+
+	//頂点法線の平均によるエッジの平滑化
+	if (smoothing)
+	{
+		CalculateSmoothedVertexNormals();
+	}
 
 	CreateVBSize();
 	CreateIBSize();
@@ -388,6 +399,7 @@ inline size_t Model::GetVertexCount()
 
 void Model::AddSmoothData(unsigned short indexPosition, unsigned short indexVertex)
 {
+	smoothData[indexPosition].emplace_back(indexVertex);
 }
 
 void Model::CalculateSmoothedVertexNormals()
@@ -406,7 +418,15 @@ void Model::CalculateSmoothedVertexNormals()
 			normal.z += vertices[index].normal.z;
 			normal.w += 0.0f;
 		}
-		normal = 
+		normal = normal / (float)v.size();
+		normal = normal.normalization();
+		//共通法線を使用する全ての頂点データに書き込む
+		for (unsigned short index : v)
+		{
+			vertices[index].normal.x = normal.x;
+			vertices[index].normal.y = normal.y;
+			vertices[index].normal.z = normal.z;
+		}
 	}
 }
 #pragma endregion

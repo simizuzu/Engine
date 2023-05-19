@@ -121,7 +121,7 @@ private:
 	/// <summary>
 	/// OBJファイルから3Dモデルを読み込む
 	/// </summary>
-	void LoadFromOBJInternal(const std::string& modelname);
+	void LoadFromOBJInternal(const std::string& modelname, bool smoothing);
 
 	/// <summary>
 	/// デスクリプタヒープの初期化

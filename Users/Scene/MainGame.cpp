@@ -6,6 +6,7 @@ void MainGame::Initialize()
 	Framework::Initialize();
 	// 3Dオブジェクト静的初期化
 	Object3d::StaticInitialize(dxCommon_->GetDevice(), winApp_->window_width, winApp_->window_height);
+	Light::StaticInitialise(dxCommon_);
 	//パーティクルマネージャー静的初期化
 	ParticleManager::StaticInitialize(dxCommon_->GetDevice(), dxCommon_->GetCommandList());
 

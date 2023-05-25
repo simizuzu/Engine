@@ -9,7 +9,10 @@
 // 定数バッファ用データ構造体
 struct ConstBufferDataB0
 {
-	Mathematics::Matrix4 mat;	// 3D変換行列
+	//Mathematics::Matrix4 mat;	// 3D変換行列
+	Mathematics::Matrix4 viewproj;
+	Mathematics::Matrix4 world;
+	Mathematics::Vector3 cameraPos;
 };
 
 struct ConstBufferDataViewProjection

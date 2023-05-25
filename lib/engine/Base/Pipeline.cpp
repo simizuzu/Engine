@@ -243,7 +243,7 @@ void Pipeline::CreateObjPipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode b
 	descritorRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
 	// ルートパラメータの設定
-	D3D12_ROOT_PARAMETER rootParams[3] = {};
+	D3D12_ROOT_PARAMETER rootParams[4] = {};
 	// 定数バッファ0番
 	rootParams[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;	// 定数バッファビュー
 	rootParams[0].Descriptor.ShaderRegister = 0;					// 定数バッファ番号
@@ -261,6 +261,12 @@ void Pipeline::CreateObjPipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode b
 	rootParams[2].Descriptor.ShaderRegister = 1;					//デスクリプタレンジ
 	rootParams[2].Descriptor.RegisterSpace = 0;						//デスクリプタレンジ数
 	rootParams[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;	//すべてのシェーダから見えるバッファE
+
+	//定数バッファ1番
+	rootParams[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;	//種類
+	rootParams[3].Descriptor.ShaderRegister = 2;					//デスクリプタレンジ
+	rootParams[3].Descriptor.RegisterSpace = 0;						//デスクリプタレンジ数
+	rootParams[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;	//すべてのシェーダから見えるバッファE
 
 	// テクスチャサンプラーの設定
 	D3D12_STATIC_SAMPLER_DESC sampleDesc{};

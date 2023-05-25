@@ -1,8 +1,8 @@
 #pragma once
 #include "DirectXCommon.h"
 
-#include "Matrix4.h"
 #include "Vector3.h"
+#include "Vector4.h"
 #include "DirectX12Math.h"
 
 /// <summary>
@@ -13,25 +13,65 @@ class Light
 public:
 	struct ConstBufferData
 	{
-		Mathematics::Matrix4 lightVec;		//ライトへの方向を表すベクトル
+		Mathematics::Vector4 lightVec;		//ライトへの方向を表すベクトル
 		Mathematics::Vector3 lightColor;	//ライトの色
 	};
 
-public: //静的メンバ関数
-	static void StaticInitialize(DirectXCommon* device);
+public:
+	/// <summary>
+	/// 静的初期化
+	/// </summary>
+	/// <param name="device">デバイス</param>
+	static void StaticInitialise(DirectXCommon* device);
 
-private: //静的メンバ変数
-	//デバイス
+	/// <summary>
+	/// インスタンス生成
+	/// </summary>
+	/// <returns>インスタンス</returns>
+	static Light* Create();
+
 	static DirectXCommon* device_;
 
 public:
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	/// <param name="device">デバイス</param>
 	void Initialize();
+
+	/// <summary>
+	/// 更新
+	/// </summary>
+	void Update();
+
+	/// <summary>
+	/// 描画
+	/// </summary>
+	void Draw(ID3D12GraphicsCommandList* cmdList,UINT rootPramIndex);
+
+	/// <summary>
+	/// ライト方向をセット
+	/// </summary>
+	/// <param name="lightdir">ライト方向</param>
+	void SetLightDir(const Mathematics::Vector4& lightdir);
+
+	/// <summary>
+	/// ライト色をセット
+	/// </summary>
+	/// <param name="lightColor">ライト色</param>
+	void SetLightColor(const Mathematics::Vector3& lightColor);
+
+private:
+	/// <summary>
+	/// 定数バッファ転送
+	/// </summary>
+	void TransferConstBuffer();
 
 private: //メンバ変数
 	//定数バッファ
 	Microsoft::WRL::ComPtr<ID3D12Resource> constBuff;
 	//ライト光線方向（単位ベクトル）
-	Mathematics::Matrix4 lightdir = MyMathUtility::MakeIdentity();
+	Mathematics::Vector4 lightdir = {1,0,0,0};
 	//ライト色
 	Mathematics::Vector3 lightColor = { 1.0f,1.0f,1.0f };
 	//ダーティフラグ

@@ -8,6 +8,10 @@ void TitleScene::Initialize()
 	camera = std::make_unique<Camera>();
 	camera->Initialize();
 
+	light.reset(Light::Create());
+	light->SetLightColor({ 1,1,1 });
+	Object3d::SetLight(light.get());
+
 #pragma region Sprite
 	tex = TextureManager::Load("Resources/Texture/title.png");
 	sprite_ = std::make_unique<Sprite>();
@@ -20,7 +24,7 @@ void TitleScene::Initialize()
 
 #pragma region OBJ
 	tyoinori = std::make_unique<Model>();
-	tyoinori.reset(Model::LoadFromObj("Enemy"));
+	tyoinori.reset(Model::LoadFromObj("Enemy",true));
 	tyoinoriObj.reset(Object3d::Create());
 	tyoinoriObj->SetModel(tyoinori.get());
 	tyoinoriObj->SetScale({ 10.0f,10.0f,10.0f });
@@ -29,19 +33,7 @@ void TitleScene::Initialize()
 	skydome.reset(Model::LoadFromObj("skydome"));
 	skydomeObj.reset(Object3d::Create());
 	skydomeObj->SetModel(skydome.get());
-#pragma endregion
 
-#pragma region Particle
-	particles_ = std::make_unique<ParticleManager>();
-	particles_->Initialize();
-	particles_->LoadTexture(L"Resources/effect.png");
-	particleTrans_.Initialize();
-
-	particles2_ = std::make_unique<ParticleManager>();
-	particles2_->Initialize();
-	particles2_->LoadTexture(L"Resources/Texture/warning.png");
-	particleTrans2_.Initialize();
-#pragma endregion
 
 	//camera->SetEye({ 0.0f, 0.0f, 0.0f });
 
@@ -51,6 +43,7 @@ void TitleScene::Initialize()
 void TitleScene::Update()
 {
 	camera->Update();
+	light->Update();
 	/*ImGui::Begin("camera");
 	ImGui::SetWindowSize({ 500,100 });
 	ImGui::SetWindowPos({ 100,100 });

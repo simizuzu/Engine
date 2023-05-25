@@ -6,6 +6,7 @@
 #include "Model.h"
 #include "Pipeline.h"
 #include "Shader.h"
+#include "Light.h"
 
 #include "Camera.h"
 #include "Matrix4.h"
@@ -16,7 +17,10 @@ public:
 	// 定数バッファ用データ構造体B0
 	struct ConstBufferDataB0
 	{
-		Mathematics::Matrix4 mat;	// 3D変換行列
+		//Mathematics::Matrix4 mat;	// 3D変換行列
+		Mathematics::Matrix4 viewproj;
+		Mathematics::Matrix4 world;
+		Mathematics::Vector3 cameraPos;
 	};
 
 public: // 静的メンバ関数
@@ -26,6 +30,8 @@ public: // 静的メンバ関数
 
 	static Object3d* Create();
 
+	static void SetLight(Light*light);
+
 private:
 	// デバイス
 	static Microsoft::WRL::ComPtr<ID3D12Device> device_;
@@ -33,6 +39,8 @@ private:
 	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cmdList_;
 	// パイプラインステート
 	static RootsigSetPip pip;
+	//ライト
+	static Light* light;
 
 public: // メンバ関数
 	/// <summary>

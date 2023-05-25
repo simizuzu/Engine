@@ -9,6 +9,7 @@
 Microsoft::WRL::ComPtr<ID3D12Device> Object3d::device_;
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> Object3d::cmdList_;
 RootsigSetPip Object3d::pip;
+Light* Object3d::light = nullptr;
 
 void Object3d::StaticInitialize(ID3D12Device* device, int width, int height)
 {
@@ -106,12 +107,16 @@ void Object3d::Update(Camera* camera)
 
 	const Mathematics::Matrix4 matView = camera->GetMatView();
 	const Mathematics::Matrix4 matProjection = camera->GetMatProjection();
+	const Mathematics::Vector3& cameraPos = camera->GetEye();
 
 	// 定数バッファへデータ転送
 	ConstBufferDataB0* constMap = nullptr;
 	result = constBuffB0->Map(0, nullptr, (void**)&constMap);
 	assert(SUCCEEDED(result));
-	constMap->mat = matWorld* matView * matProjection;
+	//constMap->mat = matWorld* matView * matProjection;
+	constMap->viewproj = matView * matProjection;
+	constMap->world = matWorld;
+	constMap->cameraPos = cameraPos;
 	constBuffB0->Unmap(0, nullptr);
 }
 
@@ -138,6 +143,8 @@ void Object3d::Draw()
 	// 定数バッファビューをセット
 	cmdList_->SetGraphicsRootConstantBufferView(2, constBuffB0->GetGPUVirtualAddress());
 
+	//ライトの描画
+	light->Draw(cmdList_.Get(), 3);
 	// モデル描画
 	model->Draw(cmdList_.Get());
 }
@@ -145,6 +152,11 @@ void Object3d::Draw()
 void Object3d::SetModel(Model* model)
 {
 	this->model = model;
+}
+
+void Object3d::SetLight(Light* light)
+{
+	Object3d::light = light;
 }
 
 void Object3d::SetPosition(Mathematics::Vector3 position_)

@@ -33,32 +33,36 @@ void WorldTransform::Update(Camera* camera, bool billboradFlag)
 	{
 		const Mathematics::Matrix4 matView = camera->GetMatView();
 		const Mathematics::Matrix4 matProjection = camera->GetMatProjection();
+		const Mathematics::Vector3& cameraPos = camera->GetEye();
 
-		//定数バッファへデータ転送
+		// 定数バッファへデータ転送
 		ConstBufferDataB0* constMap = nullptr;
 		result = constBuffer_->Map(0, nullptr, (void**)&constMap);
 		assert(SUCCEEDED(result));
-		constMap->mat = matWorld * matView * matProjection;
+		//constMap->mat = matWorld* matView * matProjection;
+		constMap->viewproj = matView * matProjection;
+		constMap->world = matWorld;
+		constMap->cameraPos = cameraPos;
 		constBuffer_->Unmap(0, nullptr);
 	}
-	else
-	{
-		Mathematics::Matrix4 mat = camera->GetMatViewInverse();
+	//else
+	//{
+	//	Mathematics::Matrix4 mat = camera->GetMatViewInverse();
 
-		mat.m[3][0] = 0;
-		mat.m[3][1] = 0;
-		mat.m[3][2] = 0;
-		mat.m[3][3] = 1;
+	//	mat.m[3][0] = 0;
+	//	mat.m[3][1] = 0;
+	//	mat.m[3][2] = 0;
+	//	mat.m[3][3] = 1;
 
-		matWorld = matScale * matRot * mat * matTrans * camera->GetMatView() * camera->GetMatProjection();
+	//	matWorld = matScale * matRot * mat * matTrans * camera->GetMatView() * camera->GetMatProjection();
 
-		//定数バッファへデータ転送
-		ConstBufferDataB0* constMap = nullptr;
-		result = constBuffer_->Map(0, nullptr, (void**)&constMap);
-		assert(SUCCEEDED(result));
-		constMap->mat = matWorld;
-		constBuffer_->Unmap(0, nullptr);
-	}
+	//	//定数バッファへデータ転送
+	//	ConstBufferDataB0* constMap = nullptr;
+	//	result = constBuffer_->Map(0, nullptr, (void**)&constMap);
+	//	assert(SUCCEEDED(result));
+	//	constMap->mat = matWorld;
+	//	constBuffer_->Unmap(0, nullptr);
+	//}
 }
 
 void WorldTransform::CreateConstBuffer()

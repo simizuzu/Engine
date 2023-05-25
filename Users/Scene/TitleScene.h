@@ -6,6 +6,7 @@
 #include "GameScene.h"
 #include "SceneManager.h"
 #include "Camera.h"
+#include "Light.h"
 
 #include "Sprite.h"
 #include "Object3d.h"
@@ -43,6 +44,7 @@ public: // メンバ関数
 private:
 	Input* input_ = nullptr;
 	std::unique_ptr<Camera> camera;
+	std::unique_ptr<Light> light;
 	SceneManager* sceneManager_= nullptr;
 #pragma region Sprite
 	TextureData tex;
@@ -61,13 +63,6 @@ private:
 	std::unique_ptr<Model> skydome;
 #pragma endregion
 
-#pragma region Particle
-	std::unique_ptr<ParticleManager> particles_;
-	WorldTransform particleTrans_;
-
-	std::unique_ptr<ParticleManager> particles2_;
-	WorldTransform particleTrans2_;
-#pragma endregion 
 
 	//ImGuiデバッグ用
 	Mathematics::Vector3 cameraPos = { 0,0,0 };

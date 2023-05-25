@@ -1,6 +1,7 @@
 #pragma once
 #include "Object3d.h"
 #include "ParticleManager.h"
+#include "Light.h"
 #include "Framework.h"
 #include "SceneFactory.h"
 

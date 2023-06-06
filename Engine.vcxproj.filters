@@ -117,9 +117,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Engine\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="lib\engine\Base\WinApp.cpp">
       <Filter>Engine\ソース ファイル\Base</Filter>
     </ClCompile>
@@ -219,10 +216,13 @@
     <ClCompile Include="lib\engine\3D\Particle\ParticleManager.cpp">
       <Filter>Engine\ソース ファイル\3D\Particle</Filter>
     </ClCompile>
-    <ClCompile Include="Light.cpp">
+    <ClCompile Include="lib\engine\2D\PostEffect\PostEffect.cpp">
       <Filter>Engine\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="PostEffect.cpp">
+    <ClCompile Include="lib\engine\main.cpp">
+      <Filter>Engine\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\Base\Light.cpp">
       <Filter>Engine\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -338,10 +338,10 @@
     <ClInclude Include="lib\engine\3D\WorldTransform.h">
       <Filter>Engine\ヘッダー ファイル\3D</Filter>
     </ClInclude>
-    <ClInclude Include="Light.h">
+    <ClInclude Include="lib\engine\2D\PostEffect\PostEffect.h">
       <Filter>Engine\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="PostEffect.h">
+    <ClInclude Include="lib\engine\Base\Light.h">
       <Filter>Engine\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

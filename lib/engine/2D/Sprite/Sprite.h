@@ -118,7 +118,7 @@ public: // ƒƒ“ƒoŠÖ”
 	/// <param name="pos">À•W</param>
 	/// <param name="rot">‰ñ“]</param>
 	/// <param name="scale">Šg‘å—¦</param>
-	void DrawSprite(
+	void Draw(
 		TextureData& textureData, Mathematics::Vector2 position, Mathematics::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f,
 		Mathematics::Vector2 anchorpoint = { 0.0f,0.0f }, bool flipX = false, bool flipY = false);
 

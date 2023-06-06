@@ -61,7 +61,7 @@ void Sprite::Update(const Mathematics::Vector2 pos, const Mathematics::Vector2 s
 	*constBuffMap = matWorld * matProjection_;
 }
 
-void Sprite::DrawSprite(TextureData& textureData, Mathematics::Vector2 position, Mathematics::Vector2 scale, float rotation,
+void Sprite::Draw(TextureData& textureData, Mathematics::Vector2 position, Mathematics::Vector2 scale, float rotation,
 	Mathematics::Vector2 anchorpoint, bool flipX, bool flipY)
 {
 	int isFlipX, isFlipY;

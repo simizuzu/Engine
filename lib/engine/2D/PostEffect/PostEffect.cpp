@@ -1,5 +1,7 @@
 #include "PostEffect.h"
 
+const float PostEffect::clearColor[4] = { 0.25f,0.5f,0.1f,0.0f };
+
 PostEffect::PostEffect()
 {
 
@@ -7,7 +9,6 @@ PostEffect::PostEffect()
 
 void PostEffect::Initialize()
 {
-	HRESULT result;
 	CreateTextureBuff();
 	CreateSRVDesc();
 	CreateRTVDesc();
@@ -16,9 +17,49 @@ void PostEffect::Initialize()
 }
 
 void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList)
-{	ID3D12DescriptorHeap* ppHeaps[] = { descHeapSRV.Get() };
+{
+	ID3D12DescriptorHeap* ppHeaps[] = { descHeapSRV.Get() };
 
 	cmdList->SetGraphicsRootDescriptorTable(1, descHeapSRV->GetGPUDescriptorHandleForHeapStart());
+}
+
+void PostEffect::PreDrawScene(ID3D12GraphicsCommandList* cmdList)
+{
+	//リソースバリアを変更（シェーダーリソース→描画可能）
+	CD3DX12_RESOURCE_BARRIER CHANGE_RENDER_TARGET =
+		CD3DX12_RESOURCE_BARRIER::Transition(texBuff.Get(), D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_RENDER_TARGET);
+	cmdList->ResourceBarrier(1, &CHANGE_RENDER_TARGET);
+
+	//レンダーターゲットビュー用ディスクリプタヒープのハンドルを取得
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvH =
+		descHeapRTV->GetCPUDescriptorHandleForHeapStart();
+	//深度ステンシルビュー用デスクリプタヒープのハンドルを取得
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvH =
+		descHeapDSV->GetCPUDescriptorHandleForHeapStart();
+	//レンダーターゲットをセット
+	cmdList->OMSetRenderTargets(1, &rtvH, false, &dsvH);
+
+	//ビューポートの設定
+	CD3DX12_VIEWPORT VIEWPORT =
+		CD3DX12_VIEWPORT(0.0f, 0.0f, winApp_->window_width, winApp_->window_height);
+	cmdList->RSSetViewports(1, &VIEWPORT);
+	//シザリング矩形の設定
+	CD3DX12_RECT RECT =
+		CD3DX12_RECT(0, 0, winApp_->window_width, winApp_->window_height);
+	cmdList->RSSetScissorRects(1, &RECT);
+
+	//全画面クリア
+	cmdList->ClearRenderTargetView(rtvH, clearColor, 0, nullptr);
+	//深度バッファのクリア
+	cmdList->ClearDepthStencilView(dsvH, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+}
+
+void PostEffect::PostDrawScene(ID3D12GraphicsCommandList* cmdList)
+{
+	//リソースバリアを変更（描画可能→シェーダーリソース）
+	CD3DX12_RESOURCE_BARRIER CHANGE_PIXEL_SHADER_RESOURCE =
+		CD3DX12_RESOURCE_BARRIER::Transition(texBuff.Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+	cmdList->ResourceBarrier(1, &CHANGE_PIXEL_SHADER_RESOURCE);
 }
 
 void PostEffect::CreateTextureBuff()
@@ -35,13 +76,16 @@ void PostEffect::CreateTextureBuff()
 	);
 
 	//テクスチャバッファの生成
+	CD3DX12_HEAP_PROPERTIES HEAP_PROPERTIES =
+		CD3DX12_HEAP_PROPERTIES(D3D12_CPU_PAGE_PROPERTY_WRITE_BACK, D3D12_MEMORY_POOL_L0);
+	CD3DX12_CLEAR_VALUE CLEAR_VALUE = CD3DX12_CLEAR_VALUE(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, clearColor);
+
 	result = device_->CreateCommittedResource(
-		&CD3DX12_HEAP_PROPERTIES(D3D12_CPU_PAGE_PROPERTY_WRITE_BACK,
-			D3D12_MEMORY_POOL_L0),
+		&HEAP_PROPERTIES,
 		D3D12_HEAP_FLAG_NONE,
 		&texturesDesc,
 		D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE,
-		nullptr,
+		&CLEAR_VALUE,
 		IID_PPV_ARGS(&texBuff));
 	assert(SUCCEEDED(result));
 
@@ -130,13 +174,17 @@ void PostEffect::CreateDSVDesc()
 			1, 0,
 			D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL
 		);
+
 	//深度バッファの生成
+	CD3DX12_HEAP_PROPERTIES HEAP_PROPERTIES = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
+	CD3DX12_CLEAR_VALUE CLEAR_VALUE = CD3DX12_CLEAR_VALUE(DXGI_FORMAT_D32_FLOAT, 1.0f, 0);
+
 	result = device_->CreateCommittedResource(
-		&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT),
+		&HEAP_PROPERTIES,
 		D3D12_HEAP_FLAG_NONE,
 		&depthResDesc,
 		D3D12_RESOURCE_STATE_DEPTH_WRITE,
-		&CD3DX12_CLEAR_VALUE(DXGI_FORMAT_D32_FLOAT, 1.0f, 0),
+		&CLEAR_VALUE,
 		IID_PPV_ARGS(&depthBuff));
 	assert(SUCCEEDED(result));
 }

@@ -8,6 +8,8 @@ void Framework::Initialize()
 	audioManager = AudioManager::GetInstance();
 	textureManager_ = TextureManager::GetInstance();
 	imGuiManager = ImGuiManager::GetInstance();
+	postEffect = std::make_unique<PostEffect>();
+	postEffect->Initialize();
 
 	// WindowsAPI初期化
 	winApp_->Initialize();
@@ -24,8 +26,6 @@ void Framework::Initialize()
 	imGuiManager->Initialize(winApp_, dxCommon_);
 	// Input初期化
 	input_->Initialize();
-	// スプライト静的初期化
-	Sprite::StaticInitialize();
 
 	sceneManager_ = SceneManager::GetInstance();
 }
@@ -86,10 +86,13 @@ void Framework::Run()
 			break;
 		}
 		dxCommon_->PreDraw(winApp_);
+		postEffect->PreDrawScene(dxCommon_->GetCommandList());
 		// 描画
 		Draw();
 		//ImGui描画
+		postEffect->PostDrawScene(dxCommon_->GetCommandList());
 		imGuiManager->Draw(dxCommon_);
+		postEffect->Draw(dxCommon_->GetCommandList());
 		dxCommon_->PostDraw();
 		// FPS固定更新
 		fps_->UpdateFixFPS();

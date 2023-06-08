@@ -3,11 +3,10 @@
 #include "DirectXCommon.h"
 #include "Input.h"
 #include "FPS.h"
-#include "Sprite.h"
 #include "AudioManager.h"
 #include "TextureManager.h"
 #include "ImGuiManager.h"
-
+#include "PostEffect.h"
 
 #include "BaseScene.h"
 #include "SceneManager.h"
@@ -38,12 +37,12 @@ protected:
 
 	WinApp* winApp_ = nullptr;
 	DirectXCommon* dxCommon_ = nullptr;
-	Sprite* sprite_ = nullptr;
 	AudioManager* audioManager = nullptr;
 	Input* input_ = nullptr;
 	FPS* fps_ = nullptr;
 	TextureManager* textureManager_ = nullptr;
 	ImGuiManager* imGuiManager = nullptr;
+	std::unique_ptr<PostEffect> postEffect;
 
 	SceneManager* sceneManager_ = nullptr;
 	AbstractSceneFactory* sceneFactory_ = nullptr;

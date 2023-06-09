@@ -1,8 +1,6 @@
 #include "TextureManager.h"
 #include <cassert>
 
-using namespace DirectX;
-
 TextureManager* TextureManager::textureManager_ = nullptr;
 std::string TextureManager::DefaultTextureDirectoryPath = "Resource/";
 
@@ -46,9 +44,9 @@ TextureData TextureManager::LoadTexture(const std::string& fileName)
 
 	TextureData tmp{};
 
-	TexMetadata metadata{};
-	ScratchImage scratchImg{};
-	ScratchImage mipChain{};
+	DirectX::TexMetadata metadata{};
+	DirectX::ScratchImage scratchImg{};
+	DirectX::ScratchImage mipChain{};
 
 	tmp.srvHeap = srvHeap;
 	tmp.descriptorRange = descriptorRange;
@@ -60,7 +58,7 @@ TextureData TextureManager::LoadTexture(const std::string& fileName)
 	// WICテクスチャのロード
 	HRESULT result = LoadFromWICFile(
 		wfilepath,
-		WIC_FLAGS_NONE,
+		DirectX::WIC_FLAGS_NONE,
 		&metadata, scratchImg);
 	assert(SUCCEEDED(result));
 
@@ -69,7 +67,7 @@ TextureData TextureManager::LoadTexture(const std::string& fileName)
 		scratchImg.GetImages(),
 		scratchImg.GetImageCount(),
 		scratchImg.GetMetadata(),
-		TEX_FILTER_DEFAULT, 0, mipChain);
+		DirectX::TEX_FILTER_DEFAULT, 0, mipChain);
 
 	if (SUCCEEDED(result))
 	{
@@ -78,7 +76,7 @@ TextureData TextureManager::LoadTexture(const std::string& fileName)
 	}
 
 	// 読み込んだディフューズテクスチャをSRGBとして扱う
-	metadata.format = MakeSRGB(metadata.format);
+	metadata.format = DirectX::MakeSRGB(metadata.format);
 
 	tmp.texBuff = CreateTexBuff(metadata, scratchImg);
 
@@ -119,7 +117,7 @@ Microsoft::WRL::ComPtr<ID3D12Resource> TextureManager::CreateTexBuff(DirectX::Te
 	// 全ミップマップについて
 	for (size_t i = 0; i < metadata.mipLevels; i++) {
 		// ミップマップレベルを指定してイメージを取得
-		const Image* img = scratchImg.GetImage(i, 0, 0);
+		const DirectX::Image* img = scratchImg.GetImage(i, 0, 0);
 		// テクスチャバッファにデータ転送
 		result = resource->WriteToSubresource(
 			(UINT)i,
@@ -164,9 +162,19 @@ ID3D12Resource* TextureManager::UploadTextureData(ID3D12Resource* texture, const
 	std::vector<D3D12_SUBRESOURCE_DATA> subresources;
 	DirectX::PrepareUpload(device, mipImages.GetImages(), mipImages.GetImageCount(), mipImages.GetMetadata(), subresources);
 	uint64_t intermediateSize = GetRequiredIntermediateSize(texture, 0, UINT(subresources.size()));
-	ID3D12Resource* intermediaResource = CreateBufferResource(device, subresources)
-		UpdateSubresources(cmdList, texture, intermediateSize, 0, , 0, UINT(subresources.size()), subresources.data());
-	return;
+	ID3D12Resource* intermediaResource = CreateBufferResource(device, subresources);
+	UpdateSubresources(cmdList, texture, intermediaResource, 0, 0, UINT(subresources.size()), subresources.data());
+
+	//D3D12_RESOURCE_STATE_COPY_DESTからD3D12_RESOURCE_STATE_GENERIC_READへResourceStateを変換する
+	D3D12_RESOURCE_BARRIER barrier{};
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier.Transition.pResource = texture;
+	barrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_COPY_DEST;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_GENERIC_READ;
+	cmdList->ResourceBarrier(1,&barrier);
+	return intermediaResource;
 }
 
 void TextureManager::Delete()

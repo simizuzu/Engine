@@ -3,8 +3,6 @@
 #include "DirectXCommon.h"
 
 #include <d3d12.h>
-#include <d3dx12.h>
-#include <vector>
 #include <wrl.h>
 #include <DirectXTex.h>
 #include <array>
@@ -39,18 +37,6 @@ public: // メンバ関数
 	static TextureData Load(const std::string& fileName);
 
 	/// <summary>
-	/// 解放処理
-	/// </summary>
-	void Delete();
-
-	// インスタンス
-	static TextureManager* GetInstance();
-
-	// Getter
-	ID3D12DescriptorHeap* GetSrvHeap() { return srvHeap.Get(); }
-
-private:
-	/// <summary>
 	/// テクスチャバッファの生成
 	/// </summary>
 	Microsoft::WRL::ComPtr<ID3D12Resource> CreateTexBuff(DirectX::TexMetadata& metadata, DirectX::ScratchImage& scratchImg);
@@ -62,8 +48,16 @@ private:
 	/// <param name="metadata"></param>
 	D3D12_GPU_DESCRIPTOR_HANDLE CreateShaderResourceView(ID3D12Resource* texBuff, DirectX::TexMetadata& metadata);
 
-	[[nodiscard]]
-	ID3D12Resource* UploadTextureData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages, ID3D12Device* device, ID3D12GraphicsCommandList* cmdList);
+	/// <summary>
+	/// 解放処理
+	/// </summary>
+	void Delete();
+
+	// インスタンス
+	static TextureManager* GetInstance();
+
+	// Getter
+	ID3D12DescriptorHeap* GetSrvHeap() { return srvHeap.Get(); }
 
 private: // メンバ変数
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> srvHeap = nullptr;

@@ -32,7 +32,9 @@ void TextureManager::Initialize(DirectXCommon* directXCommon)
 	assert(SUCCEEDED(result));
 
 	// ヒープ設定
-	textureHeapProp.Type = D3D12_HEAP_TYPE_DEFAULT;
+	textureHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
+	textureHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
+	textureHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
 }
 
 TextureData TextureManager::LoadTexture(const std::string& fileName)
@@ -92,7 +94,7 @@ TextureData TextureManager::LoadTexture(const std::string& fileName)
 
 Microsoft::WRL::ComPtr<ID3D12Resource> TextureManager::CreateTexBuff(DirectX::TexMetadata& metadata, DirectX::ScratchImage& scratchImg)
 {
-	Microsoft::WRL::ComPtr<ID3D12Resource> resource;
+	Microsoft::WRL::ComPtr<ID3D12Resource> tmp;
 	HRESULT result;
 
 	// リソース設定
@@ -110,16 +112,16 @@ Microsoft::WRL::ComPtr<ID3D12Resource> TextureManager::CreateTexBuff(DirectX::Te
 		&textureHeapProp,
 		D3D12_HEAP_FLAG_NONE,
 		&textureResourceDesc,
-		D3D12_RESOURCE_STATE_COPY_DEST,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
-		IID_PPV_ARGS(resource.ReleaseAndGetAddressOf()));
+		IID_PPV_ARGS(tmp.ReleaseAndGetAddressOf()));
 
 	// 全ミップマップについて
 	for (size_t i = 0; i < metadata.mipLevels; i++) {
 		// ミップマップレベルを指定してイメージを取得
 		const DirectX::Image* img = scratchImg.GetImage(i, 0, 0);
 		// テクスチャバッファにデータ転送
-		result = resource->WriteToSubresource(
+		result = tmp->WriteToSubresource(
 			(UINT)i,
 			nullptr,              // 全領域へコピー
 			img->pixels,          // 元データアドレス
@@ -129,7 +131,7 @@ Microsoft::WRL::ComPtr<ID3D12Resource> TextureManager::CreateTexBuff(DirectX::Te
 		assert(SUCCEEDED(result));
 	}
 
-	return resource;
+	return tmp;
 }
 
 D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::CreateShaderResourceView(ID3D12Resource* texBuff, DirectX::TexMetadata& metadata)
@@ -155,26 +157,6 @@ D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::CreateShaderResourceView(ID3D12Resou
 	dxCommon_->GetDevice()->CreateShaderResourceView(texBuff, &srvDesc, cpuHandle);
 
 	return gpuHandle;
-}
-
-ID3D12Resource* TextureManager::UploadTextureData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages, ID3D12Device* device, ID3D12GraphicsCommandList* cmdList)
-{
-	std::vector<D3D12_SUBRESOURCE_DATA> subresources;
-	DirectX::PrepareUpload(device, mipImages.GetImages(), mipImages.GetImageCount(), mipImages.GetMetadata(), subresources);
-	uint64_t intermediateSize = GetRequiredIntermediateSize(texture, 0, UINT(subresources.size()));
-	ID3D12Resource* intermediaResource = CreateBufferResource(device, subresources);
-	UpdateSubresources(cmdList, texture, intermediaResource, 0, 0, UINT(subresources.size()), subresources.data());
-
-	//D3D12_RESOURCE_STATE_COPY_DESTからD3D12_RESOURCE_STATE_GENERIC_READへResourceStateを変換する
-	D3D12_RESOURCE_BARRIER barrier{};
-	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	barrier.Transition.pResource = texture;
-	barrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
-	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_COPY_DEST;
-	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_GENERIC_READ;
-	cmdList->ResourceBarrier(1,&barrier);
-	return intermediaResource;
 }
 
 void TextureManager::Delete()

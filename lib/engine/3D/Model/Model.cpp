@@ -5,9 +5,6 @@
 #include <sstream>
 #include <cassert>
 
-using namespace DirectX;
-using namespace Mathematics;
-
 /// <summary>
 /// 静的メンバ変数の実態
 /// </summary>
@@ -145,9 +142,9 @@ void Model::LoadFromOBJInternal(const std::string& modelname,bool smoothing)
 		assert(0);
 	}
 
-	std::vector<Vector3> positions;		// 頂点座標
-	std::vector<Vector3> normals;		// 法線ベクトル
-	std::vector<Vector2> texcoords;		// テクスチャUV
+	std::vector<Mathematics::Vector3> positions;		// 頂点座標
+	std::vector<Mathematics::Vector3> normals;		// 法線ベクトル
+	std::vector<Mathematics::Vector2> texcoords;		// テクスチャUV
 	// 1行ずつ読み込む
 	std::string line;
 	while (getline(file, line))
@@ -162,7 +159,7 @@ void Model::LoadFromOBJInternal(const std::string& modelname,bool smoothing)
 		if (key == "v")
 		{
 			//X,Y,Z座標読み込み
-			Vector3 position;
+			Mathematics::Vector3 position;
 			line_stream >> position.x;
 			line_stream >> position.y;
 			line_stream >> position.z;
@@ -203,7 +200,7 @@ void Model::LoadFromOBJInternal(const std::string& modelname,bool smoothing)
 		if (key == "vt")
 		{
 			//U,V成分読み込み
-			Vector2 texcoord{};
+			Mathematics::Vector2 texcoord{};
 			line_stream >> texcoord.x;
 			line_stream >> texcoord.y;
 			// V方向反転
@@ -215,7 +212,7 @@ void Model::LoadFromOBJInternal(const std::string& modelname,bool smoothing)
 		if (key == "vn")
 		{
 			//X,Y,Z成分読み込み
-			Vector3 normal{};
+			Mathematics::Vector3 normal{};
 			line_stream >> normal.x;
 			line_stream >> normal.y;
 			line_stream >> normal.z;

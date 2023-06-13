@@ -115,6 +115,21 @@
     <Filter Include="Engine\ヘッダー ファイル\3D\Particle">
       <UniqueIdentifier>{e7bc7cb2-6b19-4b3a-a242-ddeee7edc915}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\シェーダーファイル\OBJ">
+      <UniqueIdentifier>{03231808-fd62-4065-ae01-4b273713a102}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\シェーダーファイル\Particle">
+      <UniqueIdentifier>{ed740241-0357-480a-ab66-187245ec34f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\シェーダーファイル\Sprite">
+      <UniqueIdentifier>{503769ae-1fca-49a8-bd28-40edeaee15ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\シェーダーファイル\PostEffect">
+      <UniqueIdentifier>{ce9f6aaa-338d-4d47-8ceb-fad102ff800a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\シェーダーファイル\PostEffect\Default">
+      <UniqueIdentifier>{b5a625f7-c2ea-4f4b-b6a5-e6bb4a03cbee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\engine\Base\WinApp.cpp">
@@ -347,36 +362,45 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\Sprite.hlsli">
-      <Filter>Engine\シェーダーファイル</Filter>
+      <Filter>Engine\シェーダーファイル\Sprite</Filter>
     </None>
     <None Include="Resources\shaders\OBJ.hlsli">
-      <Filter>Engine\シェーダーファイル</Filter>
+      <Filter>Engine\シェーダーファイル\OBJ</Filter>
     </None>
     <None Include="Resources\shaders\Particle.hlsli">
-      <Filter>Engine\シェーダーファイル</Filter>
+      <Filter>Engine\シェーダーファイル\Particle</Filter>
+    </None>
+    <None Include="PostEffectDefault.hlsli">
+      <Filter>Engine\シェーダーファイル\PostEffect\Default</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
-      <Filter>Engine\シェーダーファイル</Filter>
+      <Filter>Engine\シェーダーファイル\Sprite</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\SpriteVS.hlsl">
-      <Filter>Engine\シェーダーファイル</Filter>
+      <Filter>Engine\シェーダーファイル\Sprite</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\OBJVS.hlsl">
-      <Filter>Engine\シェーダーファイル</Filter>
+      <Filter>Engine\シェーダーファイル\OBJ</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\OBJPS.hlsl">
-      <Filter>Engine\シェーダーファイル</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\ParticleGS.hlsl">
-      <Filter>Engine\シェーダーファイル</Filter>
+      <Filter>Engine\シェーダーファイル\OBJ</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\ParticlePS.hlsl">
-      <Filter>Engine\シェーダーファイル</Filter>
+      <Filter>Engine\シェーダーファイル\Particle</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\ParticleVS.hlsl">
-      <Filter>Engine\シェーダーファイル</Filter>
+      <Filter>Engine\シェーダーファイル\Particle</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ParticleGS.hlsl">
+      <Filter>Engine\シェーダーファイル\Particle</Filter>
+    </FxCompile>
+    <FxCompile Include="PostEffectDefaultPS.hlsl">
+      <Filter>Engine\シェーダーファイル\PostEffect\Default</Filter>
+    </FxCompile>
+    <FxCompile Include="PostEffectDefaultVS.hlsl">
+      <Filter>Engine\シェーダーファイル\PostEffect\Default</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

@@ -48,6 +48,11 @@ public:
 
 private:
 	/// <summary>
+	/// 頂点データの生成
+	/// </summary>
+	void CreateVertexData();
+
+	/// <summary>
 	/// テクスチャ生成
 	/// </summary>
 	void CreateTextureBuff();

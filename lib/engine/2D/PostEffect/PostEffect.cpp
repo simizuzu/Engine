@@ -62,6 +62,17 @@ void PostEffect::PostDrawScene(ID3D12GraphicsCommandList* cmdList)
 	cmdList->ResourceBarrier(1, &CHANGE_PIXEL_SHADER_RESOURCE);
 }
 
+void PostEffect::CreateVertexData()
+{
+	HRESULT result;
+
+	result = device_->CreateCommittedResource(
+		&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD),
+		D3D12_HEAP_FLAG_NONE,
+		&CD3DX12_RESOURCE_DESC::Buffer(sizeof(VertexPos))
+	)
+}
+
 void PostEffect::CreateTextureBuff()
 {
 	HRESULT result;

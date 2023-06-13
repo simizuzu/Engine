@@ -17,6 +17,13 @@
 
 #include "Sprite.h"
 #include "TextureManager.h"
+#include "DirectXCommon.h"
+
+struct VertexPosUv
+{
+	Mathematics::Vector3 pos;
+	Mathematics::Vector2 uv;
+};
 
 class PostEffect
 {
@@ -38,7 +45,7 @@ public:
 	/// シーン描画前処理
 	/// </summary>
 	/// <param name="cmdList">コマンドリスト</param>
-	void PreDrawScene(ID3D12GraphicsCommandList* cmdList);
+	void PreDrawScene(ID3D12GraphicsCommandList* cmdList, WinApp* winApp);
 
 	/// <summary>
 	/// シーン描画後処理
@@ -50,32 +57,32 @@ private:
 	/// <summary>
 	/// 頂点データの生成
 	/// </summary>
-	void CreateVertexData();
+	void CreateVertexData(ID3D12Device* device);
 
 	/// <summary>
 	/// テクスチャ生成
 	/// </summary>
-	void CreateTextureBuff();
+	void CreateTextureBuff(ID3D12Device* device, WinApp* winApp);
 
 	/// <summary>
 	/// SRV作成
 	/// </summary>
-	void CreateSRVDesc();
+	void CreateSRVDesc(ID3D12Device* device);
 
 	/// <summary>
 	/// RTV作成
 	/// </summary>
-	void CreateRTVDesc();
+	void CreateRTVDesc(ID3D12Device* device);
 
 	/// <summary>
 	/// DSV作成
 	/// </summary>
-	void CreateDSVDesc();
+	void CreateDSVDesc(ID3D12Device* device, WinApp* winApp);
 
 	/// <summary>
 	/// 深度バッファ生成
 	/// </summary>
-	void CreateDepthBuff();
+	void CreateDepthBuff(ID3D12Device* device);
 
 private:
 	//デバイス
@@ -90,9 +97,16 @@ private:
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeapRTV;
 	//DSV用デスクリプタヒープ
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeapDSV;
+	//頂点バッファ
+	Microsoft::WRL::ComPtr<ID3D12Resource> vertBuff;
+	//定数バッファ
+	Microsoft::WRL::ComPtr<ID3D12Resource> constBuff;
+	//頂点バッファビュー
+	D3D12_VERTEX_BUFFER_VIEW vbView{};
 
 	static const float clearColor[4];
 
-	WinApp* winApp_ = nullptr;
+	std::shared_ptr<WinApp> winApp_;
+	std::shared_ptr<DirectXCommon> dxCommon;
 };
 

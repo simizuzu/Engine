@@ -5,7 +5,7 @@
 
 using namespace Microsoft::WRL;
 using namespace DirectX;
-using namespace Mathematics;
+using namespace MyMath;
 using namespace MyMathUtility;
 
 /// <summary>
@@ -16,7 +16,7 @@ UINT Sprite::descriptorSize_;
 ComPtr<ID3D12GraphicsCommandList> Sprite::commandList_;
 ComPtr<ID3D12RootSignature> Sprite::rootSignature_;
 std::array<RootsigSetPip, 6> Sprite::pipelineState;
-Mathematics::Matrix4 Sprite::matProjection_;
+MyMath::Matrix4 Sprite::matProjection_;
 
 void Sprite::StaticInitialize()
 {
@@ -50,9 +50,9 @@ void Sprite::Initialize()
 	CreateConstBuff();
 }
 
-void Sprite::Update(const Mathematics::Vector2 pos, const Mathematics::Vector2 scale, float rot)
+void Sprite::Update(const MyMath::Vector2 pos, const MyMath::Vector2 scale, float rot)
 {
-	Mathematics::Matrix4 mTrans, mRot, mScale, matWorld;
+	MyMath::Matrix4 mTrans, mRot, mScale, matWorld;
 	mTrans = MakeTranslation({ pos.x,pos.y,0.0f });
 	mRot = MakeRotation({ 0.0f,0.0f,rot });
 	mScale = MakeScaling({ scale.x,scale.y,1.0f });
@@ -61,8 +61,8 @@ void Sprite::Update(const Mathematics::Vector2 pos, const Mathematics::Vector2 s
 	*constBuffMap = matWorld * matProjection_;
 }
 
-void Sprite::Draw(TextureData& textureData, Mathematics::Vector2 position, Mathematics::Vector2 scale, float rotation,
-	Mathematics::Vector2 anchorpoint, bool flipX, bool flipY)
+void Sprite::Draw(TextureData& textureData, MyMath::Vector2 position, MyMath::Vector2 scale, float rotation,
+	MyMath::Vector2 anchorpoint, bool flipX, bool flipY)
 {
 	int isFlipX, isFlipY;
 	if (flipX == false)isFlipX = 1;

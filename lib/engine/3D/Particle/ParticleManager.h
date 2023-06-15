@@ -27,7 +27,7 @@ public:
 	void LoadTexture(const wchar_t* texturename);
 	void CreateModel();
 
-	void Add(int life, Mathematics::Vector3 position, Mathematics::Vector3 velocity, Mathematics::Vector3 accel, float start_scale, float end_scale, Mathematics::Vector4 s_color, Mathematics::Vector4 e_color);
+	void Add(int life, MyMath::Vector3 position, MyMath::Vector3 velocity, MyMath::Vector3 accel, float start_scale, float end_scale, MyMath::Vector4 s_color, MyMath::Vector4 e_color);
 
 	void RandParticle();
 
@@ -52,8 +52,8 @@ private:
 	VertexPos vertices[vertexCount];
 	D3D12_VERTEX_BUFFER_VIEW vbView;
 
-	Mathematics::Matrix4 matView;
-	Mathematics::Matrix4 matProjection;
+	MyMath::Matrix4 matView;
+	MyMath::Matrix4 matProjection;
 
 private:
 	Microsoft::WRL::ComPtr<ID3D12Resource> constBuff;

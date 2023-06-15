@@ -37,7 +37,7 @@ private:
 	int shakeTimer = 0;
 
 	// デッドゾーンに入っているか(DeadRate : デッドゾーン判定の度合い)
-	bool StickDeadZone(Mathematics::Vector2& stick, const Mathematics::Vector2& deadZoneInitial);
+	bool StickDeadZone(MyMath::Vector2& stick, const MyMath::Vector2& deadZoneInitial);
 
 	// 最高入力値
 	const float MAX_STICK_NUM = 32768.0f;
@@ -65,7 +65,7 @@ public:
 	/// <param name="deadZoneRange">デッドゾーンの範囲</param>
 	/// <param name="deadZoneInitial">デッドゾーンの判定の初期値: 1.0f</param>
 	/// <returns></returns>
-	bool TriggerStick(ControllerStick stickInput, const float& deadZoneRange = 0.3f, const Mathematics::Vector2& deadZoneInitial = { 1.0f,1.0f });
+	bool TriggerStick(ControllerStick stickInput, const float& deadZoneRange = 0.3f, const MyMath::Vector2& deadZoneInitial = { 1.0f,1.0f });
 
 	/// <summary>
 	/// プッシュボタンの入力
@@ -81,7 +81,7 @@ public:
 	/// <param name="deadZoneRange">デッドゾーンの範囲</param>
 	/// <param name="deadZoneInitial">デッドゾーンの判定の初期値: 1.0f</param>
 	/// <returns></returns>
-	bool InputStick(ControllerStick stickInput, const float& deadZoneRange = 0.3f, const Mathematics::Vector2& deadZoneInitial = { 1.0f,1.0f });
+	bool InputStick(ControllerStick stickInput, const float& deadZoneRange = 0.3f, const MyMath::Vector2& deadZoneInitial = { 1.0f,1.0f });
 
 	/// <summary>
 	/// ボタンを離したときの入力
@@ -97,7 +97,7 @@ public:
 	/// <param name="deadZoneRange">デッドゾーンの範囲</param>
 	/// <param name="deadZoneInitial">デッドゾーンの判定の初期値: 1.0f</param>
 	/// <returns></returns>
-	bool ReleaseTriggerStick(ControllerStick stickInput, const float& deadZoneRange = 0.3f, const Mathematics::Vector2& deadZoneInitial = { 1.0f,1.0f });
+	bool ReleaseTriggerStick(ControllerStick stickInput, const float& deadZoneRange = 0.3f, const MyMath::Vector2& deadZoneInitial = { 1.0f,1.0f });
 
 	/// <summary>
 	/// コントローラーの振動させる処理
@@ -111,14 +111,14 @@ public:
 	/// </summary>
 	/// <param name="deadZoneRange">デッドゾーンの判定の初期値: 1.0f</param>
 	/// <returns></returns>
-	Mathematics::Vector2 GetLeftStickVec(const Mathematics::Vector2& deadZoneRange = { 1.0f,1.0f });
+	MyMath::Vector2 GetLeftStickVec(const MyMath::Vector2& deadZoneRange = { 1.0f,1.0f });
 
 	/// <summary>
 	/// 右スティックのベクトル
 	/// </summary>
 	/// <param name="deadZoneRange">デッドゾーンの判定の初期値: 1.0f</param>
 	/// <returns></returns>
-	Mathematics::Vector2 GetRightStickVec(const Mathematics::Vector2& deadZoneRange = { 1.0f,1.0f });
+	MyMath::Vector2 GetRightStickVec(const MyMath::Vector2& deadZoneRange = { 1.0f,1.0f });
 
 private:
 	//コピーコンストラクタ・代入演算子削除

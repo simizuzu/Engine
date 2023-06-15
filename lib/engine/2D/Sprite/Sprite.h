@@ -17,15 +17,15 @@
 // 2D変換行列(定数バッファ)
 struct ConstBufferData
 {
-	Mathematics::Vector4 color;
-	Mathematics::Matrix4 mat;
+	MyMath::Vector4 color;
+	MyMath::Matrix4 mat;
 };
 
 /// 頂点データ構造体
 struct PosUvColor
 {
-	Mathematics::Vector3 pos;
-	Mathematics::Vector2 uv;
+	MyMath::Vector3 pos;
+	MyMath::Vector2 uv;
 	//Mathematics::Vector4 color;
 };
 
@@ -53,7 +53,7 @@ private: // 静的メンバ変数
 	// ルートシグネチャ
 	static ComPtr<ID3D12RootSignature> rootSignature_;
 	// プロジェクション行列
-	static Mathematics::Matrix4 matProjection_;
+	static MyMath::Matrix4 matProjection_;
 	// パイプラインステート
 	static std::array<RootsigSetPip, 6> pipelineState;
 
@@ -78,18 +78,18 @@ private: // メンバ変数
 	D3D12_INPUT_ELEMENT_DESC inputLayout{};
 
 	// 座標
-	Mathematics::Vector2 position_ = { 0.0f,0.0f };
+	MyMath::Vector2 position_ = { 0.0f,0.0f };
 	// 色
-	Mathematics::Vector4 color_ = { 1, 1, 1, 1 };
+	MyMath::Vector4 color_ = { 1, 1, 1, 1 };
 
 	//定数バッファ
 	Microsoft::WRL::ComPtr<ID3D12Resource>constBuff;
-	Mathematics::Matrix4* constBuffMap = nullptr;
+	MyMath::Matrix4* constBuffMap = nullptr;
 
 	// 角度
 	float rotation_ = 0.0f;
 	// 表示サイズ(単位はpixel)
-	Mathematics::Vector2 size_ = { 100.0f,100.0f };
+	MyMath::Vector2 size_ = { 100.0f,100.0f };
 	// テクスチャ番号
 	uint32_t textureIndex_ = 0;
 	// ブレンドモード
@@ -104,7 +104,7 @@ public: // メンバ関数
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update(Mathematics::Vector2 pos, Mathematics::Vector2 scale, float rot);
+	void Update(MyMath::Vector2 pos, MyMath::Vector2 scale, float rot);
 
 	/// <summary>
 	/// 描画
@@ -119,8 +119,8 @@ public: // メンバ関数
 	/// <param name="rot">回転</param>
 	/// <param name="scale">拡大率</param>
 	void Draw(
-		TextureData& textureData, Mathematics::Vector2 position, Mathematics::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f,
-		Mathematics::Vector2 anchorpoint = { 0.0f,0.0f }, bool flipX = false, bool flipY = false);
+		TextureData& textureData, MyMath::Vector2 position, MyMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f,
+		MyMath::Vector2 anchorpoint = { 0.0f,0.0f }, bool flipX = false, bool flipY = false);
 
 	/*/// <summary>
 	/// スプライトのクリップ描画
@@ -160,7 +160,7 @@ public: // setter,getter
 	/// 座標をセット
 	/// </summary>
 	/// <param name="position">: 座標{ x,y }</param>
-	void SetPosiotion(const Mathematics::Vector2& position) { position_ = position; }
+	void SetPosiotion(const MyMath::Vector2& position) { position_ = position; }
 
 	/// <summary>
 	/// 回転角をセット
@@ -172,13 +172,13 @@ public: // setter,getter
 	/// スプライトの大きさをセット
 	/// </summary>
 	/// <param name="rotation">サイズ</param>
-	void SetSize(const Mathematics::Vector2& size) { size_ = size; }
+	void SetSize(const MyMath::Vector2& size) { size_ = size; }
 
 	/// <summary>
 	/// スプライトの色をセット
 	/// </summary>
 	/// <param name="color">: 色{ red,blue,green,alpha }</param>
-	void SetColor(const Mathematics::Vector4& color) { color_ = color; }
+	void SetColor(const MyMath::Vector4& color) { color_ = color; }
 
 	/// <summary>
 	/// テクスチャ番号をセット
@@ -192,13 +192,13 @@ public: // setter,getter
 	void SetBlendMode(BlendMode mode);
 
 	// 座標
-	const Mathematics::Vector2& GetPosition() const { return position_; }
+	const MyMath::Vector2& GetPosition() const { return position_; }
 	// 角度
 	float GetRotation() const { return rotation_; }
 	// 色
-	const Mathematics::Vector4& GetColor() const { return color_; }
+	const MyMath::Vector4& GetColor() const { return color_; }
 	// サイズ
-	const Mathematics::Vector2& GetSize() const { return size_; }
+	const MyMath::Vector2& GetSize() const { return size_; }
 	// テクスチャ番号
 	uint32_t GetTextureIndex() { return textureIndex_; }
 

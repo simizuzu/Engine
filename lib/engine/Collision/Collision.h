@@ -15,7 +15,7 @@ public:
 	/// <param name="plane">平面</param>
 	/// <param name="inter">交点（平面上の最近接点）</param>
 	/// <returns交差しているか否か></returns>
-	static bool CheckSpere2Plane(const Sphere& sphere, const Plane& plane, Mathematics::Vector4* inter = nullptr);
+	static bool CheckSpere2Plane(const Sphere& sphere, const Plane& plane, MyMath::Vector4* inter = nullptr);
 
 	/// <summary>
 	/// OBBとOBBの当たり判定(参照渡し)

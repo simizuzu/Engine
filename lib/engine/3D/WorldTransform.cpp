@@ -8,7 +8,7 @@ void WorldTransform::Initialize()
 void WorldTransform::Update(Camera* camera, bool billboradFlag)
 {
 	HRESULT result;
-	Mathematics::Matrix4 matScale, matRot, matTrans;
+	MyMath::Matrix4 matScale, matRot, matTrans;
 
 	//スケール、回転平行移動行列の計算
 	matScale = MyMathUtility::MakeScaling(scale_);
@@ -31,9 +31,9 @@ void WorldTransform::Update(Camera* camera, bool billboradFlag)
 
 	if (!billboradFlag)
 	{
-		const Mathematics::Matrix4 matView = camera->GetMatView();
-		const Mathematics::Matrix4 matProjection = camera->GetMatProjection();
-		const Mathematics::Vector3& cameraPos = camera->GetEye();
+		const MyMath::Matrix4 matView = camera->GetMatView();
+		const MyMath::Matrix4 matProjection = camera->GetMatProjection();
+		const MyMath::Vector3& cameraPos = camera->GetEye();
 
 		// 定数バッファへデータ転送
 		ConstBufferDataB0* constMap = nullptr;
@@ -94,17 +94,17 @@ void WorldTransform::CreateConstBuffer()
 }
 
 
-void WorldTransform::SetTranslation(Mathematics::Vector3 translation)
+void WorldTransform::SetTranslation(MyMath::Vector3 translation)
 {
 	translation_ = translation;
 }
 
-void WorldTransform::SetScale(Mathematics::Vector3 scale)
+void WorldTransform::SetScale(MyMath::Vector3 scale)
 {
 	scale_ = scale;
 }
 
-void WorldTransform::SetRotation(Mathematics::Vector3 rotation)
+void WorldTransform::SetRotation(MyMath::Vector3 rotation)
 {
 	rotation_ = rotation;
 }

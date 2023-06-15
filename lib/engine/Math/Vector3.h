@@ -1,6 +1,10 @@
 #pragma once
+#include<assimp/Importer.hpp>
+#include<assimp/scene.h>
+#include<assimp/postprocess.h>
+#include<assimp/cimport.h>
 
-namespace Mathematics
+namespace MyMath
 {
 	/// <summary>
 	/// 3次元ベクトル
@@ -16,10 +20,12 @@ namespace Mathematics
 		//コンストラクト
 		Vector3();                //ゼロベクトルとして生成
 		Vector3(float x, float y, float z);//x成分,y成分を指定しての生成
+		Vector3(const aiVector3D& mat);//Assimp用Vector3
 
 		//　メンバ関数
 		float length() const;              //ノルム(長さ)を求める
 		Vector3& normalize();              //正規化する
+		Vector3 Norm()const;
 		float dot(const Vector3& v)const;  //内積を求める
 		Vector3 cross(const Vector3& v)const; //外積を求める
 

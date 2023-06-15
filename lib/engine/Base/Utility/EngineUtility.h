@@ -10,24 +10,24 @@
 struct ConstBufferDataB0
 {
 	//Mathematics::Matrix4 mat;	// 3D変換行列
-	Mathematics::Matrix4 viewproj;
-	Mathematics::Matrix4 world;
-	Mathematics::Vector3 cameraPos;
+	MyMath::Matrix4 viewproj;
+	MyMath::Matrix4 world;
+	MyMath::Vector3 cameraPos;
 };
 
 struct ConstBufferDataViewProjection
 {
 	// ワールド行列
-	Mathematics::Matrix4 world;
+	MyMath::Matrix4 world;
 	// ワールド座標
-	Mathematics::Matrix4 matWorld;
+	MyMath::Matrix4 matWorld;
 
 	// ワールド → ビュー変換行列
-	Mathematics::Matrix4 view;
+	MyMath::Matrix4 view;
 	// ビュー → プロジェクション変換行列
-	Mathematics::Matrix4 projection;
+	MyMath::Matrix4 projection;
 	// カメラ座標（ワールド座標）
-	Mathematics::Vector3 cameraPos;
+	MyMath::Vector3 cameraPos;
 };
 
 struct ViewProjection
@@ -40,9 +40,9 @@ struct ViewProjection
 
 struct VertexPosNormalUv
 {
-	Mathematics::Vector3 pos;		// xyz座標
-	Mathematics::Vector3 normal;	// 法線ベクトル
-	Mathematics::Vector2 uv;		// uv座標
+	MyMath::Vector3 pos;		// xyz座標
+	MyMath::Vector3 normal;	// 法線ベクトル
+	MyMath::Vector2 uv;		// uv座標
 };
 
 enum class BlendMode
@@ -83,37 +83,37 @@ struct TextureData
 //ビルボード定数バッファ用データ構造体
 struct ParticleConstBuffData
 {
-	Mathematics::Matrix4 mat;
-	Mathematics::Matrix4 matBillboard;
+	MyMath::Matrix4 mat;
+	MyMath::Matrix4 matBillboard;
 };
 
 //カメラ構造体
 struct WorldvViewProCamera
 {
 	//ワールド行列
-	Mathematics::Matrix4 world;
+	MyMath::Matrix4 world;
 	//ワールド座標
-	Mathematics::Matrix4 matWorld;
+	MyMath::Matrix4 matWorld;
 	//カメラ座標(ワールド座標)
-	Mathematics::Vector3 cameraPos;
+	MyMath::Vector3 cameraPos;
 };
 
 struct VertexPos
 {
-	Mathematics::Vector3 pos;	//xyz座標
+	MyMath::Vector3 pos;	//xyz座標
 	float scale;			//スケール
-	Mathematics::Vector4 color;	//色
+	MyMath::Vector4 color;	//色
 };
 
 // パーティクル1粒
 struct Particle
 {
 	// 座標
-	Mathematics::Vector3 position = {};
+	MyMath::Vector3 position = {};
 	// 速度
-	Mathematics::Vector3 velocity = {};
+	MyMath::Vector3 velocity = {};
 	// 加速度
-	Mathematics::Vector3 accel = {};
+	MyMath::Vector3 accel = {};
 	// 現在フレーム
 	int frame = 0;
 	// 終了フレーム
@@ -125,7 +125,7 @@ struct Particle
 	// 最終値
 	float e_scale = 0.0f;
 	// 色
-	Mathematics::Vector4 color = { 1,1,1,1 };
-	Mathematics::Vector4 s_color = { 1,0,0,1 };
-	Mathematics::Vector4 e_color = { 1,1,1,1 };
+	MyMath::Vector4 color = { 1,1,1,1 };
+	MyMath::Vector4 s_color = { 1,0,0,1 };
+	MyMath::Vector4 e_color = { 1,1,1,1 };
 };

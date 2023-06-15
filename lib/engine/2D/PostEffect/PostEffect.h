@@ -21,8 +21,8 @@
 
 struct VertexPosUv
 {
-	Mathematics::Vector3 pos;
-	Mathematics::Vector2 uv;
+	MyMath::Vector3 pos;
+	MyMath::Vector2 uv;
 };
 
 class PostEffect

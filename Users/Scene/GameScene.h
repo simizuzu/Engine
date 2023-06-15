@@ -45,10 +45,10 @@ private: // メンバ変数
 	char PADING[4]{};
 
 	// ImGuiデバック用
-	Mathematics::Vector2 pos = {100,100};
-	Mathematics::Vector3 posObj = { 0,0,0 };
+	MyMath::Vector2 pos = {100,100};
+	MyMath::Vector3 posObj = { 0,0,0 };
 	
-	Mathematics::Vector3 cameraPos = { 0,0,0 };
+	MyMath::Vector3 cameraPos = { 0,0,0 };
 
 	// サウンド
 	uint32_t gameHandle_ = 0;

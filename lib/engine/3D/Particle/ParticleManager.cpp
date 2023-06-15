@@ -115,7 +115,7 @@ void ParticleManager::Update()
 	}
 }
 
-void ParticleManager::Add(int life, Mathematics::Vector3 position, Mathematics::Vector3 velocity, Mathematics::Vector3 accel, float start_scale, float end_scale, Mathematics::Vector4 s_color, Mathematics::Vector4 e_color)
+void ParticleManager::Add(int life, MyMath::Vector3 position, MyMath::Vector3 velocity, MyMath::Vector3 accel, float start_scale, float end_scale, MyMath::Vector4 s_color, MyMath::Vector4 e_color)
 {
 	//リストに要素を追加
 	particles.emplace_front();
@@ -140,22 +140,22 @@ void ParticleManager::RandParticle()
 	{
 		//X,Y,Z全て[-5.0f,+5.0f]でランダムに分布
 		const float rnd_pos = 10.0f;
-		Mathematics::Vector3 pos{};
+		MyMath::Vector3 pos{};
 		pos.x = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
 		pos.y = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
 		pos.z = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
 		//X,Y,Z全て[-0.05f,+0.05f]でランダムに分布
 		const float rnd_vel = 0.3f;
-		Mathematics::Vector3 vel{};
+		MyMath::Vector3 vel{};
 		vel.x = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
 		vel.y = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
 		vel.z = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
 		// 重力に見立ててYのみ[-0.001f,0]でランダムに分布
-		Mathematics::Vector3 acc{};
+		MyMath::Vector3 acc{};
 		const float rnd_acc = 0.001f;
 		acc.y = -(float)rand() / RAND_MAX * rnd_acc;
 
-		Mathematics::Vector4 col{};
+		MyMath::Vector4 col{};
 		const float rnd_col = 1.0f;
 		col.x = (float)rand() / RAND_MAX * rnd_col;
 		col.y = (float)rand() / RAND_MAX * rnd_col;

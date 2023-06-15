@@ -2,7 +2,7 @@
 #include <cmath>
 #include <cassert>
 
-using namespace Mathematics;
+using namespace MyMath;
 
 namespace MyMathUtility
 {
@@ -125,7 +125,7 @@ namespace MyMathUtility
 		return Matrix4();
 	}
 
-	void MakeOrthogonalL(float left, float right, float bottom, float top, float near_, float far_, Mathematics::Matrix4& matrix)
+	void MakeOrthogonalL(float left, float right, float bottom, float top, float near_, float far_, MyMath::Matrix4& matrix)
 	{
 		float width = 1.0f / (right - left);
 		float height = 1.0f / (top - bottom);
@@ -453,7 +453,7 @@ namespace MyMathUtility
 	}
 }
 
-namespace Mathematics
+namespace MyMath
 {
 	Vector3 Vec3Mat4Mul(Vector3& vec, Matrix4& mat)
 	{

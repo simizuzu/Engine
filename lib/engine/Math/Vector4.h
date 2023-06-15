@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Mathematics
+namespace MyMath
 {
 	/// <summary>
 	/// 4ŽŸŒ³ƒxƒNƒgƒ‹

@@ -13,8 +13,8 @@ class Light
 public:
 	struct ConstBufferData
 	{
-		Mathematics::Vector4 lightVec;		//ライトへの方向を表すベクトル
-		Mathematics::Vector3 lightColor;	//ライトの色
+		MyMath::Vector4 lightVec;		//ライトへの方向を表すベクトル
+		MyMath::Vector3 lightColor;	//ライトの色
 	};
 
 public:
@@ -53,13 +53,13 @@ public:
 	/// ライト方向をセット
 	/// </summary>
 	/// <param name="lightdir">ライト方向</param>
-	void SetLightDir(const Mathematics::Vector4& lightdir);
+	void SetLightDir(const MyMath::Vector4& lightdir);
 
 	/// <summary>
 	/// ライト色をセット
 	/// </summary>
 	/// <param name="lightColor">ライト色</param>
-	void SetLightColor(const Mathematics::Vector3& lightColor);
+	void SetLightColor(const MyMath::Vector3& lightColor);
 
 private:
 	/// <summary>
@@ -71,9 +71,9 @@ private: //メンバ変数
 	//定数バッファ
 	Microsoft::WRL::ComPtr<ID3D12Resource> constBuff;
 	//ライト光線方向（単位ベクトル）
-	Mathematics::Vector4 lightdir = {1,0,0,0};
+	MyMath::Vector4 lightdir = {1,0,0,0};
 	//ライト色
-	Mathematics::Vector3 lightColor = { 1.0f,1.0f,1.0f };
+	MyMath::Vector3 lightColor = { 1.0f,1.0f,1.0f };
 	//ダーティフラグ
 	bool dirty = false;
 };

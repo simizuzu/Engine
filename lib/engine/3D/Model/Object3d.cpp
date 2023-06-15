@@ -85,7 +85,7 @@ bool Object3d::Initialize()
 void Object3d::Update(Camera* camera)
 {
 	HRESULT result;
-	Mathematics::Matrix4 matScale, matRot, matTrans;
+	MyMath::Matrix4 matScale, matRot, matTrans;
 
 	// スケール、回転、平行移動行列の計算
 	matScale = MyMathUtility::MakeScaling(scale);
@@ -105,9 +105,9 @@ void Object3d::Update(Camera* camera)
 		matWorld *= parent->matWorld;
 	}
 
-	const Mathematics::Matrix4 matView = camera->GetMatView();
-	const Mathematics::Matrix4 matProjection = camera->GetMatProjection();
-	const Mathematics::Vector3& cameraPos = camera->GetEye();
+	const MyMath::Matrix4 matView = camera->GetMatView();
+	const MyMath::Matrix4 matProjection = camera->GetMatProjection();
+	const MyMath::Vector3& cameraPos = camera->GetEye();
 
 	// 定数バッファへデータ転送
 	ConstBufferDataB0* constMap = nullptr;
@@ -159,22 +159,22 @@ void Object3d::SetLight(Light* light)
 	Object3d::light = light;
 }
 
-void Object3d::SetPosition(Mathematics::Vector3 position_)
+void Object3d::SetPosition(MyMath::Vector3 position_)
 {
 	position = position_;
 }
 
-void Object3d::SetScale(Mathematics::Vector3 scale_)
+void Object3d::SetScale(MyMath::Vector3 scale_)
 {
 	scale = scale_;
 }
 
-void Object3d::SetRotation(Mathematics::Vector3 rotation_)
+void Object3d::SetRotation(MyMath::Vector3 rotation_)
 {
 	rotation = rotation_;
 }
 
-namespace Mathematics
+namespace MyMath
 {
 	Vector3 GetWorldPosition(Object3d& transform)
 	{

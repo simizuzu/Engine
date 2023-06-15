@@ -1,7 +1,7 @@
 #include "Controller.h"
 #include <cassert>
 
-bool Controller::StickDeadZone(Mathematics::Vector2& stick, const Mathematics::Vector2& deadZoneInitial)
+bool Controller::StickDeadZone(MyMath::Vector2& stick, const MyMath::Vector2& deadZoneInitial)
 {
     bool x = false;
     bool y = false;
@@ -76,20 +76,20 @@ bool Controller::TriggerButton(ControllerButton button)
     }
 }
 
-bool Controller::TriggerStick(ControllerStick stickInput, const float& deadZoneRange, const Mathematics::Vector2& deadZoneInitial)
+bool Controller::TriggerStick(ControllerStick stickInput, const float& deadZoneRange, const MyMath::Vector2& deadZoneInitial)
 {
-    Mathematics::Vector2 oldVec;
-    Mathematics::Vector2 vec;
+    MyMath::Vector2 oldVec;
+    MyMath::Vector2 vec;
     bool isLeftStick = stickInput <= L_RIGHT;
     if (isLeftStick)
     {
-        oldVec = Mathematics::Vector2(oldXinputState.Gamepad.sThumbLX, oldXinputState.Gamepad.sThumbLY);
-        vec = Mathematics::Vector2(xinputState.Gamepad.sThumbLX, xinputState.Gamepad.sThumbLY);
+        oldVec = MyMath::Vector2(oldXinputState.Gamepad.sThumbLX, oldXinputState.Gamepad.sThumbLY);
+        vec = MyMath::Vector2(xinputState.Gamepad.sThumbLX, xinputState.Gamepad.sThumbLY);
     }
     else
     {
-        oldVec = Mathematics::Vector2(oldXinputState.Gamepad.sThumbRX, oldXinputState.Gamepad.sThumbRY);
-        vec = Mathematics::Vector2(xinputState.Gamepad.sThumbRX, xinputState.Gamepad.sThumbRY);
+        oldVec = MyMath::Vector2(oldXinputState.Gamepad.sThumbRX, oldXinputState.Gamepad.sThumbRY);
+        vec = MyMath::Vector2(xinputState.Gamepad.sThumbRX, xinputState.Gamepad.sThumbRY);
     }
 
     if (!StickDeadZone(oldVec, deadZoneInitial))
@@ -144,18 +144,18 @@ bool Controller::PushButton(ControllerButton button)
     }
 }
 
-bool Controller::InputStick(ControllerStick stickInput, const float& deadZoneRange, const Mathematics::Vector2& deadZoneInitial)
+bool Controller::InputStick(ControllerStick stickInput, const float& deadZoneRange, const MyMath::Vector2& deadZoneInitial)
 {
-    Mathematics::Vector2 vec;
+    MyMath::Vector2 vec;
     bool isLeftStick = stickInput <= L_RIGHT;
 
     if (isLeftStick)
     {
-        vec = Mathematics::Vector2(xinputState.Gamepad.sThumbLX, xinputState.Gamepad.sThumbLY);
+        vec = MyMath::Vector2(xinputState.Gamepad.sThumbLX, xinputState.Gamepad.sThumbLY);
     }
     else
     {
-        vec = Mathematics::Vector2(xinputState.Gamepad.sThumbRX, xinputState.Gamepad.sThumbRY);
+        vec = MyMath::Vector2(xinputState.Gamepad.sThumbRX, xinputState.Gamepad.sThumbRY);
     }
 
     if (StickDeadZone(vec, deadZoneInitial))return false;
@@ -199,21 +199,21 @@ bool Controller::ReleaseTriggerButton(ControllerButton button)
     }
 }
 
-bool Controller::ReleaseTriggerStick(ControllerStick stickInput, const float& deadZoneRange, const Mathematics::Vector2& deadZoneInitial)
+bool Controller::ReleaseTriggerStick(ControllerStick stickInput, const float& deadZoneRange, const MyMath::Vector2& deadZoneInitial)
 {
-    Mathematics::Vector2 oldVec;
-    Mathematics::Vector2 vec;
+    MyMath::Vector2 oldVec;
+    MyMath::Vector2 vec;
     bool isLeftStick = stickInput <= L_RIGHT;
 
     if (isLeftStick)
     {
-        oldVec = Mathematics::Vector2(oldXinputState.Gamepad.sThumbLX, oldXinputState.Gamepad.sThumbLY);
-        vec = Mathematics::Vector2(xinputState.Gamepad.sThumbLX, xinputState.Gamepad.sThumbLY);
+        oldVec = MyMath::Vector2(oldXinputState.Gamepad.sThumbLX, oldXinputState.Gamepad.sThumbLY);
+        vec = MyMath::Vector2(xinputState.Gamepad.sThumbLX, xinputState.Gamepad.sThumbLY);
     }
     else
     {
-        oldVec = Mathematics::Vector2(oldXinputState.Gamepad.sThumbRX, oldXinputState.Gamepad.sThumbRY);
-        vec = Mathematics::Vector2(xinputState.Gamepad.sThumbRX, xinputState.Gamepad.sThumbRY);
+        oldVec = MyMath::Vector2(oldXinputState.Gamepad.sThumbRX, oldXinputState.Gamepad.sThumbRY);
+        vec = MyMath::Vector2(xinputState.Gamepad.sThumbRX, xinputState.Gamepad.sThumbRY);
     }
 
     if (!StickDeadZone(oldVec, deadZoneInitial))
@@ -263,16 +263,16 @@ void Controller::ShakeController(const float& power, const int& flame)
     shakeTimer = flame;
 }
 
-Mathematics::Vector2 Controller::GetLeftStickVec(const Mathematics::Vector2& deadZoneRange)
+MyMath::Vector2 Controller::GetLeftStickVec(const MyMath::Vector2& deadZoneRange)
 {
-    Mathematics::Vector2 result(static_cast<float>(xinputState.Gamepad.sThumbLX), static_cast<float>(-xinputState.Gamepad.sThumbLY));
+    MyMath::Vector2 result(static_cast<float>(xinputState.Gamepad.sThumbLX), static_cast<float>(-xinputState.Gamepad.sThumbLY));
     StickDeadZone(result, deadZoneRange);
     return result / MAX_STICK_NUM;
 }
 
-Mathematics::Vector2 Controller::GetRightStickVec(const Mathematics::Vector2& deadZoneRange)
+MyMath::Vector2 Controller::GetRightStickVec(const MyMath::Vector2& deadZoneRange)
 {
-    Mathematics::Vector2 result(static_cast<float>(xinputState.Gamepad.sThumbRX), static_cast<float>(-xinputState.Gamepad.sThumbRY));
+    MyMath::Vector2 result(static_cast<float>(xinputState.Gamepad.sThumbRX), static_cast<float>(-xinputState.Gamepad.sThumbRY));
     StickDeadZone(result, deadZoneRange);
     return result / MAX_STICK_NUM;
 }

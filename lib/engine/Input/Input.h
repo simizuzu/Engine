@@ -29,14 +29,14 @@ public:
 	bool TriggerReleaseKey(BYTE keyNum);
 
 	bool TriggerButton(ControllerButton button);
-	bool TriggerStick(ControllerStick stickInput, const float& deadZoneRange = 0.3f, const Mathematics::Vector2& deadZoneInitial = { 1.0f,1.0f });
+	bool TriggerStick(ControllerStick stickInput, const float& deadZoneRange = 0.3f, const MyMath::Vector2& deadZoneInitial = { 1.0f,1.0f });
 	bool PushButton(ControllerButton button);
-	bool InputStick(ControllerStick stickInput, const float& deadZoneRange = 0.3f, const Mathematics::Vector2& deadZoneInitial = { 1.0f,1.0f });
+	bool InputStick(ControllerStick stickInput, const float& deadZoneRange = 0.3f, const MyMath::Vector2& deadZoneInitial = { 1.0f,1.0f });
 	bool ReleaseTriggerButton(ControllerButton button);
-	bool ReleaseTriggerStick(ControllerStick stickInput, const float& deadZoneRange = 0.3f, const Mathematics::Vector2& deadZoneInitial = { 1.0f,1.0f });
+	bool ReleaseTriggerStick(ControllerStick stickInput, const float& deadZoneRange = 0.3f, const MyMath::Vector2& deadZoneInitial = { 1.0f,1.0f });
 	void ShakeController(const float& power, const int& flame);
-	Mathematics::Vector2 GetLeftStickVec(const Mathematics::Vector2& deadZoneRange = { 1.0f,1.0f });
-	Mathematics::Vector2 GetRightStickVec(const Mathematics::Vector2& deadZoneRange = { 1.0f,1.0f });
+	MyMath::Vector2 GetLeftStickVec(const MyMath::Vector2& deadZoneRange = { 1.0f,1.0f });
+	MyMath::Vector2 GetRightStickVec(const MyMath::Vector2& deadZoneRange = { 1.0f,1.0f });
 
 	static Input* GetInstace();
 private:

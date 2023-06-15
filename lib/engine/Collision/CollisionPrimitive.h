@@ -49,22 +49,22 @@ public:
 struct AABB
 {
 	// 中心座標
-	Mathematics::Vector3 center;
+	MyMath::Vector3 center;
 	// サイズ
-	Mathematics::Vector3 size;
+	MyMath::Vector3 size;
 };
 
 struct Sphere
 {
 	// 中心座標
-	Mathematics::Vector4 center;
+	MyMath::Vector4 center;
 	// 半径
 	float radius;
 };
 
 struct Plane
 {
-	Mathematics::Vector4 normal = { 0.0f,1.0f,0.0f,0.0f };
+	MyMath::Vector4 normal = { 0.0f,1.0f,0.0f,0.0f };
 	float distance = 0.0f;
 };
 
@@ -72,19 +72,19 @@ class BoundingBox : public BaseCollision
 {
 protected:
 	// 位置
-	Mathematics::Vector3 center = {};
+	MyMath::Vector3 center = {};
 	// 方向ベクトル
-	Mathematics::Vector3 directionVec[3];
+	MyMath::Vector3 directionVec[3];
 	// 各軸方向の長さ
 	float length[3]{};
 
 public:
 	// 指定軸番号の方向ベクトルを取得
-	const Mathematics::Vector3 GetDirectVec(uint16_t element);
+	const MyMath::Vector3 GetDirectVec(uint16_t element);
 	// 指定軸方向の長さを取得
 	const float GetLength(uint16_t element);
 	// 中心からの位置を取得
-	const Mathematics::Vector3 GetCenter();
+	const MyMath::Vector3 GetCenter();
 	// 衝突時に呼ばれる関数
 	virtual void OnCollision() {};
 

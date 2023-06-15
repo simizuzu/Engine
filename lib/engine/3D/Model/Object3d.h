@@ -18,9 +18,9 @@ public:
 	struct ConstBufferDataB0
 	{
 		//Mathematics::Matrix4 mat;	// 3D変換行列
-		Mathematics::Matrix4 viewproj;
-		Mathematics::Matrix4 world;
-		Mathematics::Vector3 cameraPos;
+		MyMath::Matrix4 viewproj;
+		MyMath::Matrix4 world;
+		MyMath::Vector3 cameraPos;
 	};
 
 public: // 静的メンバ関数
@@ -60,30 +60,30 @@ public: // メンバ関数
 
 	// setter
 	void SetModel(Model* model);
-	void SetPosition(Mathematics::Vector3 position_);
-	void SetScale(Mathematics::Vector3 scale_);
-	void SetRotation(Mathematics::Vector3 rotation_);
+	void SetPosition(MyMath::Vector3 position_);
+	void SetScale(MyMath::Vector3 scale_);
+	void SetRotation(MyMath::Vector3 rotation_);
 
 public:
 	// 定数バッファ
 	Microsoft::WRL::ComPtr <ID3D12Resource> constBuffB0;
 	// 色
-	Mathematics::Vector4 color = { 1.0f,1.0f,1.0f,1.0f };
+	MyMath::Vector4 color = { 1.0f,1.0f,1.0f,1.0f };
 	// ローカルスケール
-	Mathematics::Vector3 scale = { 1.0f,1.0f,1.0f };
+	MyMath::Vector3 scale = { 1.0f,1.0f,1.0f };
 	// X,Y,Z軸回りのローカル回転角
-	Mathematics::Vector3 rotation = { 0.0f,0.0f,0.0f };
+	MyMath::Vector3 rotation = { 0.0f,0.0f,0.0f };
 	// ローカル座標
-	Mathematics::Vector3 position = { 0.0f,0.0f,0.0f };
+	MyMath::Vector3 position = { 0.0f,0.0f,0.0f };
 	// ワールド変換行列
-	Mathematics::Matrix4 matWorld;
+	MyMath::Matrix4 matWorld;
 	// 親オブジェクト
 	Object3d* parent = nullptr;
 	// モデル
 	Model* model = nullptr;
 };
 
-namespace Mathematics
+namespace MyMath
 {
 	Vector3 GetWorldPosition(Object3d& transform);
 	Matrix4 MakeWorldMatrix4(Object3d& transform);

@@ -11,11 +11,11 @@ class Camera
 public:
 #pragma region ビュー行列設定
 	// 視点座標
-	Mathematics::Vector3 eye_;
+	MyMath::Vector3 eye_;
 	// 注視点座標
-	Mathematics::Vector3 target_;
+	MyMath::Vector3 target_;
 	// 上方向ベクトル
-	Mathematics::Vector3 up_;
+	MyMath::Vector3 up_;
 #pragma endregion
 
 private:
@@ -30,11 +30,11 @@ private:
 	float aspect = 0.0f;
 #pragma endregion
 	// ビュー行列
-	Mathematics::Matrix4 matView_;
+	MyMath::Matrix4 matView_;
 	// ビュー逆行列
-	Mathematics::Matrix4 matViewInverse_;
+	MyMath::Matrix4 matViewInverse_;
 	// 射影行列
-	Mathematics::Matrix4 matProjection_;;
+	MyMath::Matrix4 matProjection_;;
 	// カメラ距離
 	float distance = 50.0f;
 
@@ -65,17 +65,17 @@ public:
 	void TransferMatrix();
 
 public:
-	const Mathematics::Matrix4& GetMatView();
-	const Mathematics::Matrix4& GetMatViewInverse();
-	const Mathematics::Matrix4& GetMatProjection();
+	const MyMath::Matrix4& GetMatView();
+	const MyMath::Matrix4& GetMatViewInverse();
+	const MyMath::Matrix4& GetMatProjection();
 
-	const Mathematics::Vector3& GetEye();
-	const Mathematics::Vector3& GetTarget();
-	const Mathematics::Vector3& GetUp();
+	const MyMath::Vector3& GetEye();
+	const MyMath::Vector3& GetTarget();
+	const MyMath::Vector3& GetUp();
 
-	void SetEye(const Mathematics::Vector3& eye);
-	void SetTarget(const Mathematics::Vector3& target);
-	void SetUp(const Mathematics::Vector3& up);
+	void SetEye(const MyMath::Vector3& eye);
+	void SetTarget(const MyMath::Vector3& target);
+	void SetUp(const MyMath::Vector3& up);
 	void SetFarZ(const float& farZ);
 	void SetNearZ(const float& nearZ);
 };

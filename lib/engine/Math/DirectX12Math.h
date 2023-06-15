@@ -16,21 +16,21 @@ namespace MyMathUtility
 	constexpr float EPSILON = 2.2204460492503131E-16f;
 
 	// 長さを求める(2次元)
-	float Vector2Length(const Mathematics::Vector2& v);
+	float Vector2Length(const MyMath::Vector2& v);
 	// 長さを求める(3次元)
-	float Vector3Length(const Mathematics::Vector3& v);
+	float Vector3Length(const MyMath::Vector3& v);
 
 	// 正規化する
-	Mathematics::Vector3 MakeNormalize(Mathematics::Vector3 v);
+	MyMath::Vector3 MakeNormalize(MyMath::Vector3 v);
 
 	// 単位行列を求める
-	Mathematics::Matrix4 MakeIdentity();
+	MyMath::Matrix4 MakeIdentity();
 	// 拡大縮小を求める
-	Mathematics::Matrix4 MakeScaling(const Mathematics::Vector3& scale);
+	MyMath::Matrix4 MakeScaling(const MyMath::Vector3& scale);
 	// 回転行列を求める
-	Mathematics::Matrix4 MakeRotation(const Mathematics::Vector3& rot);
+	MyMath::Matrix4 MakeRotation(const MyMath::Vector3& rot);
 	// 平行移動行列を求める
-	Mathematics::Matrix4 MakeTranslation(const Mathematics::Vector3& trans);
+	MyMath::Matrix4 MakeTranslation(const MyMath::Vector3& trans);
 	//// ワールド行列の計算
 	//Mathematics::Matrix4 CreateMatrix(const WorldTransform& worldTransform);
 
@@ -43,26 +43,26 @@ namespace MyMathUtility
 	void SinCos(float& sin_, float& cos_, float angle);
 
 	// ベクトルと行列の掛け算
-	Mathematics::Matrix4 MatMulVector(Mathematics::Matrix4 m, Mathematics::Vector3 v);
+	MyMath::Matrix4 MatMulVector(MyMath::Matrix4 m, MyMath::Vector3 v);
 
 	// 平行投影変換(左手系)
-	void MakeOrthogonalL(float left, float right, float bottom, float top, float near_, float far_, Mathematics::Matrix4& matrix);
+	void MakeOrthogonalL(float left, float right, float bottom, float top, float near_, float far_, MyMath::Matrix4& matrix);
 	// 平行投影変換(左手系)
-	void MakeOrthogonalR(float left, float right, float bottom, float top, float near_, float far_, Mathematics::Matrix4& matrix);
+	void MakeOrthogonalR(float left, float right, float bottom, float top, float near_, float far_, MyMath::Matrix4& matrix);
 
 	// ビュー行列の作成
-	Mathematics::Matrix4 MakeLookAtLH( Mathematics::Vector3& eye,  Mathematics::Vector3& target, Mathematics::Vector3& up);
+	MyMath::Matrix4 MakeLookAtLH( MyMath::Vector3& eye,  MyMath::Vector3& target, MyMath::Vector3& up);
 	// 透視投影作成
-	Mathematics::Matrix4 MakePerspective(float fogAngleY, float aspectRatio, float nearZ, float farZ);
+	MyMath::Matrix4 MakePerspective(float fogAngleY, float aspectRatio, float nearZ, float farZ);
 	// 逆行列
-	Mathematics::Matrix4 MakeInverse(Mathematics::Matrix4& mat);
+	MyMath::Matrix4 MakeInverse(MyMath::Matrix4& mat);
 
 	// 値が等しいか確認する
 	bool Approximately(float a, float b);
 
 	// 線形補間
 	float Lerp(float a, float b, float t);
-	Mathematics::Vector3 Lerp(Mathematics::Vector3 a, Mathematics::Vector3 b, float t);
+	MyMath::Vector3 Lerp(MyMath::Vector3 a, MyMath::Vector3 b, float t);
 
 	/// <summary>
 	/// エルミート曲線
@@ -73,7 +73,7 @@ namespace MyMathUtility
 	/// <param name="v1">制御点</param>
 	/// <param name="t">時間(0.0～1.0)</param>
 	/// <returns></returns>
-	Mathematics::Vector3 HermiteGetPoint(Mathematics::Vector3 p0, Mathematics::Vector3 p1, Mathematics::Vector3 v0, Mathematics::Vector3 v1, float t);
+	MyMath::Vector3 HermiteGetPoint(MyMath::Vector3 p0, MyMath::Vector3 p1, MyMath::Vector3 v0, MyMath::Vector3 v1, float t);
 
 	// Sin,Cos,Tan関数
 	float Sin(float sin);
@@ -92,7 +92,7 @@ namespace MyMathUtility
 
 } // namespace MyMathUtility
 
-namespace Mathematics
+namespace MyMath
 {
 	// ベクトルと行列の掛け算
 	Vector3 Vec3Mat4Mul(Vector3& vec, Matrix4& mat);

@@ -82,7 +82,7 @@ void Light::TransferConstBuffer()
 	}
 }
 
-void Light::SetLightDir(const Mathematics::Vector4& lightdir)
+void Light::SetLightDir(const MyMath::Vector4& lightdir)
 {
 	//³‹K‰»‚µ‚ÄƒZƒbƒg
 	this->lightdir.x = lightdir.x;
@@ -91,7 +91,7 @@ void Light::SetLightDir(const Mathematics::Vector4& lightdir)
 	dirty = true;
 }
 
-void Light::SetLightColor(const Mathematics::Vector3& lightColor)
+void Light::SetLightColor(const MyMath::Vector3& lightColor)
 {
 	this->lightColor = lightColor;
 	dirty = true;

@@ -1,12 +1,19 @@
 #include"Vector3.h"
 #include <cmath>
 
-namespace Mathematics
+namespace MyMath
 {
 	// 零ベクトル
 	Vector3::Vector3() :x(0), y(0), z(0) {}
 
 	Vector3::Vector3(float x, float y, float z) : x(x), y(y), z(z) {}
+
+	Vector3::Vector3(const aiVector3D& mat)
+	{
+		x = mat.x;//x成分
+		y = mat.y;//y成分
+		z = mat.z;//z成分
+	}
 
 	// ベクトルの長さを計算する
 	float Vector3::length() const
@@ -22,6 +29,19 @@ namespace Mathematics
 			return*this /= len;
 		}
 		return*this;
+	}
+
+	Vector3 Vector3::Norm() const
+	{
+		Vector3 tmp(*this);
+
+		float len = length();
+		if (len != 0)
+		{
+			return tmp /= len;
+		}
+
+		return tmp;
 	}
 
 	float Vector3::dot(const Vector3& v)const

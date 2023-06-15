@@ -183,9 +183,6 @@
     <ClCompile Include="lib\engine\3D\Model\Model.cpp">
       <Filter>Engine\ソース ファイル\3D\Model</Filter>
     </ClCompile>
-    <ClCompile Include="lib\engine\3D\Model\Material.cpp">
-      <Filter>Engine\ソース ファイル\3D\Model</Filter>
-    </ClCompile>
     <ClCompile Include="lib\engine\Base\Shader.cpp">
       <Filter>Engine\ソース ファイル\Base</Filter>
     </ClCompile>
@@ -237,8 +234,14 @@
     <ClCompile Include="lib\engine\main.cpp">
       <Filter>Engine\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="lib\engine\Base\Light.cpp">
+    <ClCompile Include="FbxLoader.cpp">
       <Filter>Engine\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\Base\Light.cpp">
+      <Filter>Engine\ソース ファイル\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\Math\Quaternion.cpp">
+      <Filter>Engine\ソース ファイル\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -356,8 +359,14 @@
     <ClInclude Include="lib\engine\2D\PostEffect\PostEffect.h">
       <Filter>Engine\ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="FbxLoader.h">
+      <Filter>Engine\ヘッダー ファイル\3D</Filter>
+    </ClInclude>
     <ClInclude Include="lib\engine\Base\Light.h">
-      <Filter>Engine\ヘッダー ファイル</Filter>
+      <Filter>Engine\ヘッダー ファイル\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\engine\Math\Quaternion.h">
+      <Filter>Engine\ヘッダー ファイル\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -370,7 +379,7 @@
     <None Include="Resources\shaders\Particle.hlsli">
       <Filter>Engine\シェーダーファイル\Particle</Filter>
     </None>
-    <None Include="PostEffectDefault.hlsli">
+    <None Include="Resources\shaders\PostEffectDefault.hlsli">
       <Filter>Engine\シェーダーファイル\PostEffect\Default</Filter>
     </None>
   </ItemGroup>
@@ -396,10 +405,10 @@
     <FxCompile Include="Resources\shaders\ParticleGS.hlsl">
       <Filter>Engine\シェーダーファイル\Particle</Filter>
     </FxCompile>
-    <FxCompile Include="PostEffectDefaultPS.hlsl">
+    <FxCompile Include="Resources\shaders\PostEffectDefaultPS.hlsl">
       <Filter>Engine\シェーダーファイル\PostEffect\Default</Filter>
     </FxCompile>
-    <FxCompile Include="PostEffectDefaultVS.hlsl">
+    <FxCompile Include="Resources\shaders\PostEffectDefaultVS.hlsl">
       <Filter>Engine\シェーダーファイル\PostEffect\Default</Filter>
     </FxCompile>
   </ItemGroup>

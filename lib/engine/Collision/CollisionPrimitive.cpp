@@ -43,7 +43,7 @@ std::string BaseCollision::GetOppCollsionName()
 	return opponentCollsionName_;
 }
 
-const Mathematics::Vector3 BoundingBox::GetDirectVec(uint16_t element)
+const MyMath::Vector3 BoundingBox::GetDirectVec(uint16_t element)
 {
 	return directionVec[element];
 }
@@ -53,17 +53,17 @@ const float BoundingBox::GetLength(uint16_t element)
 	return length[element];
 }
 
-const Mathematics::Vector3 BoundingBox::GetCenter()
+const MyMath::Vector3 BoundingBox::GetCenter()
 {
 	return center;
 }
 
 bool BoundingBox::CheckAABBToAABB(AABB& aabb1, AABB& aabb2)
 {
-	std::array<Mathematics::Vector3, 2> min_;
+	std::array<MyMath::Vector3, 2> min_;
 	min_[0] = { aabb1.center.x - aabb1.size.x, aabb1.center.y - aabb1.size.y ,aabb1.center.z - aabb1.size.z };
 	min_[1] = { aabb2.center.x - aabb2.size.x, aabb2.center.y - aabb2.size.y ,aabb2.center.z - aabb2.size.z };
-	std::array<Mathematics::Vector3, 2> max_;
+	std::array<MyMath::Vector3, 2> max_;
 	max_[0] = { aabb1.center.x + aabb1.size.x, aabb1.center.y + aabb1.size.y ,aabb1.center.z + aabb1.size.z };
 	max_[1] = { aabb2.center.x + aabb2.size.x, aabb2.center.y + aabb2.size.y ,aabb2.center.z + aabb2.size.z };
 
@@ -79,7 +79,7 @@ bool BoundingBox::CheckAABBToAABB(AABB& aabb1, AABB& aabb2)
 
 bool BoundingBox::CheckAABBToSphere(AABB& aabb, Sphere& sphere)
 {
-	std::array<Mathematics::Vector3, 8> vex;
+	std::array<MyMath::Vector3, 8> vex;
 
 	vex[0] = { aabb.center.x - aabb.size.x, aabb.center.y - aabb.size.y ,aabb.center.z - aabb.size.z };
 	vex[1] = { aabb.center.x - aabb.size.x, aabb.center.y - aabb.size.y ,aabb.center.z + aabb.size.z };
@@ -91,7 +91,7 @@ bool BoundingBox::CheckAABBToSphere(AABB& aabb, Sphere& sphere)
 	vex[6] = { aabb.center.x + aabb.size.x, aabb.center.y + aabb.size.y ,aabb.center.z - aabb.size.z };
 	vex[7] = { aabb.center.x + aabb.size.x, aabb.center.y + aabb.size.y ,aabb.center.z + aabb.size.z };
 
-	for (Mathematics::Vector3 v : vex)
+	for (MyMath::Vector3 v : vex)
 	{
 		float ren = (fabs(v.x - sphere.center.x)) * 2 + (fabs(v.y - sphere.center.y)) * 2 + (fabs(v.z - sphere.center.z)) * 2;
 
@@ -108,18 +108,18 @@ bool BoundingBox::CheckAABBToSphere(AABB& aabb, Sphere& sphere)
 void BoundingBox::CreateOBB(std::vector<VertexPosNormalUv> vertex, Object3d& transform)
 {
 	// 回転
-	Mathematics::Matrix4 matRot;
+	MyMath::Matrix4 matRot;
 
 	// 最大値、最小値の初期化設定
-	Mathematics::Vector3 max = Mathematics::Vector3(-10000.0f, -10000.0f, -10000.0f);
-	Mathematics::Vector3 min = Mathematics::Vector3(10000.0f, 10000.0f, 10000.0f);
+	MyMath::Vector3 max = MyMath::Vector3(-10000.0f, -10000.0f, -10000.0f);
+	MyMath::Vector3 min = MyMath::Vector3(10000.0f, 10000.0f, 10000.0f);
 
 	// メッシュの頂点データを取得
 	std::vector<VertexPosNormalUv> vertex_ = vertex;
 	// 最大値、最小値を取得
 	for (size_t i = 0; i < vertex_.size(); i++)
 	{
-		Mathematics::Vector3 pos = vertex_[i].pos;
+		MyMath::Vector3 pos = vertex_[i].pos;
 		if (pos.x < min.x) { min.x = pos.x; }
 		if (pos.x > min.x) { min.x = pos.x; }
 		if (pos.y < min.y) { min.y = pos.y; }
@@ -149,10 +149,10 @@ void BoundingBox::CreateOBB(std::vector<VertexPosNormalUv> vertex, Object3d& tra
 
 void BoundingBox::UpdateOBB(Object3d& transform)
 {
-	Mathematics::Matrix4 matRot;
+	MyMath::Matrix4 matRot;
 
 	// 中心座標を取得
-	center = Mathematics::GetWorldPosition(transform);
+	center = MyMath::GetWorldPosition(transform);
 
 	// 方向ベクトルを取得
 	matRot = MyMathUtility::MakeRotation(transform.rotation);

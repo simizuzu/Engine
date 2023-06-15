@@ -2,7 +2,7 @@
 #include"Vector3.h"
 #include<cmath>
 
-namespace Mathematics
+namespace MyMath
 {
 	Vector4::Vector4() : x(0.0f), y(0.0f), z(0.0f), w(0.0f)
 	{

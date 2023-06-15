@@ -14,9 +14,9 @@ public:
 
 
 public:	//セッター・ゲッター
-	void SetTranslation(Mathematics::Vector3 translation);
-	void SetScale(Mathematics::Vector3 scale);
-	void SetRotation(Mathematics::Vector3 rotation);
+	void SetTranslation(MyMath::Vector3 translation);
+	void SetScale(MyMath::Vector3 scale);
+	void SetRotation(MyMath::Vector3 rotation);
 
 	D3D12_GPU_VIRTUAL_ADDRESS GetGpuAddress();
 
@@ -31,13 +31,13 @@ private:
 
 public:
 	//ローカル座標
-	Mathematics::Vector3 translation_ = { 0.0f,0.0f,0.0f };
+	MyMath::Vector3 translation_ = { 0.0f,0.0f,0.0f };
 	//X,Y,Z軸回りのローカル回転角
-	Mathematics::Vector3 rotation_ = { 0.0f,0.0f,0.0f };
+	MyMath::Vector3 rotation_ = { 0.0f,0.0f,0.0f };
 	//ローカルスケール
-	Mathematics::Vector3 scale_ = { 1.0f,1.0f,1.0f };
+	MyMath::Vector3 scale_ = { 1.0f,1.0f,1.0f };
 
-	Mathematics::Matrix4 matWorld;
+	MyMath::Matrix4 matWorld;
 
 	const WorldTransform* parent = nullptr;
 };

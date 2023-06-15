@@ -53,6 +53,9 @@
     <IntDir>$(SolutionDir)..\Generated\Obj\$(ProjectName)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)..\Generated\Outputs\$(Configuration)\</OutDir>
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnabled>false</VcpkgEnabled>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -90,9 +93,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FbxLoader.cpp" />
     <ClCompile Include="lib\engine\2D\PostEffect\PostEffect.cpp" />
     <ClCompile Include="lib\engine\2D\Sprite\Sprite.cpp" />
-    <ClCompile Include="lib\engine\3D\Model\Material.cpp" />
     <ClCompile Include="lib\engine\3D\Model\Model.cpp" />
     <ClCompile Include="lib\engine\3D\Model\Object3d.cpp" />
     <ClCompile Include="lib\engine\3D\Particle\ParticleManager.cpp" />
@@ -116,6 +119,7 @@
     <ClCompile Include="lib\engine\main.cpp" />
     <ClCompile Include="lib\engine\Math\DirectX12Math.cpp" />
     <ClCompile Include="lib\engine\Math\Matrix4.cpp" />
+    <ClCompile Include="lib\engine\Math\Quaternion.cpp" />
     <ClCompile Include="lib\engine\Math\Vector2.cpp" />
     <ClCompile Include="lib\engine\Math\Vector3.cpp" />
     <ClCompile Include="lib\engine\Math\Vector4.cpp" />
@@ -128,6 +132,7 @@
     <ClCompile Include="Users\Scene\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FbxLoader.h" />
     <ClInclude Include="lib\engine\2D\PostEffect\PostEffect.h" />
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
     <ClInclude Include="lib\engine\3D\Model\Material.h" />
@@ -156,6 +161,7 @@
     <ClInclude Include="lib\engine\Input\Keyboard.h" />
     <ClInclude Include="lib\engine\Math\DirectX12Math.h" />
     <ClInclude Include="lib\engine\Math\Matrix4.h" />
+    <ClInclude Include="lib\engine\Math\Quaternion.h" />
     <ClInclude Include="lib\engine\Math\Vector2.h" />
     <ClInclude Include="lib\engine\Math\Vector3.h" />
     <ClInclude Include="lib\engine\Math\Vector4.h" />
@@ -169,20 +175,12 @@
     <ClInclude Include="Users\Scene\TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="PostEffectDefault.hlsli" />
     <None Include="Resources\shaders\OBJ.hlsli" />
     <None Include="Resources\shaders\Particle.hlsli" />
+    <None Include="Resources\shaders\PostEffectDefault.hlsli" />
     <None Include="Resources\shaders\Sprite.hlsli" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="PostEffectDefaultPS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-    </FxCompile>
-    <FxCompile Include="PostEffectDefaultVS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-    </FxCompile>
     <FxCompile Include="Resources\shaders\OBJPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
@@ -212,6 +210,18 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\PostEffectDefaultPS.hlsl">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\PostEffectDefaultVS.hlsl">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>

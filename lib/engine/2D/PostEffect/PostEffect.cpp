@@ -2,16 +2,36 @@
 
 const float PostEffect::clearColor[4] = { 0.25f,0.5f,0.1f,0.0f };
 
-PostEffect::PostEffect()
+PostEffect* PostEffect::Create()
 {
+	PostEffect* instance = new PostEffect();
+	if (instance == nullptr)
+	{
+		return nullptr;
+	}
 
+	// 初期化
+	if (!instance->Initialize()) 
+	{
+		delete instance;
+		assert(0);
+		return nullptr;
+	}
+	return instance;
 }
 
-void PostEffect::Initialize()
+bool PostEffect::Initialize()
 {
 	device_ = dxCommon->GetInstance()->GetDevice();
 	winApp_->GetInstance();
 
+	//パイプライン生成
+	Microsoft::WRL::ComPtr<ID3DBlob> vsBlob;
+	Microsoft::WRL::ComPtr<ID3DBlob> psBlob;
+	Shader::CreatePostEffectShade(vsBlob, psBlob);
+	Pipeline::CreatePostEffectPipeline(vsBlob.Get(), psBlob.Get(), device_.Get(), pipline_);
+
+	CreateVertexData(device_.Get());
 	CreateTextureBuff(device_.Get(),winApp_.get());
 	CreateSRVDesc(device_.Get());
 	CreateRTVDesc(device_.Get());
@@ -21,6 +41,9 @@ void PostEffect::Initialize()
 
 void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList)
 {
+	ConstBufferData* constMap = nullptr;
+	constBuff->Map(0,nullptr,(void**)&constMap);
+
 	ID3D12DescriptorHeap* ppHeaps[] = { descHeapSRV.Get() };
 
 	cmdList->SetGraphicsRootDescriptorTable(1, descHeapSRV->GetGPUDescriptorHandleForHeapStart());
@@ -28,7 +51,7 @@ void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList)
 
 void PostEffect::PreDrawScene(ID3D12GraphicsCommandList* cmdList, WinApp* winApp)
 {
-	winApp = winApp->GetInstance();
+	//winApp = winApp->GetInstance();
 	//リソースバリアを変更（シェーダーリソース→描画可能）
 	CD3DX12_RESOURCE_BARRIER CHANGE_RENDER_TARGET =
 		CD3DX12_RESOURCE_BARRIER::Transition(texBuff.Get(), D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_RENDER_TARGET);
@@ -74,7 +97,7 @@ void PostEffect::CreateVertexData(ID3D12Device* device)
 	CD3DX12_RESOURCE_DESC resourceDesc01 = CD3DX12_RESOURCE_DESC::Buffer(sizeof(PosUvColor) * 4);
 
 	//頂点バッファ生成
-	result = device_->CreateCommittedResource(
+	result = device->CreateCommittedResource(
 		&heapprop01,
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc01,
@@ -84,7 +107,7 @@ void PostEffect::CreateVertexData(ID3D12Device* device)
 	assert(SUCCEEDED(result));
 
 	//頂点データ(ペラポリゴン)
-	VertexPosUv vertices[4] = {
+	VertexPosUv vertices[] = {
 		{{-0.5f, -0.5f, 0.0f}, {0.0f, 1.0f}},
 		{{-0.5f, +0.5f, 0.0f}, {0.0f, 0.0f}},
 		{{+0.5f, -0.5f, 0.0f}, {1.0f, 1.0f}},
@@ -121,7 +144,7 @@ void PostEffect::CreateVertexData(ID3D12Device* device)
 void PostEffect::CreateTextureBuff(ID3D12Device* device, WinApp* winApp)
 {
 	HRESULT result;
-	winApp = winApp->GetInstance();
+	//winApp = winApp->GetInstance();
 
 	//テクスチャリソース設定
 	CD3DX12_RESOURCE_DESC texturesDesc = CD3DX12_RESOURCE_DESC::Tex2D(
@@ -219,7 +242,7 @@ void PostEffect::CreateRTVDesc(ID3D12Device* device)
 
 void PostEffect::CreateDSVDesc(ID3D12Device* device, WinApp* winApp)
 {
-	winApp = winApp->GetInstance();
+	//winApp = winApp->GetInstance();
 
 	HRESULT result;
 	//深度バッファリソース設定

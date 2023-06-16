@@ -169,6 +169,7 @@
     <ClInclude Include="lib\engine\Scene\BaseScene.h" />
     <ClInclude Include="lib\engine\Scene\Framework.h" />
     <ClInclude Include="lib\engine\Scene\SceneManager.h" />
+    <ClInclude Include="StructFbx.h" />
     <ClInclude Include="Users\Scene\GameScene.h" />
     <ClInclude Include="Users\Scene\MainGame.h" />
     <ClInclude Include="Users\Scene\SceneFactory.h" />

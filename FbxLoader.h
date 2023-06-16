@@ -7,11 +7,13 @@
 #include<assimp/postprocess.h>
 #include<assimp/cimport.h>
 
+#include "Model.h"
+
 class FbxLoader
 {
 private:
 	//デバイス
-	Microsoft::WRL::ComPtr<ID3D12Device> device;
+	Microsoft::WRL::ComPtr<ID3D12Device> device_;
 
 	std::string directoryPath;
 	const aiScene* mScene;
@@ -38,6 +40,12 @@ private:
 		aiProcess_ConvertToLeftHanded;//左手系に
 	char pad3[4] = {};
 
+public:
+	static FbxLoader* GetInstance();
+	
+	void Initailize(ID3D12Device* device);
 
+	void Finalize();
 
+	//void LoadModel(FbxModel* model, const std::string& modelDirectory,bool inverseU_, bool inverseV_);
 };

@@ -28,6 +28,8 @@ public: // メンバ関数
 	/// </summary>
 	static void CreatePaticlePipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, ID3DBlob* gsBlob, ID3D12Device* device, RootsigSetPip& pipeline);
 
+	static void CreatePostEffectPipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, ID3D12Device* device, RootsigSetPip& pipeline);
+
 private: // メンバ変数
 
 	// クラス呼び出し

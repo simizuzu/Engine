@@ -1,4 +1,9 @@
-float4 main( float4 pos : POSITION ) : SV_POSITION
+#include "PostEffectDefault.hlsli"
+
+VSOutput main(float4 pos : POSITION, float2 uv : SV_POSITION)
 {
-	return pos;
+    VSOutput output;
+    output.svpos = pos;
+    output.uv = uv;
+    return output;
 }

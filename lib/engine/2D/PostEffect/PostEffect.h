@@ -25,15 +25,22 @@ struct VertexPosUv
 	MyMath::Vector2 uv;
 };
 
+//定数バッファ用データ構造体
+struct ConstBufferData
+{
+	unsigned int isRadialBlur; //ラジアルブラーをかけるか
+	unsigned int radialBlurSampleNum; //ラジアルブラーのサンプル回数
+	float radialBlurStrength; //ラジアルブラーの広がる強さ
+	float pad1;
+};
+
 class PostEffect
 {
 public:
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	PostEffect();
 
-	void Initialize();
+	static PostEffect* Create();
+
+	bool Initialize();
 
 	/// <summary>
 	/// 描画コマンドの実行
@@ -106,7 +113,12 @@ private:
 
 	static const float clearColor[4];
 
+	static RootsigSetPip pipline_;
+
 	std::shared_ptr<WinApp> winApp_;
 	std::shared_ptr<DirectXCommon> dxCommon;
+
+	/*std::shared_ptr<Shader> shade_;
+	std::shared_ptr<Pipeline> pipeline_;*/
 };
 

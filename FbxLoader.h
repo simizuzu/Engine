@@ -7,7 +7,7 @@
 #include<assimp/postprocess.h>
 #include<assimp/cimport.h>
 
-#include "Model.h"
+#include "ObjModel.h"
 
 class FbxLoader
 {

@@ -1,4 +1,4 @@
-#include "Model.h"
+#include "ObjModel.h"
 
 #include <DirectXTex.h>
 #include <fstream>
@@ -8,13 +8,13 @@
 /// <summary>
 /// 静的メンバ変数の実態
 /// </summary>
-Microsoft::WRL::ComPtr<ID3D12Device> Model::device;
-Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> Model::descHeap;
+Microsoft::WRL::ComPtr<ID3D12Device> ObjModel::device;
+Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> ObjModel::descHeap;
 
-Model* Model::LoadFromObj(const std::string& modelname, bool smoothing)
+ObjModel* ObjModel::LoadFromObj(const std::string& modelname, bool smoothing)
 {
 	// 新たなModel型のインスタンスをnewする
-	Model* model_ = new Model();
+	ObjModel* model_ = new ObjModel();
 	// デバイスを代入
 	device = DirectXCommon::GetInstance()->GetDevice();
 	// デスクリプタヒープの生成
@@ -27,7 +27,7 @@ Model* Model::LoadFromObj(const std::string& modelname, bool smoothing)
 	return model_;
 }
 
-void Model::LoadMaterial(const std::string& directoryPath, const std::string& filename)
+void ObjModel::LoadMaterial(const std::string& directoryPath, const std::string& filename)
 {
 	// ファイルストリーム
 	std::ifstream file;
@@ -96,7 +96,7 @@ void Model::LoadMaterial(const std::string& directoryPath, const std::string& fi
 	file.close();
 }
 
-void Model::LoadTexture(const std::string& directoryPath, const std::string& filename)
+void ObjModel::LoadTexture(const std::string& directoryPath, const std::string& filename)
 {
 	// ファイルパスを結合
 	std::string filepath = directoryPath + "/" + filename;
@@ -104,7 +104,7 @@ void Model::LoadTexture(const std::string& directoryPath, const std::string& fil
 	textureData = TextureManager::GetInstance()->LoadTexture(filepath);
 }
 
-void Model::Draw(ID3D12GraphicsCommandList* cmdList)
+void ObjModel::Draw(ID3D12GraphicsCommandList* cmdList)
 {
 	// 頂点バッファビューの設定
 	cmdList->IASetVertexBuffers(0, 1, &vbView);
@@ -127,7 +127,12 @@ void Model::Draw(ID3D12GraphicsCommandList* cmdList)
 	cmdList->DrawIndexedInstanced((UINT)indices.size(), 1, 0, 0, 0);
 }
 
-void Model::LoadFromOBJInternal(const std::string& modelname,bool smoothing)
+void ObjModel::SetDevice(ID3D12Device* device)
+{
+	ObjModel::device = device;
+}
+
+void ObjModel::LoadFromOBJInternal(const std::string& modelname,bool smoothing)
 {
 	// ファイルストリーム
 	std::ifstream file;
@@ -242,7 +247,7 @@ void Model::LoadFromOBJInternal(const std::string& modelname,bool smoothing)
 	CreateIBSize();
 }
 
-void Model::InitializeDescriptorHeap()
+void ObjModel::InitializeDescriptorHeap()
 {
 	HRESULT result;
 
@@ -257,7 +262,7 @@ void Model::InitializeDescriptorHeap()
 	descriptorHandleIncrementSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 }
 
-void Model::CreateBuffers()
+void ObjModel::CreateBuffers()
 {
 	HRESULT result;
 
@@ -296,7 +301,7 @@ void Model::CreateBuffers()
 	}
 }
 
-void Model::CreateVBSize()
+void ObjModel::CreateVBSize()
 {
 	HRESULT result;
 	//頂点データ全体のサイズ
@@ -343,7 +348,7 @@ void Model::CreateVBSize()
 	vbView.StrideInBytes = sizeof(vertices[0]);
 }
 
-void Model::CreateIBSize()
+void ObjModel::CreateIBSize()
 {
 	HRESULT result;
 	//インデックスデータ全体のサイズ
@@ -383,23 +388,23 @@ void Model::CreateIBSize()
 	ibView.SizeInBytes = sizeIB;
 }
 
-const std::vector<VertexPosNormalUv> Model::GetVertices()
+const std::vector<VertexPosNormalUv> ObjModel::GetVertices()
 {
 	return vertices;
 }
 
 #pragma region スムージング
-inline size_t Model::GetVertexCount()
+inline size_t ObjModel::GetVertexCount()
 {
 	return vertices.size();
 }
 
-void Model::AddSmoothData(unsigned short indexPosition, unsigned short indexVertex)
+void ObjModel::AddSmoothData(unsigned short indexPosition, unsigned short indexVertex)
 {
 	smoothData[indexPosition].emplace_back(indexVertex);
 }
 
-void Model::CalculateSmoothedVertexNormals()
+void ObjModel::CalculateSmoothedVertexNormals()
 {
 	auto itr = smoothData.begin();
 	for (; itr != smoothData.end(); ++itr)

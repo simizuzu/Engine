@@ -3,7 +3,7 @@
 #include <memory>
 
 #include "DirectXCommon.h"
-#include "Model.h"
+#include "ObjModel.h"
 #include "Pipeline.h"
 #include "Shader.h"
 #include "Light.h"

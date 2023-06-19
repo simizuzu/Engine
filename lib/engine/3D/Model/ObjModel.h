@@ -36,10 +36,6 @@ struct Material
 	}
 };
 
-#pragma region FBX
-
-#pragma endregion 
-
 #pragma region OBJ
 
 /// <summary>

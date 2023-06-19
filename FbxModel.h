@@ -2,12 +2,33 @@
 #pragma warning(push)
 #include <array>
 #include <vector>
+#include <string>
 #pragma warning(pop)
 
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Vector4.h"
 #include "Matrix4.h"
+
+struct Material
+{
+	std::string name;				// マテリアル名
+	MyMath::Vector3 ambient;	// アンビエント影響度
+	MyMath::Vector3 diffuse;	// ディフューズ影響度
+	MyMath::Vector3 specular;	// スペキュラー影響度
+	float alpha;					// アルファ
+	std::string textureFilename;	// テクスチャファイル名
+	float shininess = 1.0f;
+	char pad[4];
+
+	// コンストラクタ
+	Material() {
+		ambient = { 0.3f,0.3f,0.3f };
+		diffuse = { 0.0f,0.0f,0.0f };
+		specular = { 0.0f,0.0f,0.0f };
+		alpha = 1.0f;
+	}
+};
 
 //ボーンの最大数
 constexpr int MAX_BONES = 128;

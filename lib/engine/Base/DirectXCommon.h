@@ -1,64 +1,78 @@
 #pragma once
+#include <Windows.h>
 #include <d3d12.h>
-#include <dxgi1_6.h>
-#include <wrl.h>
-#include <cassert>
 #include <vector>
+#include <dxgi1_6.h>
+#include <cassert>
 
 #include "WinApp.h"
-
-#pragma comment(lib,"d3d12.lib")
-#pragma comment(lib,"dxgi.lib")
 
 class DirectXCommon
 {
 private:
-	// ƒeƒ“ƒvƒŒ[ƒg
-	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
-
+	// DirectX åˆæœŸåŒ–å‡¦ç†
 	HRESULT result;
-	ComPtr<ID3D12Device> device;
-	ComPtr<IDXGIFactory7> dxgiFactory;
-	ComPtr<IDXGISwapChain4> swapChain;
-	ComPtr<ID3D12CommandAllocator> commandAllocator;
-	ComPtr<ID3D12GraphicsCommandList> commandList;
-	ComPtr<ID3D12CommandQueue> commandQueue;
-	ComPtr<ID3D12DescriptorHeap> rtvHeap;
+	Microsoft::WRL::ComPtr<ID3D12Device> device;
+	Microsoft::WRL::ComPtr<IDXGIFactory7> dxgiFactory;
+	Microsoft::WRL::ComPtr<IDXGISwapChain4> swapChain;
+	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> cmdAllocator;
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList;
+	Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue;
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> rtvHeap;
+	Microsoft::WRL::ComPtr<ID3D12Fence> fence;
+	Microsoft::WRL::ComPtr<ID3D12Resource> depthBuff;
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> dsvHeap;
+	std::vector< Microsoft::WRL::ComPtr<ID3D12Resource>> backBuffers;
 
-	// ƒXƒƒbƒvƒ`ƒF[ƒ“‚Ìİ’è
-	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
-	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle;
-	// ƒfƒXƒNƒŠƒvƒ^ƒq[ƒv‚Ìİ’è
+	// ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ãƒ¼ãƒ³ã®è¨­å®š
+	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{}; // å¤–ã«å‡ºã•ãªãã‚ƒã‚¨ãƒ©ãƒ¼èµ·ãã‚‹
+	// ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã®è¨­å®š
 	D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc{};
-	// ƒoƒbƒNƒoƒbƒtƒ@
-	std::vector<ComPtr<ID3D12Resource>> backBuffers;
-	// [“xƒeƒXƒg‚Ìİ’è
-	ID3D12Resource* depthBuff = nullptr;
-	ComPtr<ID3D12DescriptorHeap> dsvHeap;
-	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle;
-	// ƒtƒFƒ“ƒX‚Ì¶¬
-	ComPtr<ID3D12Fence> fence;
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle;
+	// ãƒ•ã‚§ãƒ³ã‚¹ã®ç”Ÿæˆ
 	UINT64 fenceVal = 0;
-	// ƒŠƒ\[ƒXƒoƒŠƒA
+	//ãƒãƒªã‚¢ãƒ¼ãƒ‡ã‚¹ã‚¯
 	D3D12_RESOURCE_BARRIER barrierDesc{};
-	// ‰æ–Ê‚ğ“h‚è‚Â‚Ô‚·F
-	FLOAT clearColor[4] = { 0.1f,0.25f,0.5f,0.0f };
-public: // ƒƒ“ƒoŠÖ”
-	/// <summary>
-	/// ‰Šú‰»
-	/// </summary>
-	void Initialize(WinApp* winApp);
+	// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆ
+	D3D12_VIEWPORT viewport{};
+	// ã‚·ã‚¶ãƒ¼çŸ©å½¢
+	D3D12_RECT scissorRect{};
+	// èƒŒæ™¯è‰²
+	FLOAT clearColor[4] = { 0.1f,0.25f, 0.5f,0.0f }; // é»„ç·‘è‰²
 
-	/// <summary>
-	/// •`‰æ‘Oˆ—
-	/// </summary>
-	void PreDraw();
-	/// <summary>
-	/// •`‰æŒãˆ—
-	/// </summary>
+	// DXGIã¾ã‚ã‚ŠåˆæœŸåŒ–
+	void InitializeDXGI();
+	// æœ€çµ‚çš„ãªãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ç”Ÿæˆ
+	void InitializeRtv();
+	// ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã®ç”Ÿæˆ
+	void InitializeSwapChain();
+	// ã‚³ãƒãƒ³ãƒ‰ã¾ã‚ã‚ŠåˆæœŸåŒ–
+	void InitializeCommand();
+	// ãƒ•ã‚§ãƒ³ã‚¹ç”Ÿæˆ
+	void InitializeFence();
+	// æ·±åº¦ãƒãƒƒãƒ•ã‚¡ã®åˆæœŸåŒ–
+	void InitializeDepthBuffer();
+	//ãƒ‡ãƒãƒƒã‚°ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æœ‰åŠ¹ã«ã™ã‚‹
+	void EnableDebugLayer();
+	void BreakOnSeverity();
+
+	WinApp* winApp_ = nullptr;
+
+public:
+	static DirectXCommon* GetInstance();
+
+	// DirectXæ¯ãƒ•ãƒ¬ãƒ¼ãƒ å‡¦ç†ã“ã“ã‹ã‚‰
+	void Initialize();
+	void PreDraw(WinApp* winApp);
 	void PostDraw();
+	void ExecuteCommand();
+	// DirectXæ¯ãƒ•ãƒ¬ãƒ¼ãƒ å‡¦ç†ã“ã“ã¾ã§
 
-	// ƒQƒbƒ^[
+	// ã‚»ãƒƒã‚¿ãƒ¼
+	//èƒŒæ™¯è‰²å¤‰æ›´(RGBA)
+	void SetBackScreenColor(float red, float green, float blue, float alpha);
+
+	// ã‚²ãƒƒã‚¿ãƒ¼
 	ID3D12Device* GetDevice();
 	IDXGIFactory7* GetDxgiFactory();
 	IDXGISwapChain4* GetSwapChain();
@@ -67,49 +81,51 @@ public: // ƒƒ“ƒoŠÖ”
 	ID3D12CommandQueue* GetCommandQueue();
 	ID3D12DescriptorHeap* GetRtvHeap();
 	ID3D12Fence* GetFence();
+	UINT64 GetFenceVal();
 
-	void SetBackScreenColor(float red, float green, float blue, float alpha);
-private: // Še‰Šú‰»
-	/// <summary>
-	/// ƒfƒoƒCƒX‚Ì‰Šú‰»
-	/// </summary>
-	void InitializeDevice();
-	/// <summary>
-	/// ƒRƒ}ƒ“ƒhŠÖ˜A‚Ì‰Šú‰»
-	/// </summary>
-	void InitializeCommand();
-	/// <summary>
-	/// ƒXƒƒbƒvƒ`ƒF[ƒ“‚Ì‰Šú‰»
-	/// </summary>
-	void InitializeSwapChain();
-	/// <summary>
-	/// ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[‚Ì‰Šú‰»
-	/// </summary>
-	void InitializeRTV();
-	/// <summary>
-	/// [“xƒoƒbƒtƒ@‚Ì‰Šú‰»
-	/// </summary>
-	void InitializeDepthBuffer();
-	/// <summary>
-	/// ƒtƒFƒ“ƒX‚Ì‰Šú‰»
-	/// </summary>
-	void InitializeFence();
-	/// <summary>
-	/// ƒRƒ}ƒ“ƒh‚Ìƒtƒ‰ƒbƒVƒ…
-	/// </summary>
-	void ExecuteCommand();
+	size_t GetBackBufferCount() const;
 
-private: // ƒGƒ‰[ƒƒbƒZ[ƒW‚Ì—}§
 	/// <summary>
-	/// ƒfƒoƒbƒOƒŒƒCƒ„[‚ğ—LŒø‚É‚·‚é
+	/// è§£æ”¾å‡¦ç†
 	/// </summary>
-	void EnableDebugLayer();
-	/// <summary>
-	/// ƒfƒoƒbƒNƒŒƒCƒ„[‚É~‚ß‚éˆ—(Windows10”Å)
-	/// </summary>
-	void BreakOnSeverity();
-
+	void Delete();
 private:
-	WinApp* winApp = nullptr;
-};
+	DirectXCommon() = default;
+	~DirectXCommon() = default;
+	DirectXCommon& operator=(const DirectXCommon&) = delete;
+	DirectXCommon(const DirectXCommon&) = delete;
 
+public:
+#pragma region å®šæ•°ãƒãƒƒãƒ•ã‚¡ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆé–¢æ•°
+	template<typename T>
+	void CreateConstBuff(T*& buff, Microsoft::WRL::ComPtr<ID3D12Resource>& constBuff)
+	{
+		// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
+		D3D12_HEAP_PROPERTIES heapProp{}; // ãƒ’ãƒ¼ãƒ—è¨­å®š
+		heapProp.Type = D3D12_HEAP_TYPE_UPLOAD; // GPUã¸ã®è»¢é€ç”¨
+		// ãƒªã‚½ãƒ¼ã‚¹è¨­å®š
+		D3D12_RESOURCE_DESC resDesc{};
+		resDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+		resDesc.Width = (sizeof(T) + 0xff) & ~0xff; // é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿å…¨ä½“ã®ã‚µã‚¤ã‚º
+		resDesc.Height = 1;
+		resDesc.DepthOrArraySize = 1;
+		resDesc.MipLevels = 1;
+		resDesc.SampleDesc.Count = 1;
+		resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
+		result = device->CreateCommittedResource(
+			&heapProp,
+			D3D12_HEAP_FLAG_NONE,
+			&resDesc,
+			D3D12_RESOURCE_STATE_GENERIC_READ,
+			nullptr,
+			IID_PPV_ARGS(constBuff.ReleaseAndGetAddressOf()));
+		assert(SUCCEEDED(result));
+
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ãƒãƒƒãƒ”ãƒ³ã‚°
+		result = constBuff->Map(0, nullptr, (void**)&buff);//ãƒãƒƒãƒ”ãƒ³ã‚°
+		assert(SUCCEEDED(result));
+	}
+#pragma endregion
+};

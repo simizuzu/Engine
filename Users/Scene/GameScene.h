@@ -5,7 +5,7 @@
 #include "Camera.h"
 #include "Sprite.h"
 #include "Object3d.h"
-#include "Model.h"
+#include "ObjModel.h"
 #include "AudioManager.h"
 #include "BaseScene.h"
 #include "TextureManager.h"

@@ -21,7 +21,7 @@ void Object3d::StaticInitialize(ID3D12Device* device, int width, int height)
 	// グラフィックスパイプラインの生成
 	CreateGraphicsPipeline();
 
-	Model::SetDevice(device);
+	ObjModel::SetDevice(device);
 }
 
 void Object3d::CreateGraphicsPipeline()
@@ -149,7 +149,7 @@ void Object3d::Draw()
 	model->Draw(cmdList_.Get());
 }
 
-void Object3d::SetModel(Model* model)
+void Object3d::SetModel(ObjModel* model)
 {
 	this->model = model;
 }

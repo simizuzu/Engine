@@ -130,12 +130,6 @@
     <Filter Include="Engine\シェーダーファイル\PostEffect\Default">
       <UniqueIdentifier>{b5a625f7-c2ea-4f4b-b6a5-e6bb4a03cbee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\scene">
-      <UniqueIdentifier>{0dd075a8-0010-41af-aa0c-f0a396ade827}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\scene">
-      <UniqueIdentifier>{db35819b-a422-4e45-addd-b2e81f7573ad}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\engine\Base\WinApp.cpp">
@@ -251,9 +245,6 @@
     </ClCompile>
     <ClCompile Include="FbxModel.cpp">
       <Filter>Engine\ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="gamescene.cpp">
-      <Filter>ソース ファイル\scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -382,9 +373,6 @@
     </ClInclude>
     <ClInclude Include="FbxModel.h">
       <Filter>Engine\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="gamescene.h">
-      <Filter>ヘッダー ファイル\scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,12 +5,6 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine.vcxproj", "{4CA6D941-F97F-4185-B1E4-593C2B8E02BC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{521802D4-D0AD-4FEC-82AA-D5A2815720D9}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXTex", "lib\External\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj", "{371B9FA9-4C90-4AC6-A123-ACED756D6C77}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imgui", "lib\External\imgui\imgui.vcxproj", "{D704C778-CBE7-4819-892F-6673C62D9D88}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,21 +15,9 @@ Global
 		{4CA6D941-F97F-4185-B1E4-593C2B8E02BC}.Debug|x64.Build.0 = Debug|x64
 		{4CA6D941-F97F-4185-B1E4-593C2B8E02BC}.Release|x64.ActiveCfg = Release|x64
 		{4CA6D941-F97F-4185-B1E4-593C2B8E02BC}.Release|x64.Build.0 = Release|x64
-		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Debug|x64.ActiveCfg = Debug|x64
-		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Debug|x64.Build.0 = Debug|x64
-		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Release|x64.ActiveCfg = Release|x64
-		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Release|x64.Build.0 = Release|x64
-		{D704C778-CBE7-4819-892F-6673C62D9D88}.Debug|x64.ActiveCfg = Debug|x64
-		{D704C778-CBE7-4819-892F-6673C62D9D88}.Debug|x64.Build.0 = Debug|x64
-		{D704C778-CBE7-4819-892F-6673C62D9D88}.Release|x64.ActiveCfg = Release|x64
-		{D704C778-CBE7-4819-892F-6673C62D9D88}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{371B9FA9-4C90-4AC6-A123-ACED756D6C77} = {521802D4-D0AD-4FEC-82AA-D5A2815720D9}
-		{D704C778-CBE7-4819-892F-6673C62D9D88} = {521802D4-D0AD-4FEC-82AA-D5A2815720D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5EE29BB8-C219-45E1-8A5A-E96646CE6E49}

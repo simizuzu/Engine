@@ -59,7 +59,7 @@ public: // メンバ関数
 	void Draw();
 
 	// setter
-	void SetModel(Model* model);
+	void SetModel(ObjModel* model);
 	void SetPosition(MyMath::Vector3 position_);
 	void SetScale(MyMath::Vector3 scale_);
 	void SetRotation(MyMath::Vector3 rotation_);
@@ -80,7 +80,7 @@ public:
 	// 親オブジェクト
 	Object3d* parent = nullptr;
 	// モデル
-	Model* model = nullptr;
+	ObjModel* model = nullptr;
 };
 
 namespace MyMath

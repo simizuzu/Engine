@@ -3,6 +3,10 @@
 #include <array>
 #include <vector>
 #include <string>
+#include<assimp/Importer.hpp>
+#include<assimp/scene.h>
+#include<assimp/postprocess.h>
+#include<assimp/cimport.h>
 #pragma warning(pop)
 
 #include "Vector2.h"
@@ -42,7 +46,7 @@ struct PosNormUvTangeColSkin
 	MyMath::Vector3 tangent; // 接空間
 	MyMath::Vector4 color; // 頂点色
 
-	std::array<UINT, MAX_BONE_INDICES> boneIndex;	// ボーンの番号
+	std::array<uint32_t, MAX_BONE_INDICES> boneIndex;	// ボーンの番号
 	std::array<float, MAX_BONE_INDICES> boneWeight;	// ボーンの重み
 };
 
@@ -60,7 +64,7 @@ struct PosNormSkin
 	MyMath::Vector4 position; // 位置座標
 	MyMath::Vector3 normal; // 法線
 
-	std::array<UINT, MAX_BONE_INDICES> boneIndex;	// ボーンの番号
+	std::array<uint32_t, MAX_BONE_INDICES> boneIndex;	// ボーンの番号
 	std::array<float, MAX_BONE_INDICES> boneWeight;	// ボーンの重み
 };
 
@@ -105,7 +109,7 @@ public:
 
 	MyMath::Matrix4 offsetMatirx = {};
 
-	UINT index = 0;
+	uint32_t index = 0;
 
 	Bone() = default;
 	~Bone() = default;

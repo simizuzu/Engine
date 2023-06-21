@@ -417,8 +417,6 @@ void Pipeline::CreatePostEffectPipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, ID3D
 {
 	HRESULT result;
 
-	ComPtr<ID3DBlob> vsBlob;		//頂点シェーダオブジェクト
-	ComPtr<ID3DBlob> psBlob;		//ピクセルシェーダオブジェクト
 	ComPtr<ID3DBlob> errorBlob;		//エラーオブジェクト
 
 	//頂点レイアウト配列の宣言と設定

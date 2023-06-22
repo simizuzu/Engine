@@ -1,14 +1,14 @@
-#include "MainGame.h"
+ï»¿#include "MainGame.h"
 
 void MainGame::Initialize()
 {
-	// Šî’êƒNƒ‰ƒX‚Ì‰Šú‰»ˆ—
+	// åŸºåº•ã‚¯ãƒ©ã‚¹ã®åˆæœŸåŒ–å‡¦ç†
 	Framework::Initialize();
-	// 3DƒIƒuƒWƒFƒNƒgÃ“I‰Šú‰»
+	// 3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé™çš„åˆæœŸåŒ–
 	Object3d::StaticInitialize(dxCommon_->GetDevice(), winApp_->window_width, winApp_->window_height);
 	Light::StaticInitialise(dxCommon_);
 	Sprite::StaticInitialize();
-	//ƒp[ƒeƒBƒNƒ‹ƒ}ƒl[ƒWƒƒ[Ã“I‰Šú‰»
+	//ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ãƒžãƒãƒ¼ã‚¸ãƒ£ãƒ¼é™çš„åˆæœŸåŒ–
 	ParticleManager::StaticInitialize(dxCommon_->GetDevice(), dxCommon_->GetCommandList());
 
 	sceneFactory_ = new SceneFactory();
@@ -18,19 +18,19 @@ void MainGame::Initialize()
 
 void MainGame::Finalize()
 {
-	// Šî’êƒNƒ‰ƒX‚ÌI—¹ˆ—
+	// åŸºåº•ã‚¯ãƒ©ã‚¹ã®çµ‚äº†å‡¦ç†
 	Framework::Finalize();
 }
 
 void MainGame::Update()
 {
-	// Šî’êƒNƒ‰ƒX‚ÌXVˆ—
+	// åŸºåº•ã‚¯ãƒ©ã‚¹ã®æ›´æ–°å‡¦ç†
 	Framework::Update();
 }
 
 void MainGame::Draw()
 {
-	// ƒQ[ƒ€ƒV[ƒ“‚Ì•`‰æ
+	// ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³ã®æç”»
 	//baseScene->Draw();
 	sceneManager_->Draw();
 }

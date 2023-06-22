@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <DirectXMath.h>
 #include <memory>
 #include <wrl.h>
@@ -14,14 +14,14 @@
 #include "Vector4.h"
 #include "Matrix4.h"
 
-// 2D•ÏŠ·s—ñ(’è”ƒoƒbƒtƒ@)
+// 2Då¤‰æ›è¡Œåˆ—(å®šæ•°ãƒãƒƒãƒ•ã‚¡)
 struct ConstBufferData
 {
 	MyMath::Vector4 color;
 	MyMath::Matrix4 mat;
 };
 
-/// ’¸“_ƒf[ƒ^\‘¢‘Ì
+/// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
 struct PosUvColor
 {
 	MyMath::Vector3 pos;
@@ -32,107 +32,107 @@ struct PosUvColor
 class Sprite
 {
 public:
-	// ’¸“_”Ô†
+	// é ‚ç‚¹ç•ªå·
 	enum VertexNumber {
-		LB,	// ¶‰º
-		LT,	// ¶ã
-		RB,	// ‰E‰º
-		RT,	// ‰Eã
+		LB,	// å·¦ä¸‹
+		LT,	// å·¦ä¸Š
+		RB,	// å³ä¸‹
+		RT,	// å³ä¸Š
 	};
 
-public: // ƒGƒCƒŠƒAƒXƒeƒ“ƒvƒŒ[ƒg
+public: // ã‚¨ã‚¤ãƒªã‚¢ã‚¹ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
-private: // Ã“Iƒƒ“ƒo•Ï”
-	// ƒfƒoƒCƒX
+private: // é™çš„ãƒ¡ãƒ³ãƒå¤‰æ•°
+	// ãƒ‡ãƒã‚¤ã‚¹
 	static ComPtr<ID3D12Device> device_;
-	// ƒfƒXƒNƒŠƒvƒ^ƒTƒCƒY
+	// ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ã‚µã‚¤ã‚º
 	static UINT descriptorSize_;
-	// ƒRƒ}ƒ“ƒhƒŠƒXƒg
+	// ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒˆ
 	static ComPtr<ID3D12GraphicsCommandList> commandList_;
-	// ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ
+	// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£
 	static ComPtr<ID3D12RootSignature> rootSignature_;
-	// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ
+	// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—
 	static MyMath::Matrix4 matProjection_;
-	// ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg
+	// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆ
 	static std::array<RootsigSetPip, 6> pipelineState;
 
-private: // ƒƒ“ƒo•Ï”
-	// ’¸“_ƒoƒbƒtƒ@
+private: // ãƒ¡ãƒ³ãƒå¤‰æ•°
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 	ComPtr<ID3D12Resource> vertBuff;
-	//’¸“_ƒ}ƒbƒv
+	//é ‚ç‚¹ãƒãƒƒãƒ—
 	PosUvColor* vertMap;
-	//’¸“_ƒoƒbƒtƒ@ƒrƒ…[
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ì¶¬
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
 	Microsoft::WRL::ComPtr<ID3D12Resource>indexBuff;
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ğƒ}ƒbƒsƒ“ƒO
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒãƒƒãƒ”ãƒ³ã‚°
 	uint16_t* indexMap;
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@ƒrƒ…[‚Ìì¬
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
 	D3D12_INDEX_BUFFER_VIEW ibView{};
-	// ƒGƒ‰[ƒIƒuƒWƒFƒNƒg
+	// ã‚¨ãƒ©ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	ComPtr<ID3DBlob> errorBlob;
-	// ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚ÌƒVƒŠƒAƒ‰ƒCƒY
+	// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚º
 	ComPtr<ID3DBlob> rootSigBlob;
-	// ƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒg
+	// ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
 	D3D12_INPUT_ELEMENT_DESC inputLayout{};
 
-	// À•W
+	// åº§æ¨™
 	MyMath::Vector2 position_ = { 0.0f,0.0f };
-	// F
+	// è‰²
 	MyMath::Vector4 color_ = { 1, 1, 1, 1 };
 
-	//’è”ƒoƒbƒtƒ@
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	Microsoft::WRL::ComPtr<ID3D12Resource>constBuff;
 	MyMath::Matrix4* constBuffMap = nullptr;
 
-	// Šp“x
+	// è§’åº¦
 	float rotation_ = 0.0f;
-	// •\¦ƒTƒCƒY(’PˆÊ‚Ípixel)
+	// è¡¨ç¤ºã‚µã‚¤ã‚º(å˜ä½ã¯pixel)
 	MyMath::Vector2 size_ = { 100.0f,100.0f };
-	// ƒeƒNƒXƒ`ƒƒ”Ô†
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ç•ªå·
 	uint32_t textureIndex_ = 0;
-	// ƒuƒŒƒ“ƒhƒ‚[ƒh
+	// ãƒ–ãƒ¬ãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰
 	int blendMode = (int)BlendMode::Alpha;
 
-public: // ƒƒ“ƒoŠÖ”
+public: // ãƒ¡ãƒ³ãƒé–¢æ•°
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update(MyMath::Vector2 pos, MyMath::Vector2 scale, float rot);
 
 	/// <summary>
-	/// •`‰æ
+	/// æç”»
 	/// </summary>
 	void DrawCommandList(TextureData textureData);
 
 	/// <summary>
-	/// ƒXƒvƒ‰ƒCƒg•`‰æ
+	/// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»
 	/// </summary>
-	/// <param name="textureData">ƒeƒNƒXƒ`ƒƒƒf[ƒ^</param>
-	/// <param name="pos">À•W</param>
-	/// <param name="rot">‰ñ“]</param>
-	/// <param name="scale">Šg‘å—¦</param>
+	/// <param name="textureData">ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ‡ãƒ¼ã‚¿</param>
+	/// <param name="pos">åº§æ¨™</param>
+	/// <param name="rot">å›è»¢</param>
+	/// <param name="scale">æ‹¡å¤§ç‡</param>
 	void Draw(
 		TextureData& textureData, MyMath::Vector2 position, MyMath::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f,
 		MyMath::Vector2 anchorpoint = { 0.0f,0.0f }, bool flipX = false, bool flipY = false);
 
 	/*/// <summary>
-	/// ƒXƒvƒ‰ƒCƒg‚ÌƒNƒŠƒbƒv•`‰æ
+	/// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¯ãƒªãƒƒãƒ—æç”»
 	/// </summary>
-	/// <param name="textureData">ƒeƒNƒXƒ`ƒƒƒf[ƒ^</param>
-	/// <param name="clipCenter">Ø‚èæ‚é‚Ì’†SÀ•W</param>
-	/// <param name="clipRadius">Ø‚èæ‚é”¼Œa</param>
-	/// <param name="position">À•W</param>
-	/// <param name="scale">‘å‚«‚³</param>
-	/// <param name="rotation">‰ñ“]</param>
-	/// <param name="flipX">X²”½“]</param>
-	/// <param name="flipY">Y²”½“]</param>
+	/// <param name="textureData">ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ‡ãƒ¼ã‚¿</param>
+	/// <param name="clipCenter">åˆ‡ã‚Šå–ã‚‹ã®ä¸­å¿ƒåº§æ¨™</param>
+	/// <param name="clipRadius">åˆ‡ã‚Šå–ã‚‹åŠå¾„</param>
+	/// <param name="position">åº§æ¨™</param>
+	/// <param name="scale">å¤§ãã•</param>
+	/// <param name="rotation">å›è»¢</param>
+	/// <param name="flipX">Xè»¸åè»¢</param>
+	/// <param name="flipY">Yè»¸åè»¢</param>
 	void DrawSpriteClip(
 		TextureData& textureData, Mathematics::Vector2 clipCenter, Mathematics::Vector2 clipRadius,
 		Mathematics::Vector2 position, Mathematics::Vector2 scale = { 1.0f,1.0f }, float rotation = 0.0f,
@@ -140,69 +140,69 @@ public: // ƒƒ“ƒoŠÖ”
 
 private:
 	/// <summary>
-	/// ’¸“_ƒoƒbƒtƒ@ŠÖ˜A‚Ì‰Šú‰»
+	/// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡é–¢é€£ã®åˆæœŸåŒ–
 	/// </summary>
 	void CreateVertexIndexBuff();
 
 	/// <summary>
-	/// ’è”ƒoƒbƒtƒ@ì¬
+	/// å®šæ•°ãƒãƒƒãƒ•ã‚¡ä½œæˆ
 	/// </summary>
 	void CreateConstBuff();
 
-public: // Ã“Iƒƒ“ƒoŠÖ”
+public: // é™çš„ãƒ¡ãƒ³ãƒé–¢æ•°
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	static void StaticInitialize();
 
 public: // setter,getter
 	/// <summary>
-	/// À•W‚ğƒZƒbƒg
+	/// åº§æ¨™ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="position">: À•W{ x,y }</param>
+	/// <param name="position">: åº§æ¨™{ x,y }</param>
 	void SetPosiotion(const MyMath::Vector2& position) { position_ = position; }
 
 	/// <summary>
-	/// ‰ñ“]Šp‚ğƒZƒbƒg
+	/// å›è»¢è§’ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="rotation">: Šp“x</param>
+	/// <param name="rotation">: è§’åº¦</param>
 	void SetRotation(float rotation) { rotation_ = rotation; }
 
 	/// <summary>
-	/// ƒXƒvƒ‰ƒCƒg‚Ì‘å‚«‚³‚ğƒZƒbƒg
+	/// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®å¤§ãã•ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="rotation">ƒTƒCƒY</param>
+	/// <param name="rotation">ã‚µã‚¤ã‚º</param>
 	void SetSize(const MyMath::Vector2& size) { size_ = size; }
 
 	/// <summary>
-	/// ƒXƒvƒ‰ƒCƒg‚ÌF‚ğƒZƒbƒg
+	/// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®è‰²ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="color">: F{ red,blue,green,alpha }</param>
+	/// <param name="color">: è‰²{ red,blue,green,alpha }</param>
 	void SetColor(const MyMath::Vector4& color) { color_ = color; }
 
 	/// <summary>
-	/// ƒeƒNƒXƒ`ƒƒ”Ô†‚ğƒZƒbƒg
+	/// ãƒ†ã‚¯ã‚¹ãƒãƒ£ç•ªå·ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="textureIndex">: ƒeƒNƒXƒ`ƒƒ”Ô†</param>
+	/// <param name="textureIndex">: ãƒ†ã‚¯ã‚¹ãƒãƒ£ç•ªå·</param>
 	void SetTextureIndex(uint32_t textureIndex) { textureIndex_ = textureIndex; }
 
 	/// <summary>
-	/// ƒuƒŒƒ“ƒh‚ğİ’è
+	/// ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚’è¨­å®š
 	/// </summary>
 	void SetBlendMode(BlendMode mode);
 
-	// À•W
+	// åº§æ¨™
 	const MyMath::Vector2& GetPosition() const { return position_; }
-	// Šp“x
+	// è§’åº¦
 	float GetRotation() const { return rotation_; }
-	// F
+	// è‰²
 	const MyMath::Vector4& GetColor() const { return color_; }
-	// ƒTƒCƒY
+	// ã‚µã‚¤ã‚º
 	const MyMath::Vector2& GetSize() const { return size_; }
-	// ƒeƒNƒXƒ`ƒƒ”Ô†
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ç•ªå·
 	uint32_t GetTextureIndex() { return textureIndex_; }
 
-private: // ƒNƒ‰ƒXŒÄ‚Ño‚µ
+private: // ã‚¯ãƒ©ã‚¹å‘¼ã³å‡ºã—
 	TextureManager* textureManager_ = nullptr;
 	DirectXCommon* dxCommon_ = nullptr;
 	static WinApp* winApp_;

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include"vector3.h"
 #include"Matrix4.h"
 
@@ -16,37 +16,37 @@ namespace MyMath
 		Quaternion(float x, float y, float z, float w);
 		Quaternion(const aiQuaternion& q);
 
-		//Quaternion‚ÌÏ
+		//Quaternionã®ç©
 		Quaternion Multiply(Quaternion r);
-		//’PˆÊQuaternion‚ğ•Ô‚·
+		//å˜ä½Quaternionã‚’è¿”ã™
 		Quaternion IdentityQuaternion();
-		//‹¤–ğQuaternion‚ğ•Ô‚·
+		//å…±å½¹Quaternionã‚’è¿”ã™
 		Quaternion Conjugate();
-		//Quaternion‚Ìnorm‚ğ•Ô‚·
+		//Quaternionã®normã‚’è¿”ã™
 		float Norm() const;
-		//³‹K‰»‚µ‚½Quaternion‚ğ•Ô‚·
+		//æ­£è¦åŒ–ã—ãŸQuaternionã‚’è¿”ã™
 		Quaternion Normalize();
-		//‹tQuaternion‚ğ•Ô‚·
+		//é€†Quaternionã‚’è¿”ã™
 		Quaternion INverse();
-		//ƒxƒNƒgƒ‹‚ğQuaternion‚Å‰ñ“]‚³‚¹‚½Œ‹‰Ê‚ÌƒxƒNƒgƒ‹‚ğ‹‚ß‚é
+		//ãƒ™ã‚¯ãƒˆãƒ«ã‚’Quaternionã§å›è»¢ã•ã›ãŸçµæœã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ±‚ã‚ã‚‹
 		MyMath::Vector3 RotateVector(const MyMath::Vector3& vector);
-		//Quaternion‚©‚ç‰ñ“]s—ñ‚ğ‹‚ß‚é
+		//Quaternionã‹ã‚‰å›è»¢è¡Œåˆ—ã‚’æ±‚ã‚ã‚‹
 		MyMath::Matrix4 MakeRotateMatrix();
-		//”CˆÓ²‰ñ“]‚ğ•\‚·Quaternion‚Ì¶¬
+		//ä»»æ„è»¸å›è»¢ã‚’è¡¨ã™Quaternionã®ç”Ÿæˆ
 		Quaternion MakeAxisAngle(const MyMath::Vector3& axsi, float angle);
-		// u‚©‚çv‚Ö‚Ì‰ñ“]‚ğ¶¬
+		// uã‹ã‚‰vã¸ã®å›è»¢ã‚’ç”Ÿæˆ
 		Quaternion DirectionToDirection(const MyMath::Vector3& u, const MyMath::Vector3& v);
 
-		//‹…–ÊüŒ`•âŠÔ
+		//çƒé¢ç·šå½¢è£œé–“
 		Quaternion Slerp(const Quaternion& p, float t);
 		float Dot(const Quaternion& q)const;
 
 
-		//’P€‰‰ZqƒI[ƒo[ƒ[ƒh
+		//å˜é …æ¼”ç®—å­ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰
 		Quaternion operator + ();
 		Quaternion operator - ()const;
 
-		//‘ã“ü‰‰ZqƒI[ƒo[ƒ[ƒh
+		//ä»£å…¥æ¼”ç®—å­ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰
 		Quaternion& operator += (const Quaternion& q);
 		Quaternion& operator -= (const Quaternion& q);
 		Quaternion& operator *= (float s);
@@ -54,7 +54,7 @@ namespace MyMath
 		Quaternion& operator *= (const Quaternion& q);
 	};
 
-	//2€‰‰ZqƒI[ƒo[ƒ[ƒh
+	//2é …æ¼”ç®—å­ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰
 	const Quaternion operator + (const Quaternion& q1, const Quaternion& q2);
 	const Quaternion operator - (const Quaternion& q1, const Quaternion& q2);
 	const Quaternion operator * (const Quaternion& q1, const Quaternion& q2);

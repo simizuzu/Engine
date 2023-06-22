@@ -1,10 +1,10 @@
-#include "SceneFactory.h"
+ï»¿#include "SceneFactory.h"
 #include "TitleScene.h"
 #include "GameScene.h"
 
 BaseScene* SceneFactory::CreateScene(const std::string& sceneName)
 {
-    // Ÿ‚ÌƒV[ƒ“‚ğ¶¬
+    // æ¬¡ã®ã‚·ãƒ¼ãƒ³ã‚’ç”Ÿæˆ
     BaseScene* newScene = nullptr;
 
     if (sceneName == "TITLE") {

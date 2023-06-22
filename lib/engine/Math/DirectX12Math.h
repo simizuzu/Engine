@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <vector>
 
 #include "Vector2.h"
@@ -7,75 +7,75 @@
 
 namespace MyMathUtility
 {
-	// “x‚©‚çƒ‰ƒWƒAƒ“‚É•ÏŠ·‚·‚é’è”
+	// åº¦ã‹ã‚‰ãƒ©ã‚¸ã‚¢ãƒ³ã«å¤‰æ›ã™ã‚‹å®šæ•°
 	const float PI = 3.141592654f;
 	constexpr float degree2Radius = 3.1415926535897931f / 180.0f;
 	constexpr float PIHalf = 3.1415926535897931f / 2.0f;
 
-	//ƒÃ(ƒCƒvƒVƒƒ“)
+	//Îµ(ã‚¤ãƒ—ã‚·ãƒ­ãƒ³)
 	constexpr float EPSILON = 2.2204460492503131E-16f;
 
-	// ’·‚³‚ğ‹‚ß‚é(2ŸŒ³)
+	// é•·ã•ã‚’æ±‚ã‚ã‚‹(2æ¬¡å…ƒ)
 	float Vector2Length(const MyMath::Vector2& v);
-	// ’·‚³‚ğ‹‚ß‚é(3ŸŒ³)
+	// é•·ã•ã‚’æ±‚ã‚ã‚‹(3æ¬¡å…ƒ)
 	float Vector3Length(const MyMath::Vector3& v);
 
-	// ³‹K‰»‚·‚é
+	// æ­£è¦åŒ–ã™ã‚‹
 	MyMath::Vector3 MakeNormalize(MyMath::Vector3 v);
 
-	// ’PˆÊs—ñ‚ğ‹‚ß‚é
+	// å˜ä½è¡Œåˆ—ã‚’æ±‚ã‚ã‚‹
 	MyMath::Matrix4 MakeIdentity();
-	// Šg‘åk¬‚ğ‹‚ß‚é
+	// æ‹¡å¤§ç¸®å°ã‚’æ±‚ã‚ã‚‹
 	MyMath::Matrix4 MakeScaling(const MyMath::Vector3& scale);
-	// ‰ñ“]s—ñ‚ğ‹‚ß‚é
+	// å›è»¢è¡Œåˆ—ã‚’æ±‚ã‚ã‚‹
 	MyMath::Matrix4 MakeRotation(const MyMath::Vector3& rot);
-	// •½sˆÚ“®s—ñ‚ğ‹‚ß‚é
+	// å¹³è¡Œç§»å‹•è¡Œåˆ—ã‚’æ±‚ã‚ã‚‹
 	MyMath::Matrix4 MakeTranslation(const MyMath::Vector3& trans);
-	//// ƒ[ƒ‹ƒhs—ñ‚ÌŒvZ
+	//// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®è¨ˆç®—
 	//Mathematics::Matrix4 CreateMatrix(const WorldTransform& worldTransform);
 
 	///// <summary>
-	///// 1‚Â•ª‚Ìƒ[ƒ‹ƒhƒgƒ‰ƒ“ƒXƒtƒH[ƒ€XVŠÖ”
+	///// 1ã¤åˆ†ã®ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ æ›´æ–°é–¢æ•°
 	///// </summary>
-	///// <param name="childWorldtrans">q‚ÌworldTransform</param>
+	///// <param name="childWorldtrans">å­ã®worldTransform</param>
 	//void WorldTransUpdate(WorldTransform& childWorldtrans);
 
 	void SinCos(float& sin_, float& cos_, float angle);
 
-	// ƒxƒNƒgƒ‹‚Æs—ñ‚ÌŠ|‚¯Z
+	// ãƒ™ã‚¯ãƒˆãƒ«ã¨è¡Œåˆ—ã®æ›ã‘ç®—
 	MyMath::Matrix4 MatMulVector(MyMath::Matrix4 m, MyMath::Vector3 v);
 
-	// •½s“Š‰e•ÏŠ·(¶èŒn)
+	// å¹³è¡ŒæŠ•å½±å¤‰æ›(å·¦æ‰‹ç³»)
 	void MakeOrthogonalL(float left, float right, float bottom, float top, float near_, float far_, MyMath::Matrix4& matrix);
-	// •½s“Š‰e•ÏŠ·(¶èŒn)
+	// å¹³è¡ŒæŠ•å½±å¤‰æ›(å·¦æ‰‹ç³»)
 	void MakeOrthogonalR(float left, float right, float bottom, float top, float near_, float far_, MyMath::Matrix4& matrix);
 
-	// ƒrƒ…[s—ñ‚Ìì¬
+	// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã®ä½œæˆ
 	MyMath::Matrix4 MakeLookAtLH( MyMath::Vector3& eye,  MyMath::Vector3& target, MyMath::Vector3& up);
-	// “§‹“Š‰eì¬
+	// é€è¦–æŠ•å½±ä½œæˆ
 	MyMath::Matrix4 MakePerspective(float fogAngleY, float aspectRatio, float nearZ, float farZ);
-	// ‹ts—ñ
+	// é€†è¡Œåˆ—
 	MyMath::Matrix4 MakeInverse(MyMath::Matrix4& mat);
 
-	// ’l‚ª“™‚µ‚¢‚©Šm”F‚·‚é
+	// å€¤ãŒç­‰ã—ã„ã‹ç¢ºèªã™ã‚‹
 	bool Approximately(float a, float b);
 
-	// üŒ`•âŠÔ
+	// ç·šå½¢è£œé–“
 	float Lerp(float a, float b, float t);
 	MyMath::Vector3 Lerp(MyMath::Vector3 a, MyMath::Vector3 b, float t);
 
 	/// <summary>
-	/// ƒGƒ‹ƒ~[ƒg‹Èü
+	/// ã‚¨ãƒ«ãƒŸãƒ¼ãƒˆæ›²ç·š
 	/// </summary>
-	/// <param name="p0">§Œä“_</param>
-	/// <param name="p1">§Œä“_</param>
-	/// <param name="v0">§Œä“_</param>
-	/// <param name="v1">§Œä“_</param>
-	/// <param name="t">ŠÔ(0.0`1.0)</param>
+	/// <param name="p0">åˆ¶å¾¡ç‚¹</param>
+	/// <param name="p1">åˆ¶å¾¡ç‚¹</param>
+	/// <param name="v0">åˆ¶å¾¡ç‚¹</param>
+	/// <param name="v1">åˆ¶å¾¡ç‚¹</param>
+	/// <param name="t">æ™‚é–“(0.0ï½1.0)</param>
 	/// <returns></returns>
 	MyMath::Vector3 HermiteGetPoint(MyMath::Vector3 p0, MyMath::Vector3 p1, MyMath::Vector3 v0, MyMath::Vector3 v1, float t);
 
-	// Sin,Cos,TanŠÖ”
+	// Sin,Cos,Tané–¢æ•°
 	float Sin(float sin);
 	float Cos(float cos);
 	float Tan(float tan);
@@ -94,12 +94,12 @@ namespace MyMathUtility
 
 namespace MyMath
 {
-	// ƒxƒNƒgƒ‹‚Æs—ñ‚ÌŠ|‚¯Z
+	// ãƒ™ã‚¯ãƒˆãƒ«ã¨è¡Œåˆ—ã®æ›ã‘ç®—
 	Vector3 Vec3Mat4Mul(Vector3& vec, Matrix4& mat);
 
-	// ƒLƒƒƒbƒgƒ€ƒ‹[ƒƒ€ƒXƒvƒ‰ƒCƒ“‹Èü
+	// ã‚­ãƒ£ãƒƒãƒˆãƒ ãƒ«ãƒ¼ãƒ­ãƒ ã‚¹ãƒ—ãƒ©ã‚¤ãƒ³æ›²ç·š
 	Vector3 CatMullRomSpline(std::vector<Vector3>& points, float t);
 
-	/// •ª—£²‚É“Š‰e‚³‚ê‚½²¬•ª‚©‚ç“Š‰eü•ª’·‚ğZo
+	/// åˆ†é›¢è»¸ã«æŠ•å½±ã•ã‚ŒãŸè»¸æˆåˆ†ã‹ã‚‰æŠ•å½±ç·šåˆ†é•·ã‚’ç®—å‡º
 	float LenSegLineOfSeparateAxis(Vector3* sep, Vector3* e1, Vector3* e2, Vector3* e3 = 0);
 }

@@ -1,38 +1,38 @@
-#pragma once
+ï»¿#pragma once
 #include "BaseScene.h"
 #include "AbstractSceneFactory.h"
 
 class SceneManager final
 {
-public: // ƒƒ“ƒoŠÖ”
+public: // ãƒ¡ãƒ³ãƒé–¢æ•°
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	/// •`‰æ
+	/// æç”»
 	/// </summary>
 	void Draw();
 
 	/// <summary>
-	/// I—¹ˆ—
+	/// çµ‚äº†å‡¦ç†
 	/// </summary>
 	void Finalize();
 
-	// Ÿ‚ÌƒV[ƒ“—\–ñ
+	// æ¬¡ã®ã‚·ãƒ¼ãƒ³äºˆç´„
 	void SetSceneFactory(AbstractSceneFactory* sceneFactory);
 	void ChangeScene(const std::string& sceneName);
 
 	static SceneManager* GetInstance();
 
 private:
-	// ¡‚ÌƒV[ƒ“iÀs’†ƒV[ƒ“j
+	// ä»Šã®ã‚·ãƒ¼ãƒ³ï¼ˆå®Ÿè¡Œä¸­ã‚·ãƒ¼ãƒ³ï¼‰
 	BaseScene* scene_ = nullptr;
 	BaseScene* nextScene_ = nullptr;
 
-	// ƒV[ƒ“ƒtƒ@ƒNƒgƒŠ[
+	// ã‚·ãƒ¼ãƒ³ãƒ•ã‚¡ã‚¯ãƒˆãƒªãƒ¼
 	AbstractSceneFactory* sceneFactory_ = nullptr;
 
 	SceneManager() = default;

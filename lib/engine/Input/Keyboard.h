@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-#define DIRECTINPUT_VERSION 0x0800 // DirectInput‚Ìƒo[ƒWƒ‡ƒ“w’è
+#define DIRECTINPUT_VERSION 0x0800 // DirectInputã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³æŒ‡å®š
 #include <dinput.h>
 #include <DirectXMath.h>
 #include <array>
@@ -20,39 +20,39 @@ public:
 
 public:
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
-	/// <param name="directInput">:DirectInputƒIƒuƒWƒFƒNƒg</param>
+	/// <param name="directInput">:DirectInputã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
 	void Initialize(IDirectInput8* directInput);
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	/// ƒL[‚ğ‰Ÿ‚µ‚½ó‘Ô‚Ìˆ—
+	/// ã‚­ãƒ¼ã‚’æŠ¼ã—ãŸçŠ¶æ…‹ã®å‡¦ç†
 	/// </summary>
-	/// <param name="keyNum">:ƒL[ƒiƒ“ƒo[</param>
-	/// <returns>ƒL[ƒiƒ“ƒo[</returns>
+	/// <param name="keyNum">:ã‚­ãƒ¼ãƒŠãƒ³ãƒãƒ¼</param>
+	/// <returns>ã‚­ãƒ¼ãƒŠãƒ³ãƒãƒ¼</returns>
 	bool PushKey(BYTE keyNum);
 	/// <summary>
-	/// ƒL[‚ğ—£‚µ‚½ó‘Ô‚Ìˆ—
+	/// ã‚­ãƒ¼ã‚’é›¢ã—ãŸçŠ¶æ…‹ã®å‡¦ç†
 	/// </summary>
-	/// <param name="keyNum">:ƒL[ƒiƒ“ƒo[</param>
-	/// <returns>ƒL[ƒiƒ“ƒo[</returns>
+	/// <param name="keyNum">:ã‚­ãƒ¼ãƒŠãƒ³ãƒãƒ¼</param>
+	/// <returns>ã‚­ãƒ¼ãƒŠãƒ³ãƒãƒ¼</returns>
 	bool ReleaseKey(BYTE keyNum);
 	/// <summary>
-	/// ƒL[‚ğ‰Ÿ‚µ‚½uŠÔ‚Ìˆ—
+	/// ã‚­ãƒ¼ã‚’æŠ¼ã—ãŸç¬é–“ã®å‡¦ç†
 	/// </summary>
-	/// <param name="keyNum">:ƒL[ƒiƒ“ƒo[</param>
-	/// <returns>ƒL[ƒiƒ“ƒo[</returns>
+	/// <param name="keyNum">:ã‚­ãƒ¼ãƒŠãƒ³ãƒãƒ¼</param>
+	/// <returns>ã‚­ãƒ¼ãƒŠãƒ³ãƒãƒ¼</returns>
 	bool TriggerPushKey(BYTE keyNum);
 	/// <summary>
-	/// ƒL[‚ğ—£‚µ‚½uŠÔ‚Ìˆ—
+	/// ã‚­ãƒ¼ã‚’é›¢ã—ãŸç¬é–“ã®å‡¦ç†
 	/// </summary>
-	/// <param name="keyNum">:ƒL[ƒiƒ“ƒo[</param>
-	/// <returns>ƒL[ƒiƒ“ƒo[</returns>
+	/// <param name="keyNum">:ã‚­ãƒ¼ãƒŠãƒ³ãƒãƒ¼</param>
+	/// <returns>ã‚­ãƒ¼ãƒŠãƒ³ãƒãƒ¼</returns>
 	bool TriggerReleaseKey(BYTE keyNum);
 
 private:

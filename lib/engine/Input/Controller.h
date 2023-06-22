@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Vector2.h"
 #include <Windows.h>
 #include <Xinput.h>
@@ -31,15 +31,15 @@ private:
 	XINPUT_STATE xinputState{};
 	XINPUT_STATE oldXinputState{};
 
-	// ƒRƒ“ƒgƒ[ƒ‰[U“®‹­‚³
+	// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼æŒ¯å‹•å¼·ã•
 	float shakePower = 0.0f;
-	// ƒRƒ“ƒgƒ[ƒ‰[U“®’·‚³(ƒtƒŒ[ƒ€”)
+	// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼æŒ¯å‹•é•·ã•(ãƒ•ãƒ¬ãƒ¼ãƒ æ•°)
 	int shakeTimer = 0;
 
-	// ƒfƒbƒhƒ][ƒ“‚É“ü‚Á‚Ä‚¢‚é‚©(DeadRate : ƒfƒbƒhƒ][ƒ“”»’è‚Ì“x‡‚¢)
+	// ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã«å…¥ã£ã¦ã„ã‚‹ã‹(DeadRate : ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³åˆ¤å®šã®åº¦åˆã„)
 	bool StickDeadZone(MyMath::Vector2& stick, const MyMath::Vector2& deadZoneInitial);
 
-	// Å‚“ü—Í’l
+	// æœ€é«˜å…¥åŠ›å€¤
 	const float MAX_STICK_NUM = 32768.0f;
 
 public:
@@ -47,81 +47,81 @@ public:
 	~Controller() = default;
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	/// ƒgƒŠƒK[ƒ{ƒ^ƒ“‚Ì“ü—Í
+	/// ãƒˆãƒªã‚¬ãƒ¼ãƒœã‚¿ãƒ³ã®å…¥åŠ›
 	/// </summary>
-	/// <param name="button">ƒ`ƒFƒbƒN‚·‚éƒ{ƒ^ƒ“</param>
+	/// <param name="button">ãƒã‚§ãƒƒã‚¯ã™ã‚‹ãƒœã‚¿ãƒ³</param>
 	/// <returns></returns>
 	bool TriggerButton(ControllerButton button);
 
 	/// <summary>
-	/// ƒgƒŠƒK[ƒXƒeƒBƒbƒN‚Ì“ü—Í
+	/// ãƒˆãƒªã‚¬ãƒ¼ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å…¥åŠ›
 	/// </summary>
-	/// <param name="stickInput">ƒXƒeƒBƒbƒN‚Ì•ûŒü</param>
-	/// <param name="deadZoneRange">ƒfƒbƒhƒ][ƒ“‚Ì”ÍˆÍ</param>
-	/// <param name="deadZoneInitial">ƒfƒbƒhƒ][ƒ“‚Ì”»’è‚Ì‰Šú’l: 1.0f</param>
+	/// <param name="stickInput">ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®æ–¹å‘</param>
+	/// <param name="deadZoneRange">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã®ç¯„å›²</param>
+	/// <param name="deadZoneInitial">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã®åˆ¤å®šã®åˆæœŸå€¤: 1.0f</param>
 	/// <returns></returns>
 	bool TriggerStick(ControllerStick stickInput, const float& deadZoneRange = 0.3f, const MyMath::Vector2& deadZoneInitial = { 1.0f,1.0f });
 
 	/// <summary>
-	/// ƒvƒbƒVƒ…ƒ{ƒ^ƒ“‚Ì“ü—Í
+	/// ãƒ—ãƒƒã‚·ãƒ¥ãƒœã‚¿ãƒ³ã®å…¥åŠ›
 	/// </summary>
-	/// <param name="button">ƒ`ƒFƒbƒN‚·‚éƒ{ƒ^ƒ“</param>
+	/// <param name="button">ãƒã‚§ãƒƒã‚¯ã™ã‚‹ãƒœã‚¿ãƒ³</param>
 	/// <returns></returns>
 	bool PushButton(ControllerButton button);
 
 	/// <summary>
-	/// ƒXƒeƒBƒbƒN‚Ì“ü—Í
+	/// ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å…¥åŠ›
 	/// </summary>
-	/// <param name="stickInput">ƒXƒeƒBƒbƒN‚Ì•ûŒü</param>
-	/// <param name="deadZoneRange">ƒfƒbƒhƒ][ƒ“‚Ì”ÍˆÍ</param>
-	/// <param name="deadZoneInitial">ƒfƒbƒhƒ][ƒ“‚Ì”»’è‚Ì‰Šú’l: 1.0f</param>
+	/// <param name="stickInput">ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®æ–¹å‘</param>
+	/// <param name="deadZoneRange">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã®ç¯„å›²</param>
+	/// <param name="deadZoneInitial">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã®åˆ¤å®šã®åˆæœŸå€¤: 1.0f</param>
 	/// <returns></returns>
 	bool InputStick(ControllerStick stickInput, const float& deadZoneRange = 0.3f, const MyMath::Vector2& deadZoneInitial = { 1.0f,1.0f });
 
 	/// <summary>
-	/// ƒ{ƒ^ƒ“‚ğ—£‚µ‚½‚Æ‚«‚Ì“ü—Í
+	/// ãƒœã‚¿ãƒ³ã‚’é›¢ã—ãŸã¨ãã®å…¥åŠ›
 	/// </summary>
-	/// <param name="button">ƒ`ƒFƒbƒN‚·‚éƒ{ƒ^ƒ“</param>
+	/// <param name="button">ãƒã‚§ãƒƒã‚¯ã™ã‚‹ãƒœã‚¿ãƒ³</param>
 	/// <returns></returns>
 	bool ReleaseTriggerButton(ControllerButton button);
 
 	/// <summary>
-	/// ƒXƒeƒBƒbƒN‚Ì—£‚µ‚½‚Æ‚«‚Ì“ü—Í
+	/// ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®é›¢ã—ãŸã¨ãã®å…¥åŠ›
 	/// </summary>
-	/// <param name="stickInput">ƒXƒeƒBƒbƒN‚Ì•ûŒü</param>
-	/// <param name="deadZoneRange">ƒfƒbƒhƒ][ƒ“‚Ì”ÍˆÍ</param>
-	/// <param name="deadZoneInitial">ƒfƒbƒhƒ][ƒ“‚Ì”»’è‚Ì‰Šú’l: 1.0f</param>
+	/// <param name="stickInput">ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®æ–¹å‘</param>
+	/// <param name="deadZoneRange">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã®ç¯„å›²</param>
+	/// <param name="deadZoneInitial">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã®åˆ¤å®šã®åˆæœŸå€¤: 1.0f</param>
 	/// <returns></returns>
 	bool ReleaseTriggerStick(ControllerStick stickInput, const float& deadZoneRange = 0.3f, const MyMath::Vector2& deadZoneInitial = { 1.0f,1.0f });
 
 	/// <summary>
-	/// ƒRƒ“ƒgƒ[ƒ‰[‚ÌU“®‚³‚¹‚éˆ—
+	/// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã®æŒ¯å‹•ã•ã›ã‚‹å‡¦ç†
 	/// </summary>
-	/// <param name="power">U“®‚Ì‹­‚³: 0.0f~1.0f</param>
-	/// <param name="flame">U“®‚³‚¹‚éŠÔ(ƒtƒŒ[ƒ€”)</param>
+	/// <param name="power">æŒ¯å‹•ã®å¼·ã•: 0.0f~1.0f</param>
+	/// <param name="flame">æŒ¯å‹•ã•ã›ã‚‹æ™‚é–“(ãƒ•ãƒ¬ãƒ¼ãƒ æ•°)</param>
 	void ShakeController(const float& power, const int& flame);
 
 	/// <summary>
-	/// ¶ƒXƒeƒBƒbƒN‚ÌƒxƒNƒgƒ‹
+	/// å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®ãƒ™ã‚¯ãƒˆãƒ«
 	/// </summary>
-	/// <param name="deadZoneRange">ƒfƒbƒhƒ][ƒ“‚Ì”»’è‚Ì‰Šú’l: 1.0f</param>
+	/// <param name="deadZoneRange">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã®åˆ¤å®šã®åˆæœŸå€¤: 1.0f</param>
 	/// <returns></returns>
 	MyMath::Vector2 GetLeftStickVec(const MyMath::Vector2& deadZoneRange = { 1.0f,1.0f });
 
 	/// <summary>
-	/// ‰EƒXƒeƒBƒbƒN‚ÌƒxƒNƒgƒ‹
+	/// å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®ãƒ™ã‚¯ãƒˆãƒ«
 	/// </summary>
-	/// <param name="deadZoneRange">ƒfƒbƒhƒ][ƒ“‚Ì”»’è‚Ì‰Šú’l: 1.0f</param>
+	/// <param name="deadZoneRange">ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã®åˆ¤å®šã®åˆæœŸå€¤: 1.0f</param>
 	/// <returns></returns>
 	MyMath::Vector2 GetRightStickVec(const MyMath::Vector2& deadZoneRange = { 1.0f,1.0f });
 
 private:
-	//ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^E‘ã“ü‰‰Zqíœ
+	//ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ»ä»£å…¥æ¼”ç®—å­å‰Šé™¤
 	Controller& operator=(const Controller&) = delete;
 	Controller(const Controller&) = delete;
 };

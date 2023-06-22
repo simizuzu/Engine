@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "BaseScene.h"
 #include "TextureManager.h"
 
@@ -13,31 +13,31 @@
 #include "ParticleManager.h"
 #include "WorldTransform.h"
 
-// ƒ^ƒCƒgƒ‹ƒV[ƒ“
+// ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³
 class TitleScene : public BaseScene
 {
-public: // ƒƒ“ƒoŠÖ”
+public: // ãƒ¡ãƒ³ãƒé–¢æ•°
 
 	TitleScene() = default;
 	~TitleScene() = default;
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize() override;
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update() override;
 
 	/// <summary>
-	/// •`‰æ
+	/// æç”»
 	/// </summary>
 	void Draw() override;
 
 	/// <summary>
-	/// I—¹ˆ—
+	/// çµ‚äº†å‡¦ç†
 	/// </summary>
 	void Finalize() override;
 
@@ -57,14 +57,14 @@ private:
 
 #pragma region OBJ
 	std::unique_ptr<Object3d> tyoinoriObj;
-	std::unique_ptr<Model> tyoinori;
+	std::unique_ptr<ObjModel> tyoinori;
 
 	std::unique_ptr<Object3d> skydomeObj;
-	std::unique_ptr<Model> skydome;
+	std::unique_ptr<ObjModel> skydome;
 #pragma endregion
 
 
-	//ImGuiƒfƒoƒbƒO—p
+	//ImGuiãƒ‡ãƒãƒƒã‚°ç”¨
 	MyMath::Vector3 cameraPos = { 0,0,0 };
 
 	MyMath::Vector2 pos = { 0,0 };

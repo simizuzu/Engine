@@ -1,4 +1,4 @@
-#include "Collision.h"
+ï»¿#include "Collision.h"
 
 bool Collision::CheckSpere2Plane(const Sphere& sphere, const Plane& plane, MyMath::Vector4* inter)
 {
@@ -11,10 +11,10 @@ bool Collision::CheckSpere2Plane(const Sphere& sphere, const Plane& plane, MyMat
 		return false;
 	}
 
-// ‹[—Œğ“_‚ğŒvZ
+// æ“¬ä¼¼äº¤ç‚¹ã‚’è¨ˆç®—
 	if (inter)
 	{
-		// •½–Êã‚ÌÄÚ‹ß“_‚ğA‹^—Œğ“_‚Æ‚·‚é
+		// å¹³é¢ä¸Šã®å†æ¥è¿‘ç‚¹ã‚’ã€ç–‘ä¼¼äº¤ç‚¹ã¨ã™ã‚‹
 		*inter = -dist * plane.normal + sphere.center;
 	}
 
@@ -23,8 +23,8 @@ bool Collision::CheckSpere2Plane(const Sphere& sphere, const Plane& plane, MyMat
 
 bool Collision::CheckOBBToOBB(BoundingBox& obb1, BoundingBox& obb2)
 {
-    //Še•ûŒüƒxƒNƒgƒ‹‚ÌŠm•Û
-    //(N***:•W€‰»•ûŒüƒxƒNƒgƒ‹)
+    //å„æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã®ç¢ºä¿
+    //(N***:æ¨™æº–åŒ–æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«)
     MyMath::Vector3 NAe1 = obb1.GetDirectVec(0), Ae1 = NAe1 * obb1.GetLength(0);
     MyMath::Vector3 NAe2 = obb1.GetDirectVec(1), Ae2 = NAe2 * obb1.GetLength(1);
     MyMath::Vector3 NAe3 = obb1.GetDirectVec(2), Ae3 = NAe3 * obb1.GetLength(2);
@@ -33,67 +33,67 @@ bool Collision::CheckOBBToOBB(BoundingBox& obb1, BoundingBox& obb2)
     MyMath::Vector3 NBe3 = obb1.GetDirectVec(2), Be3 = NBe3 * obb1.GetLength(2);
     MyMath::Vector3 interval = obb1.GetCenter() - obb2.GetCenter();
 
-    //•ª—£²:Ae1
+    //åˆ†é›¢è»¸:Ae1
     float rA = Ae1.length();
     float rB = MyMath::LenSegLineOfSeparateAxis(&NAe1, &Be1, &Be2, &Be3);
     float L = fabs(interval.dot(NAe1));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:Ae2
+    //åˆ†é›¢è»¸:Ae2
     rA = Ae2.length();
     rB = MyMath::LenSegLineOfSeparateAxis(&NAe2, &Be1, &Be2, &Be3);
     L = fabs(interval.dot(NAe2));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:Ae3
+    //åˆ†é›¢è»¸:Ae3
     rA = Ae3.length();
     rB = MyMath::LenSegLineOfSeparateAxis(&NAe3, &Be1, &Be2, &Be3);
     L = fabs(interval.dot(NAe3));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:Be1
+    //åˆ†é›¢è»¸:Be1
     rA = MyMath::LenSegLineOfSeparateAxis(&NBe1, &Ae1, &Ae2, &Ae3);
     rB = Be1.length();
     L = fabs(interval.dot(NBe1));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:Be2
+    //åˆ†é›¢è»¸:Be2
     rA = MyMath::LenSegLineOfSeparateAxis(&NBe2, &Ae1, &Ae2, &Ae3);
     rB = Be2.length();
     L = fabs(interval.dot(NBe2));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:Be3
+    //åˆ†é›¢è»¸:Be3
     rA = MyMath::LenSegLineOfSeparateAxis(&NBe3, &Ae1, &Ae2, &Ae3);
     rB = Be3.length();
     L = fabs(interval.dot(NBe3));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C11
+    //åˆ†é›¢è»¸:C11
     MyMath::Vector3 Cross;
     Cross = NAe1.cross(NBe1);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae2, &Ae3);
@@ -101,99 +101,99 @@ bool Collision::CheckOBBToOBB(BoundingBox& obb1, BoundingBox& obb2)
     L = fabs(interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C12
+    //åˆ†é›¢è»¸:C12
     Cross = NAe1.cross(NBe2);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae2, &Ae3);
     rB = MyMath::LenSegLineOfSeparateAxis(&Cross, &Be1, &Be3);
     L = fabs(interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C12
+    //åˆ†é›¢è»¸:C12
     Cross = NAe1.cross(NBe3);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae2, &Ae3);
     rB = MyMath::LenSegLineOfSeparateAxis(&Cross, &Be1, &Be2);
     L = fabs(interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C21
+    //åˆ†é›¢è»¸:C21
     Cross = NAe2.cross(NBe1);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae1, &Ae3);
     rB = MyMath::LenSegLineOfSeparateAxis(&Cross, &Be2, &Be3);
     L = fabs(interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C22
+    //åˆ†é›¢è»¸:C22
     Cross = NAe2.cross(NBe2);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae1, &Ae3);
     rB = MyMath::LenSegLineOfSeparateAxis(&Cross, &Be1, &Be3);
     L = fabs(interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C23
+    //åˆ†é›¢è»¸:C23
     Cross = NAe2.cross(NBe3);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae1, &Ae3);
     rB = MyMath::LenSegLineOfSeparateAxis(&Cross, &Be1, &Be2);
     L = fabs(interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C31
+    //åˆ†é›¢è»¸:C31
     Cross = NAe3.cross(NBe1);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae1, &Ae2);
     rB = MyMath::LenSegLineOfSeparateAxis(&Cross, &Be2, &Be3);
     L = fabs(interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C32
+    //åˆ†é›¢è»¸:C32
     Cross = NAe3.cross(NBe2);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae1, &Ae2);
     rB = MyMath::LenSegLineOfSeparateAxis(&Cross, &Be1, &Be3);
     L = fabs(interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C33
+    //åˆ†é›¢è»¸:C33
     Cross = NAe3.cross(NBe3);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae1, &Ae2);
     rB = MyMath::LenSegLineOfSeparateAxis(&Cross, &Be1, &Be2);
     L = fabs(interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    // Õ“Ë‚µ‚Ä‚¢‚é
+    // è¡çªã—ã¦ã„ã‚‹
     return true;
 }
 
@@ -204,8 +204,8 @@ bool Collision::CheckOBBToOBB(BoundingBox* obb1, BoundingBox* obb2)
         return false;
     }
 
-    //Še•ûŒüƒxƒNƒgƒ‹‚ÌŠm•Û
-    //(N***:•W€‰»•ûŒüƒxƒNƒgƒ‹)
+    //å„æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã®ç¢ºä¿
+    //(N***:æ¨™æº–åŒ–æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«)
     MyMath::Vector3 NAe1 = obb1->GetDirectVec(0), Ae1 = NAe1 * obb1->GetLength(0);
     MyMath::Vector3 NAe2 = obb1->GetDirectVec(1), Ae2 = NAe2 * obb1->GetLength(1);
     MyMath::Vector3 NAe3 = obb1->GetDirectVec(2), Ae3 = NAe3 * obb1->GetLength(2);
@@ -214,67 +214,67 @@ bool Collision::CheckOBBToOBB(BoundingBox* obb1, BoundingBox* obb2)
     MyMath::Vector3 NBe3 = obb2->GetDirectVec(2), Be3 = NBe3 * obb2->GetLength(2);
     MyMath::Vector3 Interval = obb1->GetCenter() - obb2->GetCenter();
 
-    //•ª—£²:Ae1
+    //åˆ†é›¢è»¸:Ae1
     float rA = Ae1.length();
     float rB = MyMath::LenSegLineOfSeparateAxis(&NAe1, &Be1, &Be2, &Be3);
     float L = fabs(Interval.dot(NAe1));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:Ae2
+    //åˆ†é›¢è»¸:Ae2
     rA = Ae2.length();
     rB = MyMath::LenSegLineOfSeparateAxis(&NAe2, &Be1, &Be2, &Be3);
     L = fabs(Interval.dot(NAe2));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:Ae3
+    //åˆ†é›¢è»¸:Ae3
     rA = Ae3.length();
     rB = MyMath::LenSegLineOfSeparateAxis(&NAe3, &Be1, &Be2, &Be3);
     L = fabs(Interval.dot(NAe3));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:Be1
+    //åˆ†é›¢è»¸:Be1
     rA = MyMath::LenSegLineOfSeparateAxis(&NBe1, &Ae1, &Ae2, &Ae3);
     rB = Be1.length();
     L = fabs(Interval.dot(NBe1));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:Be2
+    //åˆ†é›¢è»¸:Be2
     rA = MyMath::LenSegLineOfSeparateAxis(&NBe2, &Ae1, &Ae2, &Ae3);
     rB = Be2.length();
     L = fabs(Interval.dot(NBe2));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:Be3
+    //åˆ†é›¢è»¸:Be3
     rA = MyMath::LenSegLineOfSeparateAxis(&NBe3, &Ae1, &Ae2, &Ae3);
     rB = Be3.length();
     L = fabs(Interval.dot(NBe3));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C11
+    //åˆ†é›¢è»¸:C11
     MyMath::Vector3 Cross;
     Cross = NAe1.cross(NBe1);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae2, &Ae3);
@@ -282,98 +282,98 @@ bool Collision::CheckOBBToOBB(BoundingBox* obb1, BoundingBox* obb2)
     L = fabs(Interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C12
+    //åˆ†é›¢è»¸:C12
     Cross = NAe1.cross(NBe2);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae2, &Ae3);
     rB = MyMath::LenSegLineOfSeparateAxis(&Cross, &Be1, &Be3);
     L = fabs(Interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C13
+    //åˆ†é›¢è»¸:C13
     Cross = NAe1.cross(NBe3);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae2, &Ae3);
     rB = MyMath::LenSegLineOfSeparateAxis(&Cross, &Be1, &Be2);
     L = fabs(Interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C21
+    //åˆ†é›¢è»¸:C21
     Cross = NAe2.cross(NBe1);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae1, &Ae3);
     rB = MyMath::LenSegLineOfSeparateAxis(&Cross, &Be2, &Be3);
     L = fabs(Interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C22
+    //åˆ†é›¢è»¸:C22
     Cross = NAe2.cross(NBe2);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae1, &Ae3);
     rB = MyMath::LenSegLineOfSeparateAxis(&Cross, &Be1, &Be3);
     L = fabs(Interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C23
+    //åˆ†é›¢è»¸:C23
     Cross = NAe2.cross(NBe3);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae1, &Ae3);
     rB = MyMath::LenSegLineOfSeparateAxis(&Cross, &Be1, &Be2);
     L = fabs(Interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C31
+    //åˆ†é›¢è»¸:C31
     Cross = NAe3.cross(NBe1);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae1, &Ae2);
     rB = MyMath::LenSegLineOfSeparateAxis(&Cross, &Be2, &Be3);
     L = fabs(Interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C32
+    //åˆ†é›¢è»¸:C32
     Cross = NAe3.cross(NBe2);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae1, &Ae2);
     rB = MyMath::LenSegLineOfSeparateAxis(&Cross, &Be1, &Be3);
     L = fabs(Interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    //•ª—£²:C33
+    //åˆ†é›¢è»¸:C33
     Cross = NAe3.cross(NBe3);
     rA = MyMath::LenSegLineOfSeparateAxis(&Cross, &Ae1, &Ae2);
     rB = MyMath::LenSegLineOfSeparateAxis(&Cross, &Be1, &Be2);
     L = fabs(Interval.dot(Cross));
     if (L > rA + rB)
     {
-        //Õ“Ë‚µ‚Ä‚¢‚È‚¢
+        //è¡çªã—ã¦ã„ãªã„
         return false;
     }
 
-    // Õ“Ë‚µ‚Ä‚¢‚é
+    // è¡çªã—ã¦ã„ã‚‹
     return true;
 }

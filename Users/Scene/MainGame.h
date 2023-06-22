@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Object3d.h"
 #include "Sprite.h"
 #include "ParticleManager.h"
@@ -6,24 +6,24 @@
 #include "Framework.h"
 #include "SceneFactory.h"
 
-// ƒQ[ƒ€‘S‘Ì
+// ã‚²ãƒ¼ãƒ å…¨ä½“
 class MainGame : public Framework
 {
-public: // ƒƒ“ƒoŠÖ”
+public: // ãƒ¡ãƒ³ãƒé–¢æ•°
 	MainGame() = default;
 	~MainGame() = default;
 
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	void Initialize() override;
-	// I—¹
+	// çµ‚äº†
 	void Finalize() override;
-	// XV
+	// æ›´æ–°
 	void Update() override;
-	// •`‰æ
+	// æç”»
 	void Draw() override;
 
 private:
-	// ƒQ[ƒ€I—¹ƒtƒ‰ƒO
+	// ã‚²ãƒ¼ãƒ çµ‚äº†ãƒ•ãƒ©ã‚°
 	bool endRequest_ = false;
 };
 

@@ -1,4 +1,4 @@
-#include "TitleScene.h"
+﻿#include "TitleScene.h"
 #include "imgui.h"
 
 void TitleScene::Initialize()
@@ -23,14 +23,14 @@ void TitleScene::Initialize()
 #pragma endregion
 
 #pragma region OBJ
-	tyoinori = std::make_unique<Model>();
-	tyoinori.reset(Model::LoadFromObj("Enemy",true));
+	tyoinori = std::make_unique<ObjModel>();
+	tyoinori.reset(ObjModel::LoadFromObj("Enemy",true));
 	tyoinoriObj.reset(Object3d::Create());
 	tyoinoriObj->SetModel(tyoinori.get());
 	tyoinoriObj->SetScale({ 10.0f,10.0f,10.0f });
 
-	skydome = std::make_unique<Model>();
-	skydome.reset(Model::LoadFromObj("skydome"));
+	skydome = std::make_unique<ObjModel>();
+	skydome.reset(ObjModel::LoadFromObj("skydome"));
 	skydomeObj.reset(Object3d::Create());
 	skydomeObj->SetModel(skydome.get());
 

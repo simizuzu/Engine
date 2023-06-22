@@ -1,4 +1,4 @@
-#include "Controller.h"
+ï»¿#include "Controller.h"
 #include <cassert>
 
 bool Controller::StickDeadZone(MyMath::Vector2& stick, const MyMath::Vector2& deadZoneInitial)
@@ -31,7 +31,7 @@ void Controller::Update()
     oldXinputState = xinputState;
     ZeroMemory(&xinputState, sizeof(XINPUT_STATE));
 
-    // ƒRƒ“ƒgƒ[ƒ‰[‚Ìæ“¾
+    // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã®å–å¾—
     DWORD inputGetState = XInputGetState(0, &xinputState);
 
     if (inputGetState == ERROR_SUCCESS)
@@ -61,7 +61,7 @@ void Controller::Update()
 
 bool Controller::TriggerButton(ControllerButton button)
 {
-    //ƒgƒŠƒK[
+    //ãƒˆãƒªã‚¬ãƒ¼
     if (button == LT)
     {
         return oldXinputState.Gamepad.bLeftTrigger <= XINPUT_GAMEPAD_TRIGGER_THRESHOLD && PushButton(button);
@@ -183,7 +183,7 @@ bool Controller::InputStick(ControllerStick stickInput, const float& deadZoneRan
 
 bool Controller::ReleaseTriggerButton(ControllerButton button)
 {
-    //ƒgƒŠƒK[
+    //ãƒˆãƒªã‚¬ãƒ¼
     if (button == LT)
     {
         return XINPUT_GAMEPAD_TRIGGER_THRESHOLD < oldXinputState.Gamepad.bLeftTrigger && !PushButton(button);
@@ -192,7 +192,7 @@ bool Controller::ReleaseTriggerButton(ControllerButton button)
     {
         return XINPUT_GAMEPAD_TRIGGER_THRESHOLD < oldXinputState.Gamepad.bRightTrigger && !PushButton(button);
     }
-    //ƒ{ƒ^ƒ“
+    //ãƒœã‚¿ãƒ³
     else
     {
         return (oldXinputState.Gamepad.wButtons & button) && !PushButton(button);

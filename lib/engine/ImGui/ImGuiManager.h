@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <wrl.h>
 
 #include "WinApp.h"
@@ -9,35 +9,35 @@ class ImGuiManager final
 public:
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize(WinApp* winApp, DirectXCommon* dxCommon);
 
 	/// <summary>
-	/// ImGuió•tŠJn
+	/// ImGuiå—ä»˜é–‹å§‹
 	/// </summary>
 	void Begin();
 	
 	/// <summary>
-	/// ImGuió•tI—¹
+	/// ImGuiå—ä»˜çµ‚äº†
 	/// </summary>
 	void End();
 
 	/// <summary>
-	/// ‰æ–Ê‚Ö‚Ì•`‰æ
+	/// ç”»é¢ã¸ã®æç”»
 	/// </summary>
 	void Draw(DirectXCommon* dxCommon);
 
 	/// <summary>
-	/// I—¹ˆ—
+	/// çµ‚äº†å‡¦ç†
 	/// </summary>
 	void Finalize();
 
-	// ƒVƒ“ƒOƒ‹ƒgƒ“
+	// ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³
 	static ImGuiManager* GetInstance();
 
 private:
-	// SRV—pƒfƒXƒNƒŠƒvƒ^ƒq[ƒv
+	// SRVç”¨ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> srvHeap_;
 
 private:

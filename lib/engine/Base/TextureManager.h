@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "DirectXCommon.h"
 
@@ -9,65 +9,65 @@
 #include "EngineUtility.h"
 
 /// <summary>
-/// ƒeƒNƒXƒ`ƒƒƒ}ƒl[ƒWƒƒ
+/// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒãƒ¼ã‚¸ãƒ£
 /// </summary>
 class TextureManager
 {
-public: // ’è”
-	static const size_t MaxSRVCount = 256; // ƒeƒNƒXƒ`ƒƒ‚ÌÅ‘å–‡”
+public: // å®šæ•°
+	static const size_t MaxSRVCount = 256; // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®æœ€å¤§æšæ•°
 
-public: // ƒƒ“ƒoŠÖ”
+public: // ãƒ¡ãƒ³ãƒé–¢æ•°
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	/// <param name="directXCommon"></param>
 	void Initialize(DirectXCommon* directXCommon);
 
 	/// <summary>
-	/// ƒeƒNƒXƒ`ƒƒ“Ç‚İ‚İ
+	/// ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­ã¿è¾¼ã¿
 	/// </summary>
-	/// <param name="filename">ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼</param>
+	/// <param name="filename">ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å</param>
 	TextureData LoadTexture(const std::string& fileName);
 
 	/// <summary>
-	/// “Ç‚İ‚İ
+	/// èª­ã¿è¾¼ã¿
 	/// </summary>
-	/// <param name="fileName">ƒtƒ@ƒCƒ‹–¼</param>
-	/// <returns>ƒeƒNƒXƒ`ƒƒƒnƒ“ƒhƒ‹</returns>
+	/// <param name="fileName">ãƒ•ã‚¡ã‚¤ãƒ«å</param>
+	/// <returns>ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒ³ãƒ‰ãƒ«</returns>
 	static TextureData Load(const std::string& fileName);
 
 	/// <summary>
-	/// ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@‚Ì¶¬
+	/// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
 	/// </summary>
 	Microsoft::WRL::ComPtr<ID3D12Resource> CreateTexBuff(DirectX::TexMetadata& metadata, DirectX::ScratchImage& scratchImg);
 
 	/// <summary>
-	/// ƒVƒF[ƒ_ƒŠƒ\[ƒXƒrƒ…[‚Ì¶¬
+	/// ã‚·ã‚§ãƒ¼ãƒ€ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ã®ç”Ÿæˆ
 	/// </summary>
-	/// <param name="texbuff">ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@</param>
+	/// <param name="texbuff">ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡</param>
 	/// <param name="metadata"></param>
 	D3D12_GPU_DESCRIPTOR_HANDLE CreateShaderResourceView(ID3D12Resource* texBuff, DirectX::TexMetadata& metadata);
 
 	/// <summary>
-	/// ‰ğ•úˆ—
+	/// è§£æ”¾å‡¦ç†
 	/// </summary>
 	void Delete();
 
-	// ƒCƒ“ƒXƒ^ƒ“ƒX
+	// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 	static TextureManager* GetInstance();
 
 	// Getter
 	ID3D12DescriptorHeap* GetSrvHeap() { return srvHeap.Get(); }
 
-private: // ƒƒ“ƒo•Ï”
+private: // ãƒ¡ãƒ³ãƒå¤‰æ•°
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> srvHeap = nullptr;
 	D3D12_DESCRIPTOR_RANGE descriptorRange;
 	D3D12_HEAP_PROPERTIES textureHeapProp{};
-	// ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡
 	std::array<Microsoft::WRL::ComPtr<ID3D12Resource>, MaxSRVCount> texBuff_;
-	// ƒeƒNƒXƒ`ƒƒ”
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£æ•°
 	UINT texCount;
-	// ƒfƒtƒHƒ‹ƒgƒeƒNƒXƒ`ƒƒŠi”[ƒfƒBƒŒƒNƒgƒŠ
+	// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ†ã‚¯ã‚¹ãƒãƒ£æ ¼ç´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
 	static std::string DefaultTextureDirectoryPath;
 
 	DirectXCommon* dxCommon_ = nullptr;

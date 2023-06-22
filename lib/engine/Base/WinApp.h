@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <Windows.h>
 #include <cstdint>
 #include <string>
@@ -6,47 +6,47 @@
 
 class WinApp
 {
-public: // Ã“Iƒƒ“ƒoŠÖ”
+public: // é™çš„ãƒ¡ãƒ³ãƒé–¢æ•°
 	static LRESULT WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
-public: // ’è”
-	// ƒEƒBƒ“ƒhƒE‰¡•
+public: // å®šæ•°
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦æ¨ªå¹…
 	static const int window_height = 720;
-	// ƒEƒBƒ“ƒhƒEc•
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ç¸¦å¹…
 	static const int window_width = 1280;
 
-public: // ƒƒ“ƒoŠÖ”
+public: // ãƒ¡ãƒ³ãƒé–¢æ•°
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// ƒƒbƒZ[ƒW‚Ìˆ—
+	/// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®å‡¦ç†
 	/// </summary>
 	bool ProccessMessage();
 
 	/// <summary>
-	/// I—¹ˆ—
+	/// çµ‚äº†å‡¦ç†
 	/// </summary>
 	void Finalize();
 
 	/// <summary>
-	/// ‰ğ•úˆ—
+	/// è§£æ”¾å‡¦ç†
 	/// </summary>
 	void Delete();
 
-	// ƒVƒ“ƒOƒ‹ƒgƒ“
+	// ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³
 	static WinApp* GetInstance();
 
-public: // ƒQƒbƒ^[
+public: // ã‚²ãƒƒã‚¿ãƒ¼
 	HWND GetHwnd() const { return hwnd; }
 	HINSTANCE GetHinstance() const { return w.hInstance; }
 
-private: // ƒƒ“ƒo•Ï”
-	// ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹
+private: // ãƒ¡ãƒ³ãƒå¤‰æ•°
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
 	HWND hwnd = nullptr;
-	// ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ìİ’è
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®è¨­å®š
 	WNDCLASSEX w{};
 	static WinApp* winApp_;
 

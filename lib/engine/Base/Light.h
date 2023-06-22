@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "DirectXCommon.h"
 
 #include "Vector3.h"
@@ -6,75 +6,75 @@
 #include "DirectX12Math.h"
 
 /// <summary>
-/// ƒ‰ƒCƒg
+/// ãƒ©ã‚¤ãƒˆ
 /// </summary>
 class Light
 {
 public:
 	struct ConstBufferData
 	{
-		MyMath::Vector4 lightVec;		//ƒ‰ƒCƒg‚Ö‚Ì•ûŒü‚ğ•\‚·ƒxƒNƒgƒ‹
-		MyMath::Vector3 lightColor;	//ƒ‰ƒCƒg‚ÌF
+		MyMath::Vector4 lightVec;		//ãƒ©ã‚¤ãƒˆã¸ã®æ–¹å‘ã‚’è¡¨ã™ãƒ™ã‚¯ãƒˆãƒ«
+		MyMath::Vector3 lightColor;	//ãƒ©ã‚¤ãƒˆã®è‰²
 	};
 
 public:
 	/// <summary>
-	/// Ã“I‰Šú‰»
+	/// é™çš„åˆæœŸåŒ–
 	/// </summary>
-	/// <param name="device">ƒfƒoƒCƒX</param>
+	/// <param name="device">ãƒ‡ãƒã‚¤ã‚¹</param>
 	static void StaticInitialise(DirectXCommon* device);
 
 	/// <summary>
-	/// ƒCƒ“ƒXƒ^ƒ“ƒX¶¬
+	/// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆ
 	/// </summary>
-	/// <returns>ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+	/// <returns>ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 	static Light* Create();
 
 	static DirectXCommon* device_;
 
 public:
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
-	/// <param name="device">ƒfƒoƒCƒX</param>
+	/// <param name="device">ãƒ‡ãƒã‚¤ã‚¹</param>
 	void Initialize();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	/// •`‰æ
+	/// æç”»
 	/// </summary>
 	void Draw(ID3D12GraphicsCommandList* cmdList,UINT rootPramIndex);
 
 	/// <summary>
-	/// ƒ‰ƒCƒg•ûŒü‚ğƒZƒbƒg
+	/// ãƒ©ã‚¤ãƒˆæ–¹å‘ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="lightdir">ƒ‰ƒCƒg•ûŒü</param>
+	/// <param name="lightdir">ãƒ©ã‚¤ãƒˆæ–¹å‘</param>
 	void SetLightDir(const MyMath::Vector4& lightdir);
 
 	/// <summary>
-	/// ƒ‰ƒCƒgF‚ğƒZƒbƒg
+	/// ãƒ©ã‚¤ãƒˆè‰²ã‚’ã‚»ãƒƒãƒˆ
 	/// </summary>
-	/// <param name="lightColor">ƒ‰ƒCƒgF</param>
+	/// <param name="lightColor">ãƒ©ã‚¤ãƒˆè‰²</param>
 	void SetLightColor(const MyMath::Vector3& lightColor);
 
 private:
 	/// <summary>
-	/// ’è”ƒoƒbƒtƒ@“]‘—
+	/// å®šæ•°ãƒãƒƒãƒ•ã‚¡è»¢é€
 	/// </summary>
 	void TransferConstBuffer();
 
-private: //ƒƒ“ƒo•Ï”
-	//’è”ƒoƒbƒtƒ@
+private: //ãƒ¡ãƒ³ãƒå¤‰æ•°
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	Microsoft::WRL::ComPtr<ID3D12Resource> constBuff;
-	//ƒ‰ƒCƒgŒõü•ûŒüi’PˆÊƒxƒNƒgƒ‹j
+	//ãƒ©ã‚¤ãƒˆå…‰ç·šæ–¹å‘ï¼ˆå˜ä½ãƒ™ã‚¯ãƒˆãƒ«ï¼‰
 	MyMath::Vector4 lightdir = {1,0,0,0};
-	//ƒ‰ƒCƒgF
+	//ãƒ©ã‚¤ãƒˆè‰²
 	MyMath::Vector3 lightColor = { 1.0f,1.0f,1.0f };
-	//ƒ_[ƒeƒBƒtƒ‰ƒO
+	//ãƒ€ãƒ¼ãƒ†ã‚£ãƒ•ãƒ©ã‚°
 	bool dirty = false;
 };
 

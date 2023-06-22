@@ -1,6 +1,7 @@
-#include "PostEffect.h"
+ï»¿#include "PostEffect.h"
 
 const float PostEffect::clearColor[4] = { 0.25f,0.5f,0.1f,0.0f };
+RootsigSetPip PostEffect::pipline_;
 
 PostEffect* PostEffect::Create()
 {
@@ -10,7 +11,7 @@ PostEffect* PostEffect::Create()
 		return nullptr;
 	}
 
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	if (!instance->Initialize()) 
 	{
 		delete instance;
@@ -25,7 +26,7 @@ bool PostEffect::Initialize()
 	device_ = dxCommon->GetInstance()->GetDevice();
 	winApp_->GetInstance();
 
-	//ƒpƒCƒvƒ‰ƒCƒ“¶¬
+	//ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ç”Ÿæˆ
 	Microsoft::WRL::ComPtr<ID3DBlob> vsBlob;
 	Microsoft::WRL::ComPtr<ID3DBlob> psBlob;
 	Shader::CreatePostEffectShade(vsBlob, psBlob);
@@ -37,11 +38,13 @@ bool PostEffect::Initialize()
 	CreateRTVDesc(device_.Get());
 	CreateDepthBuff(device_.Get());
 	CreateDSVDesc(device_.Get(), winApp_.get());
+
+	return false;
 }
 
 void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList)
 {
-	ConstBufferData* constMap = nullptr;
+	ConstBufferDataPE* constMap = nullptr;
 	constBuff->Map(0,nullptr,(void**)&constMap);
 
 	ID3D12DescriptorHeap* ppHeaps[] = { descHeapSRV.Get() };
@@ -52,38 +55,38 @@ void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList)
 void PostEffect::PreDrawScene(ID3D12GraphicsCommandList* cmdList, WinApp* winApp)
 {
 	//winApp = winApp->GetInstance();
-	//ƒŠƒ\[ƒXƒoƒŠƒA‚ğ•ÏXiƒVƒF[ƒ_[ƒŠƒ\[ƒX¨•`‰æ‰Â”\j
+	//ãƒªã‚½ãƒ¼ã‚¹ãƒãƒªã‚¢ã‚’å¤‰æ›´ï¼ˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªã‚½ãƒ¼ã‚¹â†’æç”»å¯èƒ½ï¼‰
 	CD3DX12_RESOURCE_BARRIER CHANGE_RENDER_TARGET =
 		CD3DX12_RESOURCE_BARRIER::Transition(texBuff.Get(), D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_RENDER_TARGET);
 	cmdList->ResourceBarrier(1, &CHANGE_RENDER_TARGET);
 
-	//ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[—pƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚Ìƒnƒ“ƒhƒ‹‚ğæ“¾
+	//ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ç”¨ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã®ãƒãƒ³ãƒ‰ãƒ«ã‚’å–å¾—
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvH =
 		descHeapRTV->GetCPUDescriptorHandleForHeapStart();
-	//[“xƒXƒeƒ“ƒVƒ‹ƒrƒ…[—pƒfƒXƒNƒŠƒvƒ^ƒq[ƒv‚Ìƒnƒ“ƒhƒ‹‚ğæ“¾
+	//æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼ç”¨ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã®ãƒãƒ³ãƒ‰ãƒ«ã‚’å–å¾—
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvH =
 		descHeapDSV->GetCPUDescriptorHandleForHeapStart();
-	//ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg‚ğƒZƒbƒg
+	//ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ã‚»ãƒƒãƒˆ
 	cmdList->OMSetRenderTargets(1, &rtvH, false, &dsvH);
 
-	//ƒrƒ…[ƒ|[ƒg‚Ìİ’è
+	//ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã®è¨­å®š
 	CD3DX12_VIEWPORT VIEWPORT =
 		CD3DX12_VIEWPORT(0.0f, 0.0f, winApp->window_width, winApp->window_height);
 	cmdList->RSSetViewports(1, &VIEWPORT);
-	//ƒVƒUƒŠƒ“ƒO‹éŒ`‚Ìİ’è
+	//ã‚·ã‚¶ãƒªãƒ³ã‚°çŸ©å½¢ã®è¨­å®š
 	CD3DX12_RECT RECT =
 		CD3DX12_RECT(0, 0, winApp->window_width, winApp->window_height);
 	cmdList->RSSetScissorRects(1, &RECT);
 
-	//‘S‰æ–ÊƒNƒŠƒA
+	//å…¨ç”»é¢ã‚¯ãƒªã‚¢
 	cmdList->ClearRenderTargetView(rtvH, clearColor, 0, nullptr);
-	//[“xƒoƒbƒtƒ@‚ÌƒNƒŠƒA
+	//æ·±åº¦ãƒãƒƒãƒ•ã‚¡ã®ã‚¯ãƒªã‚¢
 	cmdList->ClearDepthStencilView(dsvH, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 }
 
 void PostEffect::PostDrawScene(ID3D12GraphicsCommandList* cmdList)
 {
-	//ƒŠƒ\[ƒXƒoƒŠƒA‚ğ•ÏXi•`‰æ‰Â”\¨ƒVƒF[ƒ_[ƒŠƒ\[ƒXj
+	//ãƒªã‚½ãƒ¼ã‚¹ãƒãƒªã‚¢ã‚’å¤‰æ›´ï¼ˆæç”»å¯èƒ½â†’ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªã‚½ãƒ¼ã‚¹ï¼‰
 	CD3DX12_RESOURCE_BARRIER CHANGE_PIXEL_SHADER_RESOURCE =
 		CD3DX12_RESOURCE_BARRIER::Transition(texBuff.Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
 	cmdList->ResourceBarrier(1, &CHANGE_PIXEL_SHADER_RESOURCE);
@@ -96,7 +99,7 @@ void PostEffect::CreateVertexData(ID3D12Device* device)
 	CD3DX12_HEAP_PROPERTIES heapprop01 = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
 	CD3DX12_RESOURCE_DESC resourceDesc01 = CD3DX12_RESOURCE_DESC::Buffer(sizeof(PosUvColor) * 4);
 
-	//’¸“_ƒoƒbƒtƒ@¶¬
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ç”Ÿæˆ
 	result = device->CreateCommittedResource(
 		&heapprop01,
 		D3D12_HEAP_FLAG_NONE,
@@ -106,7 +109,7 @@ void PostEffect::CreateVertexData(ID3D12Device* device)
 		IID_PPV_ARGS(&vertBuff));
 	assert(SUCCEEDED(result));
 
-	//’¸“_ƒf[ƒ^(ƒyƒ‰ƒ|ƒŠƒSƒ“)
+	//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿(ãƒšãƒ©ãƒãƒªã‚´ãƒ³)
 	VertexPosUv vertices[] = {
 		{{-0.5f, -0.5f, 0.0f}, {0.0f, 1.0f}},
 		{{-0.5f, +0.5f, 0.0f}, {0.0f, 0.0f}},
@@ -114,7 +117,7 @@ void PostEffect::CreateVertexData(ID3D12Device* device)
 		{{+0.5f, +0.5f, 0.0f}, {1.0f, 0.0f}},
 	};
 
-	//’¸“_ƒoƒbƒtƒ@‚Ö‚Ìƒf[ƒ^“]‘—
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã¸ã®ãƒ‡ãƒ¼ã‚¿è»¢é€
 	VertexPosUv* vertMap = nullptr;
 	result = vertBuff->Map(0, nullptr, (void**)&vertMap);
 	if (SUCCEEDED(result))
@@ -123,15 +126,15 @@ void PostEffect::CreateVertexData(ID3D12Device* device)
 		vertBuff->Unmap(0,nullptr);
 	}
 
-	//’¸“_ƒoƒbƒtƒ@ƒrƒ…[‚Ìì¬
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
 	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
 	vbView.SizeInBytes = sizeof(VertexPosUv) * 4;
 	vbView.StrideInBytes = sizeof(VertexPosUv);
 
 	CD3DX12_HEAP_PROPERTIES heapprop02 = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
-	CD3DX12_RESOURCE_DESC resourceDesc02 = CD3DX12_RESOURCE_DESC::Buffer((sizeof(ConstBufferData) + 0xff) & ~0xff);
+	CD3DX12_RESOURCE_DESC resourceDesc02 = CD3DX12_RESOURCE_DESC::Buffer((sizeof(ConstBufferDataPE) + 0xff) & ~0xff);
 
-	//’è”ƒoƒbƒtƒ@‚Ì¶¬
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
 	result = device->CreateCommittedResource(
 		&heapprop02, D3D12_HEAP_FLAG_NONE,
 		&resourceDesc02,
@@ -146,7 +149,7 @@ void PostEffect::CreateTextureBuff(ID3D12Device* device, WinApp* winApp)
 	HRESULT result;
 	//winApp = winApp->GetInstance();
 
-	//ƒeƒNƒXƒ`ƒƒƒŠƒ\[ƒXİ’è
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚½ãƒ¼ã‚¹è¨­å®š
 	CD3DX12_RESOURCE_DESC texturesDesc = CD3DX12_RESOURCE_DESC::Tex2D(
 		DXGI_FORMAT_R8G8B8A8_UNORM_SRGB,
 		winApp->window_width,
@@ -154,7 +157,7 @@ void PostEffect::CreateTextureBuff(ID3D12Device* device, WinApp* winApp)
 		1, 0, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET
 	);
 
-	//ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@‚Ì¶¬
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
 	CD3DX12_HEAP_PROPERTIES HEAP_PROPERTIES =
 		CD3DX12_HEAP_PROPERTIES(D3D12_CPU_PAGE_PROPERTY_WRITE_BACK, D3D12_MEMORY_POOL_L0);
 	CD3DX12_CLEAR_VALUE CLEAR_VALUE = CD3DX12_CLEAR_VALUE(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, clearColor);
@@ -168,21 +171,21 @@ void PostEffect::CreateTextureBuff(ID3D12Device* device, WinApp* winApp)
 		IID_PPV_ARGS(&texBuff));
 	assert(SUCCEEDED(result));
 
-	{	//ƒeƒNƒXƒ`ƒƒ‚ğÔƒNƒŠƒA
-		//‰æ‘œ”(1280 * 720)
+	{	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’èµ¤ã‚¯ãƒªã‚¢
+		//ç”»åƒæ•°(1280 * 720)
 		const UINT pixelCount = winApp->window_width * winApp->window_height;
-		//‰æ‘œ1s•ª‚Ìƒf[ƒ^ƒTƒCƒY
+		//ç”»åƒ1è¡Œåˆ†ã®ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚º
 		const UINT rowPitch = sizeof(UINT) * winApp->window_width;
-		//‰æ‘œ‘S‘Ì‚Ìƒf[ƒ^ƒTƒCƒY
+		//ç”»åƒå…¨ä½“ã®ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚º
 		const UINT depthPitch = rowPitch * winApp->window_height;
-		//‰æ‘œƒCƒ[ƒW
+		//ç”»åƒã‚¤ãƒ¡ãƒ¼ã‚¸
 		UINT* img = new UINT[pixelCount];
 		for (int i = 0; i < pixelCount; i++)
 		{
 			img[i] = 0xff0000ff;
 		}
 
-		//ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@‚Éƒf[ƒ^“]‘—
+		//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡ã«ãƒ‡ãƒ¼ã‚¿è»¢é€
 		result = texBuff->WriteToSubresource(0, nullptr,
 			img, rowPitch, depthPitch);
 		assert(SUCCEEDED(result));
@@ -193,23 +196,23 @@ void PostEffect::CreateTextureBuff(ID3D12Device* device, WinApp* winApp)
 void PostEffect::CreateSRVDesc(ID3D12Device* device)
 {
 	HRESULT result;
-	//SRV—pƒfƒXƒNƒŠƒvƒ^ƒq[ƒvİ’è
+	//SRVç”¨ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—è¨­å®š
 	D3D12_DESCRIPTOR_HEAP_DESC srvDescHeapDesc = {};
 	srvDescHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	srvDescHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
 	srvDescHeapDesc.NumDescriptors = 1;
-	//SRV—pƒfƒXƒNƒŠƒvƒ^ƒq[ƒv‚ğ¶¬
+	//SRVç”¨ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã‚’ç”Ÿæˆ
 	result = device->CreateDescriptorHeap(&srvDescHeapDesc, IID_PPV_ARGS(&descHeapSRV));
 	assert(SUCCEEDED(result));
 
-	//SRVİ’è
+	//SRVè¨­å®š
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
 	srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
 	srvDesc.Texture2D.MipLevels = 1;
 
-	//ƒfƒXƒNƒŠƒvƒ^ƒq[ƒv‚ÉSRVì¬
+	//ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã«SRVä½œæˆ
 	device->CreateShaderResourceView(texBuff.Get(),
 		&srvDesc,
 		descHeapSRV->GetCPUDescriptorHandleForHeapStart()
@@ -219,21 +222,21 @@ void PostEffect::CreateSRVDesc(ID3D12Device* device)
 void PostEffect::CreateRTVDesc(ID3D12Device* device)
 {
 	HRESULT result;
-	//RTV—pƒfƒXƒNƒŠƒvƒ^ƒq[ƒvİ’è
+	//RTVç”¨ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—è¨­å®š
 	D3D12_DESCRIPTOR_HEAP_DESC rtvDescHeapDesc = {};
 	rtvDescHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
 	rtvDescHeapDesc.NumDescriptors = 1;
-	//RTV—pƒfƒXƒNƒŠƒvƒ^ƒq[ƒv‚ğ¶¬
+	//RTVç”¨ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã‚’ç”Ÿæˆ
 	result = device->CreateDescriptorHeap(&rtvDescHeapDesc, IID_PPV_ARGS(&descHeapRTV));
 	assert(SUCCEEDED(result));
 
-	//ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[‚Ìİ’è
+	//ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã®è¨­å®š
 	D3D12_RENDER_TARGET_VIEW_DESC renderTargetViewDesc{};
-	//ƒVƒF[ƒ_[‚ÌŒvZŒ‹‰Ê‚ğSRGB‚É•ÏŠ·‚µ‚Ä‘‚«‚Ş
+	//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®è¨ˆç®—çµæœã‚’SRGBã«å¤‰æ›ã—ã¦æ›¸ãè¾¼ã‚€
 	renderTargetViewDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 	renderTargetViewDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
 
-	//ƒfƒXƒNƒŠƒvƒ^ƒq[ƒv“ñRTVì¬
+	//ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—äºŒRTVä½œæˆ
 	device->CreateRenderTargetView(texBuff.Get(),
 		&renderTargetViewDesc,
 		descHeapRTV->GetCPUDescriptorHandleForHeapStart()
@@ -245,7 +248,7 @@ void PostEffect::CreateDSVDesc(ID3D12Device* device, WinApp* winApp)
 	//winApp = winApp->GetInstance();
 
 	HRESULT result;
-	//[“xƒoƒbƒtƒ@ƒŠƒ\[ƒXİ’è
+	//æ·±åº¦ãƒãƒƒãƒ•ã‚¡ãƒªã‚½ãƒ¼ã‚¹è¨­å®š
 	CD3DX12_RESOURCE_DESC depthResDesc =
 		CD3DX12_RESOURCE_DESC::Tex2D(
 			DXGI_FORMAT_D32_FLOAT,
@@ -256,7 +259,7 @@ void PostEffect::CreateDSVDesc(ID3D12Device* device, WinApp* winApp)
 			D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL
 		);
 
-	//[“xƒoƒbƒtƒ@‚Ì¶¬
+	//æ·±åº¦ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
 	CD3DX12_HEAP_PROPERTIES HEAP_PROPERTIES = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
 	CD3DX12_CLEAR_VALUE CLEAR_VALUE = CD3DX12_CLEAR_VALUE(DXGI_FORMAT_D32_FLOAT, 1.0f, 0);
 
@@ -273,15 +276,15 @@ void PostEffect::CreateDSVDesc(ID3D12Device* device, WinApp* winApp)
 void PostEffect::CreateDepthBuff(ID3D12Device* device)
 {
 	HRESULT result;
-	//DSV—pƒfƒXƒNƒŠƒvƒ^ƒq[ƒvİ’è
+	//DSVç”¨ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—è¨­å®š
 	D3D12_DESCRIPTOR_HEAP_DESC descHeapDesc{};
 	descHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
 	descHeapDesc.NumDescriptors = 1;
-	//DSV—pƒfƒXƒNƒŠƒvƒ^ƒq[ƒv‚ğ¶¬
+	//DSVç”¨ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã‚’ç”Ÿæˆ
 	result = device->CreateDescriptorHeap(&descHeapDesc, IID_PPV_ARGS(&descHeapDSV));
 	assert(SUCCEEDED(result));
 
-	//ƒfƒXƒNƒŠƒvƒ^ƒq[ƒv‚ÉDSVì¬
+	//ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã«DSVä½œæˆ
 	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc{};
 	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT;
 	dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;

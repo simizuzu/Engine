@@ -1,4 +1,4 @@
-#include "GameCollisionManager.h"
+ï»¿#include "GameCollisionManager.h"
 
 void GameCollisionManager::ColliderSet(BoundingBox* collider)
 {
@@ -27,7 +27,7 @@ void GameCollisionManager::CheckCollisions()
 		{
 			BoundingBox* colliderB = *itrB;
 
-			//ƒyƒA‚Ì“–‚½‚è”»’è
+			//ãƒšã‚¢ã®å½“ãŸã‚Šåˆ¤å®š
 			CheckOBB2OBB(colliderA, colliderB);
 		}
 	}

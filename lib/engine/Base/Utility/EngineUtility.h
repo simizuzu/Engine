@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <wrl.h>
 #include <d3d12.h>
 #include "Matrix4.h"
@@ -6,10 +6,10 @@
 #include "Vector3.h"
 #include "Vector4.h"
 
-// ’è”ƒoƒbƒtƒ@—pƒf[ƒ^\‘¢‘Ì
+// å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”¨ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
 struct ConstBufferDataB0
 {
-	//Mathematics::Matrix4 mat;	// 3D•ÏŠ·s—ñ
+	//Mathematics::Matrix4 mat;	// 3Då¤‰æ›è¡Œåˆ—
 	MyMath::Matrix4 viewproj;
 	MyMath::Matrix4 world;
 	MyMath::Vector3 cameraPos;
@@ -17,114 +17,114 @@ struct ConstBufferDataB0
 
 struct ConstBufferDataViewProjection
 {
-	// ƒ[ƒ‹ƒhs—ñ
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
 	MyMath::Matrix4 world;
-	// ƒ[ƒ‹ƒhÀ•W
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™
 	MyMath::Matrix4 matWorld;
 
-	// ƒ[ƒ‹ƒh ¨ ƒrƒ…[•ÏŠ·s—ñ
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰ â†’ ãƒ“ãƒ¥ãƒ¼å¤‰æ›è¡Œåˆ—
 	MyMath::Matrix4 view;
-	// ƒrƒ…[ ¨ ƒvƒƒWƒFƒNƒVƒ‡ƒ“•ÏŠ·s—ñ
+	// ãƒ“ãƒ¥ãƒ¼ â†’ ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³å¤‰æ›è¡Œåˆ—
 	MyMath::Matrix4 projection;
-	// ƒJƒƒ‰À•Wiƒ[ƒ‹ƒhÀ•Wj
+	// ã‚«ãƒ¡ãƒ©åº§æ¨™ï¼ˆãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ï¼‰
 	MyMath::Vector3 cameraPos;
 };
 
 struct ViewProjection
 {
-	// ’è”ƒoƒbƒtƒ@
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	Microsoft::WRL::ComPtr<ID3D12Resource> constBuff_;
-	// ƒ}ƒbƒsƒ“ƒOÏ‚İƒAƒhƒŒƒX
+	// ãƒãƒƒãƒ”ãƒ³ã‚°æ¸ˆã¿ã‚¢ãƒ‰ãƒ¬ã‚¹
 	ConstBufferDataViewProjection* constBuffMap = nullptr;
 };
 
 struct VertexPosNormalUv
 {
-	MyMath::Vector3 pos;		// xyzÀ•W
-	MyMath::Vector3 normal;	// –@üƒxƒNƒgƒ‹
-	MyMath::Vector2 uv;		// uvÀ•W
+	MyMath::Vector3 pos;		// xyzåº§æ¨™
+	MyMath::Vector3 normal;	// æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«
+	MyMath::Vector2 uv;		// uvåº§æ¨™
 };
 
 enum class BlendMode
 {
-	None,	// ƒuƒŒƒ“ƒh–³‚µ
-	Alpha,	// ƒAƒ‹ƒtƒ@
-	Add,	// ‰ÁZ
-	Sub,	// Œ¸Z
-	Mul,	// æZ
-	Inv,	// F”½“]
+	None,	// ãƒ–ãƒ¬ãƒ³ãƒ‰ç„¡ã—
+	Alpha,	// ã‚¢ãƒ«ãƒ•ã‚¡
+	Add,	// åŠ ç®—
+	Sub,	// æ¸›ç®—
+	Mul,	// ä¹—ç®—
+	Inv,	// è‰²åè»¢
 };
 
 struct RootsigSetPip
 {
-	// ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ
+	// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£
 	Microsoft::WRL::ComPtr<ID3D12RootSignature> rootSignature;
-	// ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg
+	// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆ
 	Microsoft::WRL::ComPtr<ID3D12PipelineState> pipelineState;
 };
 
 struct TextureData
 {
-	// ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡
 	Microsoft::WRL::ComPtr<ID3D12Resource> texBuff;
-	// ƒfƒXƒNƒŠƒvƒ^ƒq[ƒv
+	// ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> srvHeap;
-	//GPUƒfƒXƒNƒŠƒvƒ^ƒnƒ“ƒhƒ‹
+	//GPUãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒãƒ³ãƒ‰ãƒ«
 	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle{};
-	// ƒfƒXƒNƒŠƒvƒ^ƒŒƒ“ƒW
+	// ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ¬ãƒ³ã‚¸
 	D3D12_DESCRIPTOR_RANGE descriptorRange{};
 
-	// ‰¡•
+	// æ¨ªå¹…
 	size_t width = 0;
-	// c•
+	// ç¸¦å¹…
 	size_t height = 0;
 };
 
-//ƒrƒ‹ƒ{[ƒh’è”ƒoƒbƒtƒ@—pƒf[ƒ^\‘¢‘Ì
+//ãƒ“ãƒ«ãƒœãƒ¼ãƒ‰å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”¨ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
 struct ParticleConstBuffData
 {
 	MyMath::Matrix4 mat;
 	MyMath::Matrix4 matBillboard;
 };
 
-//ƒJƒƒ‰\‘¢‘Ì
+//ã‚«ãƒ¡ãƒ©æ§‹é€ ä½“
 struct WorldvViewProCamera
 {
-	//ƒ[ƒ‹ƒhs—ñ
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
 	MyMath::Matrix4 world;
-	//ƒ[ƒ‹ƒhÀ•W
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™
 	MyMath::Matrix4 matWorld;
-	//ƒJƒƒ‰À•W(ƒ[ƒ‹ƒhÀ•W)
+	//ã‚«ãƒ¡ãƒ©åº§æ¨™(ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™)
 	MyMath::Vector3 cameraPos;
 };
 
 struct VertexPos
 {
-	MyMath::Vector3 pos;	//xyzÀ•W
-	float scale;			//ƒXƒP[ƒ‹
-	MyMath::Vector4 color;	//F
+	MyMath::Vector3 pos;	//xyzåº§æ¨™
+	float scale;			//ã‚¹ã‚±ãƒ¼ãƒ«
+	MyMath::Vector4 color;	//è‰²
 };
 
-// ƒp[ƒeƒBƒNƒ‹1—±
+// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«1ç²’
 struct Particle
 {
-	// À•W
+	// åº§æ¨™
 	MyMath::Vector3 position = {};
-	// ‘¬“x
+	// é€Ÿåº¦
 	MyMath::Vector3 velocity = {};
-	// ‰Á‘¬“x
+	// åŠ é€Ÿåº¦
 	MyMath::Vector3 accel = {};
-	// Œ»İƒtƒŒ[ƒ€
+	// ç¾åœ¨ãƒ•ãƒ¬ãƒ¼ãƒ 
 	int frame = 0;
-	// I—¹ƒtƒŒ[ƒ€
+	// çµ‚äº†ãƒ•ãƒ¬ãƒ¼ãƒ 
 	int num_frame = 0;
-	// ƒXƒP[ƒ‹
+	// ã‚¹ã‚±ãƒ¼ãƒ«
 	float scale = 1.0f;
-	// ‰Šú’l
+	// åˆæœŸå€¤
 	float s_scale = 1.0f;
-	// ÅI’l
+	// æœ€çµ‚å€¤
 	float e_scale = 0.0f;
-	// F
+	// è‰²
 	MyMath::Vector4 color = { 1,1,1,1 };
 	MyMath::Vector4 s_color = { 1,0,0,1 };
 	MyMath::Vector4 e_color = { 1,1,1,1 };

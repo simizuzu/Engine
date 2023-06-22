@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <vector>
 #include <array>
 #include <string>
@@ -7,58 +7,58 @@
 #include "Object3d.h"
 
 /// <summary>
-/// Õ“Ë”»’èŠî’êƒNƒ‰ƒX
+/// è¡çªåˆ¤å®šåŸºåº•ã‚¯ãƒ©ã‚¹
 /// </summary>
 class BaseCollision
 {
 protected:
 
 	uint32_t collisionAttribute_ = 0xffffffff;
-	// Õ“Ëƒ}ƒXƒN(‘Šè)
+	// è¡çªãƒã‚¹ã‚¯(ç›¸æ‰‹)
 	uint32_t collisionMask_ = 0xffffffff;
 
-	// –¼‘O(©•ª)
+	// åå‰(è‡ªåˆ†)
 	std::string collsionName_;
-	// –¼‘O(‘Šè)
+	// åå‰(ç›¸æ‰‹)
 	char opponentCollsionName_[256];
 
 	BaseCollision() = default;
 	virtual ~BaseCollision() = default;
 
 public:
-	// Õ“Ë‚ÉŒÄ‚Î‚ê‚éŠÖ”
+	// è¡çªæ™‚ã«å‘¼ã°ã‚Œã‚‹é–¢æ•°
 	virtual void OnCollision() = 0;
-	// Õ“Ë‘®«(©•ª)‚ğæ“¾
+	// è¡çªå±æ€§(è‡ªåˆ†)ã‚’å–å¾—
 	const uint32_t GetCollisionAttribute();
-	// Õ“Ë‘®«(©•ª)‚ğæ“¾
+	// è¡çªå±æ€§(è‡ªåˆ†)ã‚’å–å¾—
 	void SetCollisionAttribute(uint32_t collisionAttribute);
-	// Õ“Ë‘®«(‘Šè)‚ğæ“¾
+	// è¡çªå±æ€§(ç›¸æ‰‹)ã‚’å–å¾—
 	const uint32_t GetCollisionMask();
-	// Õ“Ë‘®«(‘Šè)‚ğİ’è
+	// è¡çªå±æ€§(ç›¸æ‰‹)ã‚’è¨­å®š
 	void SetCollisionMask(uint32_t collisionMask);
 
-	// –¼‘O(©•ª)
+	// åå‰(è‡ªåˆ†)
 	void SetCollsionName(std::string name);
 	std::string GetCollsionName();
 
-	// –¼‘O(‘Šè:Opponent)
+	// åå‰(ç›¸æ‰‹:Opponent)
 	void SetOppCollsionName(std::string name);
 	std::string GetOppCollsionName();
 };
 
 struct AABB
 {
-	// ’†SÀ•W
+	// ä¸­å¿ƒåº§æ¨™
 	MyMath::Vector3 center;
-	// ƒTƒCƒY
+	// ã‚µã‚¤ã‚º
 	MyMath::Vector3 size;
 };
 
 struct Sphere
 {
-	// ’†SÀ•W
+	// ä¸­å¿ƒåº§æ¨™
 	MyMath::Vector4 center;
-	// ”¼Œa
+	// åŠå¾„
 	float radius;
 };
 
@@ -71,51 +71,51 @@ struct Plane
 class BoundingBox : public BaseCollision
 {
 protected:
-	// ˆÊ’u
+	// ä½ç½®
 	MyMath::Vector3 center = {};
-	// •ûŒüƒxƒNƒgƒ‹
+	// æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«
 	MyMath::Vector3 directionVec[3];
-	// Še²•ûŒü‚Ì’·‚³
+	// å„è»¸æ–¹å‘ã®é•·ã•
 	float length[3]{};
 
 public:
-	// w’è²”Ô†‚Ì•ûŒüƒxƒNƒgƒ‹‚ğæ“¾
+	// æŒ‡å®šè»¸ç•ªå·ã®æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‚’å–å¾—
 	const MyMath::Vector3 GetDirectVec(uint16_t element);
-	// w’è²•ûŒü‚Ì’·‚³‚ğæ“¾
+	// æŒ‡å®šè»¸æ–¹å‘ã®é•·ã•ã‚’å–å¾—
 	const float GetLength(uint16_t element);
-	// ’†S‚©‚ç‚ÌˆÊ’u‚ğæ“¾
+	// ä¸­å¿ƒã‹ã‚‰ã®ä½ç½®ã‚’å–å¾—
 	const MyMath::Vector3 GetCenter();
-	// Õ“Ë‚ÉŒÄ‚Î‚ê‚éŠÖ”
+	// è¡çªæ™‚ã«å‘¼ã°ã‚Œã‚‹é–¢æ•°
 	virtual void OnCollision() {};
 
 public:
 	/// <summary>
-	/// AABB‚ÆAABB‚Ì“–‚½‚è”»’è
+	/// AABBã¨AABBã®å½“ãŸã‚Šåˆ¤å®š
 	/// </summary>
-	/// <param name="aabb1">1‚Â–Ú‚ÌAABB</param>
-	/// <param name="aabb2">2‚Â–Ú‚ÌAABB</param>
+	/// <param name="aabb1">1ã¤ç›®ã®AABB</param>
+	/// <param name="aabb2">2ã¤ç›®ã®AABB</param>
 	/// <returns>true</returns>
 	bool CheckAABBToAABB(AABB& aabb1, AABB& aabb2);
 
 	/// <summary>
-	/// AABB‚Æ‹…‚Ì“–‚½‚è”»’è
+	/// AABBã¨çƒã®å½“ãŸã‚Šåˆ¤å®š
 	/// </summary>
-	/// <param name="aabb1">1‚Â–Ú‚ÌAABB</param>
-	/// <param name="aabb2">‹…</param>
+	/// <param name="aabb1">1ã¤ç›®ã®AABB</param>
+	/// <param name="aabb2">çƒ</param>
 	/// <returns>false</returns>
 	bool CheckAABBToSphere(AABB& aabb,Sphere& sphere);
 
 public:
 	/// <summary>
-	/// OBB‚ğì¬
+	/// OBBã‚’ä½œæˆ
 	/// </summary>
-	/// <param name="vertex">’¸“_</param>
-	/// <param name="transform">ƒ[ƒ‹ƒhƒgƒ‰ƒ“ƒXƒtƒH[ƒ€</param>
+	/// <param name="vertex">é ‚ç‚¹</param>
+	/// <param name="transform">ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ </param>
 	void CreateOBB(std::vector<VertexPosNormalUv> vertex, Object3d& transform);
 
 	/// <summary>
-	/// OBB‚ÌXV
+	/// OBBã®æ›´æ–°
 	/// </summary>
-	/// <param name="transform">ƒ[ƒ‹ƒhƒgƒ‰ƒ“ƒXƒtƒH[ƒ€</param>
+	/// <param name="transform">ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ </param>
 	void UpdateOBB(Object3d& transform);
 };

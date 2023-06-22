@@ -1,4 +1,4 @@
-#include "Quaternion.h"
+ï»¿#include "Quaternion.h"
 #include<cmath>
 
 namespace MyMath
@@ -22,9 +22,9 @@ namespace MyMath
 
 	Quaternion::Quaternion(const aiQuaternion& q)
 	{
-		w_ = q.x;//x¬•ª
-		x_ = q.y;//y¬•ª
-		y_ = q.z;//z¬•ª
+		w_ = q.x;//xæˆåˆ†
+		x_ = q.y;//yæˆåˆ†
+		y_ = q.z;//zæˆåˆ†
 		z_ = q.w;//w
 	}
 

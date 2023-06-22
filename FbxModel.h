@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #pragma warning(push)
 #include <array>
 #include <vector>
@@ -16,16 +16,16 @@
 
 struct Material
 {
-	std::string name;				// ƒ}ƒeƒŠƒAƒ‹–¼
-	MyMath::Vector3 ambient;	// ƒAƒ“ƒrƒGƒ“ƒg‰e‹¿“x
-	MyMath::Vector3 diffuse;	// ƒfƒBƒtƒ…[ƒY‰e‹¿“x
-	MyMath::Vector3 specular;	// ƒXƒyƒLƒ…ƒ‰[‰e‹¿“x
-	float alpha;					// ƒAƒ‹ƒtƒ@
-	std::string textureFilename;	// ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼
+	std::string name;				// ãƒãƒ†ãƒªã‚¢ãƒ«å
+	MyMath::Vector3 ambient;	// ã‚¢ãƒ³ãƒ“ã‚¨ãƒ³ãƒˆå½±éŸ¿åº¦
+	MyMath::Vector3 diffuse;	// ãƒ‡ã‚£ãƒ•ãƒ¥ãƒ¼ã‚ºå½±éŸ¿åº¦
+	MyMath::Vector3 specular;	// ã‚¹ãƒšã‚­ãƒ¥ãƒ©ãƒ¼å½±éŸ¿åº¦
+	float alpha;					// ã‚¢ãƒ«ãƒ•ã‚¡
+	std::string textureFilename;	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å
 	float shininess = 1.0f;
 	char pad[4];
 
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Material() {
 		ambient = { 0.3f,0.3f,0.3f };
 		diffuse = { 0.0f,0.0f,0.0f };
@@ -34,46 +34,46 @@ struct Material
 	}
 };
 
-//ƒ{[ƒ“‚ÌÅ‘å”
+//ãƒœãƒ¼ãƒ³ã®æœ€å¤§æ•°
 constexpr int MAX_BONES = 128;
 constexpr int MAX_BONE_INDICES = 4;
 
 struct PosNormUvTangeColSkin
 {
-	MyMath::Vector4 position = { 0.0f,0.f,0.0f,1.0f }; // ˆÊ’uÀ•W
-	MyMath::Vector3 normal; // –@ü
-	MyMath::Vector2 uv; // uvÀ•W
-	MyMath::Vector3 tangent; // Ú‹óŠÔ
-	MyMath::Vector4 color; // ’¸“_F
+	MyMath::Vector4 position = { 0.0f,0.f,0.0f,1.0f }; // ä½ç½®åº§æ¨™
+	MyMath::Vector3 normal; // æ³•ç·š
+	MyMath::Vector2 uv; // uvåº§æ¨™
+	MyMath::Vector3 tangent; // æ¥ç©ºé–“
+	MyMath::Vector4 color; // é ‚ç‚¹è‰²
 
-	std::array<uint32_t, MAX_BONE_INDICES> boneIndex;	// ƒ{[ƒ“‚Ì”Ô†
-	std::array<float, MAX_BONE_INDICES> boneWeight;	// ƒ{[ƒ“‚Ìd‚İ
+	std::array<uint32_t, MAX_BONE_INDICES> boneIndex;	// ãƒœãƒ¼ãƒ³ã®ç•ªå·
+	std::array<float, MAX_BONE_INDICES> boneWeight;	// ãƒœãƒ¼ãƒ³ã®é‡ã¿
 };
 
 struct PosNormUvTangeCol
 {
-	MyMath::Vector4 position = { 0.0f,0.f,0.0f,1.0f }; // ˆÊ’uÀ•W
-	MyMath::Vector3 normal; // –@ü
-	MyMath::Vector2 uv; // uvÀ•W
-	MyMath::Vector3 tangent; // Ú‹óŠÔ
-	MyMath::Vector4 color; // ’¸“_F
+	MyMath::Vector4 position = { 0.0f,0.f,0.0f,1.0f }; // ä½ç½®åº§æ¨™
+	MyMath::Vector3 normal; // æ³•ç·š
+	MyMath::Vector2 uv; // uvåº§æ¨™
+	MyMath::Vector3 tangent; // æ¥ç©ºé–“
+	MyMath::Vector4 color; // é ‚ç‚¹è‰²
 };
 
 struct PosNormSkin
 {
-	MyMath::Vector4 position; // ˆÊ’uÀ•W
-	MyMath::Vector3 normal; // –@ü
+	MyMath::Vector4 position; // ä½ç½®åº§æ¨™
+	MyMath::Vector3 normal; // æ³•ç·š
 
-	std::array<uint32_t, MAX_BONE_INDICES> boneIndex;	// ƒ{[ƒ“‚Ì”Ô†
-	std::array<float, MAX_BONE_INDICES> boneWeight;	// ƒ{[ƒ“‚Ìd‚İ
+	std::array<uint32_t, MAX_BONE_INDICES> boneIndex;	// ãƒœãƒ¼ãƒ³ã®ç•ªå·
+	std::array<float, MAX_BONE_INDICES> boneWeight;	// ãƒœãƒ¼ãƒ³ã®é‡ã¿
 };
 
 struct PosNorm
 {
-	MyMath::Vector4 position; // ˆÊ’uÀ•W
-	MyMath::Vector3 normal; // –@ü
+	MyMath::Vector4 position; // ä½ç½®åº§æ¨™
+	MyMath::Vector3 normal; // æ³•ç·š
 };
-//’è”ƒoƒbƒtƒ@—pƒf[ƒ^\‘¢‘Ì(ƒXƒLƒjƒ“ƒO)
+//å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”¨ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“(ã‚¹ã‚­ãƒ‹ãƒ³ã‚°)
 struct SkinData
 {
 	std::vector<MyMath::Matrix4> bones;
@@ -87,22 +87,22 @@ struct SkinComputeInput
 
 struct Node
 {
-	//–¼‘O
+	//åå‰
 	std::string name;
-	//ƒ[ƒJƒ‹•ÏŒ`s—ñ
+	//ãƒ­ãƒ¼ã‚«ãƒ«å¤‰å½¢è¡Œåˆ—
 	MyMath::Matrix4 transform;
-	//ƒOƒ[ƒoƒ‹•ÏŒ`s—ñ
+	//ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰å½¢è¡Œåˆ—
 	MyMath::Matrix4 globalTransform;
-	//eƒm[ƒh
+	//è¦ªãƒãƒ¼ãƒ‰
 	Node* parent = nullptr;
-	//qƒm[ƒh
+	//å­ãƒãƒ¼ãƒ‰
 	std::vector<Node>childrens;
 };
 
 struct Bone
 {
 public:
-	//–¼‘O
+	//åå‰
 	std::string name;
 
 	MyMath::Matrix4 matrix = {};
@@ -120,7 +120,7 @@ private:
 
 struct BoneData
 {
-	//ƒ{[ƒ“ƒf[ƒ^
+	//ãƒœãƒ¼ãƒ³ãƒ‡ãƒ¼ã‚¿
 	std::array<MyMath::Matrix4, MAX_BONES> boneMat;
 };
 
@@ -128,42 +128,42 @@ class ModelMesh
 {
 public:
 
-	//–¼‘O
+	//åå‰
 	std::string name;
 
-	//–¼‘O
+	//åå‰
 	std::string nodeName;
 
-	//’¸“_ƒf[ƒ^‚Ì”z—ñ
+	//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã®é…åˆ—
 	std::vector<PosNormUvTangeColSkin> vertices;
 
-	//ƒCƒ“ƒfƒbƒNƒX‚Ì”z—ñ
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®é…åˆ—
 	std::vector<uint32_t> indices;
 
-	//ƒeƒNƒXƒ`ƒƒ
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£
 	std::vector <std::string> textures;
 
-	//ƒeƒNƒXƒ`ƒƒ
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£
 	std::vector <std::string> texturesNormal;
 
 	std::vector<Bone> vecBones;
 
 	std::vector<MyMath::Matrix4> deformationMat;
 
-	//—LŒø
+	//æœ‰åŠ¹
 	bool enable = false;
 	char PADING[3]{};
 
-	// ƒJƒ‰[
+	// ã‚«ãƒ©ãƒ¼
 	float col[4] = { 1.0f,1.0f,1.0f,1.0f };
 	char PADING1[4]{};
 
-	// ƒ}ƒeƒŠƒAƒ‹
+	// ãƒãƒ†ãƒªã‚¢ãƒ«
 	Material material;
 
 	Node* node = nullptr;
 
-	//•`‰æ’¸“_ƒf[ƒ^
+	//æç”»é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿
 	std::vector<PosNormUvTangeCol> vertice;
 
 	SkinComputeInput skinComputeInput;
@@ -186,8 +186,8 @@ public:
 	bool isAnimetion;
 	char pad1[7];
 
-	//ƒ‚ƒfƒ‹–¼
+	//ãƒ¢ãƒ‡ãƒ«å
 	std::string name;
-	//ƒm[ƒh”z—ñ
+	//ãƒãƒ¼ãƒ‰é…åˆ—
 	std::vector<ModelMesh> meshes;
 };

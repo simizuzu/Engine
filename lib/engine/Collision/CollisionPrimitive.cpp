@@ -1,4 +1,4 @@
-#include "CollisionPrimitive.h"
+ï»¿#include "CollisionPrimitive.h"
 
 const uint32_t BaseCollision::GetCollisionAttribute()
 {
@@ -107,16 +107,16 @@ bool BoundingBox::CheckAABBToSphere(AABB& aabb, Sphere& sphere)
 
 void BoundingBox::CreateOBB(std::vector<VertexPosNormalUv> vertex, Object3d& transform)
 {
-	// ‰ñ“]
+	// å›è»¢
 	MyMath::Matrix4 matRot;
 
-	// Å‘å’lAÅ¬’l‚Ì‰Šú‰»İ’è
+	// æœ€å¤§å€¤ã€æœ€å°å€¤ã®åˆæœŸåŒ–è¨­å®š
 	MyMath::Vector3 max = MyMath::Vector3(-10000.0f, -10000.0f, -10000.0f);
 	MyMath::Vector3 min = MyMath::Vector3(10000.0f, 10000.0f, 10000.0f);
 
-	// ƒƒbƒVƒ…‚Ì’¸“_ƒf[ƒ^‚ğæ“¾
+	// ãƒ¡ãƒƒã‚·ãƒ¥ã®é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
 	std::vector<VertexPosNormalUv> vertex_ = vertex;
-	// Å‘å’lAÅ¬’l‚ğæ“¾
+	// æœ€å¤§å€¤ã€æœ€å°å€¤ã‚’å–å¾—
 	for (size_t i = 0; i < vertex_.size(); i++)
 	{
 		MyMath::Vector3 pos = vertex_[i].pos;
@@ -128,16 +128,16 @@ void BoundingBox::CreateOBB(std::vector<VertexPosNormalUv> vertex, Object3d& tra
 		if (pos.z > min.z) { min.z = pos.z; }
 	}
 
-	// ’†S“_À•W‚Ìæ“¾
+	// ä¸­å¿ƒç‚¹åº§æ¨™ã®å–å¾—
 	center = transform.position = { 0,0,0 };
 
-	// •ûŒüƒxƒNƒgƒ‹‚ğæ“¾
+	// æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‚’å–å¾—
 	matRot = MyMathUtility::MakeRotation(transform.rotation);
 	directionVec[0] = { matRot.m[0][0], matRot.m[0][1],matRot.m[0][2] };
 	directionVec[1] = { matRot.m[1][0], matRot.m[1][1],matRot.m[1][2] };
 	directionVec[2] = { matRot.m[2][0], matRot.m[2][1],matRot.m[2][2] };
 
-	// ’·‚³‚ğæ“¾
+	// é•·ã•ã‚’å–å¾—
 	length[0] = fabs(max.x - min.x) * 0.5f;
 	length[1] = fabs(max.y - min.y) * 0.5f;
 	length[2] = fabs(max.z - min.z) * 0.5f;
@@ -151,10 +151,10 @@ void BoundingBox::UpdateOBB(Object3d& transform)
 {
 	MyMath::Matrix4 matRot;
 
-	// ’†SÀ•W‚ğæ“¾
+	// ä¸­å¿ƒåº§æ¨™ã‚’å–å¾—
 	center = MyMath::GetWorldPosition(transform);
 
-	// •ûŒüƒxƒNƒgƒ‹‚ğæ“¾
+	// æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‚’å–å¾—
 	matRot = MyMathUtility::MakeRotation(transform.rotation);
 	directionVec[0] = { matRot.m[0][0],matRot.m[0][1],matRot.m[0][2] };
 	directionVec[1] = { matRot.m[1][0],matRot.m[1][1],matRot.m[1][2] };

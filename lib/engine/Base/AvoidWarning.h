@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #pragma warning(push)
 #pragma warning(disable: 4061)
 #pragma warning(disable: 4265)
@@ -14,7 +14,7 @@
 #pragma warning(disable: 5262)
 #pragma warning(disable: 5264)
 
-#define DIRECTINPUT_VERSION 0x0800 // DirectInput‚Ìƒo[ƒWƒ‡ƒ“w’è
+#define DIRECTINPUT_VERSION 0x0800 // DirectInputã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³æŒ‡å®š
 #include <windows.h>
 #include <d3dcompiler.h>
 #include <d3d12.h>

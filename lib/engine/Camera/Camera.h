@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <wrl.h>
 #include <d3d12.h>
 #include "DirectX12Math.h"
@@ -9,58 +9,58 @@
 class Camera
 {
 public:
-#pragma region ƒrƒ…[s—ñİ’è
-	// ‹“_À•W
+#pragma region ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—è¨­å®š
+	// è¦–ç‚¹åº§æ¨™
 	MyMath::Vector3 eye_;
-	// ’‹“_À•W
+	// æ³¨è¦–ç‚¹åº§æ¨™
 	MyMath::Vector3 target_;
-	// ã•ûŒüƒxƒNƒgƒ‹
+	// ä¸Šæ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«
 	MyMath::Vector3 up_;
 #pragma endregion
 
 private:
-#pragma region Ë‰es—ñİ’è
-	// ƒJƒƒ‰‰æŠp
+#pragma region å°„å½±è¡Œåˆ—è¨­å®š
+	// ã‚«ãƒ¡ãƒ©ç”»è§’
 	float fovAngleY = MyMathUtility::degree2Radius * 45.0f;
-	// è‘O
+	// æ‰‹å‰
 	float nearZ_ = 0.1f;
-	// ‰œs‚«
+	// å¥¥è¡Œã
 	float farZ_ = 1000.0f;
-	// ƒAƒXƒyƒNƒg”ä(‰æ–Ê‰¡•/‰æ–Êc•)
+	// ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”(ç”»é¢æ¨ªå¹…/ç”»é¢ç¸¦å¹…)
 	float aspect = 0.0f;
 #pragma endregion
-	// ƒrƒ…[s—ñ
+	// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—
 	MyMath::Matrix4 matView_;
-	// ƒrƒ…[‹ts—ñ
+	// ãƒ“ãƒ¥ãƒ¼é€†è¡Œåˆ—
 	MyMath::Matrix4 matViewInverse_;
-	// Ë‰es—ñ
+	// å°„å½±è¡Œåˆ—
 	MyMath::Matrix4 matProjection_;;
-	// ƒJƒƒ‰‹——£
+	// ã‚«ãƒ¡ãƒ©è·é›¢
 	float distance = 50.0f;
 
 public:
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 	/// <summary>
-	/// ’è”ƒoƒbƒtƒ@¶¬
+	/// å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”Ÿæˆ
 	/// </summary>
 	void CreateConstBuffer();
 	/// <summary>
-	/// ƒ}ƒbƒsƒ“ƒO
+	/// ãƒãƒƒãƒ”ãƒ³ã‚°
 	/// </summary>
 	void Map();
 	/// <summary>
-	/// ƒrƒ…[s—ñ‚ÌXV
+	/// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã®æ›´æ–°
 	/// </summary>
 	void UpdateMatrix();
 	/// <summary>
-	/// ƒrƒ…[s—ñ‚Ì“]‘—
+	/// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã®è»¢é€
 	/// </summary>
 	void TransferMatrix();
 

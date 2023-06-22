@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Vector4.h"
@@ -9,16 +9,16 @@ class Collision
 {
 public:
 	/// <summary>
-	/// ‹…‚Æ•½–Ê‚Ì“–‚½‚è”»’è
+	/// çƒã¨å¹³é¢ã®å½“ãŸã‚Šåˆ¤å®š
 	/// </summary>
-	/// <param name="sphere">‹…</param>
-	/// <param name="plane">•½–Ê</param>
-	/// <param name="inter">Œğ“_i•½–Êã‚ÌÅ‹ßÚ“_j</param>
-	/// <returnsŒğ·‚µ‚Ä‚¢‚é‚©”Û‚©></returns>
+	/// <param name="sphere">çƒ</param>
+	/// <param name="plane">å¹³é¢</param>
+	/// <param name="inter">äº¤ç‚¹ï¼ˆå¹³é¢ä¸Šã®æœ€è¿‘æ¥ç‚¹ï¼‰</param>
+	/// <returnsäº¤å·®ã—ã¦ã„ã‚‹ã‹å¦ã‹></returns>
 	static bool CheckSpere2Plane(const Sphere& sphere, const Plane& plane, MyMath::Vector4* inter = nullptr);
 
 	/// <summary>
-	/// OBB‚ÆOBB‚Ì“–‚½‚è”»’è(QÆ“n‚µ)
+	/// OBBã¨OBBã®å½“ãŸã‚Šåˆ¤å®š(å‚ç…§æ¸¡ã—)
 	/// </summary>
 	/// <param name="obb1">OBB1</param>
 	/// <param name="obb2">OBB2</param>
@@ -26,7 +26,7 @@ public:
 	static bool CheckOBBToOBB(BoundingBox& obb1, BoundingBox& obb2);
 
 	/// <summary>
-	/// OBB‚ÆOBB‚Ì“–‚½‚è”»’è(ƒ|ƒCƒ“ƒ^“n‚µ)
+	/// OBBã¨OBBã®å½“ãŸã‚Šåˆ¤å®š(ãƒã‚¤ãƒ³ã‚¿æ¸¡ã—)
 	/// </summary>
 	/// <param name="obb1">OBB1</param>
 	/// <param name="obb2">OBB2</param>

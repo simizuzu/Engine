@@ -1,4 +1,4 @@
-#include "GameScene.h"
+ï»¿#include "GameScene.h"
 
 #include <imgui.h>
 
@@ -9,9 +9,9 @@ void GameScene::Initialize()
 	camera = std::make_unique<Camera>();
 	camera->Initialize();
 
-	tyoinori = std::make_unique<Model>();
+	tyoinori = std::make_unique<ObjModel>();
 
-	tyoinori.reset(Model::LoadFromObj("tyoinori"));
+	tyoinori.reset(ObjModel::LoadFromObj("tyoinori"));
 	tyoinoriObj.reset(Object3d::Create());
 	tyoinoriObj->SetModel(tyoinori.get());
 
@@ -28,7 +28,7 @@ void GameScene::Update()
 		//AudioManager::GetInstance()->StopWave(gameHandle_);
 	}
 
-	// ImGuiƒEƒBƒ“ƒhƒE‚Ì•\¦ƒIƒ“
+	// ImGuiã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®è¡¨ç¤ºã‚ªãƒ³
 	ImGui::Begin("Obj");
 	ImGui::SetWindowSize({ 500,100 });
 	ImGui::SetWindowPos({ 100,40 });

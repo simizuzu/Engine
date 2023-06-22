@@ -1,27 +1,27 @@
-#include "Input.h"
+ï»¿#include "Input.h"
 
 void Input::Initialize()
 {
 	HRESULT result;
 	WinApp* winApp = WinApp::GetInstance();
 
-	//DirectInput‚Ì‰Šú‰»
+	//DirectInputã®åˆæœŸåŒ–
 	result = DirectInput8Create(winApp->GetHinstance(), DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&directInput, nullptr);
 	assert(SUCCEEDED(result));
 
-	// ƒL[ƒ{[ƒh‰Šú‰»
+	// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰åˆæœŸåŒ–
 	keyboard_ = new Keyboard();
 	keyboard_->Initialize(directInput.Get());
 
-	// ƒRƒ“ƒgƒ[ƒ‰[‰Šú‰»
+	// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼åˆæœŸåŒ–
 	controller_ = new Controller();
 }
 
 void Input::Update() 
 {
-	// ƒL[ƒ{[ƒhˆ—
+	// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰å‡¦ç†
 	keyboard_->Update();
-	// ƒRƒ“ƒgƒ[ƒ‰[ˆ—
+	// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼å‡¦ç†
 	controller_->Update();
 }
 
@@ -31,7 +31,7 @@ Input* Input::GetInstace()
 	return &instance;
 }
 
-#pragma region ƒL[ƒ{[ƒh
+#pragma region ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰
 unsigned char Input::GetKeyTime(int keyName)
 {
 	if (PushKey(keyName))
@@ -49,24 +49,24 @@ unsigned char Input::GetKeyTime(int keyName)
 	return key[keyName];
 }
 
-bool Input::PushKey(BYTE keyNum) { // ‰Ÿ‚µ‚½ó‘Ô
+bool Input::PushKey(BYTE keyNum) { // æŠ¼ã—ãŸçŠ¶æ…‹
 	return keyboard_->PushKey(keyNum);
 }
 
-bool Input::ReleaseKey(BYTE keyNum) { // —£‚µ‚½ó‘Ô
+bool Input::ReleaseKey(BYTE keyNum) { // é›¢ã—ãŸçŠ¶æ…‹
 	return keyboard_->ReleaseKey(keyNum);
 }
 
-bool Input::TriggerPushKey(BYTE keyNum) { // ‰Ÿ‚µ‚½uŠÔ
+bool Input::TriggerPushKey(BYTE keyNum) { // æŠ¼ã—ãŸçž¬é–“
 	return keyboard_->TriggerPushKey(keyNum);
 }
 
-bool Input::TriggerReleaseKey(BYTE keyNum) { // —£‚µ‚½uŠÔ
+bool Input::TriggerReleaseKey(BYTE keyNum) { // é›¢ã—ãŸçž¬é–“
 	return keyboard_->TriggerReleaseKey(keyNum);
 }
 #pragma endregion
 
-#pragma region ƒRƒ“ƒgƒ[ƒ‰[
+#pragma region ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼
 bool Input::TriggerButton(ControllerButton button)
 {
 	return controller_->TriggerButton(button);

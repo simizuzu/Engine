@@ -1,18 +1,18 @@
-#pragma once
+ï»¿#pragma once
 
 #include "TextureManager.h"
 
 class Shader
 {
-public: // ƒGƒCƒŠƒAƒXƒeƒ“ƒvƒŒ[ƒg
+public: // ã‚¨ã‚¤ãƒªã‚¢ã‚¹ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
-public: // ƒƒ“ƒoŠÖ”
-	// ƒXƒvƒ‰ƒCƒg—p
+public: // ãƒ¡ãƒ³ãƒé–¢æ•°
+	// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆç”¨
 	static void CreateSpriteShade(ComPtr<ID3DBlob>& vsBlob, ComPtr<ID3DBlob>& psBlob);
-	// 3DƒIƒuƒWƒFƒNƒg—p
+	// 3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç”¨
 	static void CreateObjShade(ComPtr<ID3DBlob>& vsBlob, ComPtr<ID3DBlob>& psBlob);
-	// ƒp[ƒeƒBƒNƒ‹—p
+	// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ç”¨
 	static void CreateParticleShade(ComPtr<ID3DBlob>& vsBlob, ComPtr<ID3DBlob>& psBlob, ComPtr<ID3DBlob>& gsBlob);
 	static void CreatePostEffectShade(Microsoft::WRL::ComPtr<ID3DBlob>& vsBlob,Microsoft::WRL::ComPtr<ID3DBlob>& psBlob);
 

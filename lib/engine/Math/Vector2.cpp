@@ -1,20 +1,20 @@
-#include"Vector2.h"
+ï»¿#include"Vector2.h"
 #include<cmath>
 
 namespace MyMath
 {
-	// —ëƒxƒNƒgƒ‹
+	// é›¶ãƒ™ã‚¯ãƒˆãƒ«
 	Vector2::Vector2() : x(0.0f), y(0.0f) {}
 
 	Vector2::Vector2(float x, float y) : x(x), y(y) {}
 
-	// ƒxƒNƒgƒ‹‚Ì’·‚³‚ğŒvZ‚·‚é
+	// ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•ã‚’è¨ˆç®—ã™ã‚‹
 	float Vector2::length() const
 	{
 		return std::sqrt(x * x + y * y);
 	}
 
-	// ³‹K‰»ƒxƒNƒgƒ‹
+	// æ­£è¦åŒ–ãƒ™ã‚¯ãƒˆãƒ«
 	Vector2& Vector2::normalized()
 	{
 		float len = length();
@@ -27,18 +27,18 @@ namespace MyMath
 		return *this;
 	}
 
-	// ‚à‚¤ˆê•û‚ÌƒxƒNƒgƒ‹‚Æ‚Ì“àÏ
+	// ã‚‚ã†ä¸€æ–¹ã®ãƒ™ã‚¯ãƒˆãƒ«ã¨ã®å†…ç©
 	float Vector2::dot(const Vector2& v) const
 	{
 		return x * v.x + y * v.y;
 	}
-	//ŠOÏ‚ğ‹‚ß‚é
+	//å¤–ç©ã‚’æ±‚ã‚ã‚‹
 	float Vector2::cross(const Vector2& v) const
 	{
 		return x * v.y - v.x * y;
 	}
 
-	//’P€‰‰ZqƒI[ƒo[ƒ[ƒh
+	//å˜é …æ¼”ç®—å­ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰
 	Vector2 Vector2::operator+() const
 	{
 		return *this;
@@ -49,7 +49,7 @@ namespace MyMath
 		return  Vector2(-x, -y);
 	}
 
-	//‘ã“ü‰‰ZqƒI[ƒo[ƒ[ƒh
+	//ä»£å…¥æ¼”ç®—å­ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰
 	Vector2& Vector2::operator+=(const Vector2& v)
 	{
 		x += v.x;
@@ -82,8 +82,8 @@ namespace MyMath
 		return *this;
 	}
 
-	//Vector2 ƒNƒ‰ƒX‚É‘®‚³‚È‚¢ŠÖ”ŒQ
-	//“ñ€‰‰Zq
+	//Vector2 ã‚¯ãƒ©ã‚¹ã«å±ã•ãªã„é–¢æ•°ç¾¤
+	//äºŒé …æ¼”ç®—å­
 	const Vector2 operator+(const Vector2& v1, const Vector2& v2)
 	{
 		Vector2 temp(v1);

@@ -1,8 +1,8 @@
-#include "Light.h"
+ï»¿#include "Light.h"
 #include <cassert>
 
 /// <summary>
-/// Ã“Iƒƒ“ƒo•Ï”‚ÌÀ‘Ô
+/// é™çš„ãƒ¡ãƒ³ãƒå¤‰æ•°ã®å®Ÿæ…‹
 /// </summary>
 DirectXCommon* Light::device_ = nullptr;
 
@@ -15,24 +15,24 @@ void Light::StaticInitialise(DirectXCommon* device)
 
 Light* Light::Create()
 {
-	//3DƒIƒuƒWƒFƒNƒg‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
+	//3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
 	Light* instance = new Light();
-	//‰Šú‰»
+	//åˆæœŸåŒ–
 	instance->Initialize();
-	//¶¬‚µ‚½ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ•Ô‚·
+	//ç”Ÿæˆã—ãŸã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’è¿”ã™
 	return instance;
 }
 
 void Light::Initialize()
 {
 	HRESULT result;
-	//’è”ƒoƒbƒtƒ@‚Ì¶¬
-	D3D12_HEAP_PROPERTIES heapProp{};//ƒq[ƒvİ’è
-	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPU‚Ö‚Ì“]‘——p
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
+	D3D12_HEAP_PROPERTIES heapProp{};//ãƒ’ãƒ¼ãƒ—è¨­å®š
+	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPUã¸ã®è»¢é€ç”¨
 
 	D3D12_RESOURCE_DESC resDesc{};
 	resDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	resDesc.Width = (sizeof(ConstBufferData) + 0xff) & ~0xff;//’¸“_ƒf[ƒ^‘S‘Ì‚ÌƒTƒCƒY
+	resDesc.Width = (sizeof(ConstBufferData) + 0xff) & ~0xff;//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿å…¨ä½“ã®ã‚µã‚¤ã‚º
 	resDesc.Height = 1;
 	resDesc.DepthOrArraySize = 1;
 	resDesc.MipLevels = 1;
@@ -48,13 +48,13 @@ void Light::Initialize()
 		IID_PPV_ARGS(&constBuff));
 	assert(SUCCEEDED(result));
 
-	//’è”ƒoƒbƒtƒ@‚Öƒf[ƒ^“]‘—
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã¸ãƒ‡ãƒ¼ã‚¿è»¢é€
 	TransferConstBuffer();
 }
 
 void Light::Update()
 {
-	//’l‚ÌXV‚ª‚ ‚Á‚½‚¾‚¯’è”ƒoƒbƒtƒ@‚É“]‘—‚·‚é
+	//å€¤ã®æ›´æ–°ãŒã‚ã£ãŸæ™‚ã ã‘å®šæ•°ãƒãƒƒãƒ•ã‚¡ã«è»¢é€ã™ã‚‹
 	if (dirty)
 	{
 		TransferConstBuffer();
@@ -71,7 +71,7 @@ void Light::TransferConstBuffer()
 {
 	HRESULT result;
 
-	//’è”ƒoƒbƒtƒ@‚Öƒf[ƒ^“]‘—
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã¸ãƒ‡ãƒ¼ã‚¿è»¢é€
 	ConstBufferData* constMap = nullptr;
 	result = constBuff->Map(0, nullptr, (void**)&constMap);
 	if (SUCCEEDED(result))
@@ -84,7 +84,7 @@ void Light::TransferConstBuffer()
 
 void Light::SetLightDir(const MyMath::Vector4& lightdir)
 {
-	//³‹K‰»‚µ‚ÄƒZƒbƒg
+	//æ­£è¦åŒ–ã—ã¦ã‚»ãƒƒãƒˆ
 	this->lightdir.x = lightdir.x;
 	this->lightdir.y = lightdir.y;
 	this->lightdir.z = lightdir.z;

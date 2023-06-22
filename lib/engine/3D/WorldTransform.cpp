@@ -1,4 +1,4 @@
-#include "WorldTransform.h"
+ï»¿#include "WorldTransform.h"
 
 void WorldTransform::Initialize()
 {
@@ -10,20 +10,20 @@ void WorldTransform::Update(Camera* camera, bool billboradFlag)
 	HRESULT result;
 	MyMath::Matrix4 matScale, matRot, matTrans;
 
-	//ƒXƒP[ƒ‹A‰ñ“]•½sˆÚ“®s—ñ‚ÌŒvŽZ
+	//ã‚¹ã‚±ãƒ¼ãƒ«ã€å›žè»¢å¹³è¡Œç§»å‹•è¡Œåˆ—ã®è¨ˆç®—
 	matScale = MyMathUtility::MakeScaling(scale_);
 	matRot = MyMathUtility::MakeRotation(rotation_);
 	matTrans = MyMathUtility::MakeTranslation(translation_);
 
-	//ƒ[ƒ‹ƒhs—ñ‚Ì‡¬
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®åˆæˆ
 	matWorld = MyMathUtility::MakeIdentity();
-	//ƒ[ƒ‹ƒhs—ñ‚ÉƒXƒP[ƒŠƒ“ƒO‚ð”½‰f
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã«ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°ã‚’åæ˜ 
 	matWorld *= matScale;
-	//ƒ[ƒ‹ƒhs—ñ‚É‰ñ“]‚ð”½‰f
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã«å›žè»¢ã‚’åæ˜ 
 	matWorld *= matRot;
-	//ƒ[ƒ‹ƒhs—ñ‚É•½sˆÚ“®‚ð”½‰f
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã«å¹³è¡Œç§»å‹•ã‚’åæ˜ 
 	matWorld *= matTrans;
-	//es—ñ‚ÌŽw’è‚ª‚ ‚éê‡‚ÍAŠ|‚¯ŽZ‚·‚é
+	//è¦ªè¡Œåˆ—ã®æŒ‡å®šãŒã‚ã‚‹å ´åˆã¯ã€æŽ›ã‘ç®—ã™ã‚‹
 	if (parent != nullptr)
 	{
 		matWorld *= parent->matWorld;
@@ -35,7 +35,7 @@ void WorldTransform::Update(Camera* camera, bool billboradFlag)
 		const MyMath::Matrix4 matProjection = camera->GetMatProjection();
 		const MyMath::Vector3& cameraPos = camera->GetEye();
 
-		// ’è”ƒoƒbƒtƒ@‚Öƒf[ƒ^“]‘—
+		// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã¸ãƒ‡ãƒ¼ã‚¿è»¢é€
 		ConstBufferDataB0* constMap = nullptr;
 		result = constBuffer_->Map(0, nullptr, (void**)&constMap);
 		assert(SUCCEEDED(result));
@@ -56,7 +56,7 @@ void WorldTransform::Update(Camera* camera, bool billboradFlag)
 
 	//	matWorld = matScale * matRot * mat * matTrans * camera->GetMatView() * camera->GetMatProjection();
 
-	//	//’è”ƒoƒbƒtƒ@‚Öƒf[ƒ^“]‘—
+	//	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã¸ãƒ‡ãƒ¼ã‚¿è»¢é€
 	//	ConstBufferDataB0* constMap = nullptr;
 	//	result = constBuffer_->Map(0, nullptr, (void**)&constMap);
 	//	assert(SUCCEEDED(result));
@@ -69,20 +69,20 @@ void WorldTransform::CreateConstBuffer()
 {
 	HRESULT result;
 
-	//’¸“_ƒoƒbƒtƒ@‚ÌÝ’è
-	D3D12_HEAP_PROPERTIES heapProp{};//ƒq[ƒvÝ’è
-	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPU‚Ö‚Ì“]‘——p
-	//ƒŠƒ\[ƒXÝ’è
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
+	D3D12_HEAP_PROPERTIES heapProp{};//ãƒ’ãƒ¼ãƒ—è¨­å®š
+	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPUã¸ã®è»¢é€ç”¨
+	//ãƒªã‚½ãƒ¼ã‚¹è¨­å®š
 	D3D12_RESOURCE_DESC resDesc{};
 	resDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	resDesc.Width = (sizeof(ConstBufferDataB0) + 0xff) & ~0xff;//’¸“_ƒf[ƒ^‘S‘Ì‚ÌƒTƒCƒY
+	resDesc.Width = (sizeof(ConstBufferDataB0) + 0xff) & ~0xff;//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿å…¨ä½“ã®ã‚µã‚¤ã‚º
 	resDesc.Height = 1;
 	resDesc.DepthOrArraySize = 1;
 	resDesc.MipLevels = 1;
 	resDesc.SampleDesc.Count = 1;
 	resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	//’è”ƒoƒbƒtƒ@‚Ì¶¬
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
 	result = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
 		&heapProp,
 		D3D12_HEAP_FLAG_NONE,

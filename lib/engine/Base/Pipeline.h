@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <d3d12.h>
 #include <wrl.h>
 #include <array>
@@ -8,31 +8,31 @@
 
 class Pipeline
 {
-public: // ƒGƒCƒŠƒAƒXƒeƒ“ƒvƒŒ[ƒg
+public: // ã‚¨ã‚¤ãƒªã‚¢ã‚¹ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
-public: // ƒƒ“ƒoŠÖ”
+public: // ãƒ¡ãƒ³ãƒé–¢æ•°
 
 	/// <summary>
-	/// ƒpƒCƒvƒ‰ƒCƒ“ŒÄ‚Ño‚µ—pŠÖ”(ƒXƒvƒ‰ƒCƒg)
+	/// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³å‘¼ã³å‡ºã—ç”¨é–¢æ•°(ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ)
 	/// </summary>
 	static void CreateSpritePipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode blend,ID3D12Device* device, std::array<RootsigSetPip,6>&pipeline);
 
 	/// <summary>
-	/// ƒpƒCƒvƒ‰ƒCƒ“ŒÄ‚Ño‚µ—pŠÖ”(3DƒIƒuƒWƒFƒNƒg)
+	/// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³å‘¼ã³å‡ºã—ç”¨é–¢æ•°(3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ)
 	/// </summary>
 	static void CreateObjPipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode blend, ID3D12Device* device, RootsigSetPip& pipeline);
 
 	/// <summary>
-	/// ƒpƒCƒvƒ‰ƒCƒ“ŒÄ‚Ño‚µ—pŠÖ”(ƒp[ƒeƒBƒNƒ‹)
+	/// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³å‘¼ã³å‡ºã—ç”¨é–¢æ•°(ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«)
 	/// </summary>
 	static void CreatePaticlePipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, ID3DBlob* gsBlob, ID3D12Device* device, RootsigSetPip& pipeline);
 
 	static void CreatePostEffectPipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, ID3D12Device* device, RootsigSetPip& pipeline);
 
-private: // ƒƒ“ƒo•Ï”
+private: // ãƒ¡ãƒ³ãƒå¤‰æ•°
 
-	// ƒNƒ‰ƒXŒÄ‚Ño‚µ
+	// ã‚¯ãƒ©ã‚¹å‘¼ã³å‡ºã—
 	DirectXCommon* dxCommon_ = nullptr;
 };
 

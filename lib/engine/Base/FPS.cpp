@@ -1,33 +1,33 @@
-#include "FPS.h"
+ï»¿#include "FPS.h"
 
 void FPS::InitializeFixFps()
 {
-	// Œ»İŠÔ‚ğ‹L˜^‚·‚é
+	// ç¾åœ¨æ™‚é–“ã‚’è¨˜éŒ²ã™ã‚‹
 	reference_ = std::chrono::steady_clock::now();
 }
 
 void FPS::UpdateFixFPS()
 {
-	// 1/60•b‚Ò‚Á‚½‚è‚ÌŠÔ
+	// 1/60ç§’ã´ã£ãŸã‚Šã®æ™‚é–“
 	const std::chrono::microseconds kMinTime(uint64_t(1000000.0f / 60.0f));
-	// 1/60•b‚æ‚è‚í‚¸‚©‚É’Z‚¢ŠÔ
+	// 1/60ç§’ã‚ˆã‚Šã‚ãšã‹ã«çŸ­ã„æ™‚é–“
 	const std::chrono::microseconds kMinCheckTime(uint64_t(1000000.0f / 65.0f));
 
-	// Œ»İŠÔ‚ğæ“¾‚·‚é
+	// ç¾åœ¨æ™‚é–“ã‚’å–å¾—ã™ã‚‹
 	std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
-	// ‘O‰ñ‹L˜^‚©‚ç‚ÌŒo‰ßŠÔ‚ğæ“¾‚·‚é
+	// å‰å›è¨˜éŒ²ã‹ã‚‰ã®çµŒéæ™‚é–“ã‚’å–å¾—ã™ã‚‹
 	std::chrono::microseconds elapsed = std::chrono::duration_cast<std::chrono::microseconds>(now - reference_);
 
-	// 1/60•bi‚æ‚è‚í‚¸‚©‚É’Z‚¢ŠÔjŒo‚Á‚Ä‚¢‚È‚¢ê‡
+	// 1/60ç§’ï¼ˆã‚ˆã‚Šã‚ãšã‹ã«çŸ­ã„æ™‚é–“ï¼‰çµŒã£ã¦ã„ãªã„å ´åˆ
 	if (elapsed < kMinCheckTime)
 	{
-		// 1/60•bŒo‰ß‚·‚é‚Ü‚Å”÷¬‚ÈƒXƒŠ[ƒv‚ğŒJ‚è•Ô‚·
+		// 1/60ç§’çµŒéã™ã‚‹ã¾ã§å¾®å°ãªã‚¹ãƒªãƒ¼ãƒ—ã‚’ç¹°ã‚Šè¿”ã™
 		while (std::chrono::steady_clock::now() - reference_ < kMinTime)
 		{
-			// 1ƒ}ƒCƒNƒ•bƒXƒR[ƒv
+			// 1ãƒã‚¤ã‚¯ãƒ­ç§’ã‚¹ã‚³ãƒ¼ãƒ—
 			std::this_thread::sleep_for(std::chrono::microseconds(1));
 		}
 	}
-	// Œ»İ‚ÌŠÔ‚ğ‹L˜^‚·‚é
+	// ç¾åœ¨ã®æ™‚é–“ã‚’è¨˜éŒ²ã™ã‚‹
 	reference_ = std::chrono::steady_clock::now();
 }

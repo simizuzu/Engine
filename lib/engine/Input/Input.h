@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <memory>
 #include "Keyboard.h"
 #include "Controller.h"
@@ -11,7 +11,7 @@ using namespace DirectX;
 class Input
 {
 private:
-	// ƒeƒ“ƒvƒŒ[ƒg
+	// ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
 	ComPtr<IDirectInput8> directInput;

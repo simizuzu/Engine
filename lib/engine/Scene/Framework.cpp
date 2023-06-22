@@ -1,4 +1,4 @@
-#include "Framework.h"
+Ôªø#include "Framework.h"
 
 void Framework::Initialize()
 {
@@ -11,20 +11,20 @@ void Framework::Initialize()
 	postEffect = std::make_unique<PostEffect>();
 	postEffect->Initialize();
 
-	// WindowsAPIèâä˙âª
+	// WindowsAPIÂàùÊúüÂåñ
 	winApp_->Initialize();
-	// FPSå≈íËèâä˙âª
+	// FPSÂõ∫ÂÆöÂàùÊúüÂåñ
 	fps_ = new FPS();
 	fps_->InitializeFixFps();
-	// DirectXèâä˙âª
+	// DirectXÂàùÊúüÂåñ
 	dxCommon_->Initialize();
-	// ÉXÉvÉâÉCÉgã§í ïîÇÃèâä˙âª
+	// „Çπ„Éó„É©„Ç§„ÉàÂÖ±ÈÄöÈÉ®„ÅÆÂàùÊúüÂåñ
 	textureManager_->Initialize(dxCommon_);
-	// Audioèâä˙âª
+	// AudioÂàùÊúüÂåñ
 	audioManager->Initialize();
-	// ImGuièâä˙âª
+	// ImGuiÂàùÊúüÂåñ
 	imGuiManager->Initialize(winApp_, dxCommon_);
-	// Inputèâä˙âª
+	// InputÂàùÊúüÂåñ
 	input_->Initialize();
 
 	sceneManager_ = SceneManager::GetInstance();
@@ -36,68 +36,68 @@ void Framework::Finalize()
 	sceneManager_->Finalize();
 	delete sceneFactory_;
 
-	// ImGuiâï˙
+	// ImGuiËß£Êîæ
 	imGuiManager->Finalize();
-	// ÉeÉNÉXÉ`ÉÉÉ}ÉlÅ[ÉWÉÉâï˙
+	// „ÉÜ„ÇØ„Çπ„ÉÅ„É£„Éû„Éç„Éº„Ç∏„É£Ëß£Êîæ
 	textureManager_->Delete();
-	// ÉIÅ[ÉfÉBÉIÉ}ÉlÅ[ÉWÉÉÅ[èâä˙âª
+	// „Ç™„Éº„Éá„Ç£„Ç™„Éû„Éç„Éº„Ç∏„É£„ÉºÂàùÊúüÂåñ
 	audioManager->Destroy();
-	// WindowsAPIÇÃèIóπèàóù
+	// WindowsAPI„ÅÆÁµÇ‰∫ÜÂá¶ÁêÜ
 	winApp_->Finalize();
-	// WinAppâï˙
+	// WinAppËß£Êîæ
 	winApp_->Delete();
-	// FPSâï˙
+	// FPSËß£Êîæ
 	delete fps_;
 }
 
 void Framework::Update()
 {
-	// WindowsÇÃÉÅÉbÉZÅ[ÉWèàóù
+	// Windows„ÅÆ„É°„ÉÉ„Çª„Éº„Ç∏Âá¶ÁêÜ
 	if (winApp_->ProccessMessage())
 	{
 		endRequest_ = true;
 	}
-	// ì¸óÕÇÃçXêV
+	// ÂÖ•Âäõ„ÅÆÊõ¥Êñ∞
 	input_->Update();
 	audioManager->Update();
 
-	// ImGuiçXêVèàóùäJén
+	// ImGuiÊõ¥Êñ∞Âá¶ÁêÜÈñãÂßã
 	imGuiManager->Begin();
-	// ÉQÅ[ÉÄÉVÅ[ÉìÇÃñàÉtÉåÅ[ÉÄèàóù
+	// „Ç≤„Éº„É†„Ç∑„Éº„É≥„ÅÆÊØé„Éï„É¨„Éº„É†Âá¶ÁêÜ
 	//gameScene->Update();
 	sceneManager_->Update();
 	
-	// ImGuiçXêVèàóùèIóπ
+	// ImGuiÊõ¥Êñ∞Âá¶ÁêÜÁµÇ‰∫Ü
 	imGuiManager->End();
 }
 
 void Framework::Run()
 {
-	// ÉQÅ[ÉÄÇÃèâä˙âª
+	// „Ç≤„Éº„É†„ÅÆÂàùÊúüÂåñ
 	Initialize();
 
-	while (true) // ÉQÅ[ÉÄÉãÅ[Év
+	while (true) // „Ç≤„Éº„É†„É´„Éº„Éó
 	{
-		// ñàÉtÉåÅ[ÉÄçXêV
+		// ÊØé„Éï„É¨„Éº„É†Êõ¥Êñ∞
 		Update();
-		// èIóπÉäÉNÉGÉXÉgÇ™óàÇΩÇÁî≤ÇØÇÈ
+		// ÁµÇ‰∫Ü„É™„ÇØ„Ç®„Çπ„Éà„ÅåÊù•„Åü„ÇâÊäú„Åë„Çã
 		if (IsEndRequest())
 		{
 			break;
 		}
 		dxCommon_->PreDraw(winApp_);
 		postEffect->PreDrawScene(dxCommon_->GetCommandList(),winApp_);
-		// ï`âÊ
+		// ÊèèÁîª
 		Draw();
-		//ImGuiï`âÊ
+		//ImGuiÊèèÁîª
 		postEffect->PostDrawScene(dxCommon_->GetCommandList());
 		imGuiManager->Draw(dxCommon_);
 		postEffect->Draw(dxCommon_->GetCommandList());
 		dxCommon_->PostDraw();
-		// FPSå≈íËçXêV
+		// FPSÂõ∫ÂÆöÊõ¥Êñ∞
 		fps_->UpdateFixFPS();
 	}
-	// ÉQÅ[ÉÄèIóπ
+	// „Ç≤„Éº„É†ÁµÇ‰∫Ü
 	Finalize();
 }
 

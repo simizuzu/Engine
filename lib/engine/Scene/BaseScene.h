@@ -1,32 +1,32 @@
-#pragma once
+ï»¿#pragma once
 
-// ‘O•ûéŒ¾
+// å‰æ–¹å®£è¨€
 class SceneManager;
 
-// ƒV[ƒ“Šî’êƒNƒ‰ƒX
+// ã‚·ãƒ¼ãƒ³åŸºåº•ã‚¯ãƒ©ã‚¹
 class BaseScene
 {
-public: // ƒƒ“ƒoŠÖ”
+public: // ãƒ¡ãƒ³ãƒé–¢æ•°
 
 	virtual ~BaseScene() = default;
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	virtual void Initialize() = 0;
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	virtual void Update() = 0;
 	
 	/// <summary>
-	/// •`‰æ
+	/// æç”»
 	/// </summary>
 	virtual void Draw() = 0;
 
 	/// <summary>
-	/// I—¹ˆ—
+	/// çµ‚äº†å‡¦ç†
 	/// </summary>
 	virtual void Finalize() = 0;
 
@@ -34,7 +34,7 @@ public:
 	virtual void SetSceneManager(SceneManager* sceneManager);
 
 private:
-	// ƒV[ƒ“ƒ}ƒl[ƒWƒƒiØ‚è‚Ä‚­‚éj
+	// ã‚·ãƒ¼ãƒ³ãƒãƒãƒ¼ã‚¸ãƒ£ï¼ˆå€Ÿã‚Šã¦ãã‚‹ï¼‰
 	SceneManager* sceneManager_ = nullptr;
 };
 

@@ -1,10 +1,10 @@
-#include <Windows.h>
+ï»¿#include <Windows.h>
 #include <memory>
 
 #include "MainGame.h"
 #include "Framework.h"
 
-// WindowsƒAƒvƒŠ‚Å‚ÌƒGƒ“ƒgƒŠ[ƒ|ƒCƒ“ƒg(mainŠÖ”)
+// Windowsã‚¢ãƒ—ãƒªã§ã®ã‚¨ãƒ³ãƒˆãƒªãƒ¼ãƒã‚¤ãƒ³ãƒˆ(mainé–¢æ•°)
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int){
 
 	std::unique_ptr<Framework> game = std::make_unique<MainGame>();

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "WinApp.h"
 #include "DirectXCommon.h"
 #include "Input.h"
@@ -12,27 +12,27 @@
 #include "SceneManager.h"
 #include "AbstractSceneFactory.h"
 
-// ƒQ[ƒ€‘S‘Ì
+// ã‚²ãƒ¼ãƒ å…¨ä½“
 class Framework
 {
-public: // ƒƒ“ƒoŠÖ”
+public: // ãƒ¡ãƒ³ãƒé–¢æ•°
 	virtual ~Framework() = default;
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	virtual void Initialize();
-	// XV
+	// æ›´æ–°
 	virtual void Finalize();
-	// –ˆƒtƒŒ[ƒ€XV
+	// æ¯ãƒ•ãƒ¬ãƒ¼ãƒ æ›´æ–°
 	virtual void Update();
-	// •`‰æ
+	// æç”»
 	virtual void Draw() = 0;
-	// I—¹ƒ`ƒFƒbƒN
+	// çµ‚äº†ãƒã‚§ãƒƒã‚¯
 	virtual bool IsEndRequest();
 
-	// Às
+	// å®Ÿè¡Œ
 	void Run();
 
 protected:
-	// ƒQ[ƒ€I—¹ƒtƒ‰ƒO
+	// ã‚²ãƒ¼ãƒ çµ‚äº†ãƒ•ãƒ©ã‚°
 	bool endRequest_ = false;
 
 	WinApp* winApp_ = nullptr;

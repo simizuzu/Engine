@@ -1,4 +1,4 @@
-#include "Matrix4.h"
+ï»¿#include "Matrix4.h"
 
 namespace MyMath
 {
@@ -91,7 +91,7 @@ namespace MyMath
 		return tmp;
 	}
 
-	// ’PˆÊs—ñ‚ğ‹‚ß‚é
+	// å˜ä½è¡Œåˆ—ã‚’æ±‚ã‚ã‚‹
 	Matrix4 Matrix4::identity()
 	{
 		static const Matrix4 result

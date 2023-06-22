@@ -1,50 +1,50 @@
-#include "Keyboard.h"
+ï»¿#include "Keyboard.h"
 
 void Keyboard::Initialize(IDirectInput8* directInput)
 {
 	HRESULT result;
 	WinApp* winApp = WinApp::GetInstance();
 
-	//ƒL[ƒ{[ƒhƒfƒoƒCƒX‚Ì¶¬
+	//ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ãƒ‡ãƒã‚¤ã‚¹ã®ç”Ÿæˆ
 	result = directInput->CreateDevice(GUID_SysKeyboard, &keyboard, NULL);
 	assert(SUCCEEDED(result));
 
-	//“ü—Íƒf[ƒ^Œ`®‚ÌƒZƒbƒg
-	result = keyboard->SetDataFormat(&c_dfDIKeyboard);//•W€Œ`®
+	//å…¥åŠ›ãƒ‡ãƒ¼ã‚¿å½¢å¼ã®ã‚»ãƒƒãƒˆ
+	result = keyboard->SetDataFormat(&c_dfDIKeyboard);//æ¨™æº–å½¢å¼
 	assert(SUCCEEDED(result));
 
-	//”r‘¼§ŒäƒŒƒxƒ‹‚ÌƒZƒbƒg
+	//æ’ä»–åˆ¶å¾¡ãƒ¬ãƒ™ãƒ«ã®ã‚»ãƒƒãƒˆ
 	result = keyboard->SetCooperativeLevel(winApp->GetHwnd(), DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
 	assert(SUCCEEDED(result));
 }
 
 void Keyboard::Update()
 {
-	// ‘SƒL[‚Ì“ü—Íó‘Ô‚ğæ“¾‚·‚é
+	// å…¨ã‚­ãƒ¼ã®å…¥åŠ›çŠ¶æ…‹ã‚’å–å¾—ã™ã‚‹
 
 	for (int i = 0; i < _countof(oldkey); i++)
 	{
 		oldkey[i] = key[i];
 	}
 
-	//ƒL[ƒ{[ƒhî•ñ‚Ìæ“¾ŠJn
+	//ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰æƒ…å ±ã®å–å¾—é–‹å§‹
 	keyboard->Acquire();
 	keyboard->GetDeviceState(sizeof(key), key);
 }
 
 
-bool Keyboard::PushKey(BYTE keyNum) { // ‰Ÿ‚µ‚½ó‘Ô
+bool Keyboard::PushKey(BYTE keyNum) { // æŠ¼ã—ãŸçŠ¶æ…‹
 	return key[keyNum];
 }
 
-bool Keyboard::ReleaseKey(BYTE keyNum) { // —£‚µ‚½ó‘Ô
+bool Keyboard::ReleaseKey(BYTE keyNum) { // é›¢ã—ãŸçŠ¶æ…‹
 	return !key[keyNum] && !oldkey[keyNum];
 }
 
-bool Keyboard::TriggerPushKey(BYTE keyNum) { // ‰Ÿ‚µ‚½uŠÔ
+bool Keyboard::TriggerPushKey(BYTE keyNum) { // æŠ¼ã—ãŸç¬é–“
 	return key[keyNum] && !oldkey[keyNum];
 }
 
-bool Keyboard::TriggerReleaseKey(BYTE keyNum) { // —£‚µ‚½uŠÔ
+bool Keyboard::TriggerReleaseKey(BYTE keyNum) { // é›¢ã—ãŸç¬é–“
 	return !key[keyNum] && oldkey[keyNum];
 }

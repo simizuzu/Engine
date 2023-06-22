@@ -1,15 +1,15 @@
-#pragma once
+ï»¿#pragma once
 #include <chrono>
 #include <thread>
 
 class FPS
 {
-public: // ƒƒ“ƒo•Ï”
-	// FPSŒÅ’è‰Šú‰»
+public: // ãƒ¡ãƒ³ãƒå¤‰æ•°
+	// FPSå›ºå®šåˆæœŸåŒ–
 	void InitializeFixFps();
-	// FPSŒÅ’èXV
+	// FPSå›ºå®šæ›´æ–°
 	void UpdateFixFPS();
 
-	// ‹L˜^ŠÔ(FPSŒÅ’è—p)
+	// è¨˜éŒ²æ™‚é–“(FPSå›ºå®šç”¨)
 	std::chrono::steady_clock::time_point reference_;
 };

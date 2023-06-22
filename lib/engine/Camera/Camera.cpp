@@ -1,18 +1,18 @@
-#include "Camera.h"
+ï»¿#include "Camera.h"
 
 ViewProjection viewPro;
 ConstBufferDataViewProjection ConstMap;
 
 void Camera::Initialize()
 {
-	eye_ = { 0,0,-distance };//‹“_À•W
-	target_ = { 0,0,0 };//’‹“_À•W
-	up_ = { 0,1,0 };//ã•ûŒüƒxƒNƒgƒ‹
+	eye_ = { 0,0,-distance };//è¦–ç‚¹åº§æ¨™
+	target_ = { 0,0,0 };//æ³¨è¦–ç‚¹åº§æ¨™
+	up_ = { 0,1,0 };//ä¸Šæ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«
 
 	nearZ_ = 0.1f;
 	farZ_ = 1000.0f;
 
-	// ƒAƒXƒyƒNƒg”ä‚ğŒvZ(‰æ–Ê‰¡•/‰æ–Êc•)
+	// ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”ã‚’è¨ˆç®—(ç”»é¢æ¨ªå¹…/ç”»é¢ç¸¦å¹…)
 	aspect = 
 		static_cast<float>(WinApp::GetInstance()->window_width) /
 		static_cast<float>(WinApp::GetInstance()->window_height);
@@ -31,20 +31,20 @@ void Camera::CreateConstBuffer()
 {
 	HRESULT result;
 
-	//’¸“_ƒoƒbƒtƒ@‚Ìİ’è
-	D3D12_HEAP_PROPERTIES heapProp{};//ƒq[ƒvİ’è
-	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPU‚Ö‚Ì“]‘——p
-	//ƒŠƒ\[ƒXİ’è
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
+	D3D12_HEAP_PROPERTIES heapProp{};//ãƒ’ãƒ¼ãƒ—è¨­å®š
+	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPUã¸ã®è»¢é€ç”¨
+	//ãƒªã‚½ãƒ¼ã‚¹è¨­å®š
 	D3D12_RESOURCE_DESC resDesc{};
 	resDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	resDesc.Width = (sizeof(ConstBufferDataViewProjection) + 0xff) & ~0xff;//’¸“_ƒf[ƒ^‘S‘Ì‚ÌƒTƒCƒY
+	resDesc.Width = (sizeof(ConstBufferDataViewProjection) + 0xff) & ~0xff;//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿å…¨ä½“ã®ã‚µã‚¤ã‚º
 	resDesc.Height = 1;
 	resDesc.DepthOrArraySize = 1;
 	resDesc.MipLevels = 1;
 	resDesc.SampleDesc.Count = 1;
 	resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	//’è”ƒoƒbƒtƒ@‚Ì¶¬
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
 	result = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
 		&heapProp,
 		D3D12_HEAP_FLAG_NONE,
@@ -59,26 +59,26 @@ void Camera::Map()
 {
 	HRESULT result;
 
-	//’è”ƒoƒbƒtƒ@‚Ìƒ}ƒbƒsƒ“ƒO
-	result = viewPro.constBuff_->Map(0, nullptr, (void**)&viewPro.constBuffMap);//ƒ}ƒbƒsƒ“ƒO
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ãƒãƒƒãƒ”ãƒ³ã‚°
+	result = viewPro.constBuff_->Map(0, nullptr, (void**)&viewPro.constBuffMap);//ãƒãƒƒãƒ”ãƒ³ã‚°
 	assert(SUCCEEDED(result));
 }
 
 void Camera::UpdateMatrix()
 {
-	// ƒrƒ…[s—ñ‚Ì¶¬
+	// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã®ç”Ÿæˆ
 	matView_ = MyMathUtility::MakeLookAtLH(eye_, target_, up_);
-	// ‹ts—ñ
+	// é€†è¡Œåˆ—
 	matViewInverse_ = MyMathUtility::MakeInverse(matView_);
-	// “§‹“Š‰e‚Ì¶¬
+	// é€è¦–æŠ•å½±ã®ç”Ÿæˆ
 	matProjection_ = MyMathUtility::MakePerspective(fovAngleY, aspect, nearZ_, farZ_);
-	// ’è”ƒoƒbƒtƒ@‚É“]‘—
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã«è»¢é€
 	TransferMatrix();
 }
 
 void Camera::TransferMatrix()
 {
-	// ’è”ƒoƒbƒtƒ@‚É‘‚«‚İ
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã«æ›¸ãè¾¼ã¿
 	ConstMap.view = matView_;
 	ConstMap.projection = matProjection_;
 	ConstMap.cameraPos = eye_;

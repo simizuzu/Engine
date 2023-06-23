@@ -29,6 +29,9 @@ echo assimp終了
 START /wait vcpkg.exe install nlohmann-json:x64-windows-static
 echo nlohmann-json終了
 
+START /wait vcpkg.exe install directx-headers:x64-windows-static
+echo directx-Headers終了
+
 echo libファイル生成終了
 
 echo 生成ファイル移動開始

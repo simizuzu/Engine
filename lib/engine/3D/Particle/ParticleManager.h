@@ -1,5 +1,4 @@
 #pragma once
-#include "AvoidWarning.h"
 #include "Shader.h"
 #include "Pipeline.h"
 #include "DirectXCommon.h"

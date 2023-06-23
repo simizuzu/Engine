@@ -353,9 +353,6 @@
     <ClInclude Include="lib\engine\3D\Particle\ParticleManager.h">
       <Filter>Engine\ヘッダー ファイル\3D\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="lib\engine\Base\AvoidWarning.h">
-      <Filter>Engine\ヘッダー ファイル\Base</Filter>
-    </ClInclude>
     <ClInclude Include="lib\engine\3D\WorldTransform.h">
       <Filter>Engine\ヘッダー ファイル\3D</Filter>
     </ClInclude>

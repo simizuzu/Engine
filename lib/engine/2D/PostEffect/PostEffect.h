@@ -2,7 +2,7 @@
 #include <DirectXMath.h>
 #include <memory>
 #include <wrl.h>
-#include <d3dx12.h>
+#include <directx/d3dx12.h>
 
 #include "DirectX12Math.h"
 #include "TextureManager.h"

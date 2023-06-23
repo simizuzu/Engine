@@ -148,7 +148,6 @@
     <ClInclude Include="lib\engine\3D\Particle\ParticleManager.h" />
     <ClInclude Include="lib\engine\3D\WorldTransform.h" />
     <ClInclude Include="lib\engine\Audio\AudioManager.h" />
-    <ClInclude Include="lib\engine\Base\AvoidWarning.h" />
     <ClInclude Include="lib\engine\Base\DirectXCommon.h" />
     <ClInclude Include="lib\engine\Base\FPS.h" />
     <ClInclude Include="lib\engine\Base\Light.h" />

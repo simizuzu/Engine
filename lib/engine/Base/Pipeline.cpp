@@ -512,7 +512,7 @@ void Pipeline::CreatePostEffectPipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, ID3D
 	//パイプラインにルートシグネチャをセット
 	gpipeline.pRootSignature = pipeline.rootSignature.Get();
 
-	//パイプラインステートの生成
+	// グラフィックスパイプラインの生成
 	result = device->CreateGraphicsPipelineState(&gpipeline, IID_PPV_ARGS(&pipeline.pipelineState));
 	assert(SUCCEEDED(result));
 }

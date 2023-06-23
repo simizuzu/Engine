@@ -8,8 +8,6 @@ void Framework::Initialize()
 	audioManager = AudioManager::GetInstance();
 	textureManager_ = TextureManager::GetInstance();
 	imGuiManager = ImGuiManager::GetInstance();
-	postEffect = std::make_unique<PostEffect>();
-	postEffect->Initialize();
 
 	// WindowsAPI初期化
 	winApp_->Initialize();
@@ -26,6 +24,9 @@ void Framework::Initialize()
 	imGuiManager->Initialize(winApp_, dxCommon_);
 	// Input初期化
 	input_->Initialize();
+
+	postEffect = std::make_unique<PostEffect>();
+	postEffect->Initialize();
 
 	sceneManager_ = SceneManager::GetInstance();
 }
@@ -87,7 +88,7 @@ void Framework::Run()
 		}
 		dxCommon_->PreDraw(winApp_);
 		postEffect->PreDrawScene(dxCommon_->GetCommandList(),winApp_);
-		// 描画
+		// シーンの描画
 		Draw();
 		//ImGui描画
 		postEffect->PostDrawScene(dxCommon_->GetCommandList());

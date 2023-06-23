@@ -103,3 +103,13 @@ WinApp* WinApp::GetInstance()
 
 	return &winApp;
 }
+
+HWND WinApp::GetHwnd() const 
+{ 
+	return hwnd;
+}
+
+HINSTANCE WinApp::GetHinstance() const
+{
+	return w.hInstance;
+}

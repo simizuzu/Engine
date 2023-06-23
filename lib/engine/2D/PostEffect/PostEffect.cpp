@@ -24,7 +24,6 @@ PostEffect* PostEffect::Create()
 bool PostEffect::Initialize()
 {
 	device_ = dxCommon->GetInstance()->GetDevice();
-	winApp_->GetInstance();
 
 	//パイプライン生成
 	Microsoft::WRL::ComPtr<ID3DBlob> vsBlob;
@@ -33,11 +32,11 @@ bool PostEffect::Initialize()
 	Pipeline::CreatePostEffectPipeline(vsBlob.Get(), psBlob.Get(), device_.Get(), pipline_);
 
 	CreateVertexData(device_.Get());
-	CreateTextureBuff(device_.Get(),winApp_.get());
+	CreateTextureBuff(device_.Get());
 	CreateSRVDesc(device_.Get());
 	CreateRTVDesc(device_.Get());
 	CreateDepthBuff(device_.Get());
-	CreateDSVDesc(device_.Get(), winApp_.get());
+	CreateDSVDesc(device_.Get());
 
 	return false;
 }
@@ -52,9 +51,8 @@ void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList)
 	cmdList->SetGraphicsRootDescriptorTable(1, descHeapSRV->GetGPUDescriptorHandleForHeapStart());
 }
 
-void PostEffect::PreDrawScene(ID3D12GraphicsCommandList* cmdList, WinApp* winApp)
+void PostEffect::PreDrawScene(ID3D12GraphicsCommandList* cmdList,WinApp* winApp)
 {
-	//winApp = winApp->GetInstance();
 	//リソースバリアを変更（シェーダーリソース→描画可能）
 	CD3DX12_RESOURCE_BARRIER CHANGE_RENDER_TARGET =
 		CD3DX12_RESOURCE_BARRIER::Transition(texBuff.Get(), D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_RENDER_TARGET);
@@ -71,11 +69,11 @@ void PostEffect::PreDrawScene(ID3D12GraphicsCommandList* cmdList, WinApp* winApp
 
 	//ビューポートの設定
 	CD3DX12_VIEWPORT VIEWPORT =
-		CD3DX12_VIEWPORT(0.0f, 0.0f, winApp->window_width, winApp->window_height);
+		CD3DX12_VIEWPORT(0.0f, 0.0f, winApp_->window_width, winApp_->window_height);
 	cmdList->RSSetViewports(1, &VIEWPORT);
 	//シザリング矩形の設定
 	CD3DX12_RECT RECT =
-		CD3DX12_RECT(0, 0, winApp->window_width, winApp->window_height);
+		CD3DX12_RECT(0, 0, winApp_->window_width, winApp_->window_height);
 	cmdList->RSSetScissorRects(1, &RECT);
 
 	//全画面クリア
@@ -144,16 +142,15 @@ void PostEffect::CreateVertexData(ID3D12Device* device)
 	assert(SUCCEEDED(result));
 }
 
-void PostEffect::CreateTextureBuff(ID3D12Device* device, WinApp* winApp)
+void PostEffect::CreateTextureBuff(ID3D12Device* device)
 {
 	HRESULT result;
-	//winApp = winApp->GetInstance();
 
 	//テクスチャリソース設定
 	CD3DX12_RESOURCE_DESC texturesDesc = CD3DX12_RESOURCE_DESC::Tex2D(
 		DXGI_FORMAT_R8G8B8A8_UNORM_SRGB,
-		winApp->window_width,
-		winApp->window_height,
+		winApp_->GetInstance()->window_width,
+		winApp_->GetInstance()->window_height,
 		1, 0, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET
 	);
 
@@ -173,14 +170,14 @@ void PostEffect::CreateTextureBuff(ID3D12Device* device, WinApp* winApp)
 
 	{	//テクスチャを赤クリア
 		//画像数(1280 * 720)
-		const UINT pixelCount = winApp->window_width * winApp->window_height;
+		const uint32_t pixelCount = winApp_->GetInstance()->window_width * winApp_->GetInstance()->window_height;
 		//画像1行分のデータサイズ
-		const UINT rowPitch = sizeof(UINT) * winApp->window_width;
+		const uint32_t rowPitch = sizeof(uint32_t) * winApp_->GetInstance()->window_width;
 		//画像全体のデータサイズ
-		const UINT depthPitch = rowPitch * winApp->window_height;
+		const uint32_t depthPitch = rowPitch * winApp_->GetInstance()->window_height;
 		//画像イメージ
-		UINT* img = new UINT[pixelCount];
-		for (int i = 0; i < pixelCount; i++)
+		uint32_t* img = new uint32_t[pixelCount];
+		for (uint32_t i = 0; i < pixelCount; i++)
 		{
 			img[i] = 0xff0000ff;
 		}
@@ -243,17 +240,15 @@ void PostEffect::CreateRTVDesc(ID3D12Device* device)
 	);
 }
 
-void PostEffect::CreateDSVDesc(ID3D12Device* device, WinApp* winApp)
+void PostEffect::CreateDSVDesc(ID3D12Device* device)
 {
-	//winApp = winApp->GetInstance();
-
 	HRESULT result;
 	//深度バッファリソース設定
 	CD3DX12_RESOURCE_DESC depthResDesc =
 		CD3DX12_RESOURCE_DESC::Tex2D(
 			DXGI_FORMAT_D32_FLOAT,
-			winApp->window_width,
-			winApp->window_height,
+			winApp_->GetInstance()->window_width,
+			winApp_->GetInstance()->window_height,
 			1, 0,
 			1, 0,
 			D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL

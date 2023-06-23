@@ -128,10 +128,10 @@ void DirectXCommon::InitializeSwapChain()
 	// 生成
 	result = dxgiFactory->CreateSwapChainForHwnd(
 		commandQueue.Get(),
-		WinApp::GetInstance()->GetHwnd(), 
-		&swapChainDesc, 
-		nullptr, 
-		nullptr, 
+		WinApp::GetInstance()->GetHwnd(),
+		&swapChainDesc,
+		nullptr,
+		nullptr,
 		&swapChain1);
 
 	// 生成したIDXGISwapChain1のオブジェクトをIDXGISwapChain4に変換する
@@ -279,7 +279,7 @@ void DirectXCommon::ExecuteCommand()
 	result = commandList->Close();
 	assert(SUCCEEDED(result));
 	//コマンドリストの実行
-	ID3D12CommandList* commandListts[] = { commandList.Get()};
+	ID3D12CommandList* commandListts[] = { commandList.Get() };
 	commandQueue->ExecuteCommandLists(1, commandListts);
 
 	// フリップ

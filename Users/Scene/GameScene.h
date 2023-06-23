@@ -11,6 +11,7 @@
 #include "TextureManager.h"
 #include "SceneManager.h"
 #include "TitleScene.h"
+#include "PostEffect.h"
 
 #include "GameCollisionManager.h"
 
@@ -39,6 +40,8 @@ private: // メンバ変数
 
 	std::unique_ptr<Object3d> tyoinoriObj;
 	std::unique_ptr<ObjModel> tyoinori;
+
+	std::unique_ptr<PostEffect> postEffect;
 
 	//宣言
 	INT32 sceneNum = 0;

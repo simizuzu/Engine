@@ -3,8 +3,26 @@
 #include <wrl.h>
 #include <array>
 #include "DirectXCommon.h"
-#include "EngineUtility.h"
 #include "AvoidWarning.h"
+
+
+struct RootsigSetPip
+{
+	// ルートシグネチャ
+	Microsoft::WRL::ComPtr<ID3D12RootSignature> rootSignature;
+	// パイプラインステート
+	Microsoft::WRL::ComPtr<ID3D12PipelineState> pipelineState;
+};
+
+enum class BlendMode
+{
+	None,	// ブレンド無し
+	Alpha,	// アルファ
+	Add,	// 加算
+	Sub,	// 減算
+	Mul,	// 乗算
+	Inv,	// 色反転
+};
 
 class Pipeline
 {
@@ -33,6 +51,6 @@ public: // メンバ関数
 private: // メンバ変数
 
 	// クラス呼び出し
-	DirectXCommon* dxCommon_ = nullptr;
+	//DirectXCommon* dxCommon_ = nullptr;
 };
 

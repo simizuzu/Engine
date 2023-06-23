@@ -15,6 +15,8 @@ void GameScene::Initialize()
 	tyoinoriObj.reset(Object3d::Create());
 	tyoinoriObj->SetModel(tyoinori.get());
 
+	//postEffect->Create();
+
 	//AudioManager::GetInstance()->PlayWave(gameHandle_);
 
 	sceneManager_ = SceneManager::GetInstance();

@@ -52,7 +52,7 @@ public:
 	/// シーン描画前処理
 	/// </summary>
 	/// <param name="cmdList">コマンドリスト</param>
-	void PreDrawScene(ID3D12GraphicsCommandList* cmdList, WinApp* winApp);
+	void PreDrawScene(ID3D12GraphicsCommandList* cmdList,WinApp* winApp);
 
 	/// <summary>
 	/// シーン描画後処理
@@ -69,7 +69,7 @@ private:
 	/// <summary>
 	/// テクスチャ生成
 	/// </summary>
-	void CreateTextureBuff(ID3D12Device* device, WinApp* winApp);
+	void CreateTextureBuff(ID3D12Device* device);
 
 	/// <summary>
 	/// SRV作成
@@ -84,7 +84,7 @@ private:
 	/// <summary>
 	/// DSV作成
 	/// </summary>
-	void CreateDSVDesc(ID3D12Device* device, WinApp* winApp);
+	void CreateDSVDesc(ID3D12Device* device);
 
 	/// <summary>
 	/// 深度バッファ生成

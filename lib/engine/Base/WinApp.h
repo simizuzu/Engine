@@ -40,8 +40,8 @@ public: // メンバ関数
 	static WinApp* GetInstance();
 
 public: // ゲッター
-	HWND GetHwnd() const { return hwnd; }
-	HINSTANCE GetHinstance() const { return w.hInstance; }
+	HWND GetHwnd() const;
+	HINSTANCE GetHinstance() const;
 
 private: // メンバ変数
 	// ウィンドウハンドル

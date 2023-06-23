@@ -51,7 +51,7 @@ void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList)
 	cmdList->SetGraphicsRootDescriptorTable(1, descHeapSRV->GetGPUDescriptorHandleForHeapStart());
 }
 
-void PostEffect::PreDrawScene(ID3D12GraphicsCommandList* cmdList,WinApp* winApp)
+void PostEffect::PreDrawScene(ID3D12GraphicsCommandList* cmdList)
 {
 	//リソースバリアを変更（シェーダーリソース→描画可能）
 	CD3DX12_RESOURCE_BARRIER CHANGE_RENDER_TARGET =
@@ -69,11 +69,11 @@ void PostEffect::PreDrawScene(ID3D12GraphicsCommandList* cmdList,WinApp* winApp)
 
 	//ビューポートの設定
 	CD3DX12_VIEWPORT VIEWPORT =
-		CD3DX12_VIEWPORT(0.0f, 0.0f, winApp_->window_width, winApp_->window_height);
+		CD3DX12_VIEWPORT(0.0f, 0.0f, WinApp::window_width, WinApp::window_height);
 	cmdList->RSSetViewports(1, &VIEWPORT);
 	//シザリング矩形の設定
 	CD3DX12_RECT RECT =
-		CD3DX12_RECT(0, 0, winApp_->window_width, winApp_->window_height);
+		CD3DX12_RECT(0, 0, WinApp::window_width, WinApp::window_height);
 	cmdList->RSSetScissorRects(1, &RECT);
 
 	//全画面クリア

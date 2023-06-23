@@ -52,7 +52,7 @@ public:
 	/// シーン描画前処理
 	/// </summary>
 	/// <param name="cmdList">コマンドリスト</param>
-	void PreDrawScene(ID3D12GraphicsCommandList* cmdList,WinApp* winApp);
+	void PreDrawScene(ID3D12GraphicsCommandList* cmdList);
 
 	/// <summary>
 	/// シーン描画後処理

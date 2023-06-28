@@ -1,5 +1,12 @@
 ﻿#include "Pipeline.h"
 
+#include<cassert>
+
+#pragma warning(push)
+#pragma warning(disable: 4091)
+#include <directx/d3dx12.h>
+#pragma warning(pop)
+
 void Pipeline::CreateSpritePipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode blend, ID3D12Device* device, std::array<RootsigSetPip, 6>& pipeline)
 {
 	HRESULT result;

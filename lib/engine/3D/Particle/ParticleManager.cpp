@@ -1,5 +1,14 @@
 ﻿#include "ParticleManager.h"
 #include "EngineUtility.h"
+#include "DirectXCommon.h"
+#include <cassert>
+#include"TextureManager.h"
+#include"Shader.h"
+
+#pragma warning(push)
+#include <directx/d3dx12.h>
+#pragma warning(disable: 4091)
+#pragma warning(pop)
 
 /// <summary>
 /// 静的メンバ変数の実態

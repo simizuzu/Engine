@@ -1,17 +1,17 @@
 ﻿#pragma once
 #include "BaseScene.h"
-#include "TextureManager.h"
 
 #include "Input.h"
-#include "GameScene.h"
 #include "SceneManager.h"
-#include "Camera.h"
 #include "Light.h"
 
 #include "Sprite.h"
 #include "Object3d.h"
 #include "ParticleManager.h"
-#include "WorldTransform.h"
+
+#pragma warning(push)
+#pragma warning(disable: 4091)
+#pragma warning(pop)
 
 // タイトルシーン
 class TitleScene : public BaseScene

@@ -1,10 +1,7 @@
 ﻿#pragma once
-#include <d3d12.h>
+#include <directx/d3d12.h>
 #include <wrl.h>
 #include <array>
-#include "DirectXCommon.h"
-#include "AvoidWarning.h"
-
 
 struct RootsigSetPip
 {

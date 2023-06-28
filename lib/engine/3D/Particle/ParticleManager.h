@@ -1,9 +1,8 @@
-#pragma once
-#include "Shader.h"
+ï»¿#pragma once
+#include <forward_list>
 #include "Pipeline.h"
-#include "DirectXCommon.h"
+
 #include "WorldTransform.h"
-#include "Vector4.h"
 
 
 class ParticleManager
@@ -31,23 +30,23 @@ public:
 	void RandParticle();
 
 private:
-	static const int vertexCount = 1024;	// ’¸“_”
+	static const int vertexCount = 1024;	// é ‚ç‚¹æ•°
 
 private:
-	// ƒfƒoƒCƒX
+	// ãƒ‡ãƒã‚¤ã‚¹
 	static Microsoft::WRL::ComPtr<ID3D12Device> device_;
-	// ƒRƒ}ƒ“ƒhƒŠƒXƒg
+	// ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒˆ
 	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cmdList_;
-	// ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg
+	// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆ
 	static RootsigSetPip pip;
 
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeap;
 	Microsoft::WRL::ComPtr<ID3D12Resource> vertBuff;
 	Microsoft::WRL::ComPtr<ID3D12Resource> texbuff;
-	CD3DX12_CPU_DESCRIPTOR_HANDLE cpuDescHandleSRV;
-	CD3DX12_GPU_DESCRIPTOR_HANDLE gpuDescHandleSRV;
+	D3D12_CPU_DESCRIPTOR_HANDLE cpuDescHandleSRV;
+	D3D12_GPU_DESCRIPTOR_HANDLE gpuDescHandleSRV;
 	UINT descriptorHandleIncrementSize;
-	// ’¸“_ƒf[ƒ^”z—ñ
+	// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿é…åˆ—
 	VertexPos vertices[vertexCount];
 	D3D12_VERTEX_BUFFER_VIEW vbView;
 

@@ -13,7 +13,9 @@
 #include "TitleScene.h"
 #include "PostEffect.h"
 
-#include "GameCollisionManager.h"
+#pragma warning(push)
+#pragma warning(disable: 4091)
+#pragma warning(pop)
 
 class GameScene : public BaseScene
 {
@@ -38,8 +40,6 @@ private: // メンバ変数
 
 	SceneManager* sceneManager_ = nullptr;
 
-	std::unique_ptr<Object3d> tyoinoriObj;
-	std::unique_ptr<ObjModel> tyoinori;
 
 	std::unique_ptr<PostEffect> postEffect;
 

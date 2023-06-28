@@ -1,23 +1,11 @@
 ﻿#pragma once
-#include <DirectXMath.h>
 #include <memory>
-#include <wrl.h>
-#include <directx/d3dx12.h>
 
 #include "DirectX12Math.h"
-#include "TextureManager.h"
-#include "DirectXCommon.h"
-#include "WinApp.h"
 #include "Shader.h"
 #include "Pipeline.h"
-#include "Vector2.h"
-#include "Vector3.h"
-#include "Vector4.h"
-#include "Matrix4.h"
-
-#include "Sprite.h"
-#include "TextureManager.h"
-#include "DirectXCommon.h"
+#include"WinApp.h"
+#include"DirectXCommon.h"
 
 struct VertexPosUv
 {
@@ -115,8 +103,8 @@ private:
 
 	static RootsigSetPip pipline_;
 
-	std::shared_ptr<WinApp> winApp_;
-	std::shared_ptr<DirectXCommon> dxCommon;
+	WinApp* winApp_ = nullptr;
+	DirectXCommon* dxCommon = nullptr;
 
 	/*std::shared_ptr<Shader> shade_;
 	std::shared_ptr<Pipeline> pipeline_;*/

@@ -6,10 +6,10 @@
 
 #pragma comment(lib,"d3dcompiler.lib")
 
-void Shader::CreateSpriteShade(ComPtr<ID3DBlob>& vsBlob, ComPtr<ID3DBlob>& psBlob)
+void Shader::CreateSpriteShade(Microsoft::WRL::ComPtr<ID3DBlob>& vsBlob, Microsoft::WRL::ComPtr<ID3DBlob>& psBlob)
 {
 	// エラーオブジェクト
-	ComPtr<ID3DBlob> errorBlob;
+	Microsoft::WRL::ComPtr<ID3DBlob> errorBlob;
 
 	//　頂点シェーダの読み込みとコンパイル
 	HRESULT result = D3DCompileFromFile(
@@ -64,10 +64,10 @@ void Shader::CreateSpriteShade(ComPtr<ID3DBlob>& vsBlob, ComPtr<ID3DBlob>& psBlo
 	}
 }
 
-void Shader::CreateObjShade(ComPtr<ID3DBlob>& vsBlob, ComPtr<ID3DBlob>& psBlob)
+void Shader::CreateObjShade(Microsoft::WRL::ComPtr<ID3DBlob>& vsBlob, Microsoft::WRL::ComPtr<ID3DBlob>& psBlob)
 {
 	// エラーオブジェクト
-	ComPtr<ID3DBlob> errorBlob;
+	Microsoft::WRL::ComPtr<ID3DBlob> errorBlob;
 
 	//　頂点シェーダの読み込みとコンパイル
 	HRESULT result = D3DCompileFromFile(
@@ -122,10 +122,10 @@ void Shader::CreateObjShade(ComPtr<ID3DBlob>& vsBlob, ComPtr<ID3DBlob>& psBlob)
 	}
 }
 
-void Shader::CreateParticleShade(ComPtr<ID3DBlob>& vsBlob, ComPtr<ID3DBlob>& psBlob, ComPtr<ID3DBlob>& gsBlob)
+void Shader::CreateParticleShade(Microsoft::WRL::ComPtr<ID3DBlob>& vsBlob, Microsoft::WRL::ComPtr<ID3DBlob>& psBlob, Microsoft::WRL::ComPtr<ID3DBlob>& gsBlob)
 {
 	// エラーオブジェクト
-	ComPtr<ID3DBlob> errorBlob;
+	Microsoft::WRL::ComPtr<ID3DBlob> errorBlob;
 
 	//　頂点シェーダの読み込みとコンパイル
 	HRESULT result = D3DCompileFromFile(
@@ -207,7 +207,7 @@ void Shader::CreatePostEffectShade(Microsoft::WRL::ComPtr<ID3DBlob>& vsBlob, Mic
 {
 	HRESULT result;
 	// エラーオブジェクト
-	ComPtr<ID3DBlob> errorBlob;
+	Microsoft::WRL::ComPtr<ID3DBlob> errorBlob;
 
 	//頂点シェーダの読み込みとコンパイル
 	result = D3DCompileFromFile(

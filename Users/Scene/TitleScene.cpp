@@ -1,5 +1,4 @@
 ﻿#include "TitleScene.h"
-#include "imgui.h"
 
 void TitleScene::Initialize()
 {
@@ -35,7 +34,7 @@ void TitleScene::Initialize()
 	skydomeObj->SetModel(skydome.get());
 
 
-	//camera->SetEye({ 0.0f, 0.0f, 0.0f });
+	camera->SetEye({ 0.0f, 0.0f, 0.0f });
 
 	sceneManager_ = SceneManager::GetInstance();
 }
@@ -50,7 +49,7 @@ void TitleScene::Update()
 	ImGui::SliderFloat2("camera", &cameraPos.y, -10.0f, 100.0f, "%.1f");
 	ImGui::SliderFloat3("camera", &cameraPos.x, -10.0f, 100.0f, "%.1f");
 	ImGui::End();*/
-	//tyoinoriObj->SetPosition({ 0.0f,-20.0f,0.0f });
+	tyoinoriObj->SetPosition({ 0.0f,-20.0f,0.0f });
 
 	if (input_->PushKey(DIK_RIGHT))
 	{
@@ -67,12 +66,8 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	//sprite_->DrawSprite(tex, { 500.0f,200.0f },{0.5f,0.5f});
-	//warningSprite_->DrawSprite(tex2, { 20.0f,20.0f });
-	//skydomeObj->Draw();
+	skydomeObj->Draw();
 	tyoinoriObj->Draw();
-	//particles_->Draw(&particleTrans_);
-	//particles2_->Draw(&particleTrans2_);
 }
 
 void TitleScene::Finalize()

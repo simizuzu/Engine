@@ -116,9 +116,6 @@
     <ClCompile Include="lib\engine\Base\TextureManager.cpp" />
     <ClCompile Include="lib\engine\Base\WinApp.cpp" />
     <ClCompile Include="lib\engine\Camera\Camera.cpp" />
-    <ClCompile Include="lib\engine\Collision\Collision.cpp" />
-    <ClCompile Include="lib\engine\Collision\CollisionPrimitive.cpp" />
-    <ClCompile Include="lib\engine\Collision\GameCollisionManager.cpp" />
     <ClCompile Include="lib\engine\ImGui\ImGuiManager.cpp" />
     <ClCompile Include="lib\engine\Input\Controller.cpp" />
     <ClCompile Include="lib\engine\Input\Input.cpp" />
@@ -158,10 +155,6 @@
     <ClInclude Include="lib\engine\Base\Utility\EngineUtility.h" />
     <ClInclude Include="lib\engine\Base\WinApp.h" />
     <ClInclude Include="lib\engine\Camera\Camera.h" />
-    <ClInclude Include="lib\engine\Collision\Collision.h" />
-    <ClInclude Include="lib\engine\Collision\CollisionPrimitive.h" />
-    <ClInclude Include="lib\engine\Collision\GameCollisionConflg.h" />
-    <ClInclude Include="lib\engine\Collision\GameCollisionManager.h" />
     <ClInclude Include="lib\engine\ImGui\ImGuiManager.h" />
     <ClInclude Include="lib\engine\Input\Controller.h" />
     <ClInclude Include="lib\engine\Input\Input.h" />

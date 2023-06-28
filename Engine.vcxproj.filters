@@ -82,12 +82,6 @@
     <Filter Include="Users\ヘッダーファイル">
       <UniqueIdentifier>{bf8fe96f-0fed-4f1d-8d00-838460ae6a53}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\ソース ファイル\Collision">
-      <UniqueIdentifier>{81d8fa0e-832d-4769-87ef-581ca72dd4a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\ヘッダー ファイル\Collision">
-      <UniqueIdentifier>{36737aef-d22d-4247-8501-b9e6e3ef91d6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\ソース ファイル\Imgui">
       <UniqueIdentifier>{eb7948e4-3f34-4cb5-bfc5-b7e858393c1a}</UniqueIdentifier>
     </Filter>
@@ -186,17 +180,8 @@
     <ClCompile Include="lib\engine\Base\Shader.cpp">
       <Filter>Engine\ソース ファイル\Base</Filter>
     </ClCompile>
-    <ClCompile Include="lib\engine\Collision\CollisionPrimitive.cpp">
-      <Filter>Engine\ソース ファイル\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\engine\Collision\Collision.cpp">
-      <Filter>Engine\ソース ファイル\Collision</Filter>
-    </ClCompile>
     <ClCompile Include="lib\engine\Input\Controller.cpp">
       <Filter>Engine\ソース ファイル\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\engine\Collision\GameCollisionManager.cpp">
-      <Filter>Engine\ソース ファイル\Collision</Filter>
     </ClCompile>
     <ClCompile Include="lib\engine\ImGui\ImGuiManager.cpp">
       <Filter>Engine\ソース ファイル\Imgui</Filter>
@@ -305,20 +290,8 @@
     <ClInclude Include="lib\engine\Base\Shader.h">
       <Filter>Engine\ヘッダー ファイル\Base</Filter>
     </ClInclude>
-    <ClInclude Include="lib\engine\Collision\Collision.h">
-      <Filter>Engine\ヘッダー ファイル\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\engine\Collision\CollisionPrimitive.h">
-      <Filter>Engine\ヘッダー ファイル\Collision</Filter>
-    </ClInclude>
     <ClInclude Include="lib\engine\Input\Controller.h">
       <Filter>Engine\ヘッダー ファイル\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\engine\Collision\GameCollisionManager.h">
-      <Filter>Engine\ヘッダー ファイル\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\engine\Collision\GameCollisionConflg.h">
-      <Filter>Engine\ヘッダー ファイル\Collision</Filter>
     </ClInclude>
     <ClInclude Include="lib\engine\ImGui\ImGuiManager.h">
       <Filter>Engine\ヘッダー ファイル\Imgui</Filter>

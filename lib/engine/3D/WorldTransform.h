@@ -1,40 +1,38 @@
-#pragma once
-#include "AvoidWarning.h"
+ï»¿#pragma once
 #include "Camera.h"
-#include "EngineUtility.h"
 
 class WorldTransform
 {
 
 public:
-	//‰Šú‰»
+	//åˆæœŸåŒ–
 	void Initialize();
-	//XV
+	//æ›´æ–°
 	void Update(Camera* camera,bool billboradFlag = false);
 
 
-public:	//ƒZƒbƒ^[EƒQƒbƒ^[
+public:	//ã‚»ãƒƒã‚¿ãƒ¼ãƒ»ã‚²ãƒƒã‚¿ãƒ¼
 	void SetTranslation(MyMath::Vector3 translation);
 	void SetScale(MyMath::Vector3 scale);
 	void SetRotation(MyMath::Vector3 rotation);
 
 	D3D12_GPU_VIRTUAL_ADDRESS GetGpuAddress();
 
-private: //ƒƒ“ƒoŠÖ”
-	//’è”ƒoƒbƒtƒ@¶¬
+private: //ãƒ¡ãƒ³ãƒé–¢æ•°
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”Ÿæˆ
 	void CreateConstBuffer();
 
 private:
-	//’è”ƒoƒbƒtƒ@
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	Microsoft::WRL::ComPtr<ID3D12Resource> constBuffer_;
 	WorldvViewProCamera constBuffMap;
 
 public:
-	//ƒ[ƒJƒ‹À•W
+	//ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™
 	MyMath::Vector3 translation_ = { 0.0f,0.0f,0.0f };
-	//X,Y,Z²‰ñ‚è‚Ìƒ[ƒJƒ‹‰ñ“]Šp
+	//X,Y,Zè»¸å›ã‚Šã®ãƒ­ãƒ¼ã‚«ãƒ«å›è»¢è§’
 	MyMath::Vector3 rotation_ = { 0.0f,0.0f,0.0f };
-	//ƒ[ƒJƒ‹ƒXƒP[ƒ‹
+	//ãƒ­ãƒ¼ã‚«ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«
 	MyMath::Vector3 scale_ = { 1.0f,1.0f,1.0f };
 
 	MyMath::Matrix4 matWorld;

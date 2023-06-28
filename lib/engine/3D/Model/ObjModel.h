@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 #include <Windows.h>
-#include <d3d12.h>
+#include <directx/d3d12.h>
 #include <vector>
 #include <string>
 #include <wrl.h>
@@ -18,16 +18,16 @@
 
 struct Material
 {
-	std::string name;				// ƒ}ƒeƒŠƒAƒ‹–¼
-	MyMath::Vector3 ambient;	// ƒAƒ“ƒrƒGƒ“ƒg‰e‹¿“x
-	MyMath::Vector3 diffuse;	// ƒfƒBƒtƒ…[ƒY‰e‹¿“x
-	MyMath::Vector3 specular;	// ƒXƒyƒLƒ…ƒ‰[‰e‹¿“x
-	float alpha;					// ƒAƒ‹ƒtƒ@
-	std::string textureFilename;	// ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼
+	std::string name;				// ãƒãƒ†ãƒªã‚¢ãƒ«å
+	MyMath::Vector3 ambient;	// ã‚¢ãƒ³ãƒ“ã‚¨ãƒ³ãƒˆå½±éŸ¿åº¦
+	MyMath::Vector3 diffuse;	// ãƒ‡ã‚£ãƒ•ãƒ¥ãƒ¼ã‚ºå½±éŸ¿åº¦
+	MyMath::Vector3 specular;	// ã‚¹ãƒšã‚­ãƒ¥ãƒ©ãƒ¼å½±éŸ¿åº¦
+	float alpha;					// ã‚¢ãƒ«ãƒ•ã‚¡
+	std::string textureFilename;	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å
 	float shininess = 1.0f;
 	char pad[4];
 
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Material() {
 		ambient = { 0.3f,0.3f,0.3f };
 		diffuse = { 0.0f,0.0f,0.0f };
@@ -39,130 +39,130 @@ struct Material
 #pragma region OBJ
 
 /// <summary>
-/// 3Dƒ‚ƒfƒ‹
+/// 3Dãƒ¢ãƒ‡ãƒ«
 /// </summary>
 class ObjModel
 {
 public:
-	// ’è”ƒoƒbƒtƒ@—pƒf[ƒ^\‘¢‘ÌB1
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”¨ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“B1
 	struct ConstBufferDataB1
 	{
-		MyMath::Vector3 ambient;	// ƒAƒ“ƒrƒGƒ“ƒgŒW”
-		float pad1;						// ƒpƒfƒBƒ“ƒO
-		MyMath::Vector3 diffuse;	// ƒfƒBƒtƒ…[ƒYŒW”
-		float pad2;						// ƒpƒfƒBƒ“ƒO
-		MyMath::Vector3 specular;	// ƒXƒyƒLƒ…ƒ‰[ŒW”
-		float alpha;					// ƒAƒ‹ƒtƒ@
+		MyMath::Vector3 ambient;	// ã‚¢ãƒ³ãƒ“ã‚¨ãƒ³ãƒˆä¿‚æ•°
+		float pad1;						// ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°
+		MyMath::Vector3 diffuse;	// ãƒ‡ã‚£ãƒ•ãƒ¥ãƒ¼ã‚ºä¿‚æ•°
+		float pad2;						// ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°
+		MyMath::Vector3 specular;	// ã‚¹ãƒšã‚­ãƒ¥ãƒ©ãƒ¼ä¿‚æ•°
+		float alpha;					// ã‚¢ãƒ«ãƒ•ã‚¡
 	};
 
 public:
 	/// <summary>
-	/// OBJƒtƒ@ƒCƒ‹‚©‚ç3Dƒ‚ƒfƒ‹‚ğ“Ç‚İ‚Ş
+	/// OBJãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰3Dãƒ¢ãƒ‡ãƒ«ã‚’èª­ã¿è¾¼ã‚€
 	/// </summary>
-	/// <returns>ƒ‚ƒfƒ‹</returns>
+	/// <returns>ãƒ¢ãƒ‡ãƒ«</returns>
 	static ObjModel* LoadFromObj(const std::string& modelname, bool smoothing = false);
 
 	/// <summary>
-	/// ƒ}ƒeƒŠƒAƒ‹“Ç‚İ‚İ
+	/// ãƒãƒ†ãƒªã‚¢ãƒ«èª­ã¿è¾¼ã¿
 	/// </summary>
 	void LoadMaterial(const std::string& directoryPath, const std::string& filename);
 
 	/// <summary>
-	/// ƒeƒNƒXƒ`ƒƒ“Ç‚İ‚İ
+	/// ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­ã¿è¾¼ã¿
 	/// </summary>
-	/// <returns>¬”Û</returns>
+	/// <returns>æˆå¦</returns>
 	void LoadTexture(const std::string& directoryPath, const std::string& filename);
 
 	/// <summary>
-	/// •`‰æ
+	/// æç”»
 	/// </summary>
-	/// <param name="cmdList">ƒRƒ}ƒ“ƒhƒŠƒXƒg</param>
-	/// <param name="rootParamIndexMaterial">ƒ}ƒeƒŠƒAƒ‹—pƒ‹[ƒgƒpƒ‰ƒ[ƒ^”Ô†</param>
+	/// <param name="cmdList">ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒˆ</param>
+	/// <param name="rootParamIndexMaterial">ãƒãƒ†ãƒªã‚¢ãƒ«ç”¨ãƒ«ãƒ¼ãƒˆãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ç•ªå·</param>
 	void Draw(ID3D12GraphicsCommandList* cmdList);
 
 	static void SetDevice(ID3D12Device* device);
 
-private: // Ã“Iƒƒ“ƒo•Ï”
+private: // é™çš„ãƒ¡ãƒ³ãƒå¤‰æ•°
 	static Microsoft::WRL::ComPtr<ID3D12Device> device;
-	// ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡
 	 Microsoft::WRL::ComPtr<ID3D12Resource> texBuff;
-	// ƒVƒF[ƒ_ƒŠƒ\[ƒXƒrƒ…[‚Ìƒnƒ“ƒhƒ‹(CPU)
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ã®ãƒãƒ³ãƒ‰ãƒ«(CPU)
 	D3D12_CPU_DESCRIPTOR_HANDLE cpuDescHandleSRV;
-		// ƒVƒF[ƒ_ƒŠƒ\[ƒXƒrƒ…[‚Ìƒnƒ“ƒhƒ‹(GPU)
+		// ã‚·ã‚§ãƒ¼ãƒ€ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ã®ãƒãƒ³ãƒ‰ãƒ«(GPU)
 	D3D12_GPU_DESCRIPTOR_HANDLE gpuDescHandleSRV;
-	// ƒfƒXƒNƒŠƒvƒ^ƒq[ƒv
+	// ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—
 	static Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeap;
-	// ’¸“_ƒoƒbƒtƒ@ƒrƒ…[
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼
 	 D3D12_VERTEX_BUFFER_VIEW vbView;
-	// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@ƒrƒ…[
+	// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼
 	 D3D12_INDEX_BUFFER_VIEW ibView;
-	// ’¸“_ƒf[ƒ^”z—ñ
+	// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿é…åˆ—
 	 std::vector<VertexPosNormalUv> vertices;
-	// ’¸“_ƒCƒ“ƒfƒbƒNƒX”z—ñ
+	// é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹é…åˆ—
 	 std::vector<unsigned short> indices;
-	// ƒ}ƒeƒŠƒAƒ‹
+	// ãƒãƒ†ãƒªã‚¢ãƒ«
 	 Material material;
 
-private: // ƒƒ“ƒo•Ï”
-	// ƒŠƒ\[ƒXİ’è
+private: // ãƒ¡ãƒ³ãƒå¤‰æ•°
+	// ãƒªã‚½ãƒ¼ã‚¹è¨­å®š
 	D3D12_RESOURCE_DESC resDesc{};
-	// ƒq[ƒvİ’è
+	// ãƒ’ãƒ¼ãƒ—è¨­å®š
 	D3D12_HEAP_PROPERTIES heapProp{};
-	// ’è”ƒoƒbƒtƒ@iƒ}ƒeƒŠƒAƒ‹j
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ï¼ˆãƒãƒ†ãƒªã‚¢ãƒ«ï¼‰
 	Microsoft::WRL::ComPtr<ID3D12Resource> constBuffB1;
-	// ’¸“_ƒoƒbƒtƒ@
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 	Microsoft::WRL::ComPtr<ID3D12Resource> vertBuff;
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ì¶¬
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
 	Microsoft::WRL::ComPtr<ID3D12Resource>indexBuff;
-	// ƒfƒXƒNƒŠƒvƒ^ƒTƒCƒY
+	// ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ã‚µã‚¤ã‚º
 	UINT descriptorHandleIncrementSize;
-	// ƒeƒNƒXƒ`ƒƒƒf[ƒ^
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ‡ãƒ¼ã‚¿
 	TextureData textureData;
 
-	//’¸“_–@üƒXƒ€[ƒWƒ“ƒO—pƒf[ƒ^
+	//é ‚ç‚¹æ³•ç·šã‚¹ãƒ ãƒ¼ã‚¸ãƒ³ã‚°ç”¨ãƒ‡ãƒ¼ã‚¿
 	std::unordered_map<unsigned short, std::vector<unsigned short>> smoothData;
 
 private:
 	/// <summary>
-	/// OBJƒtƒ@ƒCƒ‹‚©‚ç3Dƒ‚ƒfƒ‹‚ğ“Ç‚İ‚Ş
+	/// OBJãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰3Dãƒ¢ãƒ‡ãƒ«ã‚’èª­ã¿è¾¼ã‚€
 	/// </summary>
 	void LoadFromOBJInternal(const std::string& modelname, bool smoothing);
 
 	/// <summary>
-	/// ƒfƒXƒNƒŠƒvƒ^ƒq[ƒv‚Ì‰Šú‰»
+	/// ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã®åˆæœŸåŒ–
 	/// </summary>
 	void InitializeDescriptorHeap();
 
 	/// <summary>
-	/// Šeíƒoƒbƒtƒ@¶¬
+	/// å„ç¨®ãƒãƒƒãƒ•ã‚¡ç”Ÿæˆ
 	/// </summary>
 	void CreateBuffers();
 
 	/// <summary>
-	/// ’¸“_ƒf[ƒ^‘S‘Ì‚ÌƒTƒCƒY
+	/// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿å…¨ä½“ã®ã‚µã‚¤ã‚º
 	/// </summary>
 	void CreateVBSize();
 
 	/// <summary>
-	/// ƒCƒ“ƒfƒbƒNƒXƒf[ƒ^‘S‘Ì‚ÌƒTƒCƒY
+	/// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒ‡ãƒ¼ã‚¿å…¨ä½“ã®ã‚µã‚¤ã‚º
 	/// </summary>
 	void CreateIBSize();
 
 	/// <summary>
-	/// ’¸“_ƒf[ƒ^‚Ì”‚ğæ“¾
+	/// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã®æ•°ã‚’å–å¾—
 	/// </summary>
-	/// <returns>’¸“_ƒf[ƒ^‚Ìæ“¾</returns>
+	/// <returns>é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã®å–å¾—</returns>
 	inline size_t GetVertexCount();
 
 	/// <summary>
-	/// ƒGƒbƒW•½ŠŠ‰»ƒf[ƒ^‚Ì’Ç‰Á
+	/// ã‚¨ãƒƒã‚¸å¹³æ»‘åŒ–ãƒ‡ãƒ¼ã‚¿ã®è¿½åŠ 
 	/// </summary>
-	/// <param name="indexPosition">À•WƒCƒ“ƒfƒbƒNƒX</param>
-	/// <param name="indexVertex">’¸“_ƒCƒ“ƒfƒbƒNƒX</param>
+	/// <param name="indexPosition">åº§æ¨™ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹</param>
+	/// <param name="indexVertex">é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹</param>
 	void AddSmoothData(unsigned short indexPosition, unsigned short indexVertex);
 
 	/// <summary>
-	/// •½ŠŠ‰»‚³‚ê‚½’¸“_–@ü‚ÌŒvZ
+	/// å¹³æ»‘åŒ–ã•ã‚ŒãŸé ‚ç‚¹æ³•ç·šã®è¨ˆç®—
 	/// </summary>
 	void CalculateSmoothedVertexNormals();
 

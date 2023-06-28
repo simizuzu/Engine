@@ -1,8 +1,6 @@
-#pragma once
-#include <d3d12.h>
+ï»¿#pragma once
 #include <memory>
 
-#include "DirectXCommon.h"
 #include "ObjModel.h"
 #include "Pipeline.h"
 #include "Shader.h"
@@ -14,16 +12,16 @@
 class Object3d
 {
 public:
-	// ’è”ƒoƒbƒtƒ@—pƒf[ƒ^\‘¢‘ÌB0
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”¨ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“B0
 	struct ConstBufferDataB0
 	{
-		//Mathematics::Matrix4 mat;	// 3D•ÏŠ·s—ñ
+		//Mathematics::Matrix4 mat;	// 3Då¤‰æ›è¡Œåˆ—
 		MyMath::Matrix4 viewproj;
 		MyMath::Matrix4 world;
 		MyMath::Vector3 cameraPos;
 	};
 
-public: // Ã“Iƒƒ“ƒoŠÖ”
+public: // é™çš„ãƒ¡ãƒ³ãƒé–¢æ•°
 	static void StaticInitialize(ID3D12Device* device, int width, int height);
 
 	static void CreateGraphicsPipeline();
@@ -33,28 +31,28 @@ public: // Ã“Iƒƒ“ƒoŠÖ”
 	static void SetLight(Light*light);
 
 private:
-	// ƒfƒoƒCƒX
+	// ãƒ‡ãƒã‚¤ã‚¹
 	static Microsoft::WRL::ComPtr<ID3D12Device> device_;
-	// ƒRƒ}ƒ“ƒhƒŠƒXƒg
+	// ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒˆ
 	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cmdList_;
-	// ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg
+	// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆ
 	static RootsigSetPip pip;
-	//ƒ‰ƒCƒg
+	//ãƒ©ã‚¤ãƒˆ
 	static Light* light;
 
-public: // ƒƒ“ƒoŠÖ”
+public: // ãƒ¡ãƒ³ãƒé–¢æ•°
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	bool Initialize();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update(Camera* camera);
 
 	/// <summary>
-	/// •`‰æ
+	/// æç”»
 	/// </summary>
 	void Draw();
 
@@ -65,21 +63,21 @@ public: // ƒƒ“ƒoŠÖ”
 	void SetRotation(MyMath::Vector3 rotation_);
 
 public:
-	// ’è”ƒoƒbƒtƒ@
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	Microsoft::WRL::ComPtr <ID3D12Resource> constBuffB0;
-	// F
+	// è‰²
 	MyMath::Vector4 color = { 1.0f,1.0f,1.0f,1.0f };
-	// ƒ[ƒJƒ‹ƒXƒP[ƒ‹
+	// ãƒ­ãƒ¼ã‚«ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«
 	MyMath::Vector3 scale = { 1.0f,1.0f,1.0f };
-	// X,Y,Z²‰ñ‚è‚Ìƒ[ƒJƒ‹‰ñ“]Šp
+	// X,Y,Zè»¸å›ã‚Šã®ãƒ­ãƒ¼ã‚«ãƒ«å›è»¢è§’
 	MyMath::Vector3 rotation = { 0.0f,0.0f,0.0f };
-	// ƒ[ƒJƒ‹À•W
+	// ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™
 	MyMath::Vector3 position = { 0.0f,0.0f,0.0f };
-	// ƒ[ƒ‹ƒh•ÏŠ·s—ñ
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›è¡Œåˆ—
 	MyMath::Matrix4 matWorld;
-	// eƒIƒuƒWƒFƒNƒg
+	// è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	Object3d* parent = nullptr;
-	// ƒ‚ƒfƒ‹
+	// ãƒ¢ãƒ‡ãƒ«
 	ObjModel* model = nullptr;
 };
 

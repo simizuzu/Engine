@@ -1,4 +1,11 @@
 ﻿#include "PostEffect.h"
+#include"Sprite.h"
+#include<cassert>
+
+#pragma warning(push)
+#pragma warning(disable: 4091)
+#include <directx/d3dx12.h>
+#pragma warning(pop)
 
 const float PostEffect::clearColor[4] = { 0.25f,0.5f,0.1f,0.0f };
 RootsigSetPip PostEffect::pipline_;
@@ -47,6 +54,8 @@ void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList)
 	constBuff->Map(0,nullptr,(void**)&constMap);
 
 	ID3D12DescriptorHeap* ppHeaps[] = { descHeapSRV.Get() };
+
+	cmdList->SetDescriptorHeaps(1, ppHeaps);
 
 	cmdList->SetGraphicsRootDescriptorTable(1, descHeapSRV->GetGPUDescriptorHandleForHeapStart());
 }
@@ -242,7 +251,20 @@ void PostEffect::CreateRTVDesc(ID3D12Device* device)
 
 void PostEffect::CreateDSVDesc(ID3D12Device* device)
 {
+	
+}
+
+void PostEffect::CreateDepthBuff(ID3D12Device* device)
+{
 	HRESULT result;
+	//DSV用デスクリプタヒープ設定
+	D3D12_DESCRIPTOR_HEAP_DESC descHeapDesc{};
+	descHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
+	descHeapDesc.NumDescriptors = 1;
+	//DSV用デスクリプタヒープを生成
+	result = device->CreateDescriptorHeap(&descHeapDesc, IID_PPV_ARGS(&descHeapDSV));
+	assert(SUCCEEDED(result));
+
 	//深度バッファリソース設定
 	CD3DX12_RESOURCE_DESC depthResDesc =
 		CD3DX12_RESOURCE_DESC::Tex2D(
@@ -265,20 +287,8 @@ void PostEffect::CreateDSVDesc(ID3D12Device* device)
 		D3D12_RESOURCE_STATE_DEPTH_WRITE,
 		&CLEAR_VALUE,
 		IID_PPV_ARGS(&depthBuff));
-	assert(SUCCEEDED(result));
-}
 
-void PostEffect::CreateDepthBuff(ID3D12Device* device)
-{
-	HRESULT result;
-	//DSV用デスクリプタヒープ設定
-	D3D12_DESCRIPTOR_HEAP_DESC descHeapDesc{};
-	descHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
-	descHeapDesc.NumDescriptors = 1;
-	//DSV用デスクリプタヒープを生成
-	result = device->CreateDescriptorHeap(&descHeapDesc, IID_PPV_ARGS(&descHeapDSV));
 	assert(SUCCEEDED(result));
-
 	//デスクリプタヒープにDSV作成
 	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc{};
 	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT;

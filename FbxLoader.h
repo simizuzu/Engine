@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-#include <d3d12.h>
+#include <directx/d3d12.h>
 #include <wrl.h>
 #include<assimp/Importer.hpp>
 #include<assimp/scene.h>
@@ -12,7 +12,7 @@
 class FbxLoader
 {
 private:
-	//ƒfƒoƒCƒX
+	//ãƒ‡ãƒã‚¤ã‚¹
 	Microsoft::WRL::ComPtr<ID3D12Device> device_;
 
 	std::string directoryPath;
@@ -27,17 +27,17 @@ private:
 
 	const size_t MAX_BONE_INDICES = 4;
 
-	//“Ç‚İ‚İ‚ÌƒfƒtƒHƒ‹ƒgƒtƒ‰ƒO
+	//èª­ã¿è¾¼ã¿ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ•ãƒ©ã‚°
 	const UINT ASSIMP_LOAD_FLAG_DEFAULT =
-		aiProcess_Triangulate | //OŠp–Ê‰»
-		aiProcess_CalcTangentSpace | //ÚüƒxƒNƒgƒ‹¶¬
-		aiProcess_GenSmoothNormals | //ƒXƒ€[ƒWƒ“ƒOƒxƒNƒgƒ‹¶¬
-		aiProcess_GenUVCoords | //”ñƒ}ƒbƒsƒ“ƒO‚ğ“KØ‚ÈUVÀ•W‚É•ÏŠ·
-		aiProcess_RemoveRedundantMaterials | //ç’·‚Èƒ}ƒeƒŠƒAƒ‹‚ğíœ
-		aiProcess_OptimizeMeshes | //ƒƒbƒVƒ…”‚ğÅ“K‰»
-		aiProcess_JoinIdenticalVertices |//ƒCƒ“ƒfƒbƒNƒX‚ğ¶¬
-		aiProcess_LimitBoneWeights |//Še’¸“_‚ª‰e‹¿‚ğó‚¯‚éƒ{[ƒ“‚ğ4‚É§ŒÀ
-		aiProcess_ConvertToLeftHanded;//¶èŒn‚É
+		aiProcess_Triangulate | //ä¸‰è§’é¢åŒ–
+		aiProcess_CalcTangentSpace | //æ¥ç·šãƒ™ã‚¯ãƒˆãƒ«ç”Ÿæˆ
+		aiProcess_GenSmoothNormals | //ã‚¹ãƒ ãƒ¼ã‚¸ãƒ³ã‚°ãƒ™ã‚¯ãƒˆãƒ«ç”Ÿæˆ
+		aiProcess_GenUVCoords | //éãƒãƒƒãƒ”ãƒ³ã‚°ã‚’é©åˆ‡ãªUVåº§æ¨™ã«å¤‰æ›
+		aiProcess_RemoveRedundantMaterials | //å†—é•·ãªãƒãƒ†ãƒªã‚¢ãƒ«ã‚’å‰Šé™¤
+		aiProcess_OptimizeMeshes | //ãƒ¡ãƒƒã‚·ãƒ¥æ•°ã‚’æœ€é©åŒ–
+		aiProcess_JoinIdenticalVertices |//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’ç”Ÿæˆ
+		aiProcess_LimitBoneWeights |//å„é ‚ç‚¹ãŒå½±éŸ¿ã‚’å—ã‘ã‚‹ãƒœãƒ¼ãƒ³ã‚’4ã«åˆ¶é™
+		aiProcess_ConvertToLeftHanded;//å·¦æ‰‹ç³»ã«
 	char pad3[4] = {};
 
 public:

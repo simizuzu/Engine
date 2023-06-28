@@ -1,4 +1,6 @@
 ﻿#include "WorldTransform.h"
+#include"DirectXCommon.h"
+#include <cassert>
 
 void WorldTransform::Initialize()
 {

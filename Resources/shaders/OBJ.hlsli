@@ -1,20 +1,19 @@
-// ƒ}ƒeƒŠƒAƒ‹
 cbuffer ConstBufferDataMaterial : register(b0)
 {
-    //float4 color; // F(RGBA)
-    float3 m_ambient  : packoffset(c0); // ƒAƒ“ƒrƒGƒ“ƒgŒW”
-	float3 m_diffuse  : packoffset(c1); // ƒfƒBƒtƒ…[ƒYŒW”
-	float3 m_specular : packoffset(c2); // ƒXƒyƒLƒ…ƒ‰[ŒW”
-	float m_alpha : packoffset(c2.w);	// ƒAƒ‹ƒtƒ@
+    //float4 color; // è‰²(RGBA)
+    float3 m_ambient : packoffset(c0); // ã‚¢ãƒ³ãƒ“ã‚¨ãƒ³ãƒˆä¿‚æ•°
+    float3 m_diffuse : packoffset(c1); // ãƒ‡ã‚£ãƒ•ãƒ¥ãƒ¼ã‚ºä¿‚æ•°
+    float3 m_specular : packoffset(c2); // ã‚¹ãƒšã‚­ãƒ¥ãƒ©ãƒ¼ä¿‚æ•°
+    float m_alpha : packoffset(c2.w); // ã‚¢ãƒ«ãƒ•ã‚¡
 };
 
-// 3D•ÏŠ·s—ñ
+// 3Då¤‰æ›è¡Œåˆ—
 cbuffer ConstBufferDataTransform : register(b1)
 {
-   // matrix mat; // 3D•ÏŠ·s—ñ
-    matrix viewproj;    //ƒrƒ…[ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ
-    matrix world;       //ƒ[ƒ‹ƒhs—ñ
-    float3 cameraPos;   //ƒJƒƒ‰À•Wiƒ[ƒ‹ƒhÀ•Wj
+    //matrix mat; // 3Då¤‰æ›è¡Œåˆ—
+    matrix viewproj; //ãƒ“ãƒ¥ãƒ¼ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—
+    matrix world; //ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
+    float3 cameraPos; //ã‚«ãƒ¡ãƒ©åº§æ¨™ï¼ˆãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ï¼‰
 }
 
 cbuffer cbuff2 : register(b2)
@@ -24,11 +23,11 @@ cbuffer cbuff2 : register(b2)
 }
 
 
-// ’¸“_ƒVƒF[ƒ_[‚©‚çƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ö‚Ì‚â‚èæ‚è‚Ég—p‚·‚é\‘¢‘Ì
+// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‹ã‚‰ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¸ã®ã‚„ã‚Šå–ã‚Šã«ä½¿ç”¨ã™ã‚‹æ§‹é€ ä½“
 struct VSOutput
 {
-    float4 svpos : SV_POSITION; // ƒVƒXƒeƒ€—p’¸“_À•W
-    //float3 normal : NORMAL; // –@üƒxƒNƒgƒ‹
+    float4 svpos : SV_POSITION; // ã‚·ã‚¹ãƒ†ãƒ ç”¨é ‚ç‚¹åº§æ¨™
+    //float3 normal : NORMAL; // æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«
     float4 color : COLOR;
-    float2 uv : TEXCOORD; // uv’l
+    float2 uv : TEXCOORD; // uvå€¤
 };

@@ -334,14 +334,14 @@
     <None Include="Resources\shaders\Sprite.hlsli">
       <Filter>Engine\シェーダーファイル\Sprite</Filter>
     </None>
-    <None Include="Resources\shaders\OBJ.hlsli">
-      <Filter>Engine\シェーダーファイル\OBJ</Filter>
-    </None>
     <None Include="Resources\shaders\Particle.hlsli">
       <Filter>Engine\シェーダーファイル\Particle</Filter>
     </None>
     <None Include="Resources\shaders\PostEffectDefault.hlsli">
       <Filter>Engine\シェーダーファイル\PostEffect\Default</Filter>
+    </None>
+    <None Include="Resources\shaders\Obj.hlsli">
+      <Filter>Engine\シェーダーファイル\OBJ</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -350,12 +350,6 @@
     </FxCompile>
     <FxCompile Include="Resources\shaders\SpriteVS.hlsl">
       <Filter>Engine\シェーダーファイル\Sprite</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\OBJVS.hlsl">
-      <Filter>Engine\シェーダーファイル\OBJ</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\OBJPS.hlsl">
-      <Filter>Engine\シェーダーファイル\OBJ</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\ParticlePS.hlsl">
       <Filter>Engine\シェーダーファイル\Particle</Filter>
@@ -371,6 +365,12 @@
     </FxCompile>
     <FxCompile Include="Resources\shaders\PostEffectDefaultVS.hlsl">
       <Filter>Engine\シェーダーファイル\PostEffect\Default</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ObjPS.hlsl">
+      <Filter>Engine\シェーダーファイル\OBJ</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ObjVS.hlsl">
+      <Filter>Engine\シェーダーファイル\OBJ</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

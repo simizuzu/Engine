@@ -6,15 +6,6 @@
 #include "Vector3.h"
 #include "Vector4.h"
 
-// 定数バッファ用データ構造体
-struct ConstBufferDataB0
-{
-	//Mathematics::Matrix4 mat;	// 3D変換行列
-	MyMath::Matrix4 viewproj;
-	MyMath::Matrix4 world;
-	MyMath::Vector3 cameraPos;
-};
-
 struct ConstBufferDataViewProjection
 {
 	// ワールド行列

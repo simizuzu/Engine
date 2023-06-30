@@ -2,7 +2,7 @@
 
 void TitleScene::Initialize()
 {
-	input_ = Input::GetInstace();
+	input_ = Input::GetInstance();
 
 	camera = std::make_unique<Camera>();
 	camera->Initialize();
@@ -60,14 +60,13 @@ void TitleScene::Update()
 		rot--;
 	}
 	tyoinoriObj->SetRotation({ 0.0f,rot,0.0f });
-	tyoinoriObj->Update(camera.get());
+	//tyoinoriObj->Update(camera.get());
 
 }
 
 void TitleScene::Draw()
 {
-	skydomeObj->Draw();
-	tyoinoriObj->Draw();
+
 }
 
 void TitleScene::Finalize()

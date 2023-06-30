@@ -4,14 +4,21 @@
 
 void GameScene::Initialize()
 {
-	input_ = Input::GetInstace();
+	input_ = Input::GetInstance();
 
 	camera = std::make_unique<Camera>();
 	camera->Initialize();
+	light.reset(Light::Create());
+	light->SetLightColor({ 1,1,1 });
+	Object3d::SetLight(light.get());
 
-	//postEffect->Create();
+	skydomeModel_ = std::make_unique<ObjModel>();
+	skydomeModel_.reset(ObjModel::LoadFromObj("skydome",true));
+	skydomeObj_.reset(Object3d::Create());
+	skydomeObj_->SetModel(skydomeModel_.get());
 
-	//AudioManager::GetInstance()->PlayWave(gameHandle_);
+	skydomeTrans.Initialize();
+	skydomeTrans.SetScale({5.0f,5.0f,5.0f});
 
 	sceneManager_ = SceneManager::GetInstance();
 }
@@ -21,31 +28,17 @@ void GameScene::Update()
 	if (input_->TriggerPushKey(DIK_SPACE) || input_->TriggerButton(A))
 	{
 		sceneManager_->ChangeScene("TITLE");
-		//AudioManager::GetInstance()->StopWave(gameHandle_);
 	}
 
-	// ImGuiウィンドウの表示オン
-	/*ImGui::Begin("Obj");
-	ImGui::SetWindowSize({ 500,100 });
-	ImGui::SetWindowPos({ 100,40 });
-	ImGui::SliderFloat3("obj", &posObj.x, 0.0f, 50.0f, "%.1f");
-	ImGui::End();
-
-	ImGui::Begin("camera");
-	ImGui::SetWindowSize({ 500,100 });
-	ImGui::SetWindowPos({ 100,100 });
-	ImGui::SliderFloat3("camera", &cameraPos.y, -10.0f, 40.0f, "%.1f");
-	ImGui::End();*/
-
-	camera->SetTarget({ cameraPos.x ,cameraPos.y ,cameraPos.z});
-
-
 	camera->Update();
+	light->Update();
+
+	skydomeTrans.Update(camera.get());
 }
 
 void GameScene::Draw()
 {
-	
+	skydomeObj_->Draw(&skydomeTrans);
 }
 
 void GameScene::Finalize()

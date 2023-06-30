@@ -4,7 +4,7 @@ void Framework::Initialize()
 {
 	winApp_ = WinApp::GetInstance();
 	dxCommon_ = DirectXCommon::GetInstance();
-	input_ = Input::GetInstace();
+	input_ = Input::GetInstance();
 	audioManager = AudioManager::GetInstance();
 	textureManager_ = TextureManager::GetInstance();
 	imGuiManager = ImGuiManager::GetInstance();
@@ -25,8 +25,8 @@ void Framework::Initialize()
 	// Input初期化
 	input_->Initialize();
 
-	postEffect = std::make_unique<PostEffect>();
-	postEffect->Initialize();
+	/*postEffect = std::make_unique<PostEffect>();
+	postEffect->Initialize();*/
 
 	sceneManager_ = SceneManager::GetInstance();
 }
@@ -87,13 +87,13 @@ void Framework::Run()
 			break;
 		}
 		dxCommon_->PreDraw(winApp_);
-		postEffect->PreDrawScene(dxCommon_->GetCommandList());
+		//postEffect->PreDrawScene(dxCommon_->GetCommandList());
 		// シーンの描画
 		Draw();
 		//ImGui描画
-		postEffect->PostDrawScene(dxCommon_->GetCommandList());
+		//postEffect->PostDrawScene(dxCommon_->GetCommandList());
 		imGuiManager->Draw(dxCommon_);
-		postEffect->Draw(dxCommon_->GetCommandList());
+		//postEffect->Draw(dxCommon_->GetCommandList());
 		dxCommon_->PostDraw();
 		// FPS固定更新
 		fps_->UpdateFixFPS();

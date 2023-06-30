@@ -5,21 +5,14 @@
 #include "Pipeline.h"
 #include "Shader.h"
 #include "Light.h"
+#include "WorldTransform.h"
 
-#include "Camera.h"
 #include "Matrix4.h"
 
 class Object3d
 {
 public:
-	// 定数バッファ用データ構造体B0
-	struct ConstBufferDataB0
-	{
-		//Mathematics::Matrix4 mat;	// 3D変換行列
-		MyMath::Matrix4 viewproj;
-		MyMath::Matrix4 world;
-		MyMath::Vector3 cameraPos;
-	};
+
 
 public: // 静的メンバ関数
 	static void StaticInitialize(ID3D12Device* device, int width, int height);
@@ -49,12 +42,12 @@ public: // メンバ関数
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update(Camera* camera);
+	//void Update(Camera* camera);
 
 	/// <summary>
 	/// 描画
 	/// </summary>
-	void Draw();
+	void Draw(WorldTransform* transform);
 
 	// setter
 	void SetModel(ObjModel* model);

@@ -1,14 +1,24 @@
 ﻿#pragma once
 #include "Camera.h"
 
+// 定数バッファ用データ構造体B0
+struct ConstBufferDataB0
+{
+	//Mathematics::Matrix4 mat;	// 3D変換行列
+	MyMath::Matrix4 viewproj;
+	MyMath::Matrix4 world;
+	MyMath::Vector3 cameraPos;
+};
+
 class WorldTransform
 {
 
 public:
 	//初期化
 	void Initialize();
+	void Update(Camera*camera);
 	//更新
-	void Update(Camera* camera,bool billboradFlag = false);
+	void UpdateParticle(Camera* camera,bool billboradFlag = false);
 
 
 public:	//セッター・ゲッター

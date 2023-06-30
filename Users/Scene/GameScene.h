@@ -1,17 +1,18 @@
 ﻿#pragma once
 #include <memory>
+#include "BaseScene.h"
+#include "SceneManager.h"
 
 #include "Input.h"
 #include "Camera.h"
+#include "Light.h"
 #include "Sprite.h"
 #include "Object3d.h"
 #include "ObjModel.h"
 #include "AudioManager.h"
-#include "BaseScene.h"
+
 #include "TextureManager.h"
-#include "SceneManager.h"
-#include "TitleScene.h"
-#include "PostEffect.h"
+#include "WorldTransform.h"
 
 #pragma warning(push)
 #pragma warning(disable: 4091)
@@ -35,26 +36,22 @@ public: // メンバ関数
 private: // メンバ変数
 	Input* input_ = nullptr;
 	std::unique_ptr<Camera> camera;
-	DirectXCommon* dxCommon_ = nullptr;
-	AudioManager* audioManager_ = nullptr;
+	std::unique_ptr<Light> light;
+	//AudioManager* audioManager_ = nullptr;
 
 	SceneManager* sceneManager_ = nullptr;
-
-
-	std::unique_ptr<PostEffect> postEffect;
 
 	//宣言
 	INT32 sceneNum = 0;
 	char PADING[4]{};
 
-	// ImGuiデバック用
-	MyMath::Vector2 pos = {100,100};
-	MyMath::Vector3 posObj = { 0,0,0 };
-	
-	MyMath::Vector3 cameraPos = { 0,0,0 };
-
 	// サウンド
-	uint32_t gameHandle_ = 0;
+	//uint32_t gameHandle_ = 0;
+
+	std::unique_ptr<Object3d> skydomeObj_;
+	std::unique_ptr<ObjModel> skydomeModel_;
+
+	WorldTransform skydomeTrans;
 
 private:
 	//コピーコンストラクタ・代入演算子削除

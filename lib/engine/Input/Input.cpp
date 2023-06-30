@@ -25,7 +25,7 @@ void Input::Update()
 	controller_->Update();
 }
 
-Input* Input::GetInstace()
+Input* Input::GetInstance()
 {
 	static Input instance;
 	return &instance;

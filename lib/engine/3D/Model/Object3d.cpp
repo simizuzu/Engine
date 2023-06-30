@@ -82,45 +82,45 @@ bool Object3d::Initialize()
 	return true;
 }
 
-void Object3d::Update(Camera* camera)
-{
-	HRESULT result;
-	MyMath::Matrix4 matScale, matRot, matTrans;
+//void Object3d::Update(Camera* camera)
+//{
+//	HRESULT result;
+//	MyMath::Matrix4 matScale, matRot, matTrans;
+//
+//	// スケール、回転、平行移動行列の計算
+//	matScale = MyMathUtility::MakeScaling(scale);
+//	matRot = MyMathUtility::MakeIdentity();
+//	matRot = MyMathUtility::MakeRotation(rotation);
+//	matTrans = MyMathUtility::MakeTranslation(position);
+//
+//	// ワールド行列の合成
+//	matWorld = MyMathUtility::MakeIdentity();
+//	matWorld *= matScale;
+//	matWorld *= matRot;
+//	matWorld *= matTrans;
+//
+//	// 親オブジェクトがあれば
+//	if (parent != nullptr)
+//	{
+//		matWorld *= parent->matWorld;
+//	}
+//
+//	const MyMath::Matrix4 matView = camera->GetMatView();
+//	const MyMath::Matrix4 matProjection = camera->GetMatProjection();
+//	const MyMath::Vector3& cameraPos = camera->GetEye();
+//
+//	// 定数バッファへデータ転送
+//	ConstBufferDataB0* constMap = nullptr;
+//	result = constBuffB0->Map(0, nullptr, (void**)&constMap);
+//	assert(SUCCEEDED(result));
+//	//constMap->mat = matWorld* matView * matProjection;
+//	constMap->viewproj = matView * matProjection;
+//	constMap->world = matWorld;
+//	constMap->cameraPos = cameraPos;
+//	constBuffB0->Unmap(0, nullptr);
+//}
 
-	// スケール、回転、平行移動行列の計算
-	matScale = MyMathUtility::MakeScaling(scale);
-	matRot = MyMathUtility::MakeIdentity();
-	matRot = MyMathUtility::MakeRotation(rotation);
-	matTrans = MyMathUtility::MakeTranslation(position);
-
-	// ワールド行列の合成
-	matWorld = MyMathUtility::MakeIdentity();
-	matWorld *= matScale;
-	matWorld *= matRot;
-	matWorld *= matTrans;
-
-	// 親オブジェクトがあれば
-	if (parent != nullptr)
-	{
-		matWorld *= parent->matWorld;
-	}
-
-	const MyMath::Matrix4 matView = camera->GetMatView();
-	const MyMath::Matrix4 matProjection = camera->GetMatProjection();
-	const MyMath::Vector3& cameraPos = camera->GetEye();
-
-	// 定数バッファへデータ転送
-	ConstBufferDataB0* constMap = nullptr;
-	result = constBuffB0->Map(0, nullptr, (void**)&constMap);
-	assert(SUCCEEDED(result));
-	//constMap->mat = matWorld* matView * matProjection;
-	constMap->viewproj = matView * matProjection;
-	constMap->world = matWorld;
-	constMap->cameraPos = cameraPos;
-	constBuffB0->Unmap(0, nullptr);
-}
-
-void Object3d::Draw()
+void Object3d::Draw(WorldTransform* transform)
 {
 	cmdList_ = DirectXCommon::GetInstance()->GetCommandList();
 
@@ -141,7 +141,7 @@ void Object3d::Draw()
 	// プリミティブ形状の設定コマンド
 	cmdList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
 	// 定数バッファビューをセット
-	cmdList_->SetGraphicsRootConstantBufferView(2, constBuffB0->GetGPUVirtualAddress());
+	cmdList_->SetGraphicsRootConstantBufferView(2, transform->GetGpuAddress());
 
 	//ライトの描画
 	light->Draw(cmdList_.Get(), 3);

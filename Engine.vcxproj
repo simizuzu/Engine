@@ -99,6 +99,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="lib\engine\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="lib\engine\3D\Model\ObjModel.cpp" />
     <ClCompile Include="lib\engine\3D\Model\Object3d.cpp" />
@@ -127,6 +128,7 @@
     <ClCompile Include="lib\engine\Scene\BaseScene.cpp" />
     <ClCompile Include="lib\engine\Scene\Framework.cpp" />
     <ClCompile Include="lib\engine\Scene\SceneManager.cpp" />
+    <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="Users\Scene\GameScene.cpp" />
     <ClCompile Include="Users\Scene\MainGame.cpp" />
     <ClCompile Include="Users\Scene\SceneFactory.cpp" />
@@ -134,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FbxLoader.h" />
+    <ClInclude Include="GameCamera.h" />
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
     <ClInclude Include="lib\engine\3D\Model\Material.h" />
     <ClInclude Include="lib\engine\3D\Model\ObjModel.h" />
@@ -164,6 +167,7 @@
     <ClInclude Include="lib\engine\Scene\BaseScene.h" />
     <ClInclude Include="lib\engine\Scene\Framework.h" />
     <ClInclude Include="lib\engine\Scene\SceneManager.h" />
+    <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="Users\Scene\GameScene.h" />
     <ClInclude Include="Users\Scene\MainGame.h" />
     <ClInclude Include="Users\Scene\SceneFactory.h" />

@@ -222,6 +222,12 @@
     <ClCompile Include="lib\engine\3D\Particle\ParticleManager.cpp">
       <Filter>Engine\ソース ファイル\3D\Particle</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerBullet.cpp">
+      <Filter>Engine\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCamera.cpp">
+      <Filter>Engine\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engine\Math\DirectX12Math.h">
@@ -328,6 +334,12 @@
     </ClInclude>
     <ClInclude Include="lib\engine\Math\Quaternion.h">
       <Filter>Engine\ヘッダー ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBullet.h">
+      <Filter>Engine\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCamera.h">
+      <Filter>Engine\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

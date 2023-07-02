@@ -69,7 +69,9 @@ public:
 	const MyMath::Vector3& GetTarget();
 	const MyMath::Vector3& GetUp();
 
+	//視点距離
 	void SetEye(const MyMath::Vector3& eye);
+	//視点方向
 	void SetTarget(const MyMath::Vector3& target);
 	void SetUp(const MyMath::Vector3& up);
 	void SetFarZ(const float& farZ);

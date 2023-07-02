@@ -51,6 +51,9 @@ private: // メンバ変数
 	std::unique_ptr<Object3d> skydomeObj_;
 	std::unique_ptr<ObjModel> skydomeModel_;
 
+	MyMath::Vector3 cameraRot = {0,0,0};
+	MyMath::Vector3 cameraTarget;
+
 	WorldTransform skydomeTrans;
 
 private:

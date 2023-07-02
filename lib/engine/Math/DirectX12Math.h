@@ -75,6 +75,8 @@ namespace MyMathUtility
 	/// <returns></returns>
 	MyMath::Vector3 HermiteGetPoint(MyMath::Vector3 p0, MyMath::Vector3 p1, MyMath::Vector3 v0, MyMath::Vector3 v1, float t);
 
+	
+
 	// Sin,Cos,Tan関数
 	float Sin(float sin);
 	float Cos(float cos);
@@ -89,6 +91,23 @@ namespace MyMathUtility
 
 	float Clamp(float Value, const float low, const float high);
 	float Clamp0To1(float val);
+
+	/// <summary>
+	/// 単振動をした値を返す
+	/// </summary>
+	/// <param name="time">経過時間</param>
+	/// <param name="amplitude">振幅</param>
+	/// <param name="period">周期</param>
+	/// <returns></returns>
+	float SimpleHarmonicMotion(float time, float amplitude = 10.0f, float period = 60.0f);
+
+	float EaseOutCubic(const float startPoint, const float endPoint, float nowFlame, float endFlame);
+	float EaseOutCirc(const float startPoint, const float endPoint, float nowFlame, float endFlame);
+	float EaseInSine(const float startPoint, const float endPoint, float nowFlame, float endFlame);
+	float EaseOutSine(const float startPoint, const float endPoint, float nowFlame, float endFlame);
+	float EaseOutQuint(const float startPoint, const float endPoint, float nowFlame, float endFlame);
+	float EaseInExpo(const float startPoint, const float endPoint, float nowFlame, float endFlame);
+	float EaseInOutBack(const float startPoint, const float endPoint, float nowFlame, float endFlame);
 
 } // namespace MyMathUtility
 

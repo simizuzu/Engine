@@ -447,9 +447,61 @@ namespace MyMathUtility
 		return c0 * t3 + c1 * t2 + c2 * t + c3;
 	}
 
-	float LenSegLineOfSeparateAxis(Vector3* sep, Vector3* e1, Vector3* e2, Vector3* e3)
+	float SimpleHarmonicMotion(float time, float amplitude, float period)
 	{
-		return 0.0f;
+		return amplitude * sinf((2 *PI) * time / period);
+	}
+
+	float EaseOutCubic(const float startPoint, const float endPoint, float nowFlame, float endFlame)
+	{
+		float len = startPoint - endPoint;
+
+		return endPoint + len * pow(1 - (nowFlame / endFlame), 3.0f);
+	}
+
+	float EaseOutCirc(const float startPoint, const float endPoint, float nowFlame, float endFlame)
+	{
+		return sqrt(1 - pow(nowFlame / endFlame - 1.0f, 2.0f)) + startPoint;
+	}
+
+	float EaseInSine(const float startPoint, const float endPoint, float nowFlame, float endFlame)
+	{
+		float len = startPoint - endPoint;
+
+		return endPoint + len * cos(((nowFlame / endFlame) * PI) / 2.0f);
+	}
+
+	float EaseOutSine(const float startPoint, const float endPoint, float nowFlame, float endFlame)
+	{
+		float len = endPoint - startPoint;
+
+		return startPoint + len * sin(((nowFlame / endFlame) * PI) / 2.0f);
+	}
+
+	float EaseOutQuint(const float startPoint, const float endPoint, float nowFlame, float endFlame)
+	{
+		float len = startPoint - endPoint;
+
+		return endPoint + len * pow(1 - (nowFlame / endFlame), 5.0f);
+	}
+
+	float EaseInExpo(const float startPoint, const float endPoint, float nowFlame, float endFlame)
+	{
+		float len = startPoint - endPoint;
+
+		return endPoint + len * (nowFlame / endFlame) == 0.0f ? 0.0f : pow(2.0f, 10.0f * (nowFlame / endFlame) - 10.0f);
+	}
+
+	float EaseInOutBack(const float startPoint, const float endPoint, float nowFlame, float endFlame)
+	{
+		const float c1 = 1.70158f;
+		const float c2 = c1 * 1.525f;
+
+		float len = endPoint - startPoint;
+
+		return startPoint + len * (nowFlame / endFlame) < 0.5f
+			? len * ((pow(2.0f * (nowFlame / endFlame), 2.0f) * ((c2 + 1.0f) * 2.0f * (nowFlame / endFlame) - c2)) / 2.0f)
+			: endPoint + len * ((pow(2.0f * (nowFlame / endFlame) - 2.0f, 2.0f) * ((c2 + 1.0f) * ((nowFlame / endFlame) * 2.0f - 2.0f) + c2) + 2.0f) / 2.0f);
 	}
 }
 

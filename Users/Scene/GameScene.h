@@ -14,6 +14,8 @@
 #include "TextureManager.h"
 #include "WorldTransform.h"
 
+#include "GameCamera.h"
+
 #pragma warning(push)
 #pragma warning(disable: 4091)
 #pragma warning(pop)
@@ -38,6 +40,8 @@ private: // メンバ変数
 	std::unique_ptr<Camera> camera;
 	std::unique_ptr<Light> light;
 	//AudioManager* audioManager_ = nullptr;
+
+	std::unique_ptr<GameCamera> gameCamera;
 
 	SceneManager* sceneManager_ = nullptr;
 

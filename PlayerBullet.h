@@ -1,18 +1,21 @@
 ﻿#pragma once
-#include"Object3d.h"
-#include"ObjModel.h"
+#include "Object3d.h"
+#include "ObjModel.h"
+#include "WorldTransform.h"
 
 class PlayerBullet
 {
 public:
-	void Initialize(ObjModel* model);
+	void Initialize(ObjModel* model,Object3d* obj, const MyMath::Vector3& position);
 
-	void Update();
+	void Update(Camera* camera);
 
 	void Draw();
 
 private:
-	std::unique_ptr<ObjModel> bulletModel_;
-	std::unique_ptr<Object3d> bulletObj_;
+	ObjModel* bulletModel_ = nullptr;
+	Object3d* bulletObj_ = nullptr;
+
+	WorldTransform bulletTrans_;
 };
 

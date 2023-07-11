@@ -222,11 +222,14 @@
     <ClCompile Include="lib\engine\3D\Particle\ParticleManager.cpp">
       <Filter>Engine\ソース ファイル\3D\Particle</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerBullet.cpp">
-      <Filter>Engine\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="GameCamera.cpp">
-      <Filter>Engine\ソース ファイル</Filter>
+      <Filter>Users\ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Users\ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBullet.cpp">
+      <Filter>Users\ソースファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -335,11 +338,14 @@
     <ClInclude Include="lib\engine\Math\Quaternion.h">
       <Filter>Engine\ヘッダー ファイル\Math</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerBullet.h">
-      <Filter>Engine\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="GameCamera.h">
-      <Filter>Engine\ヘッダー ファイル</Filter>
+      <Filter>Users\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Users\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBullet.h">
+      <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

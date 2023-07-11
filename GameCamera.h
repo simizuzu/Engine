@@ -9,7 +9,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(Input* input);
+	void Initialize(Input* input,Camera* camera);
 
 	/// <summary>
 	/// 更新
@@ -31,6 +31,8 @@ private:
 	float nowFlame;
 	//終了する時間(フレーム)
 	float endFlame;
+
+	MyMath::Vector3 cameraTarget_;
 
 	bool ReleaseKeyFlag = false;
 

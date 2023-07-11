@@ -9,6 +9,9 @@ void GameScene::Initialize()
 	camera = std::make_unique<Camera>();
 	camera->Initialize();
 
+	gameCamera = std::make_unique<GameCamera>();
+	gameCamera->Initialize(input_,camera.get());
+
 	light.reset(Light::Create());
 	light->SetLightColor({ 1,1,1 });
 	Object3d::SetLight(light.get());
@@ -34,16 +37,18 @@ void GameScene::Update()
 	light->Update();
 	skydomeTrans.Update(camera.get());
 
-	if (input_->PushKey(DIK_RIGHT))
+	/*if (input_->PushKey(DIK_RIGHT))
 	{
 		cameraRot.x++;
 	}
 	else if (input_->PushKey(DIK_LEFT))
 	{
 		cameraRot.x--;
-	}
+	}*/
 
-	camera->SetTarget({ cameraRot.x,cameraRot.y,cameraRot.z });
+	gameCamera->Update(camera.get());
+
+	//camera->SetTarget({ cameraRot.x,cameraRot.y,cameraRot.z });
 }
 
 void GameScene::Draw()

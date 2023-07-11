@@ -130,6 +130,7 @@
     <ClCompile Include="lib\engine\Scene\SceneManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerBullet.cpp" />
+    <ClCompile Include="RailCamera.cpp" />
     <ClCompile Include="Users\Scene\GameScene.cpp" />
     <ClCompile Include="Users\Scene\MainGame.cpp" />
     <ClCompile Include="Users\Scene\SceneFactory.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="lib\engine\Scene\SceneManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerBullet.h" />
+    <ClInclude Include="RailCamera.h" />
     <ClInclude Include="Users\Scene\GameScene.h" />
     <ClInclude Include="Users\Scene\MainGame.h" />
     <ClInclude Include="Users\Scene\SceneFactory.h" />

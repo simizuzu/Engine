@@ -14,6 +14,15 @@ public:
 	MyMath::Vector3 up_;
 #pragma endregion
 
+	// ビュー行列
+	MyMath::Matrix4 matView_;
+	// ビュー逆行列
+	MyMath::Matrix4 matViewInverse_;
+	// 射影行列
+	MyMath::Matrix4 matProjection_;;
+	// カメラ距離
+	float distance = 50.0f;
+
 private:
 #pragma region 射影行列設定
 	// カメラ画角
@@ -25,14 +34,6 @@ private:
 	// アスペクト比(画面横幅/画面縦幅)
 	float aspect = 0.0f;
 #pragma endregion
-	// ビュー行列
-	MyMath::Matrix4 matView_;
-	// ビュー逆行列
-	MyMath::Matrix4 matViewInverse_;
-	// 射影行列
-	MyMath::Matrix4 matProjection_;;
-	// カメラ距離
-	float distance = 50.0f;
 
 public:
 	/// <summary>

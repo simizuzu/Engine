@@ -14,7 +14,7 @@
 #include "TextureManager.h"
 #include "WorldTransform.h"
 
-#include "GameCamera.h"
+#include "RailCamera.h"
 
 #pragma warning(push)
 #pragma warning(disable: 4091)
@@ -41,7 +41,7 @@ private: // メンバ変数
 	std::unique_ptr<Light> light;
 	//AudioManager* audioManager_ = nullptr;
 
-	std::unique_ptr<GameCamera> gameCamera;
+	std::unique_ptr<RailCamera> railCamera_;
 
 	SceneManager* sceneManager_ = nullptr;
 

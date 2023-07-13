@@ -359,4 +359,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /src/lib/External/lib
 /src/lib/External/include
-/src/lib/External/vcpkg
+

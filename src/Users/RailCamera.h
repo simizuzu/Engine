@@ -16,3 +16,4 @@ private:
 	std::unique_ptr<Camera> camera_;
 };
 
+//こんにちあｈ

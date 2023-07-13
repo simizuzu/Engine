@@ -87,11 +87,11 @@ void Framework::Run()
 			break;
 		}
 		dxCommon_->PreDraw(winApp_);
-		//postEffect->PreDrawScene(dxCommon_->GetCommandList());
+		postEffect->PreDrawScene(dxCommon_->GetCommandList());
 		// シーンの描画
 		Draw();
-		//ImGui描画
 		//postEffect->PostDrawScene(dxCommon_->GetCommandList());
+		//ImGui描画
 		imGuiManager->Draw(dxCommon_);
 		//postEffect->Draw(dxCommon_->GetCommandList());
 		dxCommon_->PostDraw();

@@ -124,6 +124,18 @@
     <Filter Include="Engine\シェーダーファイル\PostEffect\Default">
       <UniqueIdentifier>{b5a625f7-c2ea-4f4b-b6a5-e6bb4a03cbee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソース ファイル\3D\Model\OBJ">
+      <UniqueIdentifier>{cae4db89-6aca-4766-a1c2-dbf8918511c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソース ファイル\3D\Model\FBX">
+      <UniqueIdentifier>{14911064-0385-4b22-b1e0-a32183296d20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダー ファイル\3D\Model\FBX">
+      <UniqueIdentifier>{d70af7ad-0c9a-453f-a57c-4b92762f310a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダー ファイル\3D\Model\OBJ">
+      <UniqueIdentifier>{e81cb9b4-7c74-42d4-9ffc-05a1eb07e238}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\engine\Base\WinApp.cpp">
@@ -170,12 +182,6 @@
     </ClCompile>
     <ClCompile Include="lib\engine\Camera\Camera.cpp">
       <Filter>Engine\ソース ファイル\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\engine\3D\Model\Object3d.cpp">
-      <Filter>Engine\ソース ファイル\3D\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\engine\3D\Model\ObjModel.cpp">
-      <Filter>Engine\ソース ファイル\3D\Model</Filter>
     </ClCompile>
     <ClCompile Include="lib\engine\Base\Shader.cpp">
       <Filter>Engine\ソース ファイル\Base</Filter>
@@ -234,6 +240,18 @@
     <ClCompile Include="RailCamera.cpp">
       <Filter>Users\ソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="lib\engine\3D\Model\Object3d.cpp">
+      <Filter>Engine\ソース ファイル\3D\Model\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\3D\Model\ObjModel.cpp">
+      <Filter>Engine\ソース ファイル\3D\Model\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="FbxModel.cpp">
+      <Filter>Engine\ソース ファイル\3D\Model\FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Test\kakak\FbxLoader.cpp">
+      <Filter>Engine\ソース ファイル\3D\Model\FBX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engine\Math\DirectX12Math.h">
@@ -281,12 +299,6 @@
     <ClInclude Include="lib\engine\Camera\Camera.h">
       <Filter>Engine\ヘッダー ファイル\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="lib\engine\3D\Model\Object3d.h">
-      <Filter>Engine\ヘッダー ファイル\3D\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\engine\3D\Model\ObjModel.h">
-      <Filter>Engine\ヘッダー ファイル\3D\Model</Filter>
-    </ClInclude>
     <ClInclude Include="lib\engine\3D\Model\Material.h">
       <Filter>Engine\ヘッダー ファイル\3D\Model</Filter>
     </ClInclude>
@@ -332,9 +344,6 @@
     <ClInclude Include="lib\engine\3D\WorldTransform.h">
       <Filter>Engine\ヘッダー ファイル\3D</Filter>
     </ClInclude>
-    <ClInclude Include="FbxLoader.h">
-      <Filter>Engine\ヘッダー ファイル\3D</Filter>
-    </ClInclude>
     <ClInclude Include="lib\engine\Base\Light.h">
       <Filter>Engine\ヘッダー ファイル\Base</Filter>
     </ClInclude>
@@ -352,6 +361,18 @@
     </ClInclude>
     <ClInclude Include="RailCamera.h">
       <Filter>Users\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="FbxLoader.h">
+      <Filter>Engine\ヘッダー ファイル\3D\Model\FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="FbxModel.h">
+      <Filter>Engine\ヘッダー ファイル\3D\Model\FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\engine\3D\Model\Object3d.h">
+      <Filter>Engine\ヘッダー ファイル\3D\Model\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\engine\3D\Model\ObjModel.h">
+      <Filter>Engine\ヘッダー ファイル\3D\Model\OBJ</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

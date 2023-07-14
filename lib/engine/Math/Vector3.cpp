@@ -1,21 +1,14 @@
-#include"Vector3.h"
+ï»¿#include"Vector3.h"
 #include <cmath>
 
 namespace MyMath
 {
-	// —ëƒxƒNƒgƒ‹
+	// é›¶ãƒ™ã‚¯ãƒˆãƒ«
 	Vector3::Vector3() :x(0), y(0), z(0) {}
 
 	Vector3::Vector3(float x, float y, float z) : x(x), y(y), z(z) {}
 
-	Vector3::Vector3(const aiVector3D& mat)
-	{
-		x = mat.x;//x¬•ª
-		y = mat.y;//y¬•ª
-		z = mat.z;//z¬•ª
-	}
-
-	// ƒxƒNƒgƒ‹‚Ì’·‚³‚ğŒvZ‚·‚é
+	// ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•ã‚’è¨ˆç®—ã™ã‚‹
 	float Vector3::length() const
 	{
 		return std::sqrt(x * x + y * y + z * z);
@@ -101,8 +94,8 @@ namespace MyMath
 		return *this;
 	}
 
-	//Vector3 ƒNƒ‰ƒX‚É‘®‚³‚È‚¢ŠÖ”ŒS
-	//“ñ€‰‰Zq
+	//Vector3 ã‚¯ãƒ©ã‚¹ã«å±ã•ãªã„é–¢æ•°éƒ¡
+	//äºŒé …æ¼”ç®—å­
 	const Vector3 operator+ (const Vector3& v1, const Vector3& v2)
 	{
 		Vector3 temp(v1);

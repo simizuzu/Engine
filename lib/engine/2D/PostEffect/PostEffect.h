@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <DirectXMath.h>
 #include <memory>
 #include <wrl.h>
@@ -25,12 +25,12 @@ struct VertexPosUv
 	MyMath::Vector2 uv;
 };
 
-//’è”ƒoƒbƒtƒ@—pƒf[ƒ^\‘¢‘Ì
-struct ConstBufferData
+//å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”¨ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
+struct ConstBufferDataPE
 {
-	unsigned int isRadialBlur; //ƒ‰ƒWƒAƒ‹ƒuƒ‰[‚ğ‚©‚¯‚é‚©
-	unsigned int radialBlurSampleNum; //ƒ‰ƒWƒAƒ‹ƒuƒ‰[‚ÌƒTƒ“ƒvƒ‹‰ñ”
-	float radialBlurStrength; //ƒ‰ƒWƒAƒ‹ƒuƒ‰[‚ÌL‚ª‚é‹­‚³
+	unsigned int isRadialBlur; //ãƒ©ã‚¸ã‚¢ãƒ«ãƒ–ãƒ©ãƒ¼ã‚’ã‹ã‘ã‚‹ã‹
+	unsigned int radialBlurSampleNum; //ãƒ©ã‚¸ã‚¢ãƒ«ãƒ–ãƒ©ãƒ¼ã®ã‚µãƒ³ãƒ—ãƒ«å›æ•°
+	float radialBlurStrength; //ãƒ©ã‚¸ã‚¢ãƒ«ãƒ–ãƒ©ãƒ¼ã®åºƒãŒã‚‹å¼·ã•
 	float pad1;
 };
 
@@ -43,77 +43,79 @@ public:
 	bool Initialize();
 
 	/// <summary>
-	/// •`‰æƒRƒ}ƒ“ƒh‚ÌÀs
+	/// æç”»ã‚³ãƒãƒ³ãƒ‰ã®å®Ÿè¡Œ
 	/// </summary>
-	/// <param name="cmdList">ƒRƒ}ƒ“ƒhƒŠƒXƒg</param>
+	/// <param name="cmdList">ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒˆ</param>
 	void Draw(ID3D12GraphicsCommandList* cmdList);
 
 	/// <summary>
-	/// ƒV[ƒ“•`‰æ‘Oˆ—
+	/// ã‚·ãƒ¼ãƒ³æç”»å‰å‡¦ç†
 	/// </summary>
-	/// <param name="cmdList">ƒRƒ}ƒ“ƒhƒŠƒXƒg</param>
+	/// <param name="cmdList">ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒˆ</param>
 	void PreDrawScene(ID3D12GraphicsCommandList* cmdList, WinApp* winApp);
 
 	/// <summary>
-	/// ƒV[ƒ“•`‰æŒãˆ—
+	/// ã‚·ãƒ¼ãƒ³æç”»å¾Œå‡¦ç†
 	/// </summary>
-	/// <param name="cmdList">ƒRƒ}ƒ“ƒhƒŠƒXƒg</param>
+	/// <param name="cmdList">ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒˆ</param>
 	void PostDrawScene(ID3D12GraphicsCommandList* cmdList);
 
 private:
 	/// <summary>
-	/// ’¸“_ƒf[ƒ^‚Ì¶¬
+	/// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã®ç”Ÿæˆ
 	/// </summary>
 	void CreateVertexData(ID3D12Device* device);
 
 	/// <summary>
-	/// ƒeƒNƒXƒ`ƒƒ¶¬
+	/// ãƒ†ã‚¯ã‚¹ãƒãƒ£ç”Ÿæˆ
 	/// </summary>
 	void CreateTextureBuff(ID3D12Device* device, WinApp* winApp);
 
 	/// <summary>
-	/// SRVì¬
+	/// SRVä½œæˆ
 	/// </summary>
 	void CreateSRVDesc(ID3D12Device* device);
 
 	/// <summary>
-	/// RTVì¬
+	/// RTVä½œæˆ
 	/// </summary>
 	void CreateRTVDesc(ID3D12Device* device);
 
 	/// <summary>
-	/// DSVì¬
+	/// DSVä½œæˆ
 	/// </summary>
 	void CreateDSVDesc(ID3D12Device* device, WinApp* winApp);
 
 	/// <summary>
-	/// [“xƒoƒbƒtƒ@¶¬
+	/// æ·±åº¦ãƒãƒƒãƒ•ã‚¡ç”Ÿæˆ
 	/// </summary>
 	void CreateDepthBuff(ID3D12Device* device);
 
+	static RootsigSetPip pipline_;
+
 private:
-	//ƒfƒoƒCƒX
+	//ãƒ‡ãƒã‚¤ã‚¹
 	Microsoft::WRL::ComPtr<ID3D12Device> device_;
-	//ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡
 	Microsoft::WRL::ComPtr<ID3D12Resource> texBuff;
-	//[“xƒoƒbƒtƒ@
+	//æ·±åº¦ãƒãƒƒãƒ•ã‚¡
 	Microsoft::WRL::ComPtr<ID3D12Resource> depthBuff;
-	//SRV—pƒfƒXƒNƒŠƒvƒ^ƒq[ƒv
+	//SRVç”¨ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeapSRV;
-	//RTV—pƒfƒXƒNƒŠƒvƒ^ƒq[ƒv
+	//RTVç”¨ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeapRTV;
-	//DSV—pƒfƒXƒNƒŠƒvƒ^ƒq[ƒv
+	//DSVç”¨ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeapDSV;
-	//’¸“_ƒoƒbƒtƒ@
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 	Microsoft::WRL::ComPtr<ID3D12Resource> vertBuff;
-	//’è”ƒoƒbƒtƒ@
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	Microsoft::WRL::ComPtr<ID3D12Resource> constBuff;
-	//’¸“_ƒoƒbƒtƒ@ƒrƒ…[
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
 
 	static const float clearColor[4];
 
-	static RootsigSetPip pipline_;
+
 
 	std::shared_ptr<WinApp> winApp_;
 	std::shared_ptr<DirectXCommon> dxCommon;

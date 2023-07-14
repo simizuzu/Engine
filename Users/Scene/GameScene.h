@@ -1,36 +1,39 @@
-#pragma once
+ï»¿#pragma once
 #include <memory>
 
 #include "Input.h"
 #include "Camera.h"
 #include "Sprite.h"
 #include "Object3d.h"
-#include "Model.h"
+#include "ObjModel.h"
 #include "AudioManager.h"
 #include "BaseScene.h"
 #include "TextureManager.h"
 #include "SceneManager.h"
 #include "TitleScene.h"
+#include "Light.h"
 
 #include "GameCollisionManager.h"
 
 class GameScene : public BaseScene
 {
-public: // ƒƒ“ƒoŠÖ”
+public: // ãƒ¡ãƒ³ãƒé–¢æ•°
 	GameScene() = default;
 	~GameScene() = default;
-	//@‰Šú‰»
+	//ã€€åˆæœŸåŒ–
 	void Initialize() override;
-	// XV
+	// æ›´æ–°
 	void Update() override;
-	// •`‰æ
+	// æç”»
 	void Draw() override;
-	// I—¹ˆ—
+	// çµ‚äº†å‡¦ç†
 	void Finalize() override;
 
 
-private: // ƒƒ“ƒo•Ï”
+private: // ãƒ¡ãƒ³ãƒå¤‰æ•°
 	Input* input_ = nullptr;
+	std::unique_ptr<Light> light_;
+
 	std::unique_ptr<Camera> camera;
 	DirectXCommon* dxCommon_ = nullptr;
 	AudioManager* audioManager_ = nullptr;
@@ -38,23 +41,23 @@ private: // ƒƒ“ƒo•Ï”
 	SceneManager* sceneManager_ = nullptr;
 
 	std::unique_ptr<Object3d> tyoinoriObj;
-	std::unique_ptr<Model> tyoinori;
+	std::unique_ptr<ObjModel> tyoinori;
 
-	//éŒ¾
+	//å®£è¨€
 	INT32 sceneNum = 0;
 	char PADING[4]{};
 
-	// ImGuiƒfƒoƒbƒN—p
+	// ImGuiãƒ‡ãƒãƒƒã‚¯ç”¨
 	MyMath::Vector2 pos = {100,100};
 	MyMath::Vector3 posObj = { 0,0,0 };
 	
 	MyMath::Vector3 cameraPos = { 0,0,0 };
 
-	// ƒTƒEƒ“ƒh
+	// ã‚µã‚¦ãƒ³ãƒ‰
 	uint32_t gameHandle_ = 0;
 
 private:
-	//ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^E‘ã“ü‰‰Zqíœ
+	//ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ»ä»£å…¥æ¼”ç®—å­å‰Šé™¤
 
 	GameScene& operator=(const GameScene&) = delete;
 	GameScene(const GameScene&) = delete;

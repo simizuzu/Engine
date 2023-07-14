@@ -1,10 +1,10 @@
-#include "Object3d.h"
+ï»¿#include "Object3d.h"
 #include <windows.h>
 
 #include "DirectX12Math.h"
 
 /// <summary>
-/// Ã“Iƒƒ“ƒo•Ï”‚ÌÀ‘Ô
+/// é™çš„ãƒ¡ãƒ³ãƒå¤‰æ•°ã®å®Ÿæ…‹
 /// </summary>
 Microsoft::WRL::ComPtr<ID3D12Device> Object3d::device_;
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> Object3d::cmdList_;
@@ -13,21 +13,21 @@ Light* Object3d::light = nullptr;
 
 void Object3d::StaticInitialize(ID3D12Device* device, int width, int height)
 {
-	// nullptrƒ`ƒFƒbƒN
+	// nullptrãƒã‚§ãƒƒã‚¯
 	assert(device);
 
 	Object3d::device_ = device;
 
-	// ƒOƒ‰ƒtƒBƒbƒNƒXƒpƒCƒvƒ‰ƒCƒ“‚Ì¶¬
+	// ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚¹ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã®ç”Ÿæˆ
 	CreateGraphicsPipeline();
 
-	Model::SetDevice(device);
+	ObjModel::SetDevice(device);
 }
 
 void Object3d::CreateGraphicsPipeline()
 {
-	Microsoft::WRL::ComPtr<ID3DBlob> vsBlob; // ’¸“_ƒVƒF[ƒ_ƒIƒuƒWƒFƒNƒg
-	Microsoft::WRL::ComPtr<ID3DBlob> psBlob;	// ƒsƒNƒZƒ‹ƒVƒF[ƒ_ƒIƒuƒWƒFƒNƒg
+	Microsoft::WRL::ComPtr<ID3DBlob> vsBlob; // é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	Microsoft::WRL::ComPtr<ID3DBlob> psBlob;	// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
 	Shader::CreateObjShade(vsBlob, psBlob);
 
@@ -36,14 +36,14 @@ void Object3d::CreateGraphicsPipeline()
 
 Object3d* Object3d::Create()
 {
-	// 3DƒIƒuƒWƒFƒNƒg‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
+	// 3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
 	Object3d* object3d = new Object3d();
 	if (object3d == nullptr)
 	{
 		return nullptr;
 	}
 
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	if (!object3d->Initialize()) {
 		delete object3d;
 		assert(0);
@@ -57,13 +57,13 @@ bool Object3d::Initialize()
 {
 	HRESULT result;
 
-	//’è”ƒoƒbƒtƒ@‚Ì¶¬
-	D3D12_HEAP_PROPERTIES heapProp{};//ƒq[ƒvİ’è
-	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPU‚Ö‚Ì“]‘——p
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
+	D3D12_HEAP_PROPERTIES heapProp{};//ãƒ’ãƒ¼ãƒ—è¨­å®š
+	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;//GPUã¸ã®è»¢é€ç”¨
 
 	D3D12_RESOURCE_DESC resDesc{};
 	resDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	resDesc.Width = (sizeof(ConstBufferDataB0) + 0xff) & ~0xff;//’¸“_ƒf[ƒ^‘S‘Ì‚ÌƒTƒCƒY
+	resDesc.Width = (sizeof(ConstBufferDataB0) + 0xff) & ~0xff;//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿å…¨ä½“ã®ã‚µã‚¤ã‚º
 	resDesc.Height = 1;
 	resDesc.DepthOrArraySize = 1;
 	resDesc.MipLevels = 1;
@@ -87,19 +87,19 @@ void Object3d::Update(Camera* camera)
 	HRESULT result;
 	MyMath::Matrix4 matScale, matRot, matTrans;
 
-	// ƒXƒP[ƒ‹A‰ñ“]A•½sˆÚ“®s—ñ‚ÌŒvZ
+	// ã‚¹ã‚±ãƒ¼ãƒ«ã€å›è»¢ã€å¹³è¡Œç§»å‹•è¡Œåˆ—ã®è¨ˆç®—
 	matScale = MyMathUtility::MakeScaling(scale);
 	matRot = MyMathUtility::MakeIdentity();
 	matRot = MyMathUtility::MakeRotation(rotation);
 	matTrans = MyMathUtility::MakeTranslation(position);
 
-	// ƒ[ƒ‹ƒhs—ñ‚Ì‡¬
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®åˆæˆ
 	matWorld = MyMathUtility::MakeIdentity();
 	matWorld *= matScale;
 	matWorld *= matRot;
 	matWorld *= matTrans;
 
-	// eƒIƒuƒWƒFƒNƒg‚ª‚ ‚ê‚Î
+	// è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒã‚ã‚Œã°
 	if (parent != nullptr)
 	{
 		matWorld *= parent->matWorld;
@@ -109,7 +109,7 @@ void Object3d::Update(Camera* camera)
 	const MyMath::Matrix4 matProjection = camera->GetMatProjection();
 	const MyMath::Vector3& cameraPos = camera->GetEye();
 
-	// ’è”ƒoƒbƒtƒ@‚Öƒf[ƒ^“]‘—
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã¸ãƒ‡ãƒ¼ã‚¿è»¢é€
 	ConstBufferDataB0* constMap = nullptr;
 	result = constBuffB0->Map(0, nullptr, (void**)&constMap);
 	assert(SUCCEEDED(result));
@@ -124,32 +124,32 @@ void Object3d::Draw()
 {
 	cmdList_ = DirectXCommon::GetInstance()->GetCommandList();
 
-	// nullƒ`ƒFƒbƒN
+	// nullãƒã‚§ãƒƒã‚¯
 	assert(device_);
 	assert(Object3d::cmdList_);
 
-	// ƒ‚ƒfƒ‹‚ÌŠ„‚è“–‚Ä‚ª‚È‚¯‚ê‚Î•`‰æ‚µ‚È‚¢
+	// ãƒ¢ãƒ‡ãƒ«ã®å‰²ã‚Šå½“ã¦ãŒãªã‘ã‚Œã°æç”»ã—ãªã„
 	if (model == nullptr)
 	{
 		return;
 	}
 
-	// ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚Ìİ’è
+	// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã®è¨­å®š
 	cmdList_->SetPipelineState(pip.pipelineState.Get());
-	// ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ìİ’è
+	// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®è¨­å®š
 	cmdList_->SetGraphicsRootSignature(pip.rootSignature.Get());
-	// ƒvƒŠƒ~ƒeƒBƒuŒ`ó‚Ìİ’èƒRƒ}ƒ“ƒh
-	cmdList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // OŠpŒ`ƒŠƒXƒg
-	// ’è”ƒoƒbƒtƒ@ƒrƒ…[‚ğƒZƒbƒg
+	// ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–å½¢çŠ¶ã®è¨­å®šã‚³ãƒãƒ³ãƒ‰
+	cmdList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // ä¸‰è§’å½¢ãƒªã‚¹ãƒˆ
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã‚’ã‚»ãƒƒãƒˆ
 	cmdList_->SetGraphicsRootConstantBufferView(2, constBuffB0->GetGPUVirtualAddress());
 
-	//ƒ‰ƒCƒg‚Ì•`‰æ
+	//ãƒ©ã‚¤ãƒˆã®æç”»
 	light->Draw(cmdList_.Get(), 3);
-	// ƒ‚ƒfƒ‹•`‰æ
+	// ãƒ¢ãƒ‡ãƒ«æç”»
 	model->Draw(cmdList_.Get());
 }
 
-void Object3d::SetModel(Model* model)
+void Object3d::SetModel(ObjModel* model)
 {
 	this->model = model;
 }
@@ -178,9 +178,9 @@ namespace MyMath
 {
 	Vector3 GetWorldPosition(Object3d& transform)
 	{
-		// ƒ[ƒ‹ƒhÀ•W‚ğ“ü‚ê‚é•Ï”
+		// ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‚’å…¥ã‚Œã‚‹å¤‰æ•°
 		Vector3 worldPos;
-		// ƒ[ƒ‹ƒhs—ñ‚Ì•½sˆÚ“®¬•ª‚ğæ“¾
+		// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®å¹³è¡Œç§»å‹•æˆåˆ†ã‚’å–å¾—
 		worldPos.x = transform.matWorld.m[3][0];
 		worldPos.y = transform.matWorld.m[3][1];
 		worldPos.z = transform.matWorld.m[3][2];
@@ -193,14 +193,14 @@ namespace MyMath
 		Matrix4 matWorld = MyMathUtility::MakeIdentity();
 		Matrix4 matScale, matRot, matTrans;
 
-		// ƒXƒP[ƒŠƒ“ƒO”{—¦
+		// ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°å€ç‡
 		matScale = MyMathUtility::MakeScaling(transform.scale);
-		// ‰ñ“]s—ñ
+		// å›è»¢è¡Œåˆ—
 		matRot = MyMathUtility::MakeRotation(transform.rotation);
-		// ˆÚ“®—Ê
+		// ç§»å‹•é‡
 		matTrans = MyMathUtility::MakeTranslation(transform.position);
 
-		// matWorld‚ÉŠ|‚¯Z
+		// matWorldã«æ›ã‘ç®—
 		matWorld = matScale * matRot * matTrans;
 
 		if (transform.parent)

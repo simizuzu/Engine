@@ -95,7 +95,6 @@
   <ItemGroup>
     <ClCompile Include="FbxLoader.cpp" />
     <ClCompile Include="FbxModel.cpp" />
-    <ClCompile Include="lib\engine\2D\PostEffect\PostEffect.cpp" />
     <ClCompile Include="lib\engine\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="lib\engine\3D\Model\ObjModel.cpp" />
     <ClCompile Include="lib\engine\3D\Model\Object3d.cpp" />
@@ -135,7 +134,6 @@
   <ItemGroup>
     <ClInclude Include="FbxLoader.h" />
     <ClInclude Include="FbxModel.h" />
-    <ClInclude Include="lib\engine\2D\PostEffect\PostEffect.h" />
     <ClInclude Include="lib\engine\2D\Sprite\Sprite.h" />
     <ClInclude Include="lib\engine\3D\Model\Material.h" />
     <ClInclude Include="lib\engine\3D\Model\ObjModel.h" />

@@ -1,7 +1,7 @@
 ﻿#include "Camera.h"
 
 #include <wrl.h>
-#include <directx/d3d12.h>
+#include <d3d12.h>
 #include<cassert>
 #include "DirectXCommon.h"
 #include "WinApp.h"

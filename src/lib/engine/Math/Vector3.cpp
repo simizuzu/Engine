@@ -8,13 +8,6 @@ namespace MyMath
 
 	Vector3::Vector3(float x, float y, float z) : x(x), y(y), z(z) {}
 
-	Vector3::Vector3(const aiVector3D& mat)
-	{
-		x = mat.x;//x成分
-		y = mat.y;//y成分
-		z = mat.z;//z成分
-	}
-
 	// ベクトルの長さを計算する
 	float Vector3::length() const
 	{

@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include <directx/d3d12.h>
+#include <DirectXTex/d3dx12.h>
 #include <wrl.h>
 
 class Shader
@@ -11,6 +11,6 @@ public: // メンバ関数
 	static void CreateObjShade(Microsoft::WRL::ComPtr<ID3DBlob>& vsBlob, Microsoft::WRL::ComPtr<ID3DBlob>& psBlob);
 	// パーティクル用
 	static void CreateParticleShade(Microsoft::WRL::ComPtr<ID3DBlob>& vsBlob, Microsoft::WRL::ComPtr<ID3DBlob>& psBlob, Microsoft::WRL::ComPtr<ID3DBlob>& gsBlob);
+	// ポストエフェクト用
 	static void CreatePostEffectShade(Microsoft::WRL::ComPtr<ID3DBlob>& vsBlob,Microsoft::WRL::ComPtr<ID3DBlob>& psBlob);
-
 };

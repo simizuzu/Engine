@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <Windows.h>
-#include <directx/d3d12.h>
+#include <d3d12.h>
 #include <vector>
 #include <string>
 #include <wrl.h>

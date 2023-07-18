@@ -6,7 +6,7 @@
 #include"Shader.h"
 
 #pragma warning(push)
-#include <directx/d3dx12.h>
+#include <DirectXTex/d3dx12.h>
 #pragma warning(disable: 4091)
 #pragma warning(pop)
 

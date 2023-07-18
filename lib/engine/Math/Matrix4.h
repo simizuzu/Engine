@@ -4,11 +4,6 @@
 #include <array>
 #include "Vector3.h"
 
-#include<assimp/Importer.hpp>
-#include<assimp/scene.h>
-#include<assimp/postprocess.h>
-#include<assimp/cimport.h>
-
 namespace MyMath
 {
 	class Matrix4
@@ -26,7 +21,6 @@ namespace MyMath
 			float m30, float m31, float m32, float m33);
 
 		//Assimp用Matrix4
-		Matrix4(const aiMatrix4x4& mat);
 		Matrix4 Transpose();
 
 		Matrix4 identity();

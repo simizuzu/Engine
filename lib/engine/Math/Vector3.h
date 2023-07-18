@@ -1,8 +1,4 @@
 ﻿#pragma once
-#include<assimp/Importer.hpp>
-#include<assimp/scene.h>
-#include<assimp/postprocess.h>
-#include<assimp/cimport.h>
 
 namespace MyMath
 {
@@ -20,8 +16,7 @@ namespace MyMath
 		//コンストラクト
 		Vector3();                //ゼロベクトルとして生成
 		Vector3(float x, float y, float z);//x成分,y成分を指定しての生成
-		Vector3(const aiVector3D& mat);//Assimp用Vector3
-
+		
 		//　メンバ関数
 		float length() const;              //ノルム(長さ)を求める
 		Vector3& normalize();              //正規化する

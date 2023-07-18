@@ -20,14 +20,6 @@ namespace MyMath
 		z_ = z;
 	}
 
-	Quaternion::Quaternion(const aiQuaternion& q)
-	{
-		w_ = q.x;//x成分
-		x_ = q.y;//y成分
-		y_ = q.z;//z成分
-		z_ = q.w;//w
-	}
-
 	Quaternion Quaternion::Multiply(Quaternion r)
 	{
 		Quaternion result;

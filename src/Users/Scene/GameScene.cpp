@@ -1,4 +1,4 @@
-﻿#include "GameScene.h"
+#include "GameScene.h"
 
 #include <imgui.h>
 
@@ -21,7 +21,7 @@ void GameScene::Initialize()
 	skydomeTrans.Initialize();
 	skydomeTrans.SetScale({ 500.0f,500.0f,500.0f });
 
-	railCamera_->Initailize(camera.get());
+	//railCamera_->Initailize(camera.get());
 
 	sceneManager_ = SceneManager::GetInstance();
 }
@@ -45,7 +45,7 @@ void GameScene::Update()
 		cameraRot.x++;
 	}
 
-	railCamera_->Update();
+	//railCamera_->Update();
 
 	camera->SetTarget({ cameraRot.x,cameraRot.y,cameraRot.z });
 }

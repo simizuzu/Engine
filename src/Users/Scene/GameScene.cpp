@@ -21,7 +21,7 @@ void GameScene::Initialize()
 	skydomeTrans.Initialize();
 	skydomeTrans.SetScale({ 500.0f,500.0f,500.0f });
 
-	//railCamera_->Initailize(camera.get());
+	railCamera_->Initailize(camera.get());
 
 	sceneManager_ = SceneManager::GetInstance();
 }

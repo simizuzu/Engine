@@ -1,4 +1,4 @@
-﻿#include "SceneFactory.h"
+#include "SceneFactory.h"
 #include "TitleScene.h"
 #include "GameScene.h"
 

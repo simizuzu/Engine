@@ -246,10 +246,10 @@
     <ClCompile Include="Users\RailCamera.cpp">
       <Filter>Users\ソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="lib\engine\3D\Model\FbxLoader.cpp">
+    <ClCompile Include="lib\engine\3D\Model\FbxModel.cpp">
       <Filter>Engine\ソース ファイル\3D\Model\FBX</Filter>
     </ClCompile>
-    <ClCompile Include="lib\engine\3D\Model\FbxModel.cpp">
+    <ClCompile Include="lib\engine\3D\Model\FbxLoader.cpp">
       <Filter>Engine\ソース ファイル\3D\Model\FBX</Filter>
     </ClCompile>
   </ItemGroup>

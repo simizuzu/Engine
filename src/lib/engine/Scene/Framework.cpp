@@ -1,4 +1,4 @@
-﻿#include "Framework.h"
+#include "Framework.h"
 
 void Framework::Initialize()
 {
@@ -16,6 +16,8 @@ void Framework::Initialize()
 	fps_->InitializeFixFps();
 	// DirectX初期化
 	dxCommon_->Initialize();
+	//FBXLoaderの初期化
+	FbxLoader::GetInstance()->Initialize(dxCommon_->GetDevice());
 	// スプライト共通部の初期化
 	textureManager_->Initialize(dxCommon_);
 	// Audio初期化
@@ -43,6 +45,8 @@ void Framework::Finalize()
 	textureManager_->Delete();
 	// オーディオマネージャー初期化
 	audioManager->Destroy();
+	//FBXLoaderの後始末
+	FbxLoader::GetInstance()->Finalize();
 	// WindowsAPIの終了処理
 	winApp_->Finalize();
 	// WinApp解放

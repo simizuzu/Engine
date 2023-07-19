@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "WinApp.h"
 #include "DirectXCommon.h"
 #include "Input.h"
@@ -7,10 +7,12 @@
 #include "TextureManager.h"
 #include "ImGuiManager.h"
 #include "PostEffect.h"
+#include "FbxLoader.h"
 
 #include "BaseScene.h"
 #include "SceneManager.h"
 #include "AbstractSceneFactory.h"
+
 
 // ゲーム全体
 class Framework

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <vector>
 #include "Vector2.h"
 #include "Vector3.h"
@@ -33,12 +33,6 @@ namespace MyMathUtility
 	MyMath::Matrix4 MakeTranslation(const MyMath::Vector3& trans);
 	//// ワールド行列の計算
 	//Mathematics::Matrix4 CreateMatrix(const WorldTransform& worldTransform);
-
-	///// <summary>
-	///// 1つ分のワールドトランスフォーム更新関数
-	///// </summary>
-	///// <param name="childWorldtrans">子のworldTransform</param>
-	//void WorldTransUpdate(WorldTransform& childWorldtrans);
 
 	void SinCos(float& sin_, float& cos_, float angle);
 

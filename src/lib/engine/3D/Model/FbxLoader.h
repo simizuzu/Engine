@@ -5,6 +5,7 @@
 #pragma warning(push)
 #include <d3d12.h>
 #include <d3dx12.h>
+#include <string>
 #pragma warning(pop)
 
 class FbxLoader
@@ -27,6 +28,12 @@ public:
 	/// <returns>インスタンス</returns>
 	static FbxLoader* GetInstance();
 
+	/// <summary>
+	/// ファイルからFBXモデル読み込み
+	/// </summary>
+	/// <param name="modelName">モデル名</param>
+	void LoadModelFromFile(const std::string& modelName);
+
 private:
 	//D3Dデバイス
 	ID3D12Device* device = nullptr;
@@ -34,6 +41,9 @@ private:
 	FbxManager* fbxManager = nullptr;
 	//FBXインポータ
 	FbxImporter* fbxImporter = nullptr;
+
+public:
+	static const std::string baseDirectory;
 
 private:
 	// privateなコンストラクタ（シングルトンパターン）

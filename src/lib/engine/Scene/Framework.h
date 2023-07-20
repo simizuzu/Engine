@@ -45,6 +45,7 @@ protected:
 	TextureManager* textureManager_ = nullptr;
 	ImGuiManager* imGuiManager = nullptr;
 	std::unique_ptr<PostEffect> postEffect;
+	FbxLoader* fbxLoader = nullptr;
 
 	SceneManager* sceneManager_ = nullptr;
 	AbstractSceneFactory* sceneFactory_ = nullptr;

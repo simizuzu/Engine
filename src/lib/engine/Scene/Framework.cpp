@@ -8,6 +8,7 @@ void Framework::Initialize()
 	audioManager = AudioManager::GetInstance();
 	textureManager_ = TextureManager::GetInstance();
 	imGuiManager = ImGuiManager::GetInstance();
+	fbxLoader = FbxLoader::GetInstance();
 
 	// WindowsAPI初期化
 	winApp_->Initialize();
@@ -16,8 +17,6 @@ void Framework::Initialize()
 	fps_->InitializeFixFps();
 	// DirectX初期化
 	dxCommon_->Initialize();
-	//FBXLoaderの初期化
-	FbxLoader::GetInstance()->Initialize(dxCommon_->GetDevice());
 	// スプライト共通部の初期化
 	textureManager_->Initialize(dxCommon_);
 	// Audio初期化
@@ -26,6 +25,8 @@ void Framework::Initialize()
 	imGuiManager->Initialize(winApp_, dxCommon_);
 	// Input初期化
 	input_->Initialize();
+	//FBXLoaderの初期化
+	fbxLoader->Initialize(dxCommon_->GetDevice());
 
 	/*postEffect = std::make_unique<PostEffect>();
 	postEffect->Initialize();*/

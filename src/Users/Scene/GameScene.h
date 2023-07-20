@@ -14,6 +14,8 @@
 #include "TextureManager.h"
 #include "WorldTransform.h"
 
+#include "FbxLoader.h"
+
 //#include "RailCamera.h"
 
 #pragma warning(push)

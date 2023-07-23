@@ -45,7 +45,7 @@ void FbxModel::CreateBuffers(ID3D12Device* device)
 		&VBRESOURCE_DESC,
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
-		IID_PPV_ARGS(&vertBuff));
+		IID_PPV_ARGS(&indexBuff));
 
 	unsigned short* indexMap = nullptr;
 	result = indexBuff->Map(0, nullptr, (void**)&indexMap);

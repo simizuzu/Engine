@@ -136,6 +136,9 @@
     <Filter Include="Engine\ヘッダー ファイル\3D\Model\OBJ">
       <UniqueIdentifier>{e81cb9b4-7c74-42d4-9ffc-05a1eb07e238}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\シェーダーファイル\FBX">
+      <UniqueIdentifier>{1545e080-e071-456d-ada0-33c148fbaf6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\engine\Base\WinApp.cpp">
@@ -388,6 +391,9 @@
     <None Include="Resources\shaders\Obj.hlsli">
       <Filter>Engine\シェーダーファイル\OBJ</Filter>
     </None>
+    <None Include="Resources\shaders\FBX.hlsli">
+      <Filter>Engine\シェーダーファイル\FBX</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
@@ -416,6 +422,12 @@
     </FxCompile>
     <FxCompile Include="Resources\shaders\ObjVS.hlsl">
       <Filter>Engine\シェーダーファイル\OBJ</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\FBXPS.hlsl">
+      <Filter>Engine\シェーダーファイル\FBX</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\FBXVS.hlsl">
+      <Filter>Engine\シェーダーファイル\FBX</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

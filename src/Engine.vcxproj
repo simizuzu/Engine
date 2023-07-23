@@ -183,12 +183,15 @@
     <ClInclude Include="Users\Scene\TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\shaders\FBX.hlsli" />
     <None Include="Resources\shaders\Obj.hlsli" />
     <None Include="Resources\shaders\Particle.hlsli" />
     <None Include="Resources\shaders\PostEffectDefault.hlsli" />
     <None Include="Resources\shaders\Sprite.hlsli" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="Resources\shaders\FBXPS.hlsl" />
+    <FxCompile Include="Resources\shaders\FBXVS.hlsl" />
     <FxCompile Include="Resources\shaders\ObjPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>

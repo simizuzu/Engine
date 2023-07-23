@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <DirectXTex/d3dx12.h>
 #include <wrl.h>
 #include <array>
@@ -37,6 +37,11 @@ public: // メンバ関数
 	/// パイプライン呼び出し用関数(3Dオブジェクト)
 	/// </summary>
 	static void CreateObjPipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode blend, ID3D12Device* device, RootsigSetPip& pipeline);
+
+	/// <summary>
+	/// パイプライン呼び出し用関数(3Dオブジェクト)
+	/// </summary>
+	static void CreateFBXPipeline(ID3DBlob* vsBlob, ID3DBlob* psBlob, BlendMode blend, ID3D12Device* device, RootsigSetPip& pipeline);
 
 	/// <summary>
 	/// パイプライン呼び出し用関数(パーティクル)

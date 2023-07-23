@@ -5,6 +5,10 @@
 #include <string>
 #include <vector>
 #include <DirectXTex.h>
+#include <Windows.h>
+#include <wrl.h>
+#include <d3d12.h>
+#include <d3dx12.h>
 #pragma warning(pop)
 
 struct Node
@@ -32,12 +36,21 @@ public:
 	friend class FbxLoader;
 
 public: //サブクラス
-	struct VertexPosNormalUv
+	struct FBXVertexPosNormalUv
 	{
 		MyMath::Vector3 pos; //xyz座標
 		MyMath::Vector3 normal; //法線ベクトル
 		MyMath::Vector2 uv; //uv座標
 	};
+
+public:
+	//バッファ生成
+	void CreateBuffers(ID3D12Device* device);
+
+	//描画
+	void Draw(ID3D12GraphicsCommandList* cmdList);
+
+	const MyMath::Matrix4& GetModelTransform();
 
 private:
 	//モデル名
@@ -45,10 +58,23 @@ private:
 	//ノード配列
 	std::vector<Node> nodes;
 
+	//頂点バッファ
+	Microsoft::WRL::ComPtr<ID3D12Resource> vertBuff;
+	//インデックスバッファ
+	Microsoft::WRL::ComPtr<ID3D12Resource> indexBuff;
+	//テクスチャバッファ
+	Microsoft::WRL::ComPtr<ID3D12Resource> texBuff;
+	//頂点バッファビュー
+	D3D12_VERTEX_BUFFER_VIEW vbView = {};
+	//インデックスバッファビュー
+	D3D12_INDEX_BUFFER_VIEW ibView = {};
+	//SRVヒープ用デスクリプタビープ
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeapSRV;
+
 	//メッシュを持つノード
 	Node* meshNode = nullptr;
 	//頂点データ配列
-	std::vector<VertexPosNormalUv> vertices;
+	std::vector<FBXVertexPosNormalUv> vertices;
 	//頂点インデックス配列
 	std::vector<unsigned short> indices;
 

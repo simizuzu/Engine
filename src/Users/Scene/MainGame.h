@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "Object3d.h"
+#include "ObjObject3d.h"
 #include "Sprite.h"
 #include "ParticleManager.h"
 #include "Light.h"

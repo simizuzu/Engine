@@ -9,7 +9,7 @@
 
 #include "Matrix4.h"
 
-class Object3d
+class ObjObject3d
 {
 public:
 
@@ -19,7 +19,7 @@ public: // 静的メンバ関数
 
 	static void CreateGraphicsPipeline();
 
-	static Object3d* Create();
+	static ObjObject3d* Create();
 
 	static void SetLight(Light*light);
 
@@ -51,9 +51,6 @@ public: // メンバ関数
 
 	// setter
 	void SetModel(ObjModel* model);
-	void SetPosition(MyMath::Vector3 position_);
-	void SetScale(MyMath::Vector3 scale_);
-	void SetRotation(MyMath::Vector3 rotation_);
 
 public:
 	// 定数バッファ
@@ -69,13 +66,13 @@ public:
 	// ワールド変換行列
 	MyMath::Matrix4 matWorld;
 	// 親オブジェクト
-	Object3d* parent = nullptr;
+	ObjObject3d* parent = nullptr;
 	// モデル
 	ObjModel* model = nullptr;
 };
 
 namespace MyMath
 {
-	Vector3 GetWorldPosition(Object3d& transform);
-	Matrix4 MakeWorldMatrix4(Object3d& transform);
+	Vector3 GetWorldPosition(ObjObject3d& transform);
+	Matrix4 MakeWorldMatrix4(ObjObject3d& transform);
 }

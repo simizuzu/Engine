@@ -1,4 +1,4 @@
-#include "Object3d.h"
+﻿#include "ObjObject3d.h"
 #include <windows.h>
 
 #include "DirectX12Math.h"
@@ -6,17 +6,17 @@
 /// <summary>
 /// 静的メンバ変数の実態
 /// </summary>
-Microsoft::WRL::ComPtr<ID3D12Device> Object3d::device_;
-Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> Object3d::cmdList_;
-RootsigSetPip Object3d::pip;
-Light* Object3d::light = nullptr;
+Microsoft::WRL::ComPtr<ID3D12Device> ObjObject3d::device_;
+Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> ObjObject3d::cmdList_;
+RootsigSetPip ObjObject3d::pip;
+Light* ObjObject3d::light = nullptr;
 
-void Object3d::StaticInitialize(ID3D12Device* device, int width, int height)
+void ObjObject3d::StaticInitialize(ID3D12Device* device, int width, int height)
 {
 	// nullptrチェック
 	assert(device);
 
-	Object3d::device_ = device;
+	ObjObject3d::device_ = device;
 
 	// グラフィックスパイプラインの生成
 	CreateGraphicsPipeline();
@@ -24,7 +24,7 @@ void Object3d::StaticInitialize(ID3D12Device* device, int width, int height)
 	ObjModel::SetDevice(device);
 }
 
-void Object3d::CreateGraphicsPipeline()
+void ObjObject3d::CreateGraphicsPipeline()
 {
 	Microsoft::WRL::ComPtr<ID3DBlob> vsBlob; // 頂点シェーダオブジェクト
 	Microsoft::WRL::ComPtr<ID3DBlob> psBlob;	// ピクセルシェーダオブジェクト
@@ -34,10 +34,10 @@ void Object3d::CreateGraphicsPipeline()
 	Pipeline::CreateObjPipeline(vsBlob.Get(), psBlob.Get(), BlendMode::None, device_.Get(),pip);
 }
 
-Object3d* Object3d::Create()
+ObjObject3d* ObjObject3d::Create()
 {
 	// 3Dオブジェクトのインスタンスを生成
-	Object3d* object3d = new Object3d();
+	ObjObject3d* object3d = new ObjObject3d();
 	if (object3d == nullptr)
 	{
 		return nullptr;
@@ -53,7 +53,7 @@ Object3d* Object3d::Create()
 	return object3d;
 }
 
-bool Object3d::Initialize()
+bool ObjObject3d::Initialize()
 {
 	HRESULT result;
 
@@ -82,13 +82,13 @@ bool Object3d::Initialize()
 	return true;
 }
 
-void Object3d::Draw(WorldTransform* transform)
+void ObjObject3d::Draw(WorldTransform* transform)
 {
 	cmdList_ = DirectXCommon::GetInstance()->GetCommandList();
 
 	// nullチェック
 	assert(device_);
-	assert(Object3d::cmdList_);
+	assert(ObjObject3d::cmdList_);
 
 	// モデルの割り当てがなければ描画しない
 	if (model == nullptr)
@@ -111,34 +111,19 @@ void Object3d::Draw(WorldTransform* transform)
 	model->Draw(cmdList_.Get());
 }
 
-void Object3d::SetModel(ObjModel* model)
+void ObjObject3d::SetModel(ObjModel* model)
 {
 	this->model = model;
 }
 
-void Object3d::SetLight(Light* light)
+void ObjObject3d::SetLight(Light* light)
 {
-	Object3d::light = light;
-}
-
-void Object3d::SetPosition(MyMath::Vector3 position_)
-{
-	position = position_;
-}
-
-void Object3d::SetScale(MyMath::Vector3 scale_)
-{
-	scale = scale_;
-}
-
-void Object3d::SetRotation(MyMath::Vector3 rotation_)
-{
-	rotation = rotation_;
+	ObjObject3d::light = light;
 }
 
 namespace MyMath
 {
-	Vector3 GetWorldPosition(Object3d& transform)
+	Vector3 GetWorldPosition(ObjObject3d& transform)
 	{
 		// ワールド座標を入れる変数
 		Vector3 worldPos;
@@ -150,7 +135,7 @@ namespace MyMath
 		return worldPos;
 	}
 
-	Matrix4 MakeWorldMatrix4(Object3d& transform)
+	Matrix4 MakeWorldMatrix4(ObjObject3d& transform)
 	{
 		Matrix4 matWorld = MyMathUtility::MakeIdentity();
 		Matrix4 matScale, matRot, matTrans;

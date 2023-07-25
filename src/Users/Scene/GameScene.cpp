@@ -1,4 +1,4 @@
-#include "GameScene.h"
+﻿#include "GameScene.h"
 
 #include <imgui.h>
 
@@ -11,11 +11,11 @@ void GameScene::Initialize()
 
 	light.reset(Light::Create());
 	light->SetLightColor({ 1,1,1 });
-	Object3d::SetLight(light.get());
+	ObjObject3d::SetLight(light.get());
 
 	skydomeModel_ = std::make_unique<ObjModel>();
 	skydomeModel_.reset(ObjModel::LoadFromObj("skydome", true));
-	skydomeObj_.reset(Object3d::Create());
+	skydomeObj_.reset(ObjObject3d::Create());
 	skydomeObj_->SetModel(skydomeModel_.get());
 
 	skydomeTrans.Initialize();

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <memory>
 #include "BaseScene.h"
 #include "SceneManager.h"
@@ -7,7 +7,7 @@
 #include "Camera.h"
 #include "Light.h"
 #include "Sprite.h"
-#include "Object3d.h"
+#include "ObjObject3d.h"
 #include "ObjModel.h"
 #include "AudioManager.h"
 
@@ -15,6 +15,8 @@
 #include "WorldTransform.h"
 
 #include "FbxLoader.h"
+
+#include "SplinePosCamera.h"
 
 //#include "RailCamera.h"
 
@@ -43,8 +45,7 @@ private: // メンバ変数
 	std::unique_ptr<Light> light;
 	//AudioManager* audioManager_ = nullptr;
 
-	//std::unique_ptr<RailCamera> railCamera_;
-
+	std::unique_ptr<SplinePosition>
 	SceneManager* sceneManager_ = nullptr;
 
 	//宣言
@@ -54,7 +55,7 @@ private: // メンバ変数
 	// サウンド
 	//uint32_t gameHandle_ = 0;
 
-	std::unique_ptr<Object3d> skydomeObj_;
+	std::unique_ptr<ObjObject3d> skydomeObj_;
 	std::unique_ptr<ObjModel> skydomeModel_;
 
 	MyMath::Vector3 cameraRot = {0,0,0};

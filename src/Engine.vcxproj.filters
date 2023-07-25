@@ -240,9 +240,6 @@
     <ClCompile Include="Users\PlayerBullet.cpp">
       <Filter>Users\ソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Users\RailCamera.cpp">
-      <Filter>Users\ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="lib\engine\3D\Model\FBX\FbxLoader.cpp">
       <Filter>Engine\ソース ファイル\3D\Model\FBX</Filter>
     </ClCompile>
@@ -252,11 +249,14 @@
     <ClCompile Include="lib\engine\3D\Model\FBX\FBXObject.cpp">
       <Filter>Engine\ソース ファイル\3D\Model\FBX</Filter>
     </ClCompile>
-    <ClCompile Include="lib\engine\3D\Model\OBJ\Object3d.cpp">
-      <Filter>Engine\ソース ファイル\3D\Model\OBJ</Filter>
-    </ClCompile>
     <ClCompile Include="lib\engine\3D\Model\OBJ\ObjModel.cpp">
       <Filter>Engine\ソース ファイル\3D\Model\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\3D\Model\OBJ\ObjObject3d.cpp">
+      <Filter>Engine\ソース ファイル\3D\Model\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="SplinePosCamera.cpp">
+      <Filter>Users\ソースファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -362,9 +362,6 @@
     <ClInclude Include="Users\PlayerBullet.h">
       <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Users\RailCamera.h">
-      <Filter>Users\ヘッダーファイル</Filter>
-    </ClInclude>
     <ClInclude Include="lib\engine\3D\Model\FBX\FbxLoader.h">
       <Filter>Engine\ヘッダー ファイル\3D\Model\FBX</Filter>
     </ClInclude>
@@ -374,11 +371,14 @@
     <ClInclude Include="lib\engine\3D\Model\FBX\FBXObject.h">
       <Filter>Engine\ヘッダー ファイル\3D\Model\FBX</Filter>
     </ClInclude>
-    <ClInclude Include="lib\engine\3D\Model\OBJ\Object3d.h">
-      <Filter>Engine\ヘッダー ファイル\3D\Model\OBJ</Filter>
-    </ClInclude>
     <ClInclude Include="lib\engine\3D\Model\OBJ\ObjModel.h">
       <Filter>Engine\ヘッダー ファイル\3D\Model\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\engine\3D\Model\OBJ\ObjObject3d.h">
+      <Filter>Engine\ヘッダー ファイル\3D\Model\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="SplinePosCamera.h">
+      <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

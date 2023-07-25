@@ -6,7 +6,7 @@
 #include "Light.h"
 
 #include "Sprite.h"
-#include "Object3d.h"
+#include "ObjObject3d.h"
 #include "ParticleManager.h"
 
 #pragma warning(push)
@@ -56,10 +56,10 @@ private:
 #pragma endregion
 
 #pragma region OBJ
-	std::unique_ptr<Object3d> tyoinoriObj;
+	std::unique_ptr<ObjObject3d> tyoinoriObj;
 	std::unique_ptr<ObjModel> tyoinori;
 
-	std::unique_ptr<Object3d> skydomeObj;
+	std::unique_ptr<ObjObject3d> skydomeObj;
 	std::unique_ptr<ObjModel> skydome;
 #pragma endregion
 

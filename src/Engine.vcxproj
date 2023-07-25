@@ -107,7 +107,7 @@
     <ClCompile Include="lib\engine\3D\Model\FBX\FbxLoader.cpp" />
     <ClCompile Include="lib\engine\3D\Model\FBX\FbxModel.cpp" />
     <ClCompile Include="lib\engine\3D\Model\FBX\FBXObject.cpp" />
-    <ClCompile Include="lib\engine\3D\Model\OBJ\Object3d.cpp" />
+    <ClCompile Include="lib\engine\3D\Model\OBJ\ObjObject3d.cpp" />
     <ClCompile Include="lib\engine\3D\Model\OBJ\ObjModel.cpp" />
     <ClCompile Include="lib\engine\3D\Particle\ParticleManager.cpp" />
     <ClCompile Include="lib\engine\3D\WorldTransform.cpp" />
@@ -134,10 +134,10 @@
     <ClCompile Include="lib\engine\Scene\BaseScene.cpp" />
     <ClCompile Include="lib\engine\Scene\Framework.cpp" />
     <ClCompile Include="lib\engine\Scene\SceneManager.cpp" />
+    <ClCompile Include="SplinePosCamera.cpp" />
     <ClCompile Include="Users\GameCamera.cpp" />
     <ClCompile Include="Users\Player.cpp" />
     <ClCompile Include="Users\PlayerBullet.cpp" />
-    <ClCompile Include="Users\RailCamera.cpp" />
     <ClCompile Include="Users\Scene\GameScene.cpp" />
     <ClCompile Include="Users\Scene\MainGame.cpp" />
     <ClCompile Include="Users\Scene\SceneFactory.cpp" />
@@ -148,7 +148,7 @@
     <ClInclude Include="lib\engine\3D\Model\FBX\FbxLoader.h" />
     <ClInclude Include="lib\engine\3D\Model\FBX\FbxModel.h" />
     <ClInclude Include="lib\engine\3D\Model\FBX\FBXObject.h" />
-    <ClInclude Include="lib\engine\3D\Model\OBJ\Object3d.h" />
+    <ClInclude Include="lib\engine\3D\Model\OBJ\ObjObject3d.h" />
     <ClInclude Include="lib\engine\3D\Model\OBJ\ObjModel.h" />
     <ClInclude Include="lib\engine\3D\Particle\ParticleManager.h" />
     <ClInclude Include="lib\engine\3D\WorldTransform.h" />
@@ -176,10 +176,10 @@
     <ClInclude Include="lib\engine\Scene\BaseScene.h" />
     <ClInclude Include="lib\engine\Scene\Framework.h" />
     <ClInclude Include="lib\engine\Scene\SceneManager.h" />
+    <ClInclude Include="SplinePosCamera.h" />
     <ClInclude Include="Users\GameCamera.h" />
     <ClInclude Include="Users\Player.h" />
     <ClInclude Include="Users\PlayerBullet.h" />
-    <ClInclude Include="Users\RailCamera.h" />
     <ClInclude Include="Users\Scene\GameScene.h" />
     <ClInclude Include="Users\Scene\MainGame.h" />
     <ClInclude Include="Users\Scene\SceneFactory.h" />

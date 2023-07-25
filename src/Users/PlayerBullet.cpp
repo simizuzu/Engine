@@ -1,7 +1,7 @@
 ﻿#include "PlayerBullet.h"
 #include <cassert>
 
-void PlayerBullet::Initialize(ObjModel* model, Object3d* obj, const MyMath::Vector3& position)
+void PlayerBullet::Initialize(ObjModel* model, ObjObject3d* obj, const MyMath::Vector3& position)
 {
 	//代入チェック
 	assert(model);

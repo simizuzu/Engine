@@ -231,12 +231,6 @@
     <ClCompile Include="lib\engine\3D\Particle\ParticleManager.cpp">
       <Filter>Engine\ソース ファイル\3D\Particle</Filter>
     </ClCompile>
-    <ClCompile Include="lib\engine\3D\Model\Object3d.cpp">
-      <Filter>Engine\ソース ファイル\3D\Model\OBJ</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\engine\3D\Model\ObjModel.cpp">
-      <Filter>Engine\ソース ファイル\3D\Model\OBJ</Filter>
-    </ClCompile>
     <ClCompile Include="Users\GameCamera.cpp">
       <Filter>Users\ソースファイル</Filter>
     </ClCompile>
@@ -249,11 +243,20 @@
     <ClCompile Include="Users\RailCamera.cpp">
       <Filter>Users\ソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="lib\engine\3D\Model\FbxModel.cpp">
+    <ClCompile Include="lib\engine\3D\Model\FBX\FbxLoader.cpp">
       <Filter>Engine\ソース ファイル\3D\Model\FBX</Filter>
     </ClCompile>
-    <ClCompile Include="lib\engine\3D\Model\FbxLoader.cpp">
+    <ClCompile Include="lib\engine\3D\Model\FBX\FbxModel.cpp">
       <Filter>Engine\ソース ファイル\3D\Model\FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\3D\Model\FBX\FBXObject.cpp">
+      <Filter>Engine\ソース ファイル\3D\Model\FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\3D\Model\OBJ\Object3d.cpp">
+      <Filter>Engine\ソース ファイル\3D\Model\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\engine\3D\Model\OBJ\ObjModel.cpp">
+      <Filter>Engine\ソース ファイル\3D\Model\OBJ</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -301,9 +304,6 @@
     </ClInclude>
     <ClInclude Include="lib\engine\Camera\Camera.h">
       <Filter>Engine\ヘッダー ファイル\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\engine\3D\Model\Material.h">
-      <Filter>Engine\ヘッダー ファイル\3D\Model</Filter>
     </ClInclude>
     <ClInclude Include="lib\engine\Base\Shader.h">
       <Filter>Engine\ヘッダー ファイル\Base</Filter>
@@ -353,12 +353,6 @@
     <ClInclude Include="lib\engine\Math\Quaternion.h">
       <Filter>Engine\ヘッダー ファイル\Math</Filter>
     </ClInclude>
-    <ClInclude Include="lib\engine\3D\Model\Object3d.h">
-      <Filter>Engine\ヘッダー ファイル\3D\Model\OBJ</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\engine\3D\Model\ObjModel.h">
-      <Filter>Engine\ヘッダー ファイル\3D\Model\OBJ</Filter>
-    </ClInclude>
     <ClInclude Include="Users\GameCamera.h">
       <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
@@ -371,11 +365,20 @@
     <ClInclude Include="Users\RailCamera.h">
       <Filter>Users\ヘッダーファイル</Filter>
     </ClInclude>
-    <ClInclude Include="lib\engine\3D\Model\FbxModel.h">
+    <ClInclude Include="lib\engine\3D\Model\FBX\FbxLoader.h">
       <Filter>Engine\ヘッダー ファイル\3D\Model\FBX</Filter>
     </ClInclude>
-    <ClInclude Include="lib\engine\3D\Model\FbxLoader.h">
+    <ClInclude Include="lib\engine\3D\Model\FBX\FbxModel.h">
       <Filter>Engine\ヘッダー ファイル\3D\Model\FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\engine\3D\Model\FBX\FBXObject.h">
+      <Filter>Engine\ヘッダー ファイル\3D\Model\FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\engine\3D\Model\OBJ\Object3d.h">
+      <Filter>Engine\ヘッダー ファイル\3D\Model\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\engine\3D\Model\OBJ\ObjModel.h">
+      <Filter>Engine\ヘッダー ファイル\3D\Model\OBJ</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

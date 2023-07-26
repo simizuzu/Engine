@@ -15,7 +15,7 @@ public:
 
 
 public: // 静的メンバ関数
-	static void StaticInitialize(ID3D12Device* device, int width, int height);
+	static void StaticInitialize(ID3D12Device* device);
 
 	static void CreateGraphicsPipeline();
 

@@ -5,7 +5,7 @@ void MainGame::Initialize()
 	// 基底クラスの初期化処理
 	Framework::Initialize();
 	// 3Dオブジェクト静的初期化
-	ObjObject3d::StaticInitialize(dxCommon_->GetDevice(), winApp_->window_width, winApp_->window_height);
+	ObjObject3d::StaticInitialize(dxCommon_->GetDevice());
 	Light::StaticInitialise(dxCommon_);
 	Sprite::StaticInitialize();
 	//パーティクルマネージャー静的初期化

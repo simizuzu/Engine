@@ -31,7 +31,7 @@ void SplinePosCamera::Update(float& time)
 	NowPos = SplinePositionUpdate(points, startIndex, timeRate_);
 }
 
-MyMath::Vector3 SplinePosCamera::SplinePositionUpdate(const std::vector<MyMath::Vector3>& points, size_t& startIndex, float& t)
+MyMath::Vector3 SplinePosCamera ::SplinePositionUpdate(const std::vector<MyMath::Vector3>& points, size_t& startIndex, float& t)
 {
 	//��Ԃ��ׂ��_�̐�
 	size_t n = points.size() - 2;

@@ -45,7 +45,7 @@ private: // メンバ変数
 	std::unique_ptr<Light> light;
 	//AudioManager* audioManager_ = nullptr;
 
-	std::unique_ptr<SplinePosition>
+	//std::unique_ptr<SplinePosCamera>
 	SceneManager* sceneManager_ = nullptr;
 
 	//宣言

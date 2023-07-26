@@ -11,7 +11,7 @@ Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> ObjObject3d::cmdList_;
 RootsigSetPip ObjObject3d::pip;
 Light* ObjObject3d::light = nullptr;
 
-void ObjObject3d::StaticInitialize(ID3D12Device* device, int width, int height)
+void ObjObject3d::StaticInitialize(ID3D12Device* device)
 {
 	// nullptrチェック
 	assert(device);
